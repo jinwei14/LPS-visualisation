@@ -12,6 +12,7 @@ events ([redLight,greenLight]).
 
 % Reactive rules
 actions ([arrival]).
+action(fireTruckMove/2).
 
 % describes the facts that are true at time 1
 initially( move).
@@ -25,10 +26,10 @@ lpsDefineObject(car, image, [
 ]).
 
 % describe events taking place in the transition from one time point to the next
-observe( redLight) from 1 to 2.
-observe( greenLight) from 3 to 4.
-observe (redLight) from 7 to 8.
-observe (greenLight) from 9 to 10.
+observe(redLight,1,2).
+observe(greenLight,3,4).
+observe(redLight,7,8).
+observe(greenLight,9,10).
 
 %stop at time 13
 move(12)->
@@ -37,47 +38,58 @@ move(12)->
 
 move(T1) ->
   testPrint('I am moving'),
-  fireTruckPosition(X, Y, T1),
-  testPrint(X),
-  townPosition(fireStation, _, Tx, Ty),
-  NumCyclesNeeded = floor(abs(X - Tx) / 64),
-  T2 = T1 + NumCyclesNeeded,
-  cycleInterval(CT),
-  AnimationDuration = CT * NumCyclesNeeded,
-  handleTruckFlip(X, Tx) at T1,
-  lpsAnimateMoveObject(fireTruck, AnimationDuration, Tx + 16, Ty + 16) from T1 to T2,
-  fireTruckMove(Tx, Ty) from T1 to T2.
-  % testPrint('Hello World').
+  % fireTruckPosition(X, Y, T1),
+  % townPosition(trafficLight1, _, Tx, Ty),
+  % NumCyclesNeeded = floor(abs(X - Tx) / 64),
+  % T2 = T1 + NumCyclesNeeded,
+  % cycleInterval(CT),
+  % AnimationDuration = CT * NumCyclesNeeded,
+  lpsAnimateMoveObject(car, 2, 250, 340) from T1 to T2,
+  fireTruckMove(250, 340) from T1 to T2.
 
 
-% % describe the laws of cause and effect
-% (redLight) initiates 	waitting if move.
-% (redLight)  terminates move if move.
+waitting(T2) ->
+  testPrint('I am waitting'),
+  testPrint(T2).
+
+
+% lpsShowObject(Id) from T1 to T2 <-
+%   lpsUpdateObject(Id, [
+%     isHidden(0)
+%   ]) from T1 to T2.
 %
-% (greenLight) initiates move if waitting.
-% (greenLight) terminates waitting if waitting.
+% lpsHideObject(Id) from T1 to T2 <-
+%   lpsUpdateObject(Id, [
+%     isHidden(1)
+%   ]) from T1 to T2.
 %
-% (arrival) initiates stop if move.
-% (arrival) terminates move if move.
+% lpsAnimateMoveObject(Id, Duration, X, Y) from T1 to T2 <-
+%   lpsAnimateObject(Id, Duration, [
+%     position(X, Y)
+%   ]) from T1 to T2.
+%
+% lpsDefineObject(Id, Type, []) <-
+%   lpsDefineObject(Id, Type).
+
 
 updates(fireTruckMove(X, Y), fireTruckPosition(_, _), fireTruckPosition(X, Y)).
 
 initiates(redLight, waitting) <-
   move.
 
-terminates(redLight, move). <-
+terminates(redLight, move) <-
   move.
 
 initiates(greenLight, move) <-
   waitting.
 
-terminates(greenLight, waitting). <-
+terminates(greenLight, waitting) <-
   waitting.
 
 initiates(arrival, stop) <-
   move.
 
-terminates(arrival, move). <-
+terminates(arrival, move) <-
   move.
 
 
