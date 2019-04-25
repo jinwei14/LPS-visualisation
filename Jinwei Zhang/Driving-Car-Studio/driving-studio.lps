@@ -1,0 +1,6 @@
+% load main program
+consult('./loadImages.lps').
+consult('./animatingClouds.lps').
+consult('./town.lps').
+% consult('./roads.lps').
+consult('./fireTruck.lps').
