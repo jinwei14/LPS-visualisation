@@ -23,3 +23,5 @@ lpsLoadImage(shop1, './images/icons8-shop-department-64.png').
 lpsLoadImage(shop2, './images/icons8-small-business-64.png').
 lpsLoadImage(commercial, './images/icons8-skyscrapers-64.png').
 lpsLoadImage(campus, './images/icons8-university-campus-64.png').
+
+lpsLoadImage(trafficLight, './images/icons8-traffic-light-64.png').

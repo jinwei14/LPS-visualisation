@@ -1,3 +1,8 @@
+% observe( redLight) from 1 to 2.
+% observe( greenLight) from 3 to 4.
+% observe (redLight) from 7 to 8.
+% observe (greenLight) from 9 to 10.
+
 townPosition(fireStation, fireStation, 200, 300).
 townPosition(house1, home1, 264, 300).
 townPosition(house2, home2, 328, 300).
