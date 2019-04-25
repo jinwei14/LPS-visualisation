@@ -4,3 +4,6 @@ consult('./animatingClouds.lps').
 consult('./town.lps').
 % consult('./roads.lps').
 consult('./fireTruck.lps').
+
+cycleInterval(200).
+maxTime(20).
