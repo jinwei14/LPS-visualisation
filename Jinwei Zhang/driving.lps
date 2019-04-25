@@ -48,6 +48,6 @@ terminates(greenLight, waitting). <-
 
 initiates(arrival, stop) <-
   move.
-d
+
 terminates(arrival, move). <-
   move.
