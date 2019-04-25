@@ -38,6 +38,7 @@ move(12)->
 move(T1) ->
   testPrint('I am moving'),
   fireTruckPosition(X, Y, T1),
+  testPrint(X),
   townPosition(fireStation, _, Tx, Ty),
   NumCyclesNeeded = floor(abs(X - Tx) / 64),
   T2 = T1 + NumCyclesNeeded,
@@ -58,6 +59,7 @@ move(T1) ->
 %
 % (arrival) initiates stop if move.
 % (arrival) terminates move if move.
+
 updates(fireTruckMove(X, Y), fireTruckPosition(_, _), fireTruckPosition(X, Y)).
 
 initiates(redLight, waitting) <-

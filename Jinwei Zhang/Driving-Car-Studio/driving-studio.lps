@@ -3,7 +3,7 @@ consult('./loadImages.lps').
 consult('./animatingClouds.lps').
 consult('./town.lps').
 % consult('./roads.lps').
-consult('./fireTruck.lps').
+consult('./drivingCar.lps').
 
 cycleInterval(300).
 maxTime(20).
