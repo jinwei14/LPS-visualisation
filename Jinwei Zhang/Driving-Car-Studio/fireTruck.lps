@@ -1,3 +1,7 @@
+loadModule('./modules/module.js').
+true -> testPrint('The car has started').
+
+
 % set of facts.
 fluents([
   move, stop, waitting
@@ -27,8 +31,23 @@ observe (redLight) from 7 to 8.
 observe (greenLight) from 9 to 10.
 
 %stop at time 13
-if (move) at 12 ->
-   arrival from 12 to 13.
+move(12)->
+   arrival(12,13),
+   testPrint('I have stopped').
+
+move(T1) ->
+  testPrint('I am moving'),
+  fireTruckPosition(X, Y, T1),
+  townPosition(fireStation, _, Tx, Ty),
+  NumCyclesNeeded = floor(abs(X - Tx) / 64),
+  T2 = T1 + NumCyclesNeeded,
+  cycleInterval(CT),
+  AnimationDuration = CT * NumCyclesNeeded,
+  handleTruckFlip(X, Tx) at T1,
+  lpsAnimateMoveObject(fireTruck, AnimationDuration, Tx + 16, Ty + 16) from T1 to T2,
+  fireTruckMove(Tx, Ty) from T1 to T2.
+  % testPrint('Hello World').
+
 
 % % describe the laws of cause and effect
 % (redLight) initiates 	waitting if move.
@@ -39,6 +58,8 @@ if (move) at 12 ->
 %
 % (arrival) initiates stop if move.
 % (arrival) terminates move if move.
+updates(fireTruckMove(X, Y), fireTruckPosition(_, _), fireTruckPosition(X, Y)).
+
 initiates(redLight, waitting) <-
   move.
 
@@ -58,43 +79,48 @@ terminates(arrival, move). <-
   move.
 
 
-  %%%%%%%%%%%%%%%%%%%% LPS JS %%%%%%%%%%%%%%%%%%%%%%%%
-  % maxTime(5).
-  % fluent(fire).
-  % actions([eliminate, escape]).
-  % event(deal_with_fire).
-  %
-  % initially(fire).
-  %
-  % fire(T1) -> deal_with_fire(T1, T2).
-  %
-  % deal_with_fire(T1, T2) <- eliminate(T1, T2).
-  % deal_with_fire(T1, T2) <- escape(T1, T2).
-  %
-  % terminates(eliminate, fire).
-  %
-  % %%%%%%%%%%%%%%%%% Swish %%%%%%%%%%%%%%%%%%%%%%%
-  % %
-  % % maxTime(5).
-  % %
-  % % fluents 	fire.
-  % % actions 	eliminate, escape.
-  % % events 		deal_with_fire.
-  % %
-  % % initially 	fire.
-  % %
-  % % if 		fire at T1
-  % % then 	deal_with_fire from T1 to T2.
-  % %
-  % % deal_with_fire from T1 to T2
-  % % if 		eliminate from T1 to T2.
-  % %
-  % % deal_with_fire from T1 to T2
-  % % if		 escape from T1 to T2.
-  % %
-  % % eliminate  terminates fire.
-  % %
-  % %
-  % % /** <examples>
-  % % ?- go(Timeline).
-  % % */
+%
+% %------------------------------------------------------------
+%
+%
+%   %%%%%%%%%%%%%%%%%%% LPS JS %%%%%%%%%%%%%%%%%%%%%%%%
+%   maxTime(5).
+%   fluent(fire).
+%   actions([eliminate, escape]).
+%   event(deal_with_fire).
+%
+%   initially(fire).
+%
+%   fire(T1) -> deal_with_fire(T1, T2).
+%
+%   deal_with_fire(T1, T2) <- eliminate(T1, T2).
+%   deal_with_fire(T1, T2) <- escape(T1, T2).
+%
+%   terminates(eliminate, fire).
+%
+%   %%%%%%%%%%%%%%%%% Swish %%%%%%%%%%%%%%%%%%%%%%%
+%
+%   maxTime(5).
+%
+%   fluents 	fire.
+%   actions 	eliminate, escape.
+%   events 		deal_with_fire.
+%
+%   initially 	fire.
+%   % reactive rules if fluents then action
+%   if 		fire at T1
+%   then 	deal_with_fire from T1 to T2.
+%
+%   %law of cause event/action dowhat if fluent
+%   deal_with_fire from T1 to T2
+%   if 		eliminate from T1 to T2.
+%
+%   deal_with_fire from T1 to T2
+%   if		 escape from T1 to T2.
+%
+%   eliminate  terminates fire.
+%
+%
+%   /** <examples>
+%   ?- go(Timeline).
+%   */
