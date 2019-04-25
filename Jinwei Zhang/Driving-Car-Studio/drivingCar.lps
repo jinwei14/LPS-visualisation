@@ -34,7 +34,8 @@ observe(greenLight,9,10).
 %stop at time 13
 move(12)->
    arrival(12,13),
-   testPrint('I have stopped').
+   testPrint('I have stopped at time 13').
+
 
 move(T1) ->
   testPrint('I am moving'),
@@ -72,7 +73,7 @@ waitting(T2) ->
 %   lpsDefineObject(Id, Type).
 
 
-updates(fireTruckMove(X, Y), fireTruckPosition(_, _), fireTruckPosition(X, Y)).
+% updates(fireTruckMove(X, Y), fireTruckPosition(_, _), fireTruckPosition(X, Y)).
 
 initiates(redLight, waitting) <-
   move.
