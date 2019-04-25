@@ -5,5 +5,11 @@ consult('./town.lps').
 % consult('./roads.lps').
 consult('./fireTruck.lps').
 
-cycleInterval(200).
+cycleInterval(400).
 maxTime(20).
+
+lpsDefineObject(_, text, [
+  position(10, 20),
+  caption('Program authored by Jinwei Zhang. Icons by Icons8.com, CC BY-ND 3.0'),
+  font('10px sans-serif')
+]).

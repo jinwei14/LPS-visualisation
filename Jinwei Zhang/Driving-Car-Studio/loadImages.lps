@@ -28,3 +28,5 @@ lpsLoadImage(trafficLight1, './images/icons8-traffic-light-64.png').
 lpsLoadImage(trafficLight2, './images/icons8-traffic-light-64.png').
 lpsLoadImage(trafficLight3, './images/icons8-traffic-light-64.png').
 lpsLoadImage(trafficLight4, './images/icons8-traffic-light-64.png').
+
+lpsLoadImage(car, './images/icons8-car-64.png').

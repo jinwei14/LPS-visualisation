@@ -1,86 +1,58 @@
-fluent(isFireTruckDeployed).
-action(fireTruckDeploy).
-action(fireTruckReturnToStation).
-action(fireTruckMove/2).
-actin(putOutFire/1).
-fluent(fireTruckPosition(X, Y)).
+% set of facts.
+fluents([
+  move, stop, waitting
+]).
 
-lpsDefineObject(fireTruck, image, [
-  position(0, 0),
+% cause state transition via init fact terminate fact
+events ([redLight,greenLight]).
+
+% Reactive rules
+actions ([arrival]).
+
+% describes the facts that are true at time 1
+initially( move).
+
+lpsDefineObject(car, image, [
+  position(150, 340),
   size(64, 64),
-  isHidden(1),
-  image(fireTruck),
+  isHidden(0),  
+  image(car),
   zIndex(100)
 ]).
 
-fire(_, T1),
-  not isFireTruckDeployed(T1) ->
-    fireTruckDeploy(T1, T2).
+% describe events taking place in the transition from one time point to the next
+observe( redLight) from 1 to 2.
+observe( greenLight) from 3 to 4.
+observe (redLight) from 7 to 8.
+observe (greenLight) from 9 to 10.
 
-fireTruckDeploy(T1, T2) ->
-  fireTruckPosition(X, Y, T2),
-  X1 = X + 16,
-  Y1 = Y + 16,
-  lpsUpdateObject(fireTruck, [
-    position(X1, Y1),
-    isHidden(0)
-  ]) from T2,
-  moveToFire from T2 to T3.
+%stop at time 13
+if (move) at 12 ->
+   arrival from 12 to 13.
 
-selectFirstItem([H|_], S) <-
-  S = H.
+% % describe the laws of cause and effect
+% (redLight) initiates 	waitting if move.
+% (redLight)  terminates move if move.
+%
+% (greenLight) initiates move if waitting.
+% (greenLight) terminates waitting if waitting.
+%
+% (arrival) initiates stop if move.
+% (arrival) terminates move if move.
+initiates(redLight, waitting) <-
+  move.
 
-selectFire(I) at T <-
-  findall(I, fire(I), L),
-  selectFirstItem(L, I).
+terminates(redLight, move). <-
+  move.
 
-moveToFire from T1 to T4 <-
-  selectFire(I) at T1,
-  fireTruckPosition(X, Y, T1),
-  townPosition(I, _, Tx, Ty),
-  NumCyclesNeeded = floor(abs(X - Tx) / 64),
-  T2 = T1 + NumCyclesNeeded,
-  cycleInterval(CT),
-  AnimationDuration = CT * NumCyclesNeeded,
-  handleTruckFlip(X, Tx) at T1,
-  lpsAnimateMoveObject(fireTruck, AnimationDuration, Tx + 16, Ty + 16) from T1 to T2,
-  fireTruckMove(Tx, Ty) from T2 to T3,
-  dealWithFire(I) from T2 to T4.
+initiates(greenLight, move) <-
+  waitting.
 
-moveToFire from T1 to T3 <-
-  not fire(_, T1),
-  fireTruckPosition(X, Y, T1),
-  townPosition(fireStation, _, Tx, Ty),
-  NumCyclesNeeded = floor(abs(X - Tx) / 64),
-  T2 = T1 + NumCyclesNeeded,
-  cycleInterval(CT),
-  AnimationDuration = CT * NumCyclesNeeded,
-  handleTruckFlip(X, Tx) at T1,
-  lpsAnimateMoveObject(fireTruck, AnimationDuration, Tx + 16, Ty + 16) from T1 to T2,
-  fireTruckMove(Tx, Ty) from T2 to T3,
-  fireTruckReturnToStation from T2 to T3,
-  lpsHideObject(fireTruck) from T2.
+terminates(greenLight, waitting). <-
+  waitting.
 
-dealWithFire(I) from T1 to T4 <-
-  extinguish(I, T1, T2),
-  T3 = T1 + 8,
-  moveToFire from T3 to T4.
+initiates(arrival, stop) <-
+  move.
 
-handleTruckFlip(X1, X2) <-
-  X1 < X2,
-  lpsUpdateObject(fireTruck, [
-    flipHorizontal(0)
-  ]).
-
-handleTruckFlip(X1, X2) <-
-  X1 >= X2,
-  lpsUpdateObject(fireTruck, [
-    flipHorizontal(1)
-  ]).
-
-initiates(fireTruckDeploy, isFireTruckDeployed).
-initiates(fireTruckDeploy, fireTruckPosition(X, Y)) <-
-  townPosition(fireStation, _, X, Y).
-  % Y1 = Y + 32. % road starts slightly lower point
-updates(fireTruckMove(X, Y), fireTruckPosition(_, _), fireTruckPosition(X, Y)).
-terminates(fireTruckReturnToStation, isFireTruckDeployed).
+terminates(arrival, move). <-
+  move.
