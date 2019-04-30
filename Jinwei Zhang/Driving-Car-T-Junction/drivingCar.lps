@@ -4,20 +4,20 @@ true -> testPrint('The car has started').
 
 % set of facts.
 fluents([
-  moving, stop, waitting, location
+  moving, stop, waitting, car_location(X, Y)
 ]).
 
 % cause state transition via init fact terminate fact
 events ([redLight,greenLight]).
 
 % Reactive rules
-actions ([arrival]).
+actions ([arrival,fireTruckMove/2]).
 
 
 % describes the facts that are true at time 1
 initially([
   moving,
-  loc(0)
+  car_location(150, 340)
 ]).
 
 lpsDefineObject(car, image, [
@@ -40,10 +40,15 @@ moving(12)->
    testPrint('I have stopped at time 13').
 
 
-moving(T)^location(X,T) ->
-  update_loc(X+1, T+1),
+moving(T) ->
+  car_location(X, Y),
   testPrint('I am moving to'),
-  testPrint(T),
+  testPrint(X),
+  X2 = X + 2,
+  Y2 = Y + 2,
+  testPrint('after move'),
+  testPrint(X2),
+  carMoveTo(X2, Y2),
   % fireTruckPosition(X, Y, T1),
   % townPosition(trafficLight1, _, Tx, Ty),
   % NumCyclesNeeded = floor(abs(X - Tx) / 64),
@@ -54,7 +59,7 @@ moving(T)^location(X,T) ->
 
 
 waitting(T2) ->
-  testPrint('I am waitting'),
+  testPrint('I am waitting in Time'),
   testPrint(T2).
 
 
@@ -77,7 +82,7 @@ waitting(T2) ->
 %   lpsDefineObject(Id, Type).
 
 
-% updates(fireTruckMove(X, Y), fireTruckPosition(_, _), fireTruckPosition(X, Y)).
+updates(carMoveTo(X, Y), car_location(_, _), car_location(X, Y)).
 
 initiates(redLight, waitting) <-
   moving.
@@ -97,7 +102,9 @@ initiates(arrival, stop) <-
 terminates(arrival, moving) <-
   moving.
 
-
+  <- carMoveTo(X),
+    carMoveTo(Y),
+    X != Y.
 %
 % %------------------------------------------------------------
 %
