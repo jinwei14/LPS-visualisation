@@ -1,18 +1,15 @@
-% observe( redLight) from 1 to 2.
-% observe( greenLight) from 3 to 4.
-% observe (redLight) from 7 to 8.
-% observe (greenLight) from 9 to 10.
+
 
 townPosition(fireStation, fireStation, 200, 300).
-townPosition(trafficLight1, trafficLight1, 264, 300).
+townPosition(house1, home1, 264, 300).
 townPosition(house2, home2, 328, 300).
-townPosition(trafficLight2, trafficLight2, 392, 300).
-townPosition(shop2, shop1, 456, 300).
-townPosition(shop3, shop2, 520, 300).
-townPosition(tree1, trees1, 584, 300).
-townPosition(trafficLight3, trafficLight3, 648, 300).
+townPosition(shop1, shop1, 392, 300).
+% townPosition(shop2, shop1, 456, 300).
+townPosition(trafficLight1, trafficLight1, 520, 300).
+% townPosition(tree1, trees1, 584, 300).
+townPosition(tree2, trees2, 648, 300).
 townPosition(school1, campus, 712, 300).
-townPosition(trafficLight4, trafficLight4, 776, 300).
+townPosition(house3, home2, 776, 300).
 townPosition(house4, home1, 840, 300).
 
 % townPosition(house5, home1, 200, 428).
@@ -83,6 +80,7 @@ lpsDefineObject(_, rect, [
 ]).
 
 
+% second part of the T road 
 lpsDefineObject(_, rect, [
   position(280 , 450),
   size(300, 20),
