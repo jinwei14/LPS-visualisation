@@ -46,23 +46,26 @@ lpsDefineObject(ObjId, image, [
 ]) <-
   townPosition(ObjId, ImageId, X, Y).
 
-lpsDefineObject(FireObjId, image, [
-  position(X1, Y1),
-  size(32, 32),
-  image(fire),
-  zIndex(150),
-  isHidden(1)
-]) <-
-  townPosition(ObjId, _, X, Y),
-  atom_string(ObjId) != 'fireStation',
-  FireObjId = atom_string(ObjId) + 'Fire',
-  X1 = X + 16,
-  Y1 = Y + 16.
+% %  did not use initially
+% lpsDefineObject(FireObjId, image, [
+%   position(X1, Y1),
+%   size(32, 32),
+%   image(fire),
+%   zIndex(150),
+%   isHidden(1)
+% ]) <-
+%   townPosition(ObjId, _, X, Y),
+%   atom_string(ObjId) != 'fireStation',
+%   FireObjId = atom_string(ObjId) + 'Fire',
+%   X1 = X + 16,
+%   Y1 = Y + 16.
 
-flammable(I) <-
-  townPosition(I, _, _, _),
-  atom_string(I) != 'fireStation'.
+% % did not use
+% flammable(I) <-
+%   townPosition(I, _, _, _),
+%   atom_string(I) != 'fireStation'.
 
+% this part is the T road
 lpsDefineObject(_, rect, [
   position(520, 332),
   size(768, 20),
@@ -74,6 +77,40 @@ lpsDefineObject(_, rect, [
 lpsDefineObject(_, rect, [
   position(520, 350),
   size(768, 20),
+  zIndex(-2),
+  strokeWeight(0),
+  fillStyle('#333')
+]).
+
+
+lpsDefineObject(_, rect, [
+  position(280 , 450),
+  size(300, 20),
+  zIndex(-2),
+  strokeWeight(0),
+  fillStyle('#333')
+]).
+
+
+lpsDefineObject(_, rect, [
+  position(750 , 450),
+  size(300, 20),
+  zIndex(-2),
+  strokeWeight(0),
+  fillStyle('#333')
+]).
+% these two are the vertical ones
+lpsDefineObject(_, rect, [
+  position(440 , 590),
+  size(20, 300),
+  zIndex(-2),
+  strokeWeight(0),
+  fillStyle('#333')
+]).
+
+lpsDefineObject(_, rect, [
+  position(600 , 590),
+  size(20, 300),
   zIndex(-2),
   strokeWeight(0),
   fillStyle('#333')
