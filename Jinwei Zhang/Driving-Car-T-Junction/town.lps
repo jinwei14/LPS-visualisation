@@ -73,46 +73,56 @@ lpsDefineObject(_, rect, [
 
 lpsDefineObject(_, rect, [
   position(520, 350),
-  size(768, 20),
+  size(768, 30),
   zIndex(-2),
   strokeWeight(0),
   fillStyle('#333')
 ]).
 
+%
+% % second part of the T road
+% lpsDefineObject(_, rect, [
+%   position(280 , 450),
+%   size(300, 20),
+%   zIndex(-2),
+%   strokeWeight(0),
+%   fillStyle('#333')
+% ]).
+%
+%
+% lpsDefineObject(_, rect, [
+%   position(750 , 450),
+%   size(300, 20),
+%   zIndex(-2),
+%   strokeWeight(0),
+%   fillStyle('#333')
+% ]).
+% % these two are the vertical ones
+% lpsDefineObject(_, rect, [
+%   position(440 , 590),
+%   size(20, 300),
+%   zIndex(-2),
+%   strokeWeight(0),
+%   fillStyle('#333')
+% ]).
+%
+% lpsDefineObject(_, rect, [
+%   position(600 , 590),
+%   size(20, 300),
+%   zIndex(-2),
+%   strokeWeight(0),
+%   fillStyle('#333')
+% ]).
 
-% second part of the T road 
+
 lpsDefineObject(_, rect, [
-  position(280 , 450),
-  size(300, 20),
+  position(520 , 500),
+  size(50, 320),
   zIndex(-2),
   strokeWeight(0),
   fillStyle('#333')
 ]).
 
-
-lpsDefineObject(_, rect, [
-  position(750 , 450),
-  size(300, 20),
-  zIndex(-2),
-  strokeWeight(0),
-  fillStyle('#333')
-]).
-% these two are the vertical ones
-lpsDefineObject(_, rect, [
-  position(440 , 590),
-  size(20, 300),
-  zIndex(-2),
-  strokeWeight(0),
-  fillStyle('#333')
-]).
-
-lpsDefineObject(_, rect, [
-  position(600 , 590),
-  size(20, 300),
-  zIndex(-2),
-  strokeWeight(0),
-  fillStyle('#333')
-]).
 
 % neighbour(A, B) <-
 %   townPosition(A, _, X1, Y),
