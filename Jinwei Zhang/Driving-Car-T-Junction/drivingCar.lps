@@ -17,8 +17,8 @@ actions ([arrival]).
 % describes the facts that are true at time 1
 initially([
   moving,
-  car_location(car1, 152, 340, 0),
-  car_location(car2, 520, 650, 0)
+  car_location(car1, 150, 340),
+  car_location(car2, 520, 650)
 ]).
 
 
@@ -55,9 +55,9 @@ moving(T) , location(car1,X, Y, T)->
 
   testPrint('I am moving to'),
   testPrint(X),
-  X1 = X + 2,
-  Y1 = Y + 2,
-  carMoveTo(car1, X1, Y1, T0, T1),
+  % X1 = X + 2,
+  % Y1 = Y + 2,
+  % carMoveTo(car1, X1, Y1, T0, T1),
   % fireTruckPosition(X, Y, T1),
   % townPosition(trafficLight1, _, Tx, Ty),
   % NumCyclesNeeded = floor(abs(X - Tx) / 64),
@@ -71,9 +71,11 @@ moving(T) , location(car1,X, Y, T)->
  %  testPrint(X1),
  %  carMove(X1, Y1).
 
-location(Obj,X, Y,T) <-
+location(car1,X, Y,T) <-
   moving,
-  car_location(car1, 152, 340).
+  car_location(car1, XX, YY),
+  X = XX+2,
+  Y = YY+2.
 
 
 
@@ -106,7 +108,7 @@ waitting(T3) ->
 % have a lot of questions here!!!!!!!!!!!!!!!!!!!!!!!
 
 
-updates(carMove(Obj,X, Y), car_location(Obj,_, _), car_location(Obj,X, Y)).
+updates(location(Obj,X, Y), car_location(Obj,_, _), car_location(Obj,X, Y)).
 % %   % car_location(NOWx, NOWy),
 % %   % X1 = NOWx + 2,
 % %   % Y1 = NOWy + 2.
