@@ -4,11 +4,11 @@ true -> testPrint('The car has started').
 
 % set of facts.
 fluents([
-  moving, stop, waitting, car_location(X, Y)
+  moving, stop, waitting, car_location(_,_,_)
 ]).
 
 % cause state transition via init fact terminate fact
-events ([redLight,greenLight,carMoveTo(_, _)]).
+events ([redLight,greenLight,carMoveTo(Obj,Loc_X, Loc_Y)]).
 
 % Reactive rules
 actions ([arrival]).
@@ -17,14 +17,25 @@ actions ([arrival]).
 % describes the facts that are true at time 1
 initially([
   moving,
-  car_location(150, 340)
+  car_location(car1, 152, 340, 0),
+  car_location(car2, 520, 650, 0)
 ]).
 
-lpsDefineObject(car, image, [
+
+
+lpsDefineObject(car1, image, [
   position(150, 340),
   size(64, 64),
   isHidden(0),
-  image(car),
+  image(car1),
+  zIndex(100)
+]).
+
+lpsDefineObject(car2, image, [
+  position(520, 650),
+  size(64, 64),
+  isHidden(0),
+  image(car2),
   zIndex(100)
 ]).
 
@@ -40,30 +51,35 @@ moving(12)->
    testPrint('I have stopped at time 13').
 
 
-moving(T) ->
-  car_location(X, Y),
+moving(T) , location(car1,X, Y, T)->
+
   testPrint('I am moving to'),
   testPrint(X),
   X1 = X + 2,
   Y1 = Y + 2,
-  carMoveTo(X1, Y1).
+  carMoveTo(car1, X1, Y1, T0, T1),
   % fireTruckPosition(X, Y, T1),
   % townPosition(trafficLight1, _, Tx, Ty),
   % NumCyclesNeeded = floor(abs(X - Tx) / 64),
   % T2 = T1 + NumCyclesNeeded,
   % cycleInterval(CT),
   % AnimationDuration = CT * NumCyclesNeeded,
-  % lpsAnimateMoveObject(car, 2, 250, 340) from T1 to T2.
+  lpsAnimateMoveObject(car1, 2, X1, Y1) from T0 to T1.
 
  % carMoveTo(X1, Y1) <-
  %  testPrint('I update the positions to'),
  %  testPrint(X1),
  %  carMove(X1, Y1).
 
+location(Obj,X, Y,T) <-
+  moving,
+  car_location(car1, 152, 340).
 
-waitting(T2) ->
+
+
+waitting(T3) ->
   testPrint('I am waitting in Time'),
-  testPrint(T2).
+  testPrint(T3).
 
 
 
@@ -87,7 +103,10 @@ waitting(T2) ->
 
 
 
-% updates(carMove(X, Y), car_location(_, _), car_location(500, 500)).
+% have a lot of questions here!!!!!!!!!!!!!!!!!!!!!!!
+
+
+updates(carMove(Obj,X, Y), car_location(Obj,_, _), car_location(Obj,X, Y)).
 % %   % car_location(NOWx, NOWy),
 % %   % X1 = NOWx + 2,
 % %   % Y1 = NOWy + 2.
@@ -101,8 +120,8 @@ waitting(T2) ->
 %   AX < X,
 %   Mid = Pos + 1.
 
-initiates(carMoveTo(X1, Y1), car_location(500, 500))<-
-  moving.
+% initiates(carMoveTo(X1, Y1), car_location(500, 500))<-
+%   moving.
 
 % terminates(carMoveTo(OLD, OLD), car_location(OLD, OLD))<-
 %   moving.
