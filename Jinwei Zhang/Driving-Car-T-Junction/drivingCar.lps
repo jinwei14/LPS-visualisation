@@ -1,3 +1,5 @@
+
+
 loadModule('./modules/module.js').
 true -> testPrint('The car has started').
 
@@ -153,23 +155,23 @@ updates(carMoveTo(Obj,X, Y), car_location(Obj,_, _), car_location(Obj,X, Y)).
 
 
 
-initiates(redLight, waitting(_)) <-
-  moving(_).
+initiates(redLight, waitting(Obj)) <-
+  moving(Obj).
 
-terminates(redLight, moving(_)) <-
-  moving(_).
+terminates(redLight, moving(Obj)) <-
+  moving(Obj).
 
-initiates(greenLight, moving(_)) <-
-  waitting(_).
+initiates(greenLight, moving(Obj)) <-
+  waitting(Obj).
 
-terminates(greenLight, waitting(_)) <-
-  waitting(_).
+terminates(greenLight, waitting(Obj)) <-
+  waitting(Obj).
 
-initiates(arrival, stop(_)) <-
-  moving(_).
+initiates(arrival, stop(Obj)) <-
+  moving(Obj).
 
-terminates(arrival, moving(_)) <-
-  moving(_).
+terminates(arrival, moving(Obj)) <-
+  moving(Obj).
 
 
 %
