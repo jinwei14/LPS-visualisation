@@ -8,10 +8,10 @@ fluents([
 ]).
 
 % cause state transition via init fact terminate fact
-events ([redLight,greenLight]).
+events ([redLight,greenLight,carMoveTo(_, _)]).
 
 % Reactive rules
-actions ([arrival,fireTruckMove/2]).
+actions ([arrival]).
 
 
 % describes the facts that are true at time 1
@@ -44,23 +44,27 @@ moving(T) ->
   car_location(X, Y),
   testPrint('I am moving to'),
   testPrint(X),
-  X2 = X + 2,
-  Y2 = Y + 2,
-  testPrint('after move'),
-  testPrint(X2),
-  carMoveTo(X2, Y2),
+  X1 = X + 2,
+  Y1 = Y + 2,
+  carMoveTo(X1, Y1).
   % fireTruckPosition(X, Y, T1),
   % townPosition(trafficLight1, _, Tx, Ty),
   % NumCyclesNeeded = floor(abs(X - Tx) / 64),
   % T2 = T1 + NumCyclesNeeded,
   % cycleInterval(CT),
   % AnimationDuration = CT * NumCyclesNeeded,
-  lpsAnimateMoveObject(car, 2, 250, 340) from T1 to T2.
+  % lpsAnimateMoveObject(car, 2, 250, 340) from T1 to T2.
+
+ % carMoveTo(X1, Y1) <-
+ %  testPrint('I update the positions to'),
+ %  testPrint(X1),
+ %  carMove(X1, Y1).
 
 
 waitting(T2) ->
   testPrint('I am waitting in Time'),
   testPrint(T2).
+
 
 
 % lpsShowObject(Id) from T1 to T2 <-
@@ -82,7 +86,29 @@ waitting(T2) ->
 %   lpsDefineObject(Id, Type).
 
 
-updates(carMoveTo(X, Y), car_location(_, _), car_location(X, Y)).
+
+% updates(carMove(X, Y), car_location(_, _), car_location(500, 500)).
+% %   % car_location(NOWx, NOWy),
+% %   % X1 = NOWx + 2,
+% %   % Y1 = NOWy + 2.
+% %
+% %   X22 = X,
+% %   Y22 = Y.
+
+% updates(sample(Pos), left(_), left(Mid)) <-
+%   searching(X, T),
+%   a(Pos, AX),
+%   AX < X,
+%   Mid = Pos + 1.
+
+initiates(carMoveTo(X1, Y1), car_location(500, 500))<-
+  moving.
+
+% terminates(carMoveTo(OLD, OLD), car_location(OLD, OLD))<-
+%   moving.
+
+
+
 
 initiates(redLight, waitting) <-
   moving.
@@ -102,9 +128,7 @@ initiates(arrival, stop) <-
 terminates(arrival, moving) <-
   moving.
 
-  <- carMoveTo(X),
-    carMoveTo(Y),
-    X != Y.
+
 %
 % %------------------------------------------------------------
 %
