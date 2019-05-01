@@ -18,8 +18,9 @@ actions ([arrival,carMoveTo(Obj,Loc_X, Loc_Y)]).
 % describes the facts that are true at time 1
 initially([
   moving(car1),
-  car_location(car1, 150, 340)
-  % car_location(car2, 520, 650)
+  moving(car2),
+  car_location(car1, 150, 340),
+  car_location(car2, 520, 650)
 ]).
 
 
@@ -52,26 +53,41 @@ moving(car1,12)->
    testPrint('I have stopped at time 13').
 
 goal_location(car1, 800, 340).
+goal_location(car2, 150, 340).
 
-%
+%car moving sepraate the first car and the second car
 goal_location(car1, A, B),
   car_location(car1,X,Y,T), X@<A, moving(car1,T) ->
    XX =X + 64,
-
    carMoveTo(car1, XX,Y) from T1 to T2.
 
 goal_location(car1, A, B),
   not car_location(car1, A, B, T), car_location(car1,X,Y,T), moving(car1,T) ->
     AnimationDuration = 2,
     lpsAnimateMoveObject(car1, AnimationDuration, X, Y) from T1 to T2.
+% for car2 whether to go stright or turn left
+goal_location(car2, A, B),
+  car_location(car2,X,Y,T), Y@>B, moving(car2,T) ->
+   YY =Y - 64,
+   carMoveTo(car2, X,YY) from T1 to T2.
 
+goal_location(car2, A, B),
+ car_location(car2,X,Y,T), Y<=B, moving(car2,T) ->
+   XX =X - 64,
+  carMoveTo(car2, XX,Y) from T1 to T2.
 
+goal_location(car2, A, B),
+  not car_location(car2, A, B, T), car_location(car2,X,Y,T), moving(car2,T) ->
+    AnimationDuration = 2,
+    lpsAnimateMoveObject(car2, AnimationDuration, X, Y) from T1 to T2.
 
 waitting(car1,T3) ->
-  testPrint('I am waitting in Time'),
+  testPrint('car1 I am waitting in Time'),
   testPrint(T3).
 
-
+waitting(car2,T3) ->
+  testPrint('car1 I am waitting in Time'),
+  testPrint(T3).
 
 
 updates(carMoveTo(Obj,X, Y), car_location(Obj,_, _), car_location(Obj,X, Y)).
