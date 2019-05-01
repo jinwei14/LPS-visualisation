@@ -3,18 +3,17 @@
 loadModule('./modules/module.js').
 true -> testPrint('The car has started').
 
-
 % set of facts.
 fluents([
-  moving(Obj), stop(Obj), waitting(Obj), car_location(Obj,_,_)
+  moving(Obj), stop(Obj), waitting(Obj),car_location(Obj,_,_)
 ]).
 
 % cause state transition via init fact terminate fact
 events ([redLight, greenLight]).
 
 % Reactive rules
-actions ([arrival]).
-action(carMoveTo(Obj,Loc_X, Loc_Y)).
+actions ([arrival,carMoveTo(Obj,Loc_X, Loc_Y)]).
+
 
 % describes the facts that are true at time 1
 initially([
@@ -56,9 +55,7 @@ goal_location(car1, 200, 340).
 
 goal_location(car1, A, B),
    not car_location(car1, A, B, T) ->
-   carMoveTo(car1, A, B, T1, T2),
-   testPrint("I am moving to"),
-   testPrint(B).
+   carMoveTo(car1, A, B) from T1 to T2.
 
 % moving(T) , location(car1,X, Y, T)->
 %
