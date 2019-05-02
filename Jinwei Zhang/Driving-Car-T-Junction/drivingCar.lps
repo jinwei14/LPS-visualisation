@@ -12,7 +12,7 @@ fluents([
 events ([redLight, greenLight]).
 
 % Reactive rules
-actions ([arrival,carMoveTo(Obj,Loc_X, Loc_Y)]).
+actions ([arrival,carMoveTo(Obj,Loc_X, Loc_Y),notMovingAction(Obj,X, Y)]).
 
 
 % describes the facts that are true at time 1
@@ -20,7 +20,7 @@ initially([
   moving(car1),
   moving(car2),
   car_location(car1, 150, 340),
-  car_location(car2, 520, 650)
+  car_location(car2, 520, 650) %% 520 394
 ]).
 
 
@@ -44,7 +44,7 @@ lpsDefineObject(car2, image, [
 % describe events taking place in the transition from one time point to the next
 observe(redLight,1,2).
 observe(greenLight,3,4).
-observe(redLight,7,8).
+% observe(redLight,7,8).
 observe(greenLight,9,10).
 
 %stop at time 13
@@ -58,6 +58,7 @@ goal_location(car2, 150, 340).
 %car moving sepraate the first car and the second car
 goal_location(car1, A, B),
   car_location(car1,X,Y,T), X@<A, moving(car1,T) ->
+    testPrint(' moving car 1 right'),
    XX =X + 64,
    carMoveTo(car1, XX,Y) from T1 to T2.
 
@@ -67,13 +68,14 @@ goal_location(car1, A, B),
     lpsAnimateMoveObject(car1, AnimationDuration, X, Y) from T1 to T2.
 % for car2 whether to go stright or turn left
 goal_location(car2, A, B),
-  car_location(car2,X,Y,T), Y@>B, moving(car2,T) ->
+  car_location(car2,X,Y,T), car_location(car1,P,Q,T),abs(X - P) > 60, abs(Y - Q)> 60, Y>=B, moving(car2,T) ->
+    testPrint(' moving car 2 up'),
    YY =Y - 64,
    carMoveTo(car2, X,YY) from T1 to T2.
 
 goal_location(car2, A, B),
- car_location(car2,X,Y,T), Y<=B, moving(car2,T) ->
-   XX =X - 64,
+ car_location(car2,X,Y,T), car_location(car1,P,Q,T),abs(X - P) > 60, abs(Y - Q) > 60, X@>A, Y<=B, moving(car2,T) ->
+  XX =X - 64,
   carMoveTo(car2, XX,Y) from T1 to T2.
 
 goal_location(car2, A, B),
@@ -86,11 +88,13 @@ waitting(car1,T3) ->
   testPrint(T3).
 
 waitting(car2,T3) ->
-  testPrint('car1 I am waitting in Time'),
+  testPrint('car2 I am waitting in Time'),
   testPrint(T3).
 
 
 updates(carMoveTo(Obj,X, Y), car_location(Obj,_, _), car_location(Obj,X, Y)).
+% <-
+%   notMovingAction(Obj,X, Y).
 
 
 
@@ -114,7 +118,8 @@ initiates(arrival, stop(Obj)) <-
 terminates(arrival, moving(Obj)) <-
   moving(Obj).
 
-
+% % when should car2 not moving
+%  <- notMovingAction(Obj,X, Y,T1,T2), Obj = car2, waitting(car1,T1).
 %
 % %------------------------------------------------------------
 %
