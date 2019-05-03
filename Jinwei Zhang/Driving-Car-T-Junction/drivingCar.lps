@@ -68,13 +68,13 @@ goal_location(car1, A, B),
     lpsAnimateMoveObject(car1, AnimationDuration, X, Y) from T1 to T2.
 % for car2 whether to go stright or turn left
 goal_location(car2, A, B),
-  car_location(car2,X,Y,T), car_location(car1,P,Q,T),abs(X - P) > 60, abs(Y - Q)> 60, Y>=B, moving(car2,T) ->
+  car_location(car2,X,Y,T), car_location(car1,P,Q,T),abs(X - P)+abs(Y - Q) > 200, Y>=B, moving(car2,T) ->
     testPrint(' moving car 2 up'),
    YY =Y - 64,
    carMoveTo(car2, X,YY) from T1 to T2.
 
 goal_location(car2, A, B),
- car_location(car2,X,Y,T), car_location(car1,P,Q,T),abs(X - P) > 60, abs(Y - Q) > 60, X@>A, Y<=B, moving(car2,T) ->
+ car_location(car2,X,Y,T), car_location(car1,P,Q,T),abs(X - P)+abs(Y - Q) > 200, X@>A, Y<=B, moving(car2,T) ->
   XX =X - 64,
   carMoveTo(car2, XX,Y) from T1 to T2.
 
