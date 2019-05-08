@@ -1,0 +1,167 @@
+
+
+loadModule('./modules/module.js').
+true -> testPrint('The car has started').
+
+% set of facts.
+fluents([
+  moving(Obj), stop(Obj), waitting(Obj),car_location(Obj,_,_)
+]).
+
+% cause state transition via init fact terminate fact
+events ([redLight, greenLight]).
+
+% Reactive rules
+actions ([arrival,carMoveTo(Obj,Loc_X, Loc_Y),notMovingAction(Obj,X, Y)]).
+
+
+% describes the facts that are true at time 1
+initially([
+  moving(car1),
+  moving(car2),
+  car_location(car1, 150, 340),
+  car_location(car2, 520, 650) %% 520 394
+]).
+
+
+
+lpsDefineObject(car1, image, [
+  position(150, 340),
+  size(64, 64),
+  isHidden(0),
+  image(car1),
+  zIndex(100)
+]).
+
+lpsDefineObject(car2, image, [
+  position(520, 650),
+  size(64, 64),
+  isHidden(0),
+  image(car2),
+  zIndex(100)
+]).
+
+% describe events taking place in the transition from one time point to the next
+observe(redLight,1,2).
+observe(greenLight,3,4).
+% observe(redLight,7,8).
+observe(greenLight,9,10).
+
+%stop at time 13
+moving(car1,12)->
+   arrival(car1, 12, 13),
+   testPrint('I have stopped at time 13').
+
+goal_location(car1, 800, 340).
+goal_location(car2, 150, 340).
+
+%car moving sepraate the first car and the second car
+goal_location(car1, A, B),
+  car_location(car1,X,Y,T), X@<A, moving(car1,T) ->
+    testPrint(' moving car 1 right'),
+   XX =X + 64,
+   carMoveTo(car1, XX,Y) from T1 to T2.
+
+goal_location(car1, A, B),
+  not car_location(car1, A, B, T), car_location(car1,X,Y,T), moving(car1,T) ->
+    AnimationDuration = 2,
+    lpsAnimateMoveObject(car1, AnimationDuration, X, Y) from T1 to T2.
+% for car2 whether to go stright or turn left
+goal_location(car2, A, B),
+  car_location(car2,X,Y,T), car_location(car1,P,Q,T),abs(X - P)+abs(Y - Q) > 200, Y>=B, moving(car2,T) ->
+    testPrint(' moving car 2 up'),
+   YY =Y - 64,
+   carMoveTo(car2, X,YY) from T1 to T2.
+
+goal_location(car2, A, B),
+ car_location(car2,X,Y,T), car_location(car1,P,Q,T),abs(X - P)+abs(Y - Q) > 200, X@>A, Y<=B, moving(car2,T) ->
+  XX =X - 64,
+  carMoveTo(car2, XX,Y) from T1 to T2.
+
+goal_location(car2, A, B),
+  not car_location(car2, A, B, T), car_location(car2,X,Y,T), moving(car2,T) ->
+    AnimationDuration = 2,
+    lpsAnimateMoveObject(car2, AnimationDuration, X, Y) from T1 to T2.
+
+waitting(car1,T3) ->
+  testPrint('car1 I am waitting in Time'),
+  testPrint(T3).
+
+waitting(car2,T3) ->
+  testPrint('car2 I am waitting in Time'),
+  testPrint(T3).
+
+
+updates(carMoveTo(Obj,X, Y), car_location(Obj,_, _), car_location(Obj,X, Y)).
+% <-
+%   notMovingAction(Obj,X, Y).
+
+
+
+
+
+initiates(redLight, waitting(Obj)) <-
+  moving(Obj).
+
+terminates(redLight, moving(Obj)) <-
+  moving(Obj).
+
+initiates(greenLight, moving(Obj)) <-
+  waitting(Obj).
+
+terminates(greenLight, waitting(Obj)) <-
+  waitting(Obj).
+
+initiates(arrival, stop(Obj)) <-
+  moving(Obj).
+
+terminates(arrival, moving(Obj)) <-
+  moving(Obj).
+
+% % when should car2 not moving
+%  <- notMovingAction(Obj,X, Y,T1,T2), Obj = car2, waitting(car1,T1).
+%
+% %------------------------------------------------------------
+%
+%
+%   %%%%%%%%%%%%%%%%%%% LPS JS %%%%%%%%%%%%%%%%%%%%%%%%
+%   maxTime(5).
+%   fluent(fire).
+%   actions([eliminate, escape]).
+%   event(deal_with_fire).
+%
+%   initially(fire).
+%
+%   fire(T1) -> deal_with_fire(T1, T2).
+%
+%   deal_with_fire(T1, T2) <- eliminate(T1, T2).
+%   deal_with_fire(T1, T2) <- escape(T1, T2).
+%
+%   terminates(eliminate, fire).
+%
+%   %%%%%%%%%%%%%%%%% Swish %%%%%%%%%%%%%%%%%%%%%%%
+%
+%   maxTime(5).
+%
+%   fluents 	fire.
+%   actions 	eliminate, escape.
+%   events 		deal_with_fire.
+%
+%   initially 	fire.
+%   % reactive rules if fluents then action
+%   if 		fire at T1
+%   then 	deal_with_fire from T1 to T2.
+%
+%   %law of cause event/action dowhat if fluent
+%   deal_with_fire from T1 to T2
+%   if 		eliminate from T1 to T2.
+%
+%   deal_with_fire from T1 to T2
+%   if		 escape from T1 to T2.
+%
+%   eliminate  terminates fire.
+%
+%
+%   /** <examples>
+%   ?- go(Timeline).
+%   */
