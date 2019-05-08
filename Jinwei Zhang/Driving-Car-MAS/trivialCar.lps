@@ -4,7 +4,7 @@ loadModule(p2p).
 
 p2pJoin(sharing, 4100).
 
-fluent(position(Agent,X,Y)).
+fluent(position(X,Y)).
 initially(position(car2,10,20)).
 action(giving(X,Y)).
 
