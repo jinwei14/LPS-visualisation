@@ -1,19 +1,20 @@
-processId(Agent), wantToMove(Agent, Pos2, T1, T2) ->
-  Pos2 = position(X,Y)
-  position(Agent, Pos, T3),
-  nextMove(Agent, Pos2,T3,T4).
+processId(Agent), wantToMoveToGoal(Agent,T1, T2) ->
+  testPrint("moving to goal"),
+  testPrint(Agent),
+
+  dealwithMove(Agent) from T3 to T4.
+  % position(Agent, X, Y, T3)
+  % Pos = position(Agent, GoalX, GoalY))
+  % loanIfNotEnough(Agent, Price, Amount) from T3 to T4,
+  % buy(Agent, Item, T4, T5).
+
+dealwithMove(Agent, T1, T2), move(Agent, Position)<-
+  position(Agent, X, Y),
+  goal_location(Agent, GX, GY),
+  
 
 
-% processId(Self), borrow(Borrower, Self, Amount, T1, T2) ->
-%   lend(Self, Borrower, Amount, T3, T4).
-
- <- nextMove(Agent, position(X,Y)),
-    position(Agent2, Pos2),
-    abs(pos)
-
-
-
-nextMove() <-
-  freeze().
-
-<- false	eliminate, fire, not water.
+dealwithMove(Agent, T1, T2) <-
+  position(Agent, X, Y),
+  goal_location(Agent, GX, GY),
+  move()

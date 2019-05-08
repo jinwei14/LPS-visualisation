@@ -3,13 +3,13 @@ maxTime(20).
 fluent(position(Obj,_,_)).
 
 % retrieving information
-action(retrieving(Agent1, Agent2, Position, States)).
+action(retrieving(Agent1, Agent2, X, Y, States)).
 % giving information
-action(giving(Agent1, Agent2, Position, States)).
+action(giving(Agent1, Agent2, X, Y, States)).
 
-action(move(Agent, Position)).
+action(move(Agent, X, Y)).
 
-event(wantToMove(Agent, Position)).
+event(wantToMoveToGoal(Agent)).
 
 % itemPrice(cereal, 4).
 % itemPrice(potatos, 1).
@@ -22,18 +22,17 @@ initially([
 goal_location(mainCar, 800, 340).
 goal_location(trivialCar, 150, 340).
 
-observe(wantToMove(mainCar, position(mainCar, 800, 340)), 0, 20).
-observe(wantToMove(trivialCar, position(mainCar, 150, 340)), 0, 20).
+observe(wantToMoveToGoal(mainCar), 0, 20).
+observe(wantToMoveToGoal(trivialCar), 0, 20).
+
 
 % you cannot retrieving or giving info to yourself
-<- retrieving(Agent, Agent, _,_).
-<- giving(Agent, Agent, _,_).
+<- retrieving(Agent, Agent, _,_,_).
+<- giving(Agent, Agent, _,_,_).
 
 % updates(retrieving(Lender, Borrower, Amount), position(Lender, Balance), position(Lender, Balance - Amount)).
 % updates(giving(Lender, Borrower, Amount), position(Borrower, Balance), position(Borrower, Balance + Amount)).
-updates(move(Agent, Position), position(Agent,_,_), position(Agent,X,Y))<-
-  Position = position(Agent,X,Y).
-
+updates(move(Agent, X, Y), position(Agent,_,_), position(Agent,X,Y))
 
 consult('./agent.lps', mainCar).
 consult('./agent.lps', trivialCar).
