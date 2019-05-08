@@ -1,0 +1,17 @@
+
+
+processId(Id),
+  hasTask(Id, Task) ->
+    actOn(Id, Task).
+
+isAvailable(Agent) at T <-
+  processId(Agent),
+  not hasWork(Agent , T),
+  isAtBase(Agent , T).
+
+<- processId(Agent),
+  not isAtBase(Agent),
+  actOn(Agent , _).
+
+  % loadModule('../modules/module.js').
+  % true -> testPrint('Start ').

@@ -1,0 +1,8 @@
+processId(Agent), wantToMove(Agent, Pos1, Pos2, T1, T2) ->
+  itemPrice(Item, Price),
+  money(Agent, Amount, T3),
+  loanIfNotEnough(Agent, Price, Amount) from T3 to T4,
+  buy(Agent, Item, T4, T5).
+
+% processId(Self), borrow(Borrower, Self, Amount, T1, T2) ->
+%   lend(Self, Borrower, Amount, T3, T4).

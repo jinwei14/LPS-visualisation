@@ -5,7 +5,7 @@ true -> testPrint('The car has started').
 
 % set of facts.
 fluents([
-  moving(Obj), stop(Obj), waitting(Obj),car_location(Obj,_,_)
+   moving(Obj), stop(Obj), waitting(Obj),car_location(Obj,_,_)
 ]).
 
 % cause state transition via init fact terminate fact

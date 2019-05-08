@@ -1,0 +1,18 @@
+maxTime(20).
+
+loadModule(p2p).
+
+p2pJoin(sharing, 4100).
+
+fluent(position(Pos)).
+initially(position(10,20)).
+action(giving(Pos)).
+
+% observe(p2pReceive(lending, node(1, 2), borrow(10)), 2, 3).
+
+p2pReceive(sharing, P, retrieving(Pos), T1, T2) ->
+  giving(Pos, T2, T3),
+  p2pSend(sharing, P, giving(Pos)) from T2,
+  lpsHalt from T3.
+
+% updates(giving(Amt), money(A), money(A - Amt)).

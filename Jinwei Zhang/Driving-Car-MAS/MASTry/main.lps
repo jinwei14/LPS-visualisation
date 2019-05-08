@@ -1,0 +1,15 @@
+loadModule('../modules/module.js').
+true -> testPrint('Start of the programe started').
+
+consult('./agent.lps', alice).
+
+hasTask(alice , Task) ->
+  testPrint("alice act on task"),
+  actOn(alice , Task).
+
+isAvailable(alice) at T <-
+  testPrint("alice act on task"),
+  not hasWork(alice , T),
+  isAtBase(alice , T).
+
+<- not isAtBase(alice), actOn(alice , _).

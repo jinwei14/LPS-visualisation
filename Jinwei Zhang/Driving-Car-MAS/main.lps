@@ -1,0 +1,20 @@
+maxTime(20).
+
+fluent(money(Agent, Amount)).
+
+action(tell_Location(Agent1, Agent2, Position)).
+
+action(move(Agent, Position)).
+
+event(wantToBuy(Agent, Item)).
+
+itemPrice(cereal, 4).
+itemPrice(potatos, 1).
+itemPrice(milk, 1).
+
+initially([
+  money(alice, 1),
+  money(bob, 10)
+]).
+
+observe(wantToBuy(alice, cereal), 3, 4).
