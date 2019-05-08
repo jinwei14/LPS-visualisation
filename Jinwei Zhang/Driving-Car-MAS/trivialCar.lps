@@ -4,15 +4,17 @@ loadModule(p2p).
 
 p2pJoin(sharing, 4100).
 
-fluent(position(Pos)).
-initially(position(10,20)).
-action(giving(Pos)).
+fluent(position(Agent,X,Y)).
+initially(position(car2,10,20)).
+action(giving(X,Y)).
 
 % observe(p2pReceive(lending, node(1, 2), borrow(10)), 2, 3).
 
-p2pReceive(sharing, P, retrieving(Pos), T1, T2) ->
-  giving(Pos, T2, T3),
-  p2pSend(sharing, P, giving(Pos)) from T2,
+p2pReceive(sharing, P, retrieving, T1, T2) ->
+  Agent = car2
+  position(Agent,X,Y),
+  giving(X,Y, T2, T3),
+  p2pSend(sharing, P, giving(X,Y)) from T2,
   lpsHalt from T3.
 
 % updates(giving(Amt), money(A), money(A - Amt)).

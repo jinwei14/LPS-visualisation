@@ -2,15 +2,16 @@ maxTime(12).
 
 loadModule(p2p).
 
-p2pJoin(lending, 4100).
+p2pJoin(giving, 4100).
 
-event(wantToBuy(I)).
+event(wantToMove(Agent,X,Y)).
 
-fluent(money(A)).
-action(buy(I)).
-action(receiveLoan(A)).
+fluent(position(Agent,X,Y)).
+action(move(Agent,X,Y)).
+action(receiveInfo(X,Y)).
 
-initially(money(1)).
+initially(position(car1,5,8)).
+
 observe(wantToBuy(cereal), 3, 4).
 
 itemPrice(cereal, 4).
