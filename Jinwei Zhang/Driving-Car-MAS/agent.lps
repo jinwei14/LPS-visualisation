@@ -1,0 +1,27 @@
+processId(Agent), wantToMoveToGoal(Agent,T1, T2) ->
+  testPrint("moving to goal"),
+  testPrint(Agent),
+  checkCollision(Agent) from T2 to T3,
+  dealwithMove(Agent) at T3.
+  % position(Agent, X, Y, T3)
+  % Pos = position(Agent, GoalX, GoalY))
+  % loanIfNotEnough(Agent, Price, Amount) from T3 to T4,
+  % buy(Agent, Item, T4, T5).
+
+dealwithMove(Agent, T), move(Agent, Xnow+1,Ynow)<-
+  Agent @= mainCar,
+  position(Agent, Xnow, Xnow),
+  goal_location(Agent, GX, GY),
+  notCollison(Agent),
+  GX != Xnow,
+  GY != Ynow.
+
+
+
+dealwithMove(Agent, T), move(Agent, Xnow,Ynow-1)<-
+  Agent @= trivialCar,
+  position(Agent, Xnow, Xnow),
+  goal_location(Agent, GX, GY),
+  notCollison(Agent),
+  GX != Xnow,
+  GY != Ynow.

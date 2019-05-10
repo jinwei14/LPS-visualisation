@@ -1,5 +1,3 @@
-
-
 loadModule('./modules/module.js').
 true -> testPrint('The car has started').
 

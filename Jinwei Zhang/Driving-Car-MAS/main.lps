@@ -1,6 +1,9 @@
 maxTime(20).
 
-fluent(position(Obj,_,_)).
+fluent([position(Obj,_,_),
+  goal_location(mainCar, 800, 340),
+  goal_location(trivialCar, 150, 340)
+  ]).
 
 % retrieving information
 action(retrieving(Agent1, Agent2, X, Y, States)).
@@ -19,8 +22,7 @@ initially([
   position(mainCar, 150, 340),
   position(trivialCar, 520, 650)
 ]).
-goal_location(mainCar, 800, 340).
-goal_location(trivialCar, 150, 340).
+
 
 observe(wantToMoveToGoal(mainCar), 0, 20).
 observe(wantToMoveToGoal(trivialCar), 0, 20).
@@ -32,7 +34,10 @@ observe(wantToMoveToGoal(trivialCar), 0, 20).
 
 % updates(retrieving(Lender, Borrower, Amount), position(Lender, Balance), position(Lender, Balance - Amount)).
 % updates(giving(Lender, Borrower, Amount), position(Borrower, Balance), position(Borrower, Balance + Amount)).
-updates(move(Agent, X, Y), position(Agent,_,_), position(Agent,X,Y))
+updates(move(Agent, X, Y), position(Agent,_,_), position(Agent,X,Y))<-
+  goal_location(Agent,GX,GY),
+  GX != X,
+  GY!= Y.
 
 consult('./agent.lps', mainCar).
 consult('./agent.lps', trivialCar).

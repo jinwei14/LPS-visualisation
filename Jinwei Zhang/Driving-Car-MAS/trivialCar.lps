@@ -2,7 +2,7 @@ maxTime(20).
 
 loadModule(p2p).
 
-p2pJoin(sharing, 4100).
+p2pJoin(giving, 4100).
 
 fluent(position(X,Y)).
 initially(position(car2,10,20)).
@@ -10,7 +10,9 @@ action(giving(X,Y)).
 
 % observe(p2pReceive(lending, node(1, 2), borrow(10)), 2, 3).
 
-p2pReceive(sharing, P, retrieving, T1, T2) ->
+goal_location150, 340).
+
+p2pReceive(giving, P, retrieving, T1, T2) ->
   Agent = car2
   position(Agent,X,Y),
   giving(X,Y, T2, T3),

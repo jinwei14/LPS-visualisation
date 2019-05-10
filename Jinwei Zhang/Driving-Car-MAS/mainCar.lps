@@ -1,45 +1,56 @@
-maxTime(12).
+maxTime(20).
 
 loadModule(p2p).
 
 p2pJoin(giving, 4100).
 
-event(wantToMove(Agent,X,Y)).
+event(wantToMoveToGoal).
 
-fluent(position(Agent,X,Y)).
-action(move(Agent,X,Y)).
+fluent(position(X,Y)).
+fluent(notCollison).
+action(move(X,Y)).
 action(receiveInfo(X,Y)).
 
-initially(position(car1,5,8)).
+initially( [
+  position(150, 340),
+  notCollison
+]).
 
-observe(wantToBuy(cereal), 3, 4).
+observe(wantToMoveToGoal, 0, 20).
 
-itemPrice(cereal, 4).
-itemPrice(potatos, 1).
-itemPrice(milk, 1).
 
-wantToBuy(I, T1, T2) ->
-  itemPrice(I, Price),
-  money(Amount, T2),
-  loanIfNotEnough(Price, Amount, T2),
-  buy(I) from T3 to T4.
+goal_location(800, 340).
 
-loanIfNotEnough(Price, Amount, _T1) <-
-  Price <= Amount.
+wantToMoveToGoal ->
+  checkCollision from T2 to T3,
+  move(_,_).
 
-loanIfNotEnough(Price, Amount, T1) <-
-  Price > Amount,
-  p2pPeer(lending, P),
-  Loan = Price - Amount,
-  p2pSend(lending, P, borrow(Loan)) from T1.
 
-p2pReceive(lending, P, lend(A), T1, T2) ->
-  receiveLoan(A, T2, T3).
+move(Xnow+1,Ynow)<-
+  position(Xnow, Xnow),
+  goal_location(GX, GY),
 
-updates(receiveLoan(Loan), money(A), money(A + Loan)).
-updates(buy(I), money(A), money(A - P)) <- itemPrice(I, P).
+  notCollison,
+  GX != Xnow,
+  GY != Ynow.
 
-<- money(Amt),
-  buy(I),
-  itemPrice(I, Price),
-  Amt < Price.
+
+initiates(checkCollision, notCollison) <-
+  p2pPeer(giving, P),
+
+  p2pSend(giving, P, giving(X,Y)) from T1.
+
+terminates(checkCollision, notCollison) <-
+  p2pPeer(giving, P),
+
+  p2pSend(sharing, P, giving(X,Y)) from T1.
+
+p2pReceive(giving, P, retrieving, T1, T2) ->
+  receiveLocation(Xother,Yother, T2, T3),
+  position(X,Y),
+  abs(X-Xother) + abs(Y-Yother) <= 100.
+
+updates(move(X, Y), position(_,_), position(X,Y))<-
+  goal_location(Agent,GX,GY),
+  GX != X,
+  GY!= Y.
