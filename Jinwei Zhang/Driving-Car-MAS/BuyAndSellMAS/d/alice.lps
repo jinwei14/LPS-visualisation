@@ -28,7 +28,7 @@ wantToBuy(I, T1, T2) ->
   loanIfNotEnough(Price, Amount, T2),
   buy(I) from T3 to T4.
 
-loanIfNotEnough(Price, Amount, _T1) <-
+loanIfNotEnough(Price, Amount, T1) <-
   testPrint('alice has enough money '+ Amount+ ' price is : '+ Price),
   Price <= Amount.
 

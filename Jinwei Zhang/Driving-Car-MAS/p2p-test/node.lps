@@ -2,7 +2,14 @@ loadModule(p2p).
 maxTime(200).
 cycleInterval(500).
 
+loadModule('../modules/module.js').
+true -> testPrint('start of the program nodes lps').
+
 p2pJoin(test).
 
-p2pConnected(NetworkId, T1, T2) -> write('i am connected to '), write(NetworkId).
-p2pPeerConnected(NetworkId, Peer, T1, T2) -> write(Peer), write('is connected').
+p2pConnected(NetworkId, T1, T2) ->
+  write('i am connected to '), write(NetworkId),
+  testPrint('\n successful connected').
+
+p2pPeerConnected(NetworkId, Peer, T1, T2) ->
+  write(Peer), write('is connected').
