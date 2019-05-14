@@ -24,6 +24,7 @@ These observations trigger the car to drive, by consulting a database of known r
 % set of facts.
 % LPS uses a simple event-calculus-like ontology of fluents, and events, which include actions:
 fluents([
+   pair(X, Y),
    location(Vehicle, Place, Heading),
    collisionWarning(Vehicle1, Vehicle2, Place),
    rightOfWay(Vehicle1, Vehicle2, Place),
@@ -45,11 +46,11 @@ actions ([
 
 % describes the facts that are true at time 1
 initially([
-  location(mycar, 2-1, northward),
-	location(yourcar, 6-1, northward),
-	location(othercar, 10-5, westward),
-	location(troubleMaker, 6-2, northward),
-	location(brokencar, 2-7, noward)
+  location(mycar, pair(2, 1), northward),
+	location(yourcar, pair(6, 1), northward),
+	location(othercar, pair(10, 5), westward),
+	location(troubleMaker, pair(6, 2), northward),
+	location(brokencar, pair(2, 7), noward)
 ]).
 
 
@@ -71,31 +72,35 @@ lpsDefineObject(car2, image, [
 ]).
 
 
-observe (destination(mycar, 2-9),2,3).
-observe (destination(troubleMaker, 8-9),2,3).
-observe (destination(yourcar, 9-9),2,3).
-observe (destination(othercar, 6-1),1,2).
+observe (destination(mycar, pair(2, 9)),2,3).
+observe (destination(troubleMaker, pair(8, 9)),2,3).
+observe (destination(yourcar, pair(9, 9)),2,3).
+observe (destination(othercar, pair(6, 1)),1,2).
 observe (remove(brokencar) ,15,16).
 
 
 % Just for fun.
 terminates(remove(Vehicle), location(Vehicle,_,_)).
 
-destination(Vehicle, NewPlace) to T,
+destination(Vehicle, NewPlace) from _ to T,
 location(Vehicle, PresentPlace, Heading) at T ->
+  testPrint('Vehicle '+Vehicle+' NewPlace '+NewPlace+' PresentPlace '+PresentPlace+' Heading ' + Heading),
   directions(PresentPlace, Route, NewPlace),
-  drive(Vehicle, Route, NewPlace) from T.
+  testPrint('haha'),
+  drive(Vehicle, Route, NewPlace) from T,
+  testPrint('DrivingEnd').
 
   % Finding directions is easiest when the start and finish locations are on the same street:
   %
   directions(Start, [Heading - Street], Finish) <-
-  	on(Start, Street), on(Finish, Street),
+  	on(Start, Street),
+    on(Finish, Street),
   	orientation(Start, Finish, Heading).
 
-  orientation(X-Y1, X-Y2, northward) <- Y1 < Y2.
-  orientation(X-Y1, X-Y2, southward) <- Y1 > Y2.
-  orientation(X1-Y, X2-Y, eastward) <- X1 < X2.
-  orientation(X1-Y, X2-Y, westward) <- X1 > X2.
+  orientation(pair(X,Y1), pair(X,Y2), northward) <- Y1 < Y2.
+  orientation(pair(X,Y1), pair(X,Y2), southward) <- Y1 > Y2.
+  orientation(pair(X1,Y), pair(X2,Y), eastward) <- X1 < X2.
+  orientation(pair(X1,Y), pair(X2,Y), westward) <- X1 > X2.
 
 % Otherwise, directions can be found by consulting a database of long distance routes
 % and extracting segments of those routes.
@@ -103,10 +108,10 @@ location(Vehicle, PresentPlace, Heading) at T ->
   directions(Start, NewRoute, Finish) <-
   	on(Finish, Street2),
   	route(_, Route, _),
-  	append(FirstPart, [Heading2 - Street2 | _], Route),
+  	append(FirstPart, [pair(Heading2 , Street2) | _], Route),
   	on(Start, Street1),
-  	append(_, [Heading1 - Street1 | Link], FirstPart),
-  	append([Heading1 - Street1 | Link], [Heading2 - Street2], NewRoute).
+  	append(_, [pair(Heading1 , Street1) | Link], FirstPart),
+  	append([pair(Heading1, Street1) | Link], [pair(Heading2 , Street2)], NewRoute).
 
 % Here are some long distance routes and some street locations:
 %
@@ -116,11 +121,11 @@ route(6-1, [northward - highStreet, eastward - northStreet], 9-9).
 route(9-9, [westward - northStreet, southward - westStreet], 2-1).
 route(10-5, [westward - mainStreet, southward - highStreet], 6-1).
 
-on(X-5, mainStreet) <- 3 =< X, X =< 10.
-on(X-9, northStreet) <- 2 =< X, X =< 9.
-on(6-Y, highStreet) <- 1 =< Y, Y =< 9.
-on(2-Y, westStreet) <- 1 =< Y, Y =< 9.
-on(8-Y, eastStreet) <- 1 =< Y, Y =< 9.
+on(X-5, mainStreet) <- 3 <= X, X <= 10.
+on(X-9, northStreet) <- 2 <= X, X <= 9.
+on(6-Y, highStreet) <- 1 <= Y, Y <= 9.
+on(2-Y, westStreet) <- 1 <= Y, Y <= 9.
+on(8-Y, eastStreet) <- 1 <= Y, Y <= 9.
 
 
 % There are three cases for driving. It might be desirable to refactor them.
@@ -129,7 +134,7 @@ on(8-Y, eastStreet) <- 1 =< Y, Y =< 9.
 %
 drive(Vehicle, [Heading - Street], NewPlace) from T to T3 <-
 	location(Vehicle, OldPlace, Heading) at T,
-  OldPlace \= NewPlace,
+  OldPlace != NewPlace,
 	next(OldPlace, Heading, NextPlace),
 	on(NextPlace, Street),
 	step(Vehicle, OldPlace, NextPlace) from T1 to T2,
@@ -154,15 +159,76 @@ drive(Vehicle, [OldHeading - OldStreet, NewHeading - NewStreet | Rest], NewPlace
 
   % Stepping and turning update the current state:
   %
-  step(Vehicle, OldPlace, NextPlace) updates OldPlace to NextPlace in location(Vehicle, OldPlace, Heading).
-  turn(Vehicle, NewHeading) updates OldHeading to NewHeading in location(Vehicle, Place, OldHeading).
+updates(step(Vehicle, OldPlace, NextPlace), location(Vehicle, _, Heading), location(Vehicle, NextPlace, Heading)).
+updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, _), location(Vehicle, Place, NewHeading)).
 
   % Some geography:
   %
-  next(X-Y1, northward, X-Y2) :- Y2 is Y1 + 1.
-  next(X-Y1, southward, X-Y2) :- Y2 is Y1 - 1.
-  next(X1-Y, eastward, X2-Y) :- X2 is X1 +1.
-  next(X1-Y, westward, X2-Y) :- X2 is X1 - 1.
+  next(X-Y1, northward, X-Y2) <- Y2 @= Y1 + 1.
+  next(X-Y1, southward, X-Y2) <- Y2 @= Y1 - 1.
+  next(X1-Y, eastward, X2-Y) <- X2 @= X1 +1.
+  next(X1-Y, westward, X2-Y) <- X2 @= X1 - 1.
 
   % Some self-preservation:
   %
+
+  <- step(Vehicle1, OldPlace, NextPlace),
+  	collisionPossible(Vehicle1, Vehicle2).
+
+  collisionPossible(Vehicle1, Vehicle2) at T <-
+  	location(Vehicle1, Place1, Heading1) at T,
+  	next(Place1, Heading1, Place2),
+  	location(Vehicle2, Place2, Heading2) at T,
+  	not opposite(Heading1, Heading2).
+
+  opposite(northward, southward).
+  opposite(southward, northward).
+  opposite(eastward, westward).
+  opposite(westward, eastward).
+
+  % Some rules of the road, which are conducive to a well-ordered society:
+  %
+<- step(Vehicle1, OldPlace, NextPlace),
+  	collisionWarning(Vehicle1, Vehicle2, NextPlace),
+  	not rightOfWay(Vehicle1, Vehicle2, NextPlace).
+
+  collisionWarning(Vehicle1, Vehicle2, NextPlace) at T <-
+  	location(Vehicle1, Place1, Heading1) at T,
+  	location(Vehicle2, Place2, Heading2) at T,
+  	next(Place1, Heading1, NextPlace),
+  	next(Place2, Heading2, NextPlace),
+  	clash(Heading1, Heading2).
+
+  clash(Heading1, Heading2) <-
+      horizontal(Heading1), vertical(Heading2).
+  clash(Heading1, Heading2) <-
+      vertical(Heading1), horizontal(Heading2).
+
+  horizontal(H) <- H=eastward ; H=westward.
+  vertical(H) <- H=northward ; H=southward.
+
+  rightOfWay(Vehicle1, Vehicle2, NextPlace) <-
+  	priorityTjunction(NextPlace, Street),
+  	location(Vehicle1, Place, _),
+  	on(Place, Street).
+
+  rightOfWay(Vehicle1, Vehicle2, NextPlace) <-
+  	crossRoads(NextPlace),
+  	location(Vehicle1, _, Heading1) at T,
+  	location(Vehicle2, _, Heading2) at T,
+  	rightOf(Heading1, Heading2).
+
+  rightOf(westward, northward).
+  rightOf(southward, westward).
+  rightOf(eastward, southward).
+  rightOf(northward, eastward).
+
+  % Cross roads and T junctions can be derived from street locations,
+  % but for this simple example, it is easier just to list them:
+  %
+  crossRoads(6-5).
+  crossRoads(8-5).
+
+  priorityTjunction(2-5, westStreet).
+  priorityTjunction(6-9, northStreet).
+  priorityTjunction(8-9, northStreet).
