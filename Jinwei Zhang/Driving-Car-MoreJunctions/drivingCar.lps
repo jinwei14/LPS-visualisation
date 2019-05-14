@@ -1,0 +1,168 @@
+loadModule('./modules/module.js').
+true -> testPrint('The car has started').
+
+/*
+This simplified example is inspired by
+Zhao, Lihua, Ryutaro Ichise, Zheng Liu, Seiichi Mita, and Yutaka Sasaki.
+"Ontology-Based Driving Decision Making: A Feasibility Study at Uncontrolled Intersections."
+IEICE TRANSACTIONS on Information and Systems 100, no. 7 (2017): 1425-1439.
+At https://www.jstage.jst.go.jp/article/transinf/E100.D/7/E100.D_2016EDP7337/_pdf
+
+For simplicity, it assumes all streets have two lanes,
+and all intersections are uncontrolled without traffic lights.
+All streets run North-South or East-West.
+The term x-y represents the location with x-coordinate x and y-coordinate y.
+
+Cars drive on the left, as in Japan and in the UK.
+At cross road intersections, the car on the right has priority.
+
+All cars have an initial location.
+The destination of a car journey is observed as an external input.
+These observations trigger the car to drive, by consulting a database of known routes.
+*/
+
+% set of facts.
+% LPS uses a simple event-calculus-like ontology of fluents, and events, which include actions:
+fluents([
+   location(Vehicle, Place, Heading),
+   collisionWarning(Vehicle1, Vehicle2, Place),
+   rightOfWay(Vehicle1, Vehicle2, Place),
+   collisionPossible(Vehicle1, Vehicle2)
+]).
+
+% cause state transition via init fact terminate fact
+events ([
+  destination(Vehicle, Place),
+  remove(Vehicle)
+]).
+
+% Reactive rules
+actions ([
+  step(Vehicle, OldPlace, NextPlace),
+  turn(Vehicle, NewHeading)
+]).
+
+
+% describes the facts that are true at time 1
+initially([
+  location(mycar, 2-1, northward),
+	location(yourcar, 6-1, northward),
+	location(othercar, 10-5, westward),
+	location(troubleMaker, 6-2, northward),
+	location(brokencar, 2-7, noward)
+]).
+
+
+
+lpsDefineObject(car1, image, [
+  position(150, 340),
+  size(64, 64),
+  isHidden(0),
+  image(car1),
+  zIndex(100)
+]).
+
+lpsDefineObject(car2, image, [
+  position(520, 650),
+  size(64, 64),
+  isHidden(0),
+  image(car2),
+  zIndex(100)
+]).
+
+
+observe (destination(mycar, 2-9),2,3).
+observe (destination(troubleMaker, 8-9),2,3).
+observe (destination(yourcar, 9-9),2,3).
+observe (destination(othercar, 6-1),1,2).
+observe (remove(brokencar) ,15,16).
+
+
+% Just for fun.
+terminates(remove(Vehicle), location(Vehicle,_,_)).
+
+destination(Vehicle, NewPlace) to T,
+location(Vehicle, PresentPlace, Heading) at T ->
+  directions(PresentPlace, Route, NewPlace),
+  drive(Vehicle, Route, NewPlace) from T.
+
+  % Finding directions is easiest when the start and finish locations are on the same street:
+  %
+  directions(Start, [Heading - Street], Finish) <-
+  	on(Start, Street), on(Finish, Street),
+  	orientation(Start, Finish, Heading).
+
+  orientation(X-Y1, X-Y2, northward) <- Y1 < Y2.
+  orientation(X-Y1, X-Y2, southward) <- Y1 > Y2.
+  orientation(X1-Y, X2-Y, eastward) <- X1 < X2.
+  orientation(X1-Y, X2-Y, westward) <- X1 > X2.
+
+% Otherwise, directions can be found by consulting a database of long distance routes
+% and extracting segments of those routes.
+%
+  directions(Start, NewRoute, Finish) <-
+  	on(Finish, Street2),
+  	route(_, Route, _),
+  	append(FirstPart, [Heading2 - Street2 | _], Route),
+  	on(Start, Street1),
+  	append(_, [Heading1 - Street1 | Link], FirstPart),
+  	append([Heading1 - Street1 | Link], [Heading2 - Street2], NewRoute).
+
+% Here are some long distance routes and some street locations:
+%
+route(2-9, [eastward - northStreet], 9-9).
+route(2-1, [northward - westStreet, eastward - northStreet], 9-9).
+route(6-1, [northward - highStreet, eastward - northStreet], 9-9).
+route(9-9, [westward - northStreet, southward - westStreet], 2-1).
+route(10-5, [westward - mainStreet, southward - highStreet], 6-1).
+
+on(X-5, mainStreet) <- 3 =< X, X =< 10.
+on(X-9, northStreet) <- 2 =< X, X =< 9.
+on(6-Y, highStreet) <- 1 =< Y, Y =< 9.
+on(2-Y, westStreet) <- 1 =< Y, Y =< 9.
+on(8-Y, eastStreet) <- 1 =< Y, Y =< 9.
+
+
+% There are three cases for driving. It might be desirable to refactor them.
+% Notice that in all three cases, driving starts at "time" (really state) T, but stepping forward starts at T1.
+% This takes into account that it might be necessary to wait from T to T1 for the step to be possible.
+%
+drive(Vehicle, [Heading - Street], NewPlace) from T to T3 <-
+	location(Vehicle, OldPlace, Heading) at T,
+  OldPlace \= NewPlace,
+	next(OldPlace, Heading, NextPlace),
+	on(NextPlace, Street),
+	step(Vehicle, OldPlace, NextPlace) from T1 to T2,
+	drive(Vehicle, [Heading - Street], NewPlace) from T2 to T3.
+
+drive(Vehicle, [OldHeading - OldStreet, NewHeading - NewStreet | Rest], NewPlace) from T to T3 <-
+	location(Vehicle, OldPlace, OldHeading),
+	next(OldPlace, OldHeading, NextPlace),
+	not on(NextPlace, NewStreet),
+	step(Vehicle, OldPlace, NextPlace) from T1 to T2,
+ 	drive(Vehicle, [OldHeading - OldStreet, NewHeading - NewStreet | Rest], NewPlace) from T2 to T3.
+
+% Here step and turn are executed concurrently.
+%
+drive(Vehicle, [OldHeading - OldStreet, NewHeading - NewStreet | Rest], NewPlace) from T to T3 <-
+	location(Vehicle, OldPlace, OldHeading),
+	next(OldPlace, OldHeading, NextPlace),
+	on(NextPlace, NewStreet),
+	step(Vehicle, OldPlace, NextPlace) from T1 to T2,
+	turn(Vehicle, NewHeading) from T1 to T2,
+	drive(Vehicle, [NewHeading - NewStreet| Rest], NewPlace) from T2 to T3.
+
+  % Stepping and turning update the current state:
+  %
+  step(Vehicle, OldPlace, NextPlace) updates OldPlace to NextPlace in location(Vehicle, OldPlace, Heading).
+  turn(Vehicle, NewHeading) updates OldHeading to NewHeading in location(Vehicle, Place, OldHeading).
+
+  % Some geography:
+  %
+  next(X-Y1, northward, X-Y2) :- Y2 is Y1 + 1.
+  next(X-Y1, southward, X-Y2) :- Y2 is Y1 - 1.
+  next(X1-Y, eastward, X2-Y) :- X2 is X1 +1.
+  next(X1-Y, westward, X2-Y) :- X2 is X1 - 1.
+
+  % Some self-preservation:
+  %
