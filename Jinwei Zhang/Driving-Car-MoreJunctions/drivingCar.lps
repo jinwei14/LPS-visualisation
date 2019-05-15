@@ -85,7 +85,7 @@ terminates(remove(Vehicle), location(Vehicle,_,_)).
 
 destination(Vehicle, NewPlace) from _ to T,
 location(Vehicle, PresentPlace, Heading) at T ->
-  testPrint('Vehicle: '+Vehicle+' NewPlace: '+NewPlace+' PresentPlace: '+PresentPlace+' Heading: ' + Heading),
+  testPrint('-->Vehicle: '+Vehicle+' NewPlace: '+NewPlace+' PresentPlace: '+PresentPlace+' Heading: ' + Heading),
   directions(PresentPlace, Route, NewPlace),
   testPrint('haha Vehicle start driving: '+ Vehicle+' NewPlace: '+NewPlace + 'Route can not be printed because it is a list!!!!!!!!!!'),
   drive(Vehicle, Route, NewPlace) from T to _,
@@ -94,13 +94,15 @@ location(Vehicle, PresentPlace, Heading) at T ->
   % Finding directions is easiest when the start and finish locations are on the same street:
   %
   directions(Start, [pair(Heading , Street)], Finish) <-
+    testPrint(Heading),
     testPrint('chekcing directionsMethod1'),
   	on(Start, Street),
     testPrint('chekcing directions1'),
-    testPrint(Finish+Street),
+    testPrint(Start+Finish+Street),
     on(Finish, Street),
-    testPrint('chekcing directions2'+Start+ Finish+Heading),
-  	orientation(Start, Finish, Heading).
+    testPrint('chekcing directions2'+Start+ Finish),
+  	orientation(Start, Finish, Heading),
+    testPrint(Heading).
 
   orientation(coordinate(X,Y1), coordinate(X,Y2), northward) <- Y1 < Y2.
   orientation(coordinate(X,Y1), coordinate(X,Y2), southward) <- Y1 > Y2.
@@ -111,10 +113,12 @@ location(Vehicle, PresentPlace, Heading) at T ->
 % and extracting segments of those routes.
 %
   directions(Start, NewRoute, Finish) <-
-
+    testPrint('chekcing directionsMethod2'),
   	on(Finish, Street2),
+    testPrint('chekcing directionsMethod2'+ '     '+Start+Finish+Street2),
   	route(_, Route, _),
   	append(FirstPart, [pair(Heading2 , Street2) | _], Route),
+    testPrint('chekcing directionsMethod2'+ '     '+FirstPart),
   	on(Start, Street1),
   	append(_, [pair(Heading1 , Street1) | Link], FirstPart),
   	append([pair(Heading1, Street1) | Link], [pair(Heading2 , Street2)], NewRoute).

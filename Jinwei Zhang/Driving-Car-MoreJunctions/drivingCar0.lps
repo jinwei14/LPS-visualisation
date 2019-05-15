@@ -98,7 +98,7 @@ location(Vehicle, XPresent,YPresent, Heading) at T ->
     testPrint('chekcing directions1'),
     testPrint(Xnew+Ynew+Street),
     on(Xnew,Ynew, Street),
-    testPrint('chekcing directions2'+XPresent+YPresent+ Xnew+Ynew+Heading),
+    testPrint('chekcing directions2'+XPresent+YPresent+ Xnew+Ynew),
   	orientation(XPresent,YPresent, Xnew,Ynew, Heading).
 
   orientation(X,Y1, X,Y2, northward) <- Y1 < Y2.
