@@ -118,7 +118,7 @@ location(Vehicle, PresentPlace, Heading) at T ->
     testPrint('chekcing directionsMethod2.2'+ '     '+Start+Finish+Street2),
   	route(_, Route, _),
     testPrint('chekcing directionsMethod2.3'+ '     '+is_list(Route)),
-    testPrint('chekcing directionsMethod2.3'+ '     '+is_list(FirstPart)),
+    testPrint('chekcing directionsMethod2.3'+ '     '+is_list(FirstPart)+Heading2),
   	append(FirstPart, [pair(Heading2 , Street2) | _ ], Route),
     testPrint('chekcing directionsMethod2.4 '+ '     '),
   	on(Start, Street1),

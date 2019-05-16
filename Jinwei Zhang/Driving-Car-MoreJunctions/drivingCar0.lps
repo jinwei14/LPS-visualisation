@@ -11,7 +11,7 @@ At https://www.jstage.jst.go.jp/article/transinf/E100.D/7/E100.D_2016EDP7337/_pd
 For simplicity, it assumes all streets have two lanes,
 and all intersections are uncontrolled without traffic lights.
 All streets run North-South or East-West.
-The term x-y represents the location with x-- x and y-- y.
+The term x-y represents the location with x-coordinate x and y-coordinate y.
 
 Cars drive on the left, as in Japan and in the UK.
 At cross road intersections, the car on the right has priority.
@@ -45,11 +45,11 @@ actions ([
 
 % describes the facts that are true at time 1
 initially([
-  location(mycar, -(2, 1), northward),
-	location(yourcar, -(6, 1), northward),
-	location(othercar, -(10, 5), westward),
-	location(troubleMaker, -(6, 2), northward),
-	location(brokencar, -(2, 7), noward)
+  location(mycar, [2, 1], northward),
+	location(yourcar, [6, 1], northward),
+	location(othercar, [10, 5], westward),
+	location(troubleMaker, [6, 2], northward),
+	location(brokencar, [2, 7], noward)
 ]).
 
 
@@ -71,10 +71,10 @@ lpsDefineObject(car2, image, [
 ]).
 
 
-observe (destination(mycar, -(2, 9)),2,3).
-observe (destination(troubleMaker, -(8, 9)),2,3).
-observe (destination(yourcar, -(9, 9)),2,3).
-observe (destination(othercar, -(6, 1)),1,2).
+observe (destination(mycar, [2, 9]),2,3).
+observe (destination(troubleMaker, [8, 9]),2,3).
+observe (destination(yourcar, [9, 9]),2,3).
+observe (destination(othercar, [6, 1]),1,2).
 observe (remove(brokencar) ,15,16).
 
 
@@ -83,127 +83,120 @@ terminates(remove(Vehicle), location(Vehicle,_,_)).
 
 destination(Vehicle, NewPlace) from _ to T,
 location(Vehicle, PresentPlace, Heading) at T ->
-  testPrint('-->Vehicle: '+Vehicle+' NewPlace: '+NewPlace+' PresentPlace: '+PresentPlace+' Heading: ' + Heading),
+  testPrint('Vehicle: '+Vehicle+' NewPlace: '+is_list(NewPlace)+' PresentPlace: '+is_list(PresentPlace)+' Heading: ' + Heading),
   directions(PresentPlace, Route, NewPlace),
-  testPrint('haha Vehicle start driving: '+ Vehicle+' NewPlace: '+NewPlace + 'Route can not be printed because it is a list!!!!!!!!!!'),
+  testPrint('haha Vehicle start driving: '+ Vehicle+' NewPlace: '+is_list(NewPlace) + 'Route can not be printed because it is a list!!!!!!!!!!'),
   drive(Vehicle, Route, NewPlace) from T to _,
   testPrint('DrivingEnd').
 
   % Finding directions is easiest when the start and finish locations are on the same street:
   %
-  directions(Start, [-(Heading , Street)], Finish) <-
-    testPrint(Heading),
+  directions(Start, [[Heading , Street]], Finish) <-
     testPrint('chekcing directionsMethod1'),
   	on(Start, Street),
     testPrint('chekcing directions1'),
-    testPrint(Start+Finish+Street),
+    testPrint(is_list(Finish)+Street),
     on(Finish, Street),
-    testPrint('chekcing directions2'+Start+ Finish),
-  	orientation(Start, Finish, Heading),
-    testPrint(Heading).
+    testPrint('chekcing directions2'),
+  	orientation(Start, Finish, Heading).
 
-  orientation(-(X,Y1), -(X,Y2), northward) <- Y1 < Y2.
-  orientation(-(X,Y1), -(X,Y2), southward) <- Y1 > Y2.
-  orientation(-(X1,Y), -(X2,Y), eastward) <- X1 < X2.
-  orientation(-(X1,Y), -(X2,Y), westward) <- X1 > X2.
+  orientation([X,Y1], [X,Y2], northward) <- Y1 < Y2.
+  orientation([X,Y1], [X,Y2], southward) <- Y1 > Y2.
+  orientation([X1,Y], [X2,Y], eastward) <- X1 < X2.
+  orientation([X1,Y], [X2,Y], westward) <- X1 > X2.
 
 % Otherwise, directions can be found by consulting a database of long distance routes
 % and extracting segments of those routes.
 %
   directions(Start, NewRoute, Finish) <-
-    testPrint('chekcing directionsMethod2.1' + is_list(NewRoute)),
+
   	on(Finish, Street2),
-    testPrint('chekcing directionsMethod2.2'+ '     '+Start+Finish+Street2),
   	route(_, Route, _),
-    testPrint('chekcing directionsMethod2.3'+ '     '+is_list(Route)),
-    testPrint('chekcing directionsMethod2.3'+ '     '+is_list(FirstPart)),
-  	append(FirstPart, [-(Heading2 , Street2) | _ ], Route),
-    testPrint('chekcing directionsMethod2.4 '+ '     '),
+  	append(FirstPart, [[Heading2 , Street2] | _], Route),
   	on(Start, Street1),
-    testPrint('chekcing directionsMethod2.5'+ '     '),
-  	append(_, [-(Heading1 , Street1) | Link], FirstPart),
-  	append([-(Heading1, Street1) | Link], [-(Heading2 , Street2)], NewRoute).
+  	append(_, [[Heading1 , Street1] | Link], FirstPart),
+  	append([[Heading1, Street1] | Link], [[Heading2 , Street2]], NewRoute).
 
 % Here are some long distance routes and some street locations:
 %
-route(-(2,9), [-(eastward , northStreet)], -(9,9)).
-route(-(2,1), [-(northward , westStreet), -(eastward , northStreet)], -(9,9)).
-route(-(6,1), [-(northward , highStreet), -(eastward , northStreet)], -(9,9)).
-route(-(9,9), [-(westward , northStreet), -(southward , westStreet)], -(2,1)).
-route(-(10,5), [-(westward , mainStreet), -(southward , highStreet)], -(6,1)).
+route([2,9], [[eastward , northStreet]], [9,9]).
+route([2,1], [[northward , westStreet], [eastward , northStreet]], [9,9]).
+route([6,1], [[northward , highStreet], [eastward , northStreet]], [9,9]).
+route([9,9], [[westward , northStreet], [southward , westStreet]], [2,1]).
+route([10,5], [[pairwestward , mainStreet], [southward , highStreet]], [6,1]).
 
-on(-(X,5), mainStreet) <- 3 <= X, X <= 10.
-on(-(X,9), northStreet) <- 2 <= X, X <= 9.
-on(-(6,Y), highStreet) <- 1 <= Y, Y <= 9.
-on(-(2,Y), westStreet) <- 1 <= Y, Y <= 9.
-on(-(8,Y), eastStreet) <- 1 <= Y, Y <= 9.
+on([X,5], mainStreet) <- 3 <= X, X <= 10.
+on([X,9], northStreet) <- 2 <= X, X <= 9.
+on([6,Y], highStreet) <- 1 <= Y, Y <= 9.
+on([2,Y], westStreet) <- 1 <= Y, Y <= 9.
+on([8,Y], eastStreet) <- 1 <= Y, Y <= 9.
 
 
 % There are three cases for driving. It might be desirable to refactor them.
 % Notice that in all three cases, driving starts at "time" (really state) T, but stepping forward starts at T1.
 % This takes into account that it might be necessary to wait from T to T1 for the step to be possible.
 %
-drive(Vehicle, [-(Heading , Street)], NewPlace) from T to T3 <-
+drive(Vehicle, [ [Heading , Street]], NewPlace) from T to T3 <-
   testPrint('testing driving 1'),
 
 	location(Vehicle, OldPlace, Heading) at T,
   testPrint('testing driving 1'),
-  testPrint(OldPlace + NewPlace + Vehicle + Heading+Street),
-  % OldPlace = -(Xold, Yold),
-  % NewPlace = -(Xnew, Ynew),
+  testPrint(is_list(OldPlace) + is_list(NewPlace) + Vehicle + Heading+Street),
+  % OldPlace =  [Xold, Yold),
+  % NewPlace =  [Xnew, Ynew),
   % testPrint(Xold + Yold + Xnew + Ynew),
   OldPlace != NewPlace,
   testPrint('testing driving 1 point2'),
 	next(OldPlace, Heading, NextPlace),
 	on(NextPlace, Street),
-  testPrint('testing driving 1 point3: '+Vehicle+OldPlace+ Heading+NextPlace +' on '+NextPlace+ Street),
-	stepupdate(Vehicle, OldPlace, NextPlace),
+  testPrint('testing driving 1 point3: '+Vehicle+is_list(OldPlace)+ Heading+is_list(NextPlace) +' on '+ Street),
+	step(Vehicle, OldPlace, NextPlace),
   testPrint('testing driving 1 point4'),
-	drive(Vehicle, [-(Heading , Street)], NewPlace) from T2 to T3.
+	drive(Vehicle, [ [Heading , Street]], NewPlace) from T2 to T3.
 
 
-stepupdate(Vehicle, -(Xold,Yold), -(Xnew,Ynew)) <-
-  testPrint("tesing the most inportanta bit------------"+Xold+Yold+Xnew+Ynew),
-  step(Vehicle,Xold,Yold,Xnew,Ynew) from T1 to T2.
+% stepupdate(Vehicle,  [Xold,Yold],  [Xnew,Ynew]) <-
+%   testPrint("tesing the most inportanta bit------------"+Xold+Yold+Xnew+Ynew),
+%   step(Vehicle,Xold,Yold,Xnew,Ynew) from T1 to T2.
 
-drive(Vehicle, [-(OldHeading , OldStreet), -(NewHeading , NewStreet) | Rest], NewPlace) from T to T3 <-
+drive(Vehicle, [ [OldHeading , OldStreet],  [NewHeading , NewStreet] | Rest], NewPlace) from T to T3 <-
   testPrint('testing driving 2'),
 	location(Vehicle, OldPlace, OldHeading),
 	next(OldPlace, OldHeading, NextPlace),
 	not on(NextPlace, NewStreet),
 	step(Vehicle, OldPlace, NextPlace) from T1 to T2,
- 	drive(Vehicle, [-(OldHeading ,OldStreet), -(NewHeading , NewStreet) | Rest], NewPlace) from T2 to T3.
+ 	drive(Vehicle, [ [OldHeading ,OldStreet],  [NewHeading , NewStreet] | Rest], NewPlace) from T2 to T3.
 
 % Here step and turn are executed concurrently.
 %
-drive(Vehicle, [-(OldHeading , OldStreet), -(NewHeading , NewStreet) | Rest], NewPlace) from T to T3 <-
+drive(Vehicle, [ [OldHeading , OldStreet],  [NewHeading , NewStreet] | Rest], NewPlace) from T to T3 <-
   testPrint('testing driving 3'),
 	location(Vehicle, OldPlace, OldHeading),
 	next(OldPlace, OldHeading, NextPlace),
 	on(NextPlace, NewStreet),
 	step(Vehicle, OldPlace, NextPlace) from T1 to T2,
 	turn(Vehicle, NewHeading) from T1 to T2,
-	drive(Vehicle, [-(NewHeading , NewStreet)| Rest], NewPlace) from T2 to T3.
+	drive(Vehicle, [ [NewHeading , NewStreet]| Rest], NewPlace) from T2 to T3.
 
   % Stepping and turning update the current state:
   %
-% updates(step(Vehicle, Xold,Yold,Xnew,Ynew), location(Vehicle, -(Xold,Yold), _), location(Vehicle, -(Xnew,Ynew), _))<-
-% testPrint("stepgin!!!!!!!!!==============").
+updates(step(Vehicle, Xold,Yold,Xnew,Ynew), location(Vehicle,  [Xold,Yold), _), location(Vehicle,  [Xnew,Ynew), _))<-
+testPrint("stepgin!!!!!!!!!==============").
 
-initiates(step(Vehicle, Xold,Yold,Xnew,Ynew), location(Vehicle, -(Xnew,Ynew), _)) <-
-  testPrint("hah==========").
-
-terminates(step(Vehicle, Xold,Yold,Xnew,Ynew), location(Vehicle, -(Xold,Yold), _)) <-
-  testPrint("hah==========").
+% initiates(step(Vehicle, Xold,Yold,Xnew,Ynew), location(Vehicle,  [Xnew,Ynew], _)) <-
+%   testPrint("hah==========").
+%
+% terminates(step(Vehicle, Xold,Yold,Xnew,Ynew), location(Vehicle,  [Xold,Yold], _)) <-
+%   testPrint("hah==========").
 
 updates(turn(Vehicle, NewHeading) , location(Vehicle, _, _), location(Vehicle, _, NewHeading)).
 
   % Some geography:
   %
-next(-(X,Y1), northward, -(X,Y2)) <- Y2 = Y1 + 1.
-next(-(X,Y1), southward, -(X,Y2)) <- Y2 = Y1 - 1.
-next(-(X1,Y), eastward, -(X2,Y)) <- X2 = X1 +1.
-next(-(X1,Y), westward, -(X2,Y)) <- X2 = X1 - 1.
+next( [X,Y1], northward,  [X,Y2]) <- Y2 = Y1 + 1.
+next( [X,Y1], southward,  [X,Y2]) <- Y2 = Y1 - 1.
+next( [X1,Y], eastward,  [X2,Y]) <- X2 = X1 +1.
+next( [X1,Y], westward,  [X2,Y]) <- X2 = X1 - 1.
 
   % Some self-preservation:
   %
@@ -263,9 +256,9 @@ next(-(X1,Y), westward, -(X2,Y)) <- X2 = X1 - 1.
   % Cross roads and T junctions can be derived from street locations,
   % but for this simple example, it is easier just to list them:
   %
-  crossRoads(-(6,5)).
-  crossRoads(-(8,5)).
+  crossRoads( [6,5]).
+  crossRoads( [8,5]).
 
-  priorityTjunction(-(2,5), westStreet).
-  priorityTjunction(-(6,9), northStreet).
-  priorityTjunction(-(8,9), northStreet).
+  priorityTjunction( [2,5], westStreet).
+  priorityTjunction( [6,9], northStreet).
+  priorityTjunction( [8,9], northStreet).

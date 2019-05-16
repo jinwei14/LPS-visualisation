@@ -1,0 +1,5 @@
+loadModule('./modules/module.js').
+
+
+true -> append(X,[2,3],[1,2,3]),
+testPrint(is_list(X)).
