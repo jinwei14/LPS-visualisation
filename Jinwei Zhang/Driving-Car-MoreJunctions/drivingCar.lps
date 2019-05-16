@@ -113,13 +113,16 @@ location(Vehicle, PresentPlace, Heading) at T ->
 % and extracting segments of those routes.
 %
   directions(Start, NewRoute, Finish) <-
-    testPrint('chekcing directionsMethod2'),
+    testPrint('chekcing directionsMethod2.1' + is_list(NewRoute)),
   	on(Finish, Street2),
-    testPrint('chekcing directionsMethod2'+ '     '+Start+Finish+Street2),
+    testPrint('chekcing directionsMethod2.2'+ '     '+Start+Finish+Street2),
   	route(_, Route, _),
-  	append(FirstPart, [pair(Heading2 , Street2) | _], Route),
-    testPrint('chekcing directionsMethod2'+ '     '+FirstPart),
+    testPrint('chekcing directionsMethod2.3'+ '     '+is_list(Route)),
+    testPrint('chekcing directionsMethod2.3'+ '     '+is_list(FirstPart)),
+  	append(FirstPart, [pair(Heading2 , Street2) | _ ], Route),
+    testPrint('chekcing directionsMethod2.4 '+ '     '),
   	on(Start, Street1),
+    testPrint('chekcing directionsMethod2.5'+ '     '),
   	append(_, [pair(Heading1 , Street1) | Link], FirstPart),
   	append([pair(Heading1, Street1) | Link], [pair(Heading2 , Street2)], NewRoute).
 
@@ -129,7 +132,7 @@ route(coordinate(2,9), [pair(eastward , northStreet)], coordinate(9,9)).
 route(coordinate(2,1), [pair(northward , westStreet), pair(eastward , northStreet)], coordinate(9,9)).
 route(coordinate(6,1), [pair(northward , highStreet), pair(eastward , northStreet)], coordinate(9,9)).
 route(coordinate(9,9), [pair(westward , northStreet), pair(southward , westStreet)], coordinate(2,1)).
-route(coordinate(10,5), [pair(pairwestward , mainStreet), pair(southward , highStreet)], coordinate(6,1)).
+route(coordinate(10,5), [pair(westward , mainStreet), pair(southward , highStreet)], coordinate(6,1)).
 
 on(coordinate(X,5), mainStreet) <- 3 <= X, X <= 10.
 on(coordinate(X,9), northStreet) <- 2 <= X, X <= 9.
