@@ -79,3 +79,5 @@ helloRet((ret)=>{
   console.log(ret);
 })
 // console.log(hello());
+
+console.log('a'+'b');

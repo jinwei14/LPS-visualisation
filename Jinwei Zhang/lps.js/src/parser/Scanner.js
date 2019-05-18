@@ -21,12 +21,17 @@ function Scanner(source) {
   let _source = source;
 
   let _makeChar = (c, line, col, idx) => {
-    return {
+    retChar =  {
       c: c,
       line: line || _line,
       col: col || _col,
       index: idx || _currentIndex
     };
+    // if (c == 'a'){
+      // console.log(retChar);
+    // }
+
+    return retChar;
   };
 
   /**

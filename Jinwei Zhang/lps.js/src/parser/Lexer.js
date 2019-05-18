@@ -86,6 +86,7 @@ function Lexer(source, pathname) {
       newChars = _skipWhitespaces(newChars);
       newChars = _skipComments(newChars);
     } while (newChars !== chars);
+    // console.log(chars);
     return chars;
   };
 
@@ -242,6 +243,7 @@ function Lexer(source, pathname) {
     }
     let result = _makeToken(type, content, line, col);
     lastChars = _nextChar();
+    // console.log(result);
     return result;
   };
 

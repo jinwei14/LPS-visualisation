@@ -71,7 +71,7 @@ let processFunctor = function processFunctor(node, singleUnderscoreVariableSet) 
   return new Functor(name, processArguments(node.getChildren(), singleUnderscoreVariableSet));
 };
 
-processArguments = function (nodes, singleUnderscoreVariableSetArg) {
+processArguments = function(nodes, singleUnderscoreVariableSetArg) {
   let singleUnderscoreVariableSet = singleUnderscoreVariableSetArg;
   let result = [];
 
@@ -95,15 +95,17 @@ processArguments = function (nodes, singleUnderscoreVariableSetArg) {
       case NodeTypes.Functor:
         result.push(processFunctor(node, singleUnderscoreVariableSet));
         break;
-      case NodeTypes.Variable: {
-        result.push(processVariable(node, singleUnderscoreVariableSet));
-        break;
-      }
-      default: {
-        let error = new Error();
-        error.token = node.getToken();
-        throw error;
-      }
+      case NodeTypes.Variable:
+        {
+          result.push(processVariable(node, singleUnderscoreVariableSet));
+          break;
+        }
+      default:
+        {
+          let error = new Error();
+          error.token = node.getToken();
+          throw error;
+        }
     }
   });
 
@@ -137,7 +139,7 @@ let processTimable = function processTimable(node, singleUnderscoreVariableSet) 
   return new Timable(goal, startTime, endTime);
 };
 
-processLiteral = function (node, singleUnderscoreVariableSet) {
+processLiteral = function(node, singleUnderscoreVariableSet) {
   switch (node.getType()) {
     case NodeTypes.Timable:
       return processTimable(node, singleUnderscoreVariableSet);
@@ -147,11 +149,12 @@ processLiteral = function (node, singleUnderscoreVariableSet) {
       return processBinaryOperator(node, singleUnderscoreVariableSet);
     case NodeTypes.UnaryOperator:
       return processUnaryOperator(node, singleUnderscoreVariableSet);
-    default: {
-      let error = new Error();
-      error.token = node.getToken();
-      throw error;
-    }
+    default:
+      {
+        let error = new Error();
+        error.token = node.getToken();
+        throw error;
+      }
   }
 };
 
@@ -201,8 +204,8 @@ let processLine = function processLine(clauseNode, properties) {
     return;
   }
 
-  if (children.length === 2
-      && children[0].getToken().value === '<-') {
+  if (children.length === 2 &&
+    children[0].getToken().value === '<-') {
     // a constraint format
     properties.constraints
       .push(processConstraint(children[1].getChildren()));
@@ -210,8 +213,8 @@ let processLine = function processLine(clauseNode, properties) {
   }
 
   // sanity check (2 literal sets and one operator)
-  if (children.length !== 3
-      || children[1].getType() !== NodeTypes.Symbol) {
+  if (children.length !== 3 ||
+    children[1].getType() !== NodeTypes.Symbol) {
     throw new Error('invalid number of children in clause node');
   }
 
@@ -250,6 +253,8 @@ ProgramFactory.build = function build(ast) {
   program.setClauses(result.clauses);
   program.setRules(result.rules);
   program.setFacts(result.auxiliary);
+  console.log(result);
+  console.log("-------");
   return program;
 };
 
@@ -281,9 +286,9 @@ ProgramFactory.fromString = function fromString(source) {
       resolve(program);
     } catch (err) {
       let errorToken = err.token;
-      if (errorToken === undefined
-          || errorToken.line === undefined
-          || errorToken.col === undefined) {
+      if (errorToken === undefined ||
+        errorToken.line === undefined ||
+        errorToken.col === undefined) {
         reject(err);
         return;
       }
@@ -316,13 +321,16 @@ ProgramFactory.fromFile = function fromFile(pathname) {
         // console.log("----------------------------")
         let parser = new Parser(source, pathname);
         token = parser.build();
+        // console.log(token.print(5));
+        // console.log("-------");
         let program = ProgramFactory.build(token);
+
         resolve(program);
       } catch (err) {
         let errorToken = err.token;
-        if (errorToken === undefined
-            || errorToken.line === undefined
-            || errorToken.col === undefined) {
+        if (errorToken === undefined ||
+          errorToken.line === undefined ||
+          errorToken.col === undefined) {
           reject(err);
           return;
         }

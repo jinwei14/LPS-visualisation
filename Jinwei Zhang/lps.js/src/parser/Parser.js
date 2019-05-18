@@ -315,6 +315,8 @@ function Parser(source, pathname) {
       sentenceNode.addChild(_conjunction());
     }
     _expect(TokenTypes.Symbol, END_OF_CLAUSE_SYMBOL);
+    // console.log(sentenceNode.print(10));
+    // console.log('------');
     return sentenceNode;
   };
 
