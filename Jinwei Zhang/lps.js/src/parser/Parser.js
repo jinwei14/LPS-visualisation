@@ -17,7 +17,8 @@ const RULE_SYMBOL = '->';
 
 function Parser(source, pathname) {
   // console.log(typeof(source));
-  // console.log((source));
+  // console.log(source);
+  // console.log(type(pathname));
   // console.log("----------------------------")
 
   let _lexer = new Lexer(source, pathname);
@@ -318,6 +319,7 @@ function Parser(source, pathname) {
   };
 
   let _program = function _program() {
+
     let node = new AstNode(NodeTypes.Program);
     while (!_found(TokenTypes.Eof)) {
       node.addChild(_sentence());

@@ -301,6 +301,7 @@ ProgramFactory.fromFile = function fromFile(pathname) {
       return;
     }
     fs.readFile(pathname, 'utf8', (fsErr, source) => {
+      // this part is very werid
       if (fsErr) {
         reject(fsErr);
 

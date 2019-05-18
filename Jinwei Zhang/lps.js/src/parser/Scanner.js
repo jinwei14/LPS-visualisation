@@ -10,9 +10,9 @@
  * @constructor
  */
 function Scanner(source) {
-  // console.log(typeof(source));
-  console.log((source));
-  console.log("---------------------------xiix-", source.length - 1)
+  // // console.log(typeof(source));
+  // console.log((source));
+  // console.log("---------------------------xiix-", source.length - 1)
 
   let _line = 0;
   let _col = -1;
