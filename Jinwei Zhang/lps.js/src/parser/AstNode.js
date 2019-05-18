@@ -10,6 +10,7 @@ function AstNode(type, token) {
   //   console.log(type);
   //   console.log(token);
   // }
+  
 
   let _type = type;
   let _token = token;
