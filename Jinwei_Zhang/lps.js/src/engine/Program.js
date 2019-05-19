@@ -303,7 +303,7 @@ function Program() {
       });
   };
 
-  this.displayAll = function(){
+  this.displayAll = function () {
     // let _rules = [];
     // let _clauses = [];
     // let _sortedClauses = {};
@@ -317,22 +317,20 @@ function Program() {
     // let _actions = {};
     // let _events = {};
     console.log('---------------------------------');
-    console.log("outer function in ProgramFactory() only set constrans Clause Rules and facts");
-    console.log("Rules: " + typeof(this.getRules()) +' '+ this.getRules());
-    console.log('Clauses: '+ typeof(this.getClauses()) +' '+this.getClauses());
-    console.log('_sortedClauses: '+this._sortedClauses);
-    console.log('Constraints: '+typeof(this.getConstraints())+ this.getConstraints().toString());
-
-    console.log('Facts  '+'LiteralTreeMap()'+this.getFacts());
-    console.log('_currentState: '+'LiteralTreeMap()'+ this._currentState);
-    console.log('_executedActions: '+'LiteralTreeMap()'+ this._executedActions);
-    console.log('Directory: '+this.getWorkingDirectory());
-
-    console.log('_fluents: '+ this._fluents);
-    console.log('_actions: '+ this._actions);
-    console.log('_events: '+ this._events);
+    console.log('outer function in ProgramFactory() only set constrans Clause Rules and facts');
+    console.log('Rules: ' + typeof (this.getRules()) + ' ' + this.getRules());
+    console.log('Clauses: ' + typeof (this.getClauses()) + ' ' + this.getClauses());
+    console.log('_sortedClauses: ' + this._sortedClauses);
+    console.log('Constraints: ' + typeof (this.getConstraints()) + this.getConstraints().toString());
+    console.log('Facts: LiteralTreeMap()' + this.getFacts());
+    console.log('_currentState: LiteralTreeMap()' + this._currentState);
+    console.log('_executedActions: LiteralTreeMap()' + this._executedActions);
+    console.log('Directory: ' + this.getWorkingDirectory());
+    console.log('_fluents: ' + this._fluents);
+    console.log('_actions: ' + this._actions);
+    console.log('_events: ' + this._events);
     console.log('---------------------------------');
-  }
+  };
 }
 
 module.exports = Program;

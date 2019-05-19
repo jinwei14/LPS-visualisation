@@ -271,6 +271,7 @@ function Engine(programArg) {
           updatedState
         );
         _program.setState(updatedState);
+        // eslint-disable-next-line no-shadow
         let state = [
           _program.getFacts(),
           _program.getState(),

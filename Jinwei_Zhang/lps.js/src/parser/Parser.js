@@ -365,6 +365,7 @@ function Parser(source, pathname) {
   };
 }
 
+
 Parser.parseSentence = function parseSentence(sentence) {
   let parser = new Parser(sentence);
   let token = parser.buildSentence();

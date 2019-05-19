@@ -11,6 +11,9 @@ if (process.browser) {
   window.LPS = LPS;
 }
 
+console.log('Order of execution: ');
+console.log('index -> LPS(loadFile) -> ProgramFactory(fromFile) -> Parser(source, pathname) -> _lexer.get()');
+
 LPS.loadFile('./examples/emoji.lps')
   .then((engine) => {
     engine.run();

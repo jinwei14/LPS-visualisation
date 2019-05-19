@@ -339,9 +339,11 @@ ProgramFactory.fromFile = function fromFile(pathname) {
         let parser = new Parser(source, pathname);
         token = parser.build();
         // //AstNode(NodeTypes.Program);
-        // console.log(token.print(3));
-        // console.log("--------------");
+        console.log(token.print(3));
+        console.log("--------------");
         let program = ProgramFactory.build(token);
+        // console.log(program);
+        program.displayAll();
         // //Program()
         resolve(program);
       } catch (err) {
