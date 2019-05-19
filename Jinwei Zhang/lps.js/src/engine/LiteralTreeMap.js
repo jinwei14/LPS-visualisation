@@ -44,7 +44,7 @@ function _TreeNode(size, tree) {
     return cloneNode;
   };
 
-  this.indices = function () {
+  this.indices = function() {
     let indices = Object.getOwnPropertySymbols(this._tree)
       .concat(Object.getOwnPropertyNames(this._tree));
     return indices;
@@ -350,9 +350,9 @@ function LiteralTreeMap() {
 
   this.forEach = function forEach(callback) {
     let recursiveTraverse = (node) => {
-      if (node instanceof Functor
-          || node instanceof Timable
-          || node instanceof Array) {
+      if (node instanceof Functor ||
+        node instanceof Timable ||
+        node instanceof Array) {
         callback(node);
         return;
       }
@@ -456,8 +456,8 @@ function LiteralTreeMap() {
         Object.keys(entry.internalTheta).forEach((k) => {
           tempInternalTheta[k] = entry.internalTheta[k];
         });
-        if (term instanceof List
-            && entry.tailVariable !== undefined) {
+        if (term instanceof List &&
+          entry.tailVariable !== undefined) {
           // handle tail theta
           entry.matchingTails.forEach((symbol) => {
             if (node._tree[symbol] === undefined) {
@@ -512,9 +512,9 @@ function LiteralTreeMap() {
       let treeVarName = symName.substring(11, symName.length - 1);
       if (internalTheta[treeVarName] !== undefined) {
         // previously internally substituted.
-        if (!(internalTheta[treeVarName] instanceof Functor)
-            && !(internalTheta[treeVarName] instanceof List)
-            && !(internalTheta[treeVarName] instanceof Timable)) {
+        if (!(internalTheta[treeVarName] instanceof Functor) &&
+          !(internalTheta[treeVarName] instanceof List) &&
+          !(internalTheta[treeVarName] instanceof Timable)) {
           return;
         }
         let unifyTree = new LiteralTreeMap();
@@ -551,8 +551,8 @@ function LiteralTreeMap() {
     let currentKeyType = typeof currentKey;
 
     // current key can be determined immediately
-    if (currentKeyType === 'string'
-        || currentKeyType === 'number') {
+    if (currentKeyType === 'string' ||
+      currentKeyType === 'number') {
       if (node._tree[currentKey] === undefined) {
         // key not found at this point
         return [];
@@ -578,9 +578,9 @@ function LiteralTreeMap() {
       let varName = currentKey.evaluate();
       if (externalTheta[varName] !== undefined) {
         // substituted earlier on
-        if (externalTheta[varName] instanceof Functor
-            || externalTheta[varName] instanceof Timable
-            || externalTheta[varName] instanceof List) {
+        if (externalTheta[varName] instanceof Functor ||
+          externalTheta[varName] instanceof Timable ||
+          externalTheta[varName] instanceof List) {
           return unifyForComplexTerm(
             externalTheta[varName],
             path,
@@ -667,9 +667,9 @@ function LiteralTreeMap() {
       return result;
     } // variable
 
-    if (!(currentKey instanceof Functor)
-        && !(currentKey instanceof Timable)
-        && !(currentKey instanceof List)) {
+    if (!(currentKey instanceof Functor) &&
+      !(currentKey instanceof Timable) &&
+      !(currentKey instanceof List)) {
       // here, i have no idea what you have passed in
       return [];
     }
@@ -693,9 +693,9 @@ function LiteralTreeMap() {
       existingTheta = {};
     }
 
-    if (!(literal instanceof Functor)
-        && !(literal instanceof Timable)
-        && !(literal instanceof List)) {
+    if (!(literal instanceof Functor) &&
+      !(literal instanceof Timable) &&
+      !(literal instanceof List)) {
       throw new Error('Literal given for unification must be a functor, timable or list');
     }
 

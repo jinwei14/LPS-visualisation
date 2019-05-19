@@ -316,13 +316,22 @@ function Program() {
     // let _fluents = {};
     // let _actions = {};
     // let _events = {};
-    console.log(this.getRules());
-    console.log(this.getClauses());
-    console.log(this._sortedClauses);
-    console.log(this.getConstraints());
-    console.log(this.getFacts());
-    console.log(this.getWorkingDirectory());
-    console.log(this.getFacts());
+    console.log('---------------------------------');
+    console.log("outer function in ProgramFactory() only set constrans Clause Rules and facts");
+    console.log("Rules: " + this.getRules());
+    console.log('Clauses: '+this.getClauses());
+    console.log('_sortedClauses: '+this._sortedClauses);
+    console.log('Constraints: '+typeof(this.getConstraints())+ this.getConstraints().toString());
+
+    console.log('Facts  '+'LiteralTreeMap()'+this.getFacts());
+    console.log('_currentState: '+'LiteralTreeMap()'+ this._currentState);
+    console.log('_executedActions: '+'LiteralTreeMap()'+ this._executedActions);
+    console.log('Directory: '+this.getWorkingDirectory());
+
+    console.log('_fluents: '+ this._fluents);
+    console.log('_actions: '+ this._actions);
+    console.log('_events: '+ this._events);
+    console.log('---------------------------------');
   }
 }
 

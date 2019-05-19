@@ -1,37 +1,14 @@
-[ Clause {
-    getVariables: [Function: getVariables],
-    isConstraint: [Function: isConstraint],
-    getHeadLiteralsCount: [Function: getHeadLiteralsCount],
-    getBodyLiteralsCount: [Function: getBodyLiteralsCount],
-    isGround: [Function: isGround],
-    substitute: [Function: substitute],
-    getHeadLiterals: [Function: getHeadLiterals],
-    getBodyLiterals: [Function: getBodyLiterals],
-    toString: [Function: toString] } ]
-[]
-undefined
-[]
-LiteralTreeMap {
-  add: [Function: add],
-  get: [Function: get],
-  contains: [Function: contains],
-  remove: [Function: remove],
-  clear: [Function: clear],
-  size: [Function: size],
-  toArray: [Function: toArray],
-  forEach: [Function: forEach],
-  unifies: [Function: unifies],
-  clone: [Function: clone] }
-/Users/jinweizhang/Desktop/Project/LPS-visualisation/Jinwei Zhang/lps.js/examples
-LiteralTreeMap {
-  add: [Function: add],
-  get: [Function: get],
-  contains: [Function: contains],
-  remove: [Function: remove],
-  clear: [Function: clear],
-  size: [Function: size],
-  toArray: [Function: toArray],
-  forEach: [Function: forEach],
-  unifies: [Function: unifies],
-  clone: [Function: clone] }
-undefined
+---------------------------------
+outer function in ProgramFactory() only set constrans Clause Rules and facts
+Rules: occurs(😆, T2, T3) <- occurs(😀, T1, T2).
+Clauses: 
+_sortedClauses: undefined
+Constraints: object
+Facts  LiteralTreeMap()[object Object]
+_currentState: LiteralTreeMap()undefined
+_executedActions: LiteralTreeMap()undefined
+Directory: /Users/jinweizhang/Desktop/Project/LPS-visualisation/Jinwei Zhang/lps.js/examples
+_fluents: undefined
+_actions: undefined
+_events: undefined
+---------------------------------
