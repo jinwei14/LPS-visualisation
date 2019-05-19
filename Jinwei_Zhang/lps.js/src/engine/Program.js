@@ -318,8 +318,8 @@ function Program() {
     // let _events = {};
     console.log('---------------------------------');
     console.log("outer function in ProgramFactory() only set constrans Clause Rules and facts");
-    console.log("Rules: " + this.getRules());
-    console.log('Clauses: '+this.getClauses());
+    console.log("Rules: " + typeof(this.getRules()) +' '+ this.getRules());
+    console.log('Clauses: '+ typeof(this.getClauses()) +' '+this.getClauses());
     console.log('_sortedClauses: '+this._sortedClauses);
     console.log('Constraints: '+typeof(this.getConstraints())+ this.getConstraints().toString());
 

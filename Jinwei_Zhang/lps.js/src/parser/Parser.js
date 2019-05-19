@@ -25,6 +25,8 @@ function Parser(source, pathname) {
   let _root = null;
   let currentToken = _lexer.get();
 
+  // console.log(currentToken);
+
   let _nextToken = function _nextToken() {
     currentToken = _lexer.get();
   };
@@ -326,6 +328,7 @@ function Parser(source, pathname) {
     while (!_found(TokenTypes.Eof)) {
       node.addChild(_sentence());
     }
+    // console.log(node.print(6));
     return node;
   };
 

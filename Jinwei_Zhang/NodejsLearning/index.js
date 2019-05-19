@@ -69,7 +69,7 @@ async function hello() {
 };
 
 async function helloRet() {
-  return  "fuck you";
+  return  "fk";
 };
 console.log("this exebefore hello");
 hello().then((value) => console.log(value))

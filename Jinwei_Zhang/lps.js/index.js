@@ -11,9 +11,9 @@ if (process.browser) {
   window.LPS = LPS;
 }
 
-LPS.loadFile('./examples/emoji.lps')
+LPS.loadFile('/Users/jinweizhang/Desktop/Project/LPS-visualisation/Jinwei_Zhang/lps.js/examples/emoji.lps')
   .then((engine) => {
-      engine.run();
+    engine.run();
   });
 
 module.exports = LPS;
