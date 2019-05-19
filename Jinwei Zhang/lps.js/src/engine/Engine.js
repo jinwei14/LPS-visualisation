@@ -687,7 +687,6 @@ function Engine(programArg) {
       });
   };
 
-
   _profiler.set('numPaused', 0);
 }
 
