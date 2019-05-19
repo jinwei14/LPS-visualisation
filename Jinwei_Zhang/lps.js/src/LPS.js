@@ -80,13 +80,13 @@ LPS.createFromFile = function createFromFile(fileArg, programArgs) {
   return ProgramFactory.fromFile(file)
     .then(updateProgramArgs(programArgs))
     .then((program) => {
-      ///////////////////----------------------
+      // /////////////////----------------------
       // console.log(program.get;
-      ///////////////////----------------------
+      // /////////////////----------------------
       program.setWorkingDirectory(path.dirname(file));
-      //this is where I can solve the problems or not
+      // this is where I can solve the problems or not
       // program.displayAll();
-      //this is where I can solve the problems or not
+      // this is where I can solve the problems or not
       // console.log(program._fluents);
       let engine = new Engine(program);
       return Promise.resolve(engine);

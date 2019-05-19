@@ -323,7 +323,6 @@ function Parser(source, pathname) {
   };
 
   let _program = function _program() {
-
     let node = new AstNode(NodeTypes.Program);
     while (!_found(TokenTypes.Eof)) {
       node.addChild(_sentence());
