@@ -238,23 +238,43 @@ let processProgramTree = function processProgramTree(rootNode, properties) {
   });
 };
 
+
+
 function ProgramFactory() {}
 
 ProgramFactory.build = function build(ast) {
   let program = new Program();
+
   let result = {
     constraints: [],
     rules: [],
     clauses: [],
     auxiliary: new LiteralTreeMap()
   };
+  // console.log(result);
+  // console.log('------------');
   processProgramTree(ast, result);
+
+  // console.log(result);
+  // console.log('------------');
+
   program.setConstraints(result.constraints);
+  // console.log("-------");
+  // console.log(program.getConstraints());
+  // console.log("-------");
   program.setClauses(result.clauses);
+  // console.log("-------");
+  // console.log(program.getClauses().toString());
+  // console.log("-------");
   program.setRules(result.rules);
+  // console.log("-------");
+  // console.log(program.getRules().toString());
+  // console.log("-------");
   program.setFacts(result.auxiliary);
-  console.log(result);
-  console.log("-------");
+  // console.log("-------");
+  // console.log(program.getFacts().toString());
+  // console.log("-------");
+
   return program;
 };
 
@@ -321,10 +341,11 @@ ProgramFactory.fromFile = function fromFile(pathname) {
         // console.log("----------------------------")
         let parser = new Parser(source, pathname);
         token = parser.build();
+        // //AstNode(NodeTypes.Program);
         // console.log(token.print(5));
         // console.log("-------");
         let program = ProgramFactory.build(token);
-
+        // //Program()
         resolve(program);
       } catch (err) {
         let errorToken = err.token;

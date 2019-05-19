@@ -1,4 +1,19 @@
-/Users/jinweizhang/Desktop/Project/LPS-visualisation/Jinwei Zhang/lps.js/examples/emoji.lps
+{ constraints: [],
+  rules: [],
+  clauses: [],
+  auxiliary: 
+   LiteralTreeMap {
+     add: [Function: add],
+     get: [Function: get],
+     contains: [Function: contains],
+     remove: [Function: remove],
+     clear: [Function: clear],
+     size: [Function: size],
+     toArray: [Function: toArray],
+     forEach: [Function: forEach],
+     unifies: [Function: unifies],
+     clone: [Function: clone] } }
+------------
 { constraints: [],
   rules: 
    [ Clause {
@@ -24,7 +39,23 @@
      forEach: [Function: forEach],
      unifies: [Function: unifies],
      clone: [Function: clone] } }
--------
+------------
+{ constraints: [],
+  rules: [],
+  clauses: [],
+  auxiliary: 
+   LiteralTreeMap {
+     add: [Function: add],
+     get: [Function: get],
+     contains: [Function: contains],
+     remove: [Function: remove],
+     clear: [Function: clear],
+     size: [Function: size],
+     toArray: [Function: toArray],
+     forEach: [Function: forEach],
+     unifies: [Function: unifies],
+     clone: [Function: clone] } }
+------------
 { constraints: [],
   rules: [],
   clauses: 
@@ -470,60 +501,10 @@
      forEach: [Function: forEach],
      unifies: [Function: unifies],
      clone: [Function: clone] } }
--------
+------------
 { constraints: [],
   rules: [],
-  clauses: 
-   [ Clause {
-       getVariables: [Function: getVariables],
-       isConstraint: [Function: isConstraint],
-       getHeadLiteralsCount: [Function: getHeadLiteralsCount],
-       getBodyLiteralsCount: [Function: getBodyLiteralsCount],
-       isGround: [Function: isGround],
-       substitute: [Function: substitute],
-       getHeadLiterals: [Function: getHeadLiterals],
-       getBodyLiterals: [Function: getBodyLiterals],
-       toString: [Function: toString] },
-     Clause {
-       getVariables: [Function: getVariables],
-       isConstraint: [Function: isConstraint],
-       getHeadLiteralsCount: [Function: getHeadLiteralsCount],
-       getBodyLiteralsCount: [Function: getBodyLiteralsCount],
-       isGround: [Function: isGround],
-       substitute: [Function: substitute],
-       getHeadLiterals: [Function: getHeadLiterals],
-       getBodyLiterals: [Function: getBodyLiterals],
-       toString: [Function: toString] },
-     Clause {
-       getVariables: [Function: getVariables],
-       isConstraint: [Function: isConstraint],
-       getHeadLiteralsCount: [Function: getHeadLiteralsCount],
-       getBodyLiteralsCount: [Function: getBodyLiteralsCount],
-       isGround: [Function: isGround],
-       substitute: [Function: substitute],
-       getHeadLiterals: [Function: getHeadLiterals],
-       getBodyLiterals: [Function: getBodyLiterals],
-       toString: [Function: toString] },
-     Clause {
-       getVariables: [Function: getVariables],
-       isConstraint: [Function: isConstraint],
-       getHeadLiteralsCount: [Function: getHeadLiteralsCount],
-       getBodyLiteralsCount: [Function: getBodyLiteralsCount],
-       isGround: [Function: isGround],
-       substitute: [Function: substitute],
-       getHeadLiterals: [Function: getHeadLiterals],
-       getBodyLiterals: [Function: getBodyLiterals],
-       toString: [Function: toString] },
-     Clause {
-       getVariables: [Function: getVariables],
-       isConstraint: [Function: isConstraint],
-       getHeadLiteralsCount: [Function: getHeadLiteralsCount],
-       getBodyLiteralsCount: [Function: getBodyLiteralsCount],
-       isGround: [Function: isGround],
-       substitute: [Function: substitute],
-       getHeadLiterals: [Function: getHeadLiterals],
-       getBodyLiterals: [Function: getBodyLiterals],
-       toString: [Function: toString] } ],
+  clauses: [],
   auxiliary: 
    LiteralTreeMap {
      add: [Function: add],
@@ -536,43 +517,7 @@
      forEach: [Function: forEach],
      unifies: [Function: unifies],
      clone: [Function: clone] } }
--------
-{ constraints: [],
-  rules: [],
-  clauses: 
-   [ Clause {
-       getVariables: [Function: getVariables],
-       isConstraint: [Function: isConstraint],
-       getHeadLiteralsCount: [Function: getHeadLiteralsCount],
-       getBodyLiteralsCount: [Function: getBodyLiteralsCount],
-       isGround: [Function: isGround],
-       substitute: [Function: substitute],
-       getHeadLiterals: [Function: getHeadLiterals],
-       getBodyLiterals: [Function: getBodyLiterals],
-       toString: [Function: toString] },
-     Clause {
-       getVariables: [Function: getVariables],
-       isConstraint: [Function: isConstraint],
-       getHeadLiteralsCount: [Function: getHeadLiteralsCount],
-       getBodyLiteralsCount: [Function: getBodyLiteralsCount],
-       isGround: [Function: isGround],
-       substitute: [Function: substitute],
-       getHeadLiterals: [Function: getHeadLiterals],
-       getBodyLiterals: [Function: getBodyLiterals],
-       toString: [Function: toString] } ],
-  auxiliary: 
-   LiteralTreeMap {
-     add: [Function: add],
-     get: [Function: get],
-     contains: [Function: contains],
-     remove: [Function: remove],
-     clear: [Function: clear],
-     size: [Function: size],
-     toArray: [Function: toArray],
-     forEach: [Function: forEach],
-     unifies: [Function: unifies],
-     clone: [Function: clone] } }
--------
+------------
 { constraints: [],
   rules: [],
   clauses: 
@@ -648,4 +593,138 @@
      forEach: [Function: forEach],
      unifies: [Function: unifies],
      clone: [Function: clone] } }
--------
+------------
+{ constraints: [],
+  rules: [],
+  clauses: [],
+  auxiliary: 
+   LiteralTreeMap {
+     add: [Function: add],
+     get: [Function: get],
+     contains: [Function: contains],
+     remove: [Function: remove],
+     clear: [Function: clear],
+     size: [Function: size],
+     toArray: [Function: toArray],
+     forEach: [Function: forEach],
+     unifies: [Function: unifies],
+     clone: [Function: clone] } }
+------------
+{ constraints: [],
+  rules: [],
+  clauses: 
+   [ Clause {
+       getVariables: [Function: getVariables],
+       isConstraint: [Function: isConstraint],
+       getHeadLiteralsCount: [Function: getHeadLiteralsCount],
+       getBodyLiteralsCount: [Function: getBodyLiteralsCount],
+       isGround: [Function: isGround],
+       substitute: [Function: substitute],
+       getHeadLiterals: [Function: getHeadLiterals],
+       getBodyLiterals: [Function: getBodyLiterals],
+       toString: [Function: toString] },
+     Clause {
+       getVariables: [Function: getVariables],
+       isConstraint: [Function: isConstraint],
+       getHeadLiteralsCount: [Function: getHeadLiteralsCount],
+       getBodyLiteralsCount: [Function: getBodyLiteralsCount],
+       isGround: [Function: isGround],
+       substitute: [Function: substitute],
+       getHeadLiterals: [Function: getHeadLiterals],
+       getBodyLiterals: [Function: getBodyLiterals],
+       toString: [Function: toString] } ],
+  auxiliary: 
+   LiteralTreeMap {
+     add: [Function: add],
+     get: [Function: get],
+     contains: [Function: contains],
+     remove: [Function: remove],
+     clear: [Function: clear],
+     size: [Function: size],
+     toArray: [Function: toArray],
+     forEach: [Function: forEach],
+     unifies: [Function: unifies],
+     clone: [Function: clone] } }
+------------
+{ constraints: [],
+  rules: [],
+  clauses: [],
+  auxiliary: 
+   LiteralTreeMap {
+     add: [Function: add],
+     get: [Function: get],
+     contains: [Function: contains],
+     remove: [Function: remove],
+     clear: [Function: clear],
+     size: [Function: size],
+     toArray: [Function: toArray],
+     forEach: [Function: forEach],
+     unifies: [Function: unifies],
+     clone: [Function: clone] } }
+------------
+{ constraints: [],
+  rules: [],
+  clauses: 
+   [ Clause {
+       getVariables: [Function: getVariables],
+       isConstraint: [Function: isConstraint],
+       getHeadLiteralsCount: [Function: getHeadLiteralsCount],
+       getBodyLiteralsCount: [Function: getBodyLiteralsCount],
+       isGround: [Function: isGround],
+       substitute: [Function: substitute],
+       getHeadLiterals: [Function: getHeadLiterals],
+       getBodyLiterals: [Function: getBodyLiterals],
+       toString: [Function: toString] },
+     Clause {
+       getVariables: [Function: getVariables],
+       isConstraint: [Function: isConstraint],
+       getHeadLiteralsCount: [Function: getHeadLiteralsCount],
+       getBodyLiteralsCount: [Function: getBodyLiteralsCount],
+       isGround: [Function: isGround],
+       substitute: [Function: substitute],
+       getHeadLiterals: [Function: getHeadLiterals],
+       getBodyLiterals: [Function: getBodyLiterals],
+       toString: [Function: toString] },
+     Clause {
+       getVariables: [Function: getVariables],
+       isConstraint: [Function: isConstraint],
+       getHeadLiteralsCount: [Function: getHeadLiteralsCount],
+       getBodyLiteralsCount: [Function: getBodyLiteralsCount],
+       isGround: [Function: isGround],
+       substitute: [Function: substitute],
+       getHeadLiterals: [Function: getHeadLiterals],
+       getBodyLiterals: [Function: getBodyLiterals],
+       toString: [Function: toString] },
+     Clause {
+       getVariables: [Function: getVariables],
+       isConstraint: [Function: isConstraint],
+       getHeadLiteralsCount: [Function: getHeadLiteralsCount],
+       getBodyLiteralsCount: [Function: getBodyLiteralsCount],
+       isGround: [Function: isGround],
+       substitute: [Function: substitute],
+       getHeadLiterals: [Function: getHeadLiterals],
+       getBodyLiterals: [Function: getBodyLiterals],
+       toString: [Function: toString] },
+     Clause {
+       getVariables: [Function: getVariables],
+       isConstraint: [Function: isConstraint],
+       getHeadLiteralsCount: [Function: getHeadLiteralsCount],
+       getBodyLiteralsCount: [Function: getBodyLiteralsCount],
+       isGround: [Function: isGround],
+       substitute: [Function: substitute],
+       getHeadLiterals: [Function: getHeadLiterals],
+       getBodyLiterals: [Function: getBodyLiterals],
+       toString: [Function: toString] } ],
+  auxiliary: 
+   LiteralTreeMap {
+     add: [Function: add],
+     get: [Function: get],
+     contains: [Function: contains],
+     remove: [Function: remove],
+     clear: [Function: clear],
+     size: [Function: size],
+     toArray: [Function: toArray],
+     forEach: [Function: forEach],
+     unifies: [Function: unifies],
+     clone: [Function: clone] } }
+------------

@@ -75,9 +75,9 @@ console.log("this exebefore hello");
 hello().then((value) => console.log(value))
 hello().then(console.log)
 
-helloRet((ret)=>{
-  console.log(ret);
-})
+// helloRet((ret)=>{
+//   console.log(ret);
+// })
 // console.log(hello());
 
 console.log('a'+'b');

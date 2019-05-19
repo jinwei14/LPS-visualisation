@@ -167,6 +167,20 @@ function Program() {
       || _events[id] !== undefined;
   };
 
+
+  // let _rules = [];
+  // let _clauses = [];
+  // let _sortedClauses = {};
+  // let _constraints = [];
+  // let _facts = new LiteralTreeMap();
+  // let _currentState = new LiteralTreeMap();
+  // let _executedActions = new LiteralTreeMap();
+  // let _workingDirectory = '';
+  //
+  // let _fluents = {};
+  // let _actions = {};
+  // let _events = {};
+
   this.setWorkingDirectory = function setWorkingDirectory(dir) {
     _workingDirectory = dir;
   };
@@ -288,6 +302,28 @@ function Program() {
         _facts.add(fact);
       });
   };
+
+  this.displayAll = function(){
+    // let _rules = [];
+    // let _clauses = [];
+    // let _sortedClauses = {};
+    // let _constraints = [];
+    // let _facts = new LiteralTreeMap();
+    // let _currentState = new LiteralTreeMap();
+    // let _executedActions = new LiteralTreeMap();
+    // let _workingDirectory = '';
+    //
+    // let _fluents = {};
+    // let _actions = {};
+    // let _events = {};
+    console.log(this.getRules());
+    console.log(this.getClauses());
+    console.log(this._sortedClauses);
+    console.log(this.getConstraints());
+    console.log(this.getFacts());
+    console.log(this.getWorkingDirectory());
+    console.log(this.getFacts());
+  }
 }
 
 module.exports = Program;

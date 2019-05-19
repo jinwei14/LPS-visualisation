@@ -75,11 +75,14 @@ LPS.createFromFile = function createFromFile(fileArg, programArgs) {
   let file = fileArg;
   file = path.resolve(file);
   // !!!!!!!!!!!!!!!!!!!! This is where I print the file path
-  console.log(file);
+  // console.log(file);
 
   return ProgramFactory.fromFile(file)
     .then(updateProgramArgs(programArgs))
     .then((program) => {
+      ///////////////////----------------------
+      // console.log(program.get;
+      ///////////////////----------------------
       program.setWorkingDirectory(path.dirname(file));
       let engine = new Engine(program);
       return Promise.resolve(engine);
