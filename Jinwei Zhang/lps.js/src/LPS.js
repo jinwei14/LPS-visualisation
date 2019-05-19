@@ -84,6 +84,7 @@ LPS.createFromFile = function createFromFile(fileArg, programArgs) {
       // console.log(program.get;
       ///////////////////----------------------
       program.setWorkingDirectory(path.dirname(file));
+      console.log(program.displayAll());
       let engine = new Engine(program);
       return Promise.resolve(engine);
     });

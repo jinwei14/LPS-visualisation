@@ -272,7 +272,7 @@ ProgramFactory.build = function build(ast) {
   // console.log("-------");
   program.setFacts(result.auxiliary);
   // console.log("-------");
-  // console.log(program.getFacts().toString());
+  // console.log(program.getFacts();
   // console.log("-------");
 
   return program;
