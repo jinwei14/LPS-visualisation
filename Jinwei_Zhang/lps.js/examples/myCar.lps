@@ -1,3 +1,5 @@
+% this exmaple is testing the updating function with the timing
+
 loadModule('./modules/module.js').
 true -> testPrint('The car has started').
 
@@ -10,18 +12,19 @@ actions([carMoveTo(Obj,loc(X,Y)),carTurnTo(Obj,loc(X,Y))]).
 initially(car_location(car1, loc(0,0))).
 
 
-true  ->testPrint("moved"),
-   carMoveTo(OBJ,LOC) from T1 to T2,
-   carTurnTo(OBJ,LOC) from T2 to T3.
 
 
-%true  ->testPrint("moved"),
-%  drive(car1,loc(2,2)).
+true from _ to T ->testPrint("moved"),
+  drive(car1,loc(2,2)) form T to _,
+  testPrint("findished").
 
-%drive(OBJ,LOC)<-
-%  testPrint("running"),
-%  carMoveTo(OBJ,LOC) from T1 to T2,
-%  carTurnTo(OBJ,LOC) from T2 to T3.
+
+% true -> testPrint("moved2"),
+
+drive(OBJ,LOC) from T to T3<-
+  testPrint("running"),
+  carMoveTo(OBJ,LOC) from T1 to T2,
+  carTurnTo(OBJ,LOC) from T2 to T3.
 
 
 
@@ -30,9 +33,8 @@ updates(carMoveTo(Obj,NEW), car_location(Obj, _),  car_location(Obj,NEW))<-testP
 updates(carTurnTo(Obj,NEW), car_location(Obj, _),  car_location(Obj,NEW))<-testPrint("lolo").
 
 % this will work:
-% 1. two updates can not be put together --------no it can be
-% 2. both of the example above will work
-% 3. never to put a print after the update function it will be weird anyway
+% 1. two updates can not be put together
+% 2.
 
 
 

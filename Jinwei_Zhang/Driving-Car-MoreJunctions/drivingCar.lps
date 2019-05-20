@@ -118,11 +118,8 @@ location(Vehicle, PresentPlace, Heading) at T ->
     testPrint('chekcing directionsMethod2.2'+ '     '+Start+Finish+Street2),
   	route(_, Route, _),
     testPrint('chekcing directionsMethod2.3'+ '     '+is_list(Route)),
-    testPrint('chekcing directionsMethod2.3'+ '     '+is_list(FirstPart)+Heading2),
   	append(FirstPart, [pair(Heading2 , Street2) | _ ], Route),
-    testPrint('chekcing directionsMethod2.4 '+ '     '),
   	on(Start, Street1),
-    testPrint('chekcing directionsMethod2.5'+ '     '),
   	append(_, [pair(Heading1 , Street1) | Link], FirstPart),
   	append([pair(Heading1, Street1) | Link], [pair(Heading2 , Street2)], NewRoute).
 
@@ -155,18 +152,17 @@ drive(Vehicle, [pair(Heading , Street)], NewPlace) from T to T3 <-
   % NewPlace = coordinate(Xnew, Ynew),
   % testPrint(Xold + Yold + Xnew + Ynew),
   OldPlace != NewPlace,
-  testPrint('testing driving 1 point2'),
+  testPrint('testing driving 1 point2--------------------------------------'),
 	next(OldPlace, Heading, NextPlace),
 	on(NextPlace, Street),
   testPrint('testing driving 1 point3: '+Vehicle+OldPlace+ Heading+NextPlace +' on '+NextPlace+ Street),
-	stepupdate(Vehicle, OldPlace, NextPlace),
-  testPrint('testing driving 1 point4'),
+	step(Vehicle, OldPlace, NextPlace)from T1 to T2,
 	drive(Vehicle, [pair(Heading , Street)], NewPlace) from T2 to T3.
 
 
-stepupdate(Vehicle, coordinate(Xold,Yold), coordinate(Xnew,Ynew)) <-
-  testPrint("tesing the most inportanta bit------------"+Xold+Yold+Xnew+Ynew),
-  step(Vehicle,Xold,Yold,Xnew,Ynew) from T1 to T2.
+% stepupdate(Vehicle, coordinate(Xold,Yold), coordinate(Xnew,Ynew)) <-
+%   testPrint("tesing the most inportanta bit------------"+Xold+Yold+Xnew+Ynew),
+%   step(Vehicle,Xold,Yold,Xnew,Ynew) from T1 to T2.
 
 drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Rest], NewPlace) from T to T3 <-
   testPrint('testing driving 2'),
@@ -201,8 +197,8 @@ drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Res
 %
 % terminates(step(Vehicle, Xold,Yold,Xnew,Ynew)step(Vehicle, OldPlace, NextPlace), location(Vehicle, coordinate(Xold,Yold), _)) <-
 %   testPrint("hah==========").
-updates(step(Vehicle, OldPlace, NextPlace), location(Vehicle, OldPlace, Heading),  location(Vehicle, NextPlace, Heading))<-testPrint("updaing location").
-updates(turn(Vehicle, NewHeading) , location(Vehicle, _, _), location(Vehicle, _, NewHeading))<-testPrint("turing to new heading").
+updates(step(Vehicle, OldPlace, NextPlace), location(Vehicle, OldPlace, Heading),  location(Vehicle, NextPlace, Heading))<-testPrint("updaing location ").
+updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading))<-testPrint("updaing heading").
 
   % Some geography:
   %
