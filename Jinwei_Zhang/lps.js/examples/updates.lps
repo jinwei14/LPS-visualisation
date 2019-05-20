@@ -1,0 +1,16 @@
+loadModule('./modules/module.js').
+maxTime(5).
+action(move(A,B)).
+fluent([
+  loc(X,Y)
+]).
+initially([
+  loc(1,1)
+]).
+
+true->testPrint("moved"),
+  move(1,2) from T1 to T2,
+testPrint("moved finished").
+
+
+updates(move(X,Y), loc(_,_),  loc(X,Y)).
