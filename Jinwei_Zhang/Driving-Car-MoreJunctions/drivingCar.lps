@@ -47,11 +47,11 @@ actions ([
 
 % describes the facts that are true at time 1
 initially([
-  location(mycar, coordinate(2, 1), northward),
-	location(yourcar, coordinate(6, 1), northward),
-	location(othercar, coordinate(10, 5), westward),
+  location(myCar, coordinate(2, 1), northward),
+	location(yourCar, coordinate(6, 1), northward),
+	location(otherCar, coordinate(10, 5), westward),
 	location(troubleMaker, coordinate(6, 2), northward),
-	location(brokencar, coordinate(2, 7), noward)
+	location(broken, coordinate(2, 7), noward)
 ]).
 
 % townPosition(myCar, myCar, 200, 100).
@@ -80,7 +80,7 @@ lpsDefineObject(troubleMaker, image, [
   position(600, 200),
   size(64, 64),
   isHidden(0),
-  image(otherCar),
+  image(troubleMaker),
   zIndex(100)
 ]).
 
@@ -88,7 +88,7 @@ lpsDefineObject(yourCar, image, [
   position(600, 100),
   size(64, 64),
   isHidden(0),
-  image(otherCar),
+  image(yourCar),
   zIndex(100)
 ]).
 
@@ -96,16 +96,16 @@ lpsDefineObject(broken, image, [
   position(200, 700),
   size(64, 64),
   isHidden(0),
-  image(otherCar),
+  image(broken),
   zIndex(100)
 ]).
+% lpsAnimateMoveObject(fireTruck, AnimationDuration, Tx + 16, Ty + 16) from T1 to T2,
 
-
-observe (destination(mycar, coordinate(2, 9)),2,3).
+observe (destination(myCar, coordinate(2, 9)),2,3).
 observe (destination(troubleMaker, coordinate(8, 9)),2,3).
-observe (destination(yourcar, coordinate(9, 9)),2,3).
-observe (destination(othercar, coordinate(6, 1)),1,2).
-observe (remove(brokencar) ,15,16).
+observe (destination(yourCar, coordinate(9, 9)),2,3).
+observe (destination(otherCar, coordinate(6, 1)),1,2).
+observe (remove(broken) ,15,16).
 
 
 % Just for fun.
@@ -113,24 +113,22 @@ terminates(remove(Vehicle), location(Vehicle,_,_)).
 
 destination(Vehicle, NewPlace) from _ to T,
 location(Vehicle, PresentPlace, Heading) at T ->
-  testPrint('-->Vehicle: '+Vehicle+' NewPlace: '+NewPlace+' PresentPlace: '+PresentPlace+' Heading: ' + Heading),
+  % testPrint('-->Vehicle: '+Vehicle+' NewPlace: '+NewPlace+' PresentPlace: '+PresentPlace+' Heading: ' + Heading),
   directions(PresentPlace, Route, NewPlace),
-  testPrint('haha Vehicle start driving: '+ Vehicle+' NewPlace: '+NewPlace + is_list(Route)),
-  drive(Vehicle, Route, NewPlace) from T to _,
-  testPrint('DrivingEnd').
+  % testPrint('haha Vehicle start driving: '+ Vehicle+' NewPlace: '+NewPlace + is_list(Route)),
+  drive(Vehicle, Route, NewPlace) from T to _.
 
   % Finding directions is easiest when the start and finish locations are on the same street:
   %
   directions(Start, [pair(Heading , Street)], Finish) <-
-    testPrint(Heading),
-    testPrint('chekcing directionsMethod1'),
+    % testPrint(Heading),
+    % testPrint('chekcing directionsMethod1'),
   	on(Start, Street),
-    testPrint('chekcing directions1'),
-    testPrint(Start+Finish+Street),
+    % testPrint('chekcing directions1'),
+    % testPrint(Start+Finish+Street),
     on(Finish, Street),
-    testPrint('chekcing directions2'+Start+ Finish),
-  	orientation(Start, Finish, Heading),
-    testPrint(Heading).
+    % testPrint('chekcing directions2'+Start+ Finish),
+  	orientation(Start, Finish, Heading).
 
   orientation(coordinate(X,Y1), coordinate(X,Y2), northward) <- Y1 < Y2.
   orientation(coordinate(X,Y1), coordinate(X,Y2), southward) <- Y1 > Y2.
@@ -141,12 +139,11 @@ location(Vehicle, PresentPlace, Heading) at T ->
 % and extracting segments of those routes.
 %
   directions(Start, NewRoute, Finish) <-
-    testPrint('chekcing2.1 Start, Finish:' + Start + Finish),
+    % testPrint('chekcing2.1 Start, Finish:' + Start + Finish),
     on(Finish, Street2),
     on(Start, Street1),
-    testPrint('chekcing 2.2 Start+Finish+Street2'+ '     '+Start+Finish+Street1+Street2),
-    route(Start, NewRoute, Finish),
-    testPrint('chekcing 2.3 finshed direction checking').
+    % testPrint('chekcing 2.2 Start+Finish+Street2'+ '     '+Start+Finish+Street1+Street2),
+    route(Start, NewRoute, Finish).
 
 
 route(coordinate(Xs,Ys), [pair(eastward , northStreet)], coordinate(Xf,Yf)) <- Xs==2,Ys==9,Xf == 9, Yf == 9.
@@ -170,65 +167,81 @@ on(coordinate(6,Y), highStreet) <- 1 <= Y, Y <= 9.
 on(coordinate(2,Y), westStreet) <- 1 <= Y, Y <= 9.
 on(coordinate(8,Y), eastStreet) <- 1 <= Y, Y <= 9.
 
-
+%
 % There are three cases for driving. It might be desirable to refactor them.
 % Notice that in all three cases, driving starts at "time" (really state) T, but stepping forward starts at T1.
 % This takes into account that it might be necessary to wait from T to T1 for the step to be possible.
-%
+% This part makes a lot of things wrong
 drive(Vehicle, [pair(Heading , Street)], NewPlace) from T to T3 <-
-  testPrint('testing driving 1'),
-
 	location(Vehicle, OldPlace, Heading) at T,
-  testPrint('testing driving 1'),
-  testPrint(OldPlace + NewPlace + Vehicle + Heading+Street),
-  OldPlace != NewPlace,
-  testPrint('testing driving 1 point2--------------------------------------'),
+  notEqual(  OldPlace , NewPlace),
 	next(OldPlace, Heading, NextPlace),
 	on(NextPlace, Street),
-  testPrint('testing driving 1 point3: '+Vehicle+OldPlace+ Heading+NextPlace +' on '+NextPlace+ Street),
+  % studioUpdateObj(Vehicle, OldPlace, NextPlace),
 	step(Vehicle, OldPlace, NextPlace)from T1 to T2,
 	drive(Vehicle, [pair(Heading , Street)], NewPlace) from T2 to T3.
 
+drive(Vehicle, [pair(Heading , Street)], NewPlace) from T to T3 <-
+	location(Vehicle, OldPlace, Heading) at T,
+  notEqual(  OldPlace , NewPlace),
+	next(OldPlace, Heading, NextPlace),
+	on(NextPlace, Street),
+  studioUpdateObj(Vehicle, OldPlace, NextPlace).
 
-% stepupdate(Vehicle, coordinate(Xold,Yold), coordinate(Xnew,Ynew)) <-
-%   testPrint("tesing the most inportanta bit------------"+Xold+Yold+Xnew+Ynew),
-%   step(Vehicle,Xold,Yold,Xnew,Ynew) from T1 to T2.
+notEqual(coordinate(Xold,Yold),coordinate(Xnew,Ynew)) <-
+  Xold != Xnew.
+notEqual(coordinate(Xold,Yold),coordinate(Xnew,Ynew)) <-
+  Yold != Ynew.
+
+
 
 drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Rest], NewPlace) from T to T3 <-
   testPrint('testing driving 2'),
 	location(Vehicle, OldPlace, OldHeading),
 	next(OldPlace, OldHeading, NextPlace),
 	not on(NextPlace, NewStreet),
+  % studioUpdateObj(Vehicle, OldPlace, NextPlace),
 	step(Vehicle, OldPlace, NextPlace) from T1 to T2,
  	drive(Vehicle, [pair(OldHeading ,OldStreet), pair(NewHeading , NewStreet) | Rest], NewPlace) from T2 to T3.
 
+drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Rest], NewPlace) from T to T3 <-
+  testPrint('testing driving 2'),
+	location(Vehicle, OldPlace, OldHeading),
+	next(OldPlace, OldHeading, NextPlace),
+	not on(NextPlace, NewStreet),
+  studioUpdateObj(Vehicle, OldPlace, NextPlace).
+
+
 % Here step and turn are executed concurrently.
-%
+
+
+
 drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Rest], NewPlace) from T to T3 <-
   testPrint('testing driving 3'),
 	location(Vehicle, OldPlace, OldHeading),
 	next(OldPlace, OldHeading, NextPlace),
 	on(NextPlace, NewStreet),
+  % studioUpdateObj(Vehicle, OldPlace, NextPlace) ,
 	step(Vehicle, OldPlace, NextPlace) from T1 to T2,
 	turn(Vehicle, NewHeading) from T1 to T2,
 	drive(Vehicle, [pair(NewHeading , NewStreet)| Rest], NewPlace) from T2 to T3.
 
-  % Stepping and turning update the current state:
-  %
-% updates(step(Vehicle, Xold,Yold,Xnew,Ynew), location(Vehicle, coordinate(Xold,Yold), _), location(Vehicle, coordinate(Xnew,Ynew), _))<-
-% testPrint("stepgin!!!!!!!!!==============").
-%
-% updates(step(Vehicle, Xold,Yold,Xnew,Ynew), location(Vehicle, coordinate(Xold,Yold), _), location(Vehicle, coordinate(Xnew,Ynew), _))<-
-% testPrint("stepgin!!!!!!!!!==============").
+drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Rest], NewPlace) from T to T3 <-
+  testPrint('testing driving 3'),
+	location(Vehicle, OldPlace, OldHeading),
+	next(OldPlace, OldHeading, NextPlace),
+	on(NextPlace, NewStreet),
+  studioUpdateObj(Vehicle, OldPlace, NextPlace).
 
 
-% initiates(step(Vehicle, Xold,Yold,Xnew,Ynew), location(Vehicle, coordinate(Xnew,Ynew), _)) <-
-%   testPrint("hah==========").
-%
-% terminates(step(Vehicle, Xold,Yold,Xnew,Ynew)step(Vehicle, OldPlace, NextPlace), location(Vehicle, coordinate(Xold,Yold), _)) <-
-%   testPrint("hah==========").
-updates(step(Vehicle, OldPlace, NextPlace), location(Vehicle, OldPlace, Heading),  location(Vehicle, NextPlace, Heading)).
-updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading))<-testPrint("updaing heading").
+updates(step(Vehicle, OldPlace, NextPlace), location(Vehicle, OldPlace, Heading),  location(Vehicle, NextPlace, Heading)). %<- studioUpdateObj(Vehicle, OldPlace, NextPlace).
+updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading)).
+
+studioUpdateObj(Vehicle, coordinate(Xold,Yold),coordinate(Xnew,Ynew))<-
+  testPrint("updating Vehicle" + Vehicle+Xold +Yold+Xnew+Ynew),
+  % MoveX = Xnew * 100,
+  % MoveY = Ynew * 100,
+  lpsAnimateMoveObject(Vehicle, 1, Xnew * 100, Ynew * 100) from T1 to T2.
 
   % Some geography:
   %
@@ -240,7 +253,7 @@ next(coordinate(X1,Y), westward, coordinate(X2,Y)) <- X2 = X1 - 1.
   % Some self-preservation:
   %
 
-  <- step(Vehicle1, OldPlace, NextPlace),
+<- step(Vehicle1, OldPlace, NextPlace),
   	collisionPossible(Vehicle1, Vehicle2).
 
   collisionPossible(Vehicle1, Vehicle2) at T <-

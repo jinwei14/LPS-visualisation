@@ -1,0 +1,81 @@
+consult('./studio.lps').
+action(select(Item)).
+
+lpsDefineObject(_, text, [
+  position(10, 300),
+  caption('I am the bot player.'),
+  font('10px sans-serif')
+]).
+
+startTurn(Turn, T1, T2),
+  selfIdentifier(Id, T2),
+  atom_string(Turn) == atom_string(Id) ->
+    selectionStrategy(Choice) at T2,
+    select(Choice, T2, T3).
+
+% Actively tries to the opponent from winning
+% or move towards a win condition
+selectionStrategy(X) at T <-
+  row(X, Y, Z),
+  gridState(X, none, T),
+  gridState(Y, Player, T),
+  gridState(Z, Player, T),
+  atom_string(Player) != 'none'.
+
+selectionStrategy(Y) at T <-
+  row(X, Y, Z),
+  gridState(X, Player, T),
+  gridState(Y, none, T),
+  gridState(Z, Player, T),
+  atom_string(Player) != 'none'.
+
+selectionStrategy(Z) at T <-
+  row(X, Y, Z),
+  gridState(X, Player, T),
+  gridState(Y, Player, T),
+  gridState(Z, none, T),
+  atom_string(Player) != 'none'.
+
+% bias for center
+selectionStrategy(4) at T <-
+  gridState(4, none, T).
+
+selectionStrategy(X) at T <-
+  selfIdentifier(Id, T),
+  row(X, Y, Z),
+  gridState(X, none, T),
+  gridState(Y, Id, T),
+  gridState(Z, none, T).
+
+% bias for corners
+selectionStrategy(I) at T <-
+  member(I, [0, 2, 6, 8]),
+  gridState(I, none, T).
+
+% bias for blocking or advancing
+selectionStrategy(Y) at T <-
+  row(X, Y, Z),
+  gridState(X, none, T),
+  gridState(Y, none, T),
+  gridState(Z, Player, T),
+  atom_string(Player) != 'none'.
+
+selectionStrategy(Y) at T <-
+  row(X, Y, Z),
+  gridState(X, Player, T),
+  gridState(Y, none, T),
+  gridState(Z, none, T),
+  atom_string(Player) != 'none'.
+
+% any remaining possible moves
+selectionStrategy(Choice) at T <-
+  gridState(Choice, none, T).
+
+% perform a selection
+select(GridId, T1, T2),
+  selfIdentifier(Id) at T2,
+  ObjId = 'square' + atom_string(GridId),
+  opponent(Peer) at T2 ->
+    p2pSend(tictactoe, Peer, move(ObjId, Id, GridId)) from T2 to T3,
+    updateGrid(ObjId, GridId, Id, T3, T4),
+    checkGameState(Id) from T4 to T5.

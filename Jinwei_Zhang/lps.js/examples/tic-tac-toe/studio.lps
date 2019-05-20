@@ -1,0 +1,243 @@
+/*
+  Authored by Sam Yong, Aug 2018
+  Run this file in LPS Studio.
+ */
+
+maxTime(5000).
+cycleInterval(200).
+
+loadModule(p2p).
+
+lpsLoadImage(cross, "./icons8-cross.png").
+lpsLoadImage(circle, "./icons8-circle.png").
+
+p2pJoin(tictactoe).
+
+action(updateSelfIdentifier/1).
+action(showGridSquares).
+action(hideGridSquares).
+action(setOpponent/1).
+action(setGridState/2).
+event(startTurn/1).
+
+fluents([
+  gridState/2,
+  selfIdentifier/1,
+  opponent/1
+]).
+
+% initialise none for all grids
+initially(gridState(GridId, none)) <-
+  gridPositions(GridId, _, _).
+% grids 0 - 8 have states 'none', 'cross' or 'circle'
+
+initially([
+  selfIdentifier(cross)
+]).
+
+consult('./auxiliary.lps').
+
+lpsDefineObject(ObjId, square, [
+  position(X, Y),
+  size(60, 60),
+  strokeWeight(0),
+  fillStyle('#EFEFEF'),
+  isHidden(1)
+]) <-
+  gridPositions(GridId, X, Y),
+  ObjId = 'gridSquare' + atom_string(GridId).
+
+showGridSquares(T1, T2),
+  gridPositions(GridId, _, _),
+  gridState(GridId, none, T2), % only show non-filled squares
+  ObjId = 'gridSquare' + atom_string(GridId) ->
+    lpsShowObject(ObjId) from T3.
+
+hideGridSquares(T1, T2),
+  gridPositions(GridId, _, _),
+  ObjId = 'gridSquare' + atom_string(GridId) ->
+    lpsHideObject(ObjId) from T3.
+
+% another player is connected on the network
+% we make the second player to be "circle".
+% first player will remain as "cross"
+p2pPeerConnected(Network, Peer, T1, T2),
+  not opponent(_, T2) ->
+    p2pSend(Network, Peer, newPlayer(circle)) from T2 to T4, % inform the opponent
+    setOpponent(Peer, T4, T5), % take note of opponent's network address
+    startTurn(cross, T5, T6). % start the game
+
+% another player has already entered first
+% i will update my own identifier to what
+% the first player decided for me to be.
+p2pReceive(Network, Peer, newPlayer(Id), T1, T2),
+  not opponent(_, T2) ->
+    updateSelfIdentifier(Id) from T3 to T4, % update own ID
+    setOpponent(Peer, T4, T5), % take note of opponent's network address
+    lpsUpdateObject(playerSymbol, [
+      image(Id) % update player symbol
+    ]) at T3,
+    startTurn(cross, T5, T6).
+
+startTurn(Id, T1, T2) <-
+  selfIdentifier(Id) at T1,
+  showGridSquares(T1, T2),
+  lpsUpdateObject(gameStatus, [
+    caption('It is your turn')
+  ]).
+
+startTurn(Player, T1, T2) <-
+  selfIdentifier(Id) at T1,
+  atom_string(Player) != atom_string(Id),
+  hideGridSquares(T1, T2),
+  lpsUpdateObject(gameStatus, [
+    caption('It is the opponent turn')
+  ]).
+
+drawWinLine(A, B) <-
+  gridPositions(A, X1, Y1),
+  gridPositions(B, X2, Y2),
+  lpsUpdateObject(winLine, [
+    start(X1, Y1),
+    end(X2, Y2),
+    isHidden(0)
+  ]).
+
+% check for a win condition
+hasWon at T <-
+  row(X, Y, Z),
+  selfIdentifier(SelfId, T),
+  gridState(X, SelfId, T),
+  gridState(Y, SelfId, T),
+  gridState(Z, SelfId, T),
+  drawWinLine(X, Z).
+
+% check for a lose condition
+hasLost at T <-
+  row(X, Y, Z),
+  selfIdentifier(SelfId, T),
+  gridState(X, OtherId, T),
+  gridState(Y, OtherId, T),
+  gridState(Z, OtherId, T),
+  atom_string(OtherId) != 'none',
+  atom_string(OtherId) != atom_string(SelfId),
+  drawWinLine(X, Z).
+
+% check for a draw condition
+hasDrawn at T <-
+  not gridState(_, none, T).
+
+% checkGameStatus/1 will determine if the game
+% has met any of the end conditions, or otherwise
+% continue with the game by running changeTurn/1
+checkGameState(SelfId) from T1 to T1 <-
+  hasWon at T1,
+  lpsUpdateObject(gameStatus, [
+    caption('You have won')
+  ]) at T1,
+  lpsHalt from T1.
+
+checkGameState(SelfId) from T1 to T1 <-
+  hasLost at T1,
+  lpsUpdateObject(gameStatus, [
+    caption('You have lost')
+  ]) at T1,
+  lpsHalt from T1.
+
+checkGameState(SelfId) from T1 to T2 <-
+  hasDrawn at T1,
+  lpsUpdateObject(gameStatus, [
+    caption('It is a draw.')
+  ]) from T1,
+  lpsHalt from T1 to T2.
+
+% none of the end-game conditions have been met.
+% continue with the next turn
+checkGameState(SelfId) from T1 to T2 <-
+  changeTurn(SelfId) from T1 to T2.
+
+% change turn changes the turn for the player
+changeTurn(cross) from T1 to T2 <-
+  startTurn(circle, T1, T2).
+
+changeTurn(circle) from T1 to T2 <-
+  startTurn(cross, T1, T2).
+
+showObjectOnGrid(ObjId, Id) at T1 <-
+  lpsUpdateObject(ObjId, [
+    size(32, 32),
+    image(Id),
+    isHidden(0)
+  ]) from T1,
+  lpsAnimateObject(ObjId, 160, [
+    size(64, 64)
+  ]) from T1.
+
+updateGrid(ObjId, GridId, Id, T1, T2) <-
+  showObjectOnGrid(ObjId, Id) from T1,
+  setGridState(GridId, Id, T1, T2).
+
+% player makes a move
+lpsClick(Item, X, Y) from T1 to T2,
+  selfIdentifier(Id) at T2,
+  gridPositions(GridId, _, _),
+  GridSquareId = 'gridSquare' + atom_string(GridId),
+  atom_string(Item) == GridSquareId,
+  ObjId = 'square' + atom_string(GridId),
+  opponent(Peer) at T2 ->
+    p2pSend(tictactoe, Peer, move(ObjId, Id, GridId)) from T2 to T3,
+    updateGrid(ObjId, GridId, Id, T3, T4),
+    checkGameState(Id) from T4 to T5.
+
+% a move has been made by the opponent,
+% we need to update the current player's world view
+p2pReceive(Network, Peer, move(ObjId, Id, GridId), T1, T2) ->
+  updateGrid(ObjId, GridId, Id, T2, T4),
+  checkGameState(Id) from T4 to T5.
+
+% the game status to show the user
+lpsDefineObject(gameStatus, text, [
+  position(10, 40),
+  caption('Waiting for network...'),
+  font('14px \'PT Sans\', sans-serif')
+]).
+
+
+lpsDefineObject(_, text, [
+  position(330, 40),
+  caption('You\'re playing as'),
+  font('9px Helvetica, sans-serif')
+]).
+
+lpsDefineObject(playerSymbol, image, [
+  position(340, 64),
+  size(32, 32),
+  image(cross)
+]).
+
+% set the opponent's peer ID for use by p2p
+initiates(setOpponent(A), opponent(A)).
+
+% update the knowledge about a particular square on the grid
+updates(setGridState(GridId, Player), gridState(GridId, _), gridState(GridId, Player)).
+
+updates(updateSelfIdentifier(A), selfIdentifier(_), selfIdentifier(A)).
+
+consult('./defineGrid.lps').
+consult('./pieces.lps').
+
+% creative commons text for the icons
+lpsDefineObject(_, text, [
+  position(10, 20),
+  caption('Program authored by Sam Yong. Icons by Icons8.com, CC-BY-ND 3.0'),
+  font('9px Helvetica, sans-serif')
+]).
+
+lpsDefineObject(winLine, line, [
+  start(0, 0),
+  end(0, 0),
+  strokeWeight(5),
+  strokeStyle('#A00'),
+  isHidden(1),
+  zIndex(100)
+]).

@@ -5,7 +5,7 @@ consult('./town.lps').
 % consult('./roads.lps').
 consult('./drivingCar.lps').
 
-cycleInterval(100).
+cycleInterval(300).
 maxTime(30).
 
 lpsDefineObject(_, text, [

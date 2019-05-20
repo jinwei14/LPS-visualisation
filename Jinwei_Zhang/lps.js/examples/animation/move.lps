@@ -1,0 +1,37 @@
+lpsLoadImage(myCar, '/Users/jinweizhang/Desktop/Project/LPS-visualisation/Jinwei_Zhang/Driving-Car-MoreJunctions/images/myCar.png').
+% this exmaple is testing the updating function with the timing
+
+loadModule('../modules/module.js').
+true -> testPrint('The car has started').
+
+fluents([
+   coordinate(X, Y),
+   location(Vehicle, Place, Heading)
+]).
+
+
+% describes the facts that are true at time 1
+initially(location(myCar, coordinate(2, 1), northward)).
+
+% townPosition(myCar, myCar, 200, 100).
+% townPosition(otherCar, otherCar, 1000, 500).
+% townPosition(troubleMaker, troubleMaker, 600, 200).
+% townPosition(yourCar, yourCar, 600, 100).
+% townPosition(broken, broken, 200, 700).
+
+lpsDefineObject(myCar, image, [
+  position(0, 0),
+  size(64, 64),
+  isHidden(0),
+  image(myCar),
+  zIndex(100)
+]).
+
+
+true -> studioUpdateObj(myCar, coordinate(0,0), coordinate(500,500)).
+
+studioUpdateObj(Vehicle, coordinate(Xold,Yold),coordinate(Xnew,Ynew))<-
+  testPrint('____________________________--updaing'+Vehicle+Xnew+Ynew),
+  MoveX = Xnew + 100,
+  MoveY = Ynew + 100,
+  lpsAnimateMoveObject(Vehicle, 2, Xnew, MoveY) from T1 to T2 .
