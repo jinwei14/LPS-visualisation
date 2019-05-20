@@ -189,20 +189,20 @@ drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Res
 
   % Stepping and turning update the current state:
   %
-updates(step(Vehicle, Xold,Yold,Xnew,Ynew), location(Vehicle, coordinate(Xold,Yold), _), location(Vehicle, coordinate(Xnew,Ynew), _))<-
-testPrint("stepgin!!!!!!!!!==============").
-
-updates(step(Vehicle, Xold,Yold,Xnew,Ynew), location(Vehicle, coordinate(Xold,Yold), _), location(Vehicle, coordinate(Xnew,Ynew), _))<-
-testPrint("stepgin!!!!!!!!!==============").
+% updates(step(Vehicle, Xold,Yold,Xnew,Ynew), location(Vehicle, coordinate(Xold,Yold), _), location(Vehicle, coordinate(Xnew,Ynew), _))<-
+% testPrint("stepgin!!!!!!!!!==============").
+%
+% updates(step(Vehicle, Xold,Yold,Xnew,Ynew), location(Vehicle, coordinate(Xold,Yold), _), location(Vehicle, coordinate(Xnew,Ynew), _))<-
+% testPrint("stepgin!!!!!!!!!==============").
 
 
 % initiates(step(Vehicle, Xold,Yold,Xnew,Ynew), location(Vehicle, coordinate(Xnew,Ynew), _)) <-
 %   testPrint("hah==========").
 %
-% terminates(step(Vehicle, Xold,Yold,Xnew,Ynew), location(Vehicle, coordinate(Xold,Yold), _)) <-
+% terminates(step(Vehicle, Xold,Yold,Xnew,Ynew)step(Vehicle, OldPlace, NextPlace), location(Vehicle, coordinate(Xold,Yold), _)) <-
 %   testPrint("hah==========").
-
-updates(turn(Vehicle, NewHeading) , location(Vehicle, _, _), location(Vehicle, _, NewHeading)).
+updates(step(Vehicle, OldPlace, NextPlace), location(Vehicle, OldPlace, Heading),  location(Vehicle, NextPlace, Heading))<-testPrint("updaing location").
+updates(turn(Vehicle, NewHeading) , location(Vehicle, _, _), location(Vehicle, _, NewHeading))<-testPrint("turing to new heading").
 
   % Some geography:
   %

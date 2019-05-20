@@ -1,16 +1,36 @@
 loadModule('./modules/module.js').
+true -> testPrint('The car has started').
+
 maxTime(5).
-action(move(A,B)).
-fluent([
-  loc(X,Y)
-]).
-initially([
-  loc(1,1)
-]).
+
+fluent(car_location(Obj,X,Y)).
+
+actions([carMoveTo(Obj,X, Y),carTurnTo(Obj,X, Y)]).
+
+initially(car_location(car1, 0, 0)).
+
+
+%goal_location(car1, 800, 340).
+
+
+%%car moving seprate the first car and the second car
+%goal_location(car1, A, B),
+%  car_location(car1,X,Y,T), X@<A ->
+%  testPrint('moving'),
+%  XX =X + 64,
+%   carMoveTo(car1, XX,Y) from T1 to T2.
 
 true->testPrint("moved"),
-  move(1,2) from T1 to T2,
-testPrint("moved finished").
+  carMoveTo(car1,2,2) from T1 to T2,
+  carTurnTo(car1,8, 8) from T3 to T4.
 
 
-updates(move(X,Y), loc(_,_),  loc(X,Y)).
+
+updates(carMoveTo(Obj,X, Y), car_location(Obj, _, _),  car_location(Obj,X,Y)) <-
+        testPrint('moved1 cars using update').
+
+updates(carTurn(Obj,X, Y), car_location(Obj, _, _),  car_location(Obj,X,Y)) <-
+        testPrint('turning cars using update').
+
+% this will work
+% updates(carMoveTo(Obj,X, Y), car_location(Obj,_, _), car_location(Obj,X, Y))<-testPrint("Car loc changed").
