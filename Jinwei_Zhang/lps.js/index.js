@@ -14,7 +14,7 @@ if (process.browser) {
 console.log('Order of execution: ');
 console.log('index -> LPS(loadFile) -> ProgramFactory(fromFile) -> Parser(source, pathname) -> _lexer.get()');
 
-LPS.loadFile('./examples/emoji.lps')
+LPS.loadFile('./examples/drivingCar.lps')
   .then((engine) => {
     engine.run();
   });

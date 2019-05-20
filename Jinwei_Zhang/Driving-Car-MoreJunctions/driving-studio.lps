@@ -5,11 +5,11 @@ consult('./town.lps').
 % consult('./roads.lps').
 consult('./drivingCar.lps').
 
-cycleInterval(200).
+cycleInterval(100).
 maxTime(30).
 
 lpsDefineObject(_, text, [
   position(10, 20),
-  caption('Program illustate the T junction scenario authored by Jinwei Zhang. Icons by Icons8.com, CC BY-ND 3.0'),
+  caption('Program illustate the Multi-Car scenario authored by Jinwei Zhang. Icons by Icons8.com, CC BY-ND 3.0'),
   font('15px sans-serif')
 ]).

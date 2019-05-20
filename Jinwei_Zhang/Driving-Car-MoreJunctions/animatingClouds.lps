@@ -1,16 +1,16 @@
 action(moveCloudForward/1).
 action(moveCloudBackward/1).
 
-cloudPosition(cloud1, 100, 100).
-cloudPosition(cloud2, 160, 120).
-cloudPosition(cloud3, 240, 90).
-cloudPosition(cloud4, 400, 110).
-cloudPosition(cloud5, 570, 70).
-cloudPosition(cloud6, 620, 100).
-cloudPosition(cloud7, 690, 130).
-cloudPosition(cloud8, 720, 110).
-cloudPosition(cloud9, 810, 105).
-cloudPosition(cloud10, 890, 120).
+cloudPosition(cloud1, 100, 80).
+% cloudPosition(cloud2, 160, 100).
+cloudPosition(cloud3, 240, 70).
+cloudPosition(cloud4, 400, 90).
+% cloudPosition(cloud5, 570, 60).
+% cloudPosition(cloud6, 620, 80).
+cloudPosition(cloud7, 690, 110).
+cloudPosition(cloud8, 720, 90).
+cloudPosition(cloud9, 810, 80).
+cloudPosition(cloud10, 890, 100).
 
 lpsDefineObject(C, image, [
   position(X, Y),

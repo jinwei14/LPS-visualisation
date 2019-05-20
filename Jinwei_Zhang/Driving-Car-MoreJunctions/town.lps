@@ -1,16 +1,17 @@
 
 
-townPosition(fireStation, fireStation, 200, 300).
-townPosition(house1, home1, 264, 300).
-townPosition(house2, home2, 328, 300).
-townPosition(shop1, shop1, 392, 300).
-% townPosition(shop2, shop1, 456, 300).
-townPosition(trafficLight1, trafficLight1, 520, 300).
-% townPosition(tree1, trees1, 584, 300).
-townPosition(tree2, trees2, 648, 300).
-townPosition(school1, campus, 712, 300).
-townPosition(house3, home2, 776, 300).
-townPosition(house4, home1, 840, 300).
+townPosition(fireStation, fireStation, 270, 425).
+townPosition(house1, home1, 328, 425).
+townPosition(house2, home2, 392, 425).
+townPosition(shop1, shop1, 456, 425).
+townPosition(shop2, shop1, 520, 425).
+townPosition(commercial, commercial, 712, 425).
+townPosition(tree1, trees1, 776, 425).
+townPosition(tree2, trees2, 840, 425).
+townPosition(school1, campus, 904, 425).
+townPosition(house3, home2, 968, 425).
+townPosition(house4, home1, 1032, 425).
+
 
 % townPosition(house5, home1, 200, 428).
 % townPosition(shop4, shop2, 264, 428).
@@ -62,22 +63,30 @@ lpsDefineObject(ObjId, image, [
 %   townPosition(I, _, _, _),
 %   atom_string(I) != 'fireStation'.
 
-% this part is the T road
+% this part is wihte road
 lpsDefineObject(_, rect, [
-  position(520, 332),
-  size(768, 20),
+  position(630, 455),
+  size(900, 20),
   zIndex(-5),
   strokeWeight(0),
   fillStyle('#EDEDED')
 ]).
 
+% this is the mainStreet
 lpsDefineObject(_, rect, [
-  position(520, 350),
-  size(768, 30),
+  position(630, 500),
+  size(900, 70),
   zIndex(-2),
   strokeWeight(0),
   fillStyle('#333')
 ]).
+lpsDefineObject(_, text, [
+  position(700, 500),
+  caption('MainRoad'),
+  font('24px sans-serif'),
+  fillStyle('#EDEDED')
+]).
+
 
 %
 % % second part of the T road
@@ -116,16 +125,35 @@ lpsDefineObject(_, rect, [
 
 
 lpsDefineObject(_, rect, [
-  position(520 , 500),
-  size(50, 320),
+  position(200 , 500),
+  size(70, 900),
   zIndex(-2),
   strokeWeight(0),
   fillStyle('#333')
 ]).
 
 
-% neighbour(A, B) <-
-%   townPosition(A, _, X1, Y),
-%   townPosition(B, _, X2, Y),
-%   A != B,
-%   abs(X1 - X2) == 64.
+lpsDefineObject(_, rect, [
+  position(600 , 500),
+  size(70, 900),
+  zIndex(-2),
+  strokeWeight(0),
+  fillStyle('#333')
+]).
+
+% this part is wihte road
+lpsDefineObject(_, rect, [
+  position(615, 905),
+  size(900, 20),
+  zIndex(-5),
+  strokeWeight(0),
+  fillStyle('#EDEDED')
+]).
+% this is the northStreet
+lpsDefineObject(_, rect, [
+  position(615, 950),
+  size(900, 70),
+  zIndex(-2),
+  strokeWeight(0),
+  fillStyle('#333')
+]).

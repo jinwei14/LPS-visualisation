@@ -80,7 +80,7 @@ lpsDefineObject(troubleMaker, image, [
   position(600, 200),
   size(64, 64),
   isHidden(0),
-  image(otherCar),
+  image(troubleMaker),
   zIndex(100)
 ]).
 
@@ -88,7 +88,7 @@ lpsDefineObject(yourCar, image, [
   position(600, 100),
   size(64, 64),
   isHidden(0),
-  image(otherCar),
+  image(yourCar),
   zIndex(100)
 ]).
 
@@ -96,7 +96,7 @@ lpsDefineObject(broken, image, [
   position(200, 700),
   size(64, 64),
   isHidden(0),
-  image(otherCar),
+  image(broken),
   zIndex(100)
 ]).
 

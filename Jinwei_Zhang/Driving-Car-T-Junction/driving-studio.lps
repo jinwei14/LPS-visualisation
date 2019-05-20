@@ -2,7 +2,6 @@
 consult('./loadImages.lps').
 consult('./animatingClouds.lps').
 consult('./town.lps').
-% consult('./roads.lps').
 consult('./drivingCar.lps').
 
 cycleInterval(200).
