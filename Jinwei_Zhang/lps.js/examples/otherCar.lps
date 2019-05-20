@@ -1,0 +1,58 @@
+loadModule('./modules/module.js').
+true -> testPrint('The car has started').
+
+fluents([
+   coordinate(X, Y),
+   pair(X, Y),
+   location(Vehicle, Place, Heading),
+   collisionWarning(Vehicle1, Vehicle2, Place),
+   rightOfWay(Vehicle1, Vehicle2, Place),
+   collisionPossible(Vehicle1, Vehicle2)
+]).
+
+initially(location(othercar, coordinate(10, 5), westward)).
+
+observe (destination(othercar, coordinate(6, 1)),1,2).
+
+destination(Vehicle, NewPlace) from _ to T,
+location(Vehicle, PresentPlace, Heading) at T ->
+  testPrint('-->Vehicle: '+Vehicle+' NewPlace: '+NewPlace+' PresentPlace: '+PresentPlace+' Heading: ' + Heading),
+  directions(PresentPlace, Route, NewPlace),
+  testPrint("Route: "+is_list(Route)).
+
+
+directions(Start, NewRoute, Finish) <-
+  testPrint('chekcing2.1 Start, Finish:' + Start + Finish),
+  on(Finish, Street2),
+  on(Start, Street1),
+  testPrint('chekcing 2.2 Start+Finish+Street2'+ '     '+Start+Finish+Street1+Street2),
+  route(Start, NewRoute, Finish),
+  testPrint('haha').
+  % testPrint('chekcing directionsMethod2.3'+ '     '+is_list(NewRoute)).
+  % append(FirstPart, [pair(Heading2 , Street2) | _ ], Route),
+  %
+  % % testPrint('check 2.4 Start'+(Start)),
+  %
+  % % testPrint('check 2.4 Street1'+(Street1)),
+  % append(_, [pair(Heading1 , Street1) | Link], FirstPart),
+  % append([pair(Heading1, Street1) | Link], [pair(Heading2 , Street2)], NewRoute).
+
+route(coordinate(Xs,Ys), [pair(eastward , northStreet)], coordinate(Xf,Yf)) <- Xs==2,Ys==9,Xf == 9, Yf == 9.
+route(coordinate(Xs,Ys), [pair(northward , westStreet), pair(eastward , northStreet)], coordinate(Xf,Yf))<- Xs==2,Ys==1,Xf == 9, Yf == 9.
+route(coordinate(Xs,Ys), [pair(northward , highStreet), pair(eastward , northStreet)], coordinate(Xf,Yf))<- Xs==6,Ys==9,Xf == 9, Yf == 9.
+route(coordinate(Xs,Ys), [pair(westward , northStreet), pair(southward , westStreet)], coordinate(Xf,Yf))<- Xs==9,Ys==9,Xf == 2, Yf == 1.
+route(coordinate(Xs,Ys), [pair(westward , mainStreet), pair(southward , highStreet)], coordinate(Xf,Yf))<- Xs==10,Ys==5,Xf == 6, Yf == 1.
+route(coordinate(Xs,Ys), [pair(northward , highStreet), pair(eastward , northStreet)], coordinate(Xf,Yf))<- Xs==6,Ys==2,Xf == 8, Yf == 9.
+
+% route(coordinate(2,9), [pair(eastward , northStreet)], coordinate(9,9)).
+% route(coordinate(2,1), [pair(northward , westStreet), pair(eastward , northStreet)], coordinate(9,9)).
+% route(coordinate(6,1), [pair(northward , highStreet), pair(eastward , northStreet)], coordinate(9,9)).
+% route(coordinate(9,9), [pair(westward , northStreet), pair(southward , westStreet)], coordinate(2,1)).
+% route(coordinate(10,5), [pair(westward , mainStreet), pair(southward , highStreet)], coordinate(6,1)).
+
+
+on(coordinate(X,5), mainStreet) <- 3 <= X, X <= 10.
+on(coordinate(X,9), northStreet) <- 2 <= X, X <= 9.
+on(coordinate(6,Y), highStreet) <- 1 <= Y, Y <= 9.
+on(coordinate(2,Y), westStreet) <- 1 <= Y, Y <= 9.
+on(coordinate(8,Y), eastStreet) <- 1 <= Y, Y <= 9.

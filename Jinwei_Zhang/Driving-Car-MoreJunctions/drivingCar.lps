@@ -87,7 +87,7 @@ destination(Vehicle, NewPlace) from _ to T,
 location(Vehicle, PresentPlace, Heading) at T ->
   testPrint('-->Vehicle: '+Vehicle+' NewPlace: '+NewPlace+' PresentPlace: '+PresentPlace+' Heading: ' + Heading),
   directions(PresentPlace, Route, NewPlace),
-  testPrint('haha Vehicle start driving: '+ Vehicle+' NewPlace: '+NewPlace + 'Route can not be printed because it is a list!!!!!!!!!!'),
+  testPrint('haha Vehicle start driving: '+ Vehicle+' NewPlace: '+NewPlace + is_list(Route)),
   drive(Vehicle, Route, NewPlace) from T to _,
   testPrint('DrivingEnd').
 
@@ -113,23 +113,28 @@ location(Vehicle, PresentPlace, Heading) at T ->
 % and extracting segments of those routes.
 %
   directions(Start, NewRoute, Finish) <-
-    testPrint('chekcing directionsMethod2.1' + is_list(NewRoute)),
-  	on(Finish, Street2),
-    testPrint('chekcing directionsMethod2.2'+ '     '+Start+Finish+Street2),
-  	route(_, Route, _),
-    testPrint('chekcing directionsMethod2.3'+ '     '+is_list(Route)),
-  	append(FirstPart, [pair(Heading2 , Street2) | _ ], Route),
-  	on(Start, Street1),
-  	append(_, [pair(Heading1 , Street1) | Link], FirstPart),
-  	append([pair(Heading1, Street1) | Link], [pair(Heading2 , Street2)], NewRoute).
+    testPrint('chekcing2.1 Start, Finish:' + Start + Finish),
+    on(Finish, Street2),
+    on(Start, Street1),
+    testPrint('chekcing 2.2 Start+Finish+Street2'+ '     '+Start+Finish+Street1+Street2),
+    route(Start, NewRoute, Finish),
+    testPrint('chekcing 2.3 finshed direction checking').
+
+
+route(coordinate(Xs,Ys), [pair(eastward , northStreet)], coordinate(Xf,Yf)) <- Xs==2,Ys==9,Xf == 9, Yf == 9.
+route(coordinate(Xs,Ys), [pair(northward , westStreet), pair(eastward , northStreet)], coordinate(Xf,Yf))<- Xs==2,Ys==1,Xf == 9, Yf == 9.
+route(coordinate(Xs,Ys), [pair(northward , highStreet), pair(eastward , northStreet)], coordinate(Xf,Yf))<- Xs==6,Ys==9,Xf == 9, Yf == 9.
+route(coordinate(Xs,Ys), [pair(westward , northStreet), pair(southward , westStreet)], coordinate(Xf,Yf))<- Xs==9,Ys==9,Xf == 2, Yf == 1.
+route(coordinate(Xs,Ys), [pair(westward , mainStreet), pair(southward , highStreet)], coordinate(Xf,Yf))<- Xs==10,Ys==5,Xf == 6, Yf == 1.
+route(coordinate(Xs,Ys), [pair(northward , highStreet), pair(eastward , northStreet)], coordinate(Xf,Yf))<- Xs==6,Ys==2,Xf == 8, Yf == 9.
 
 % Here are some long distance routes and some street locations:
 %
-route(coordinate(2,9), [pair(eastward , northStreet)], coordinate(9,9)).
-route(coordinate(2,1), [pair(northward , westStreet), pair(eastward , northStreet)], coordinate(9,9)).
-route(coordinate(6,1), [pair(northward , highStreet), pair(eastward , northStreet)], coordinate(9,9)).
-route(coordinate(9,9), [pair(westward , northStreet), pair(southward , westStreet)], coordinate(2,1)).
-route(coordinate(10,5), [pair(westward , mainStreet), pair(southward , highStreet)], coordinate(6,1)).
+% route(coordinate(2,9), [pair(eastward , northStreet)], coordinate(9,9)).
+% route(coordinate(2,1), [pair(northward , westStreet), pair(eastward , northStreet)], coordinate(9,9)).
+% route(coordinate(6,1), [pair(northward , highStreet), pair(eastward , northStreet)], coordinate(9,9)).
+% route(coordinate(9,9), [pair(westward , northStreet), pair(southward , westStreet)], coordinate(2,1)).
+% route(coordinate(10,5), [pair(westward , mainStreet), pair(southward , highStreet)], coordinate(6,1)).
 
 on(coordinate(X,5), mainStreet) <- 3 <= X, X <= 10.
 on(coordinate(X,9), northStreet) <- 2 <= X, X <= 9.
@@ -148,9 +153,6 @@ drive(Vehicle, [pair(Heading , Street)], NewPlace) from T to T3 <-
 	location(Vehicle, OldPlace, Heading) at T,
   testPrint('testing driving 1'),
   testPrint(OldPlace + NewPlace + Vehicle + Heading+Street),
-  % OldPlace = coordinate(Xold, Yold),
-  % NewPlace = coordinate(Xnew, Ynew),
-  % testPrint(Xold + Yold + Xnew + Ynew),
   OldPlace != NewPlace,
   testPrint('testing driving 1 point2--------------------------------------'),
 	next(OldPlace, Heading, NextPlace),
@@ -197,7 +199,7 @@ drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Res
 %
 % terminates(step(Vehicle, Xold,Yold,Xnew,Ynew)step(Vehicle, OldPlace, NextPlace), location(Vehicle, coordinate(Xold,Yold), _)) <-
 %   testPrint("hah==========").
-updates(step(Vehicle, OldPlace, NextPlace), location(Vehicle, OldPlace, Heading),  location(Vehicle, NextPlace, Heading))<-testPrint("updaing location ").
+updates(step(Vehicle, OldPlace, NextPlace), location(Vehicle, OldPlace, Heading),  location(Vehicle, NextPlace, Heading)).
 updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading))<-testPrint("updaing heading").
 
   % Some geography:
@@ -211,7 +213,6 @@ next(coordinate(X1,Y), westward, coordinate(X2,Y)) <- X2 = X1 - 1.
   %
 
   <- step(Vehicle1, OldPlace, NextPlace),
-  testPrint("init check"),
   	collisionPossible(Vehicle1, Vehicle2).
 
   collisionPossible(Vehicle1, Vehicle2) at T <-
