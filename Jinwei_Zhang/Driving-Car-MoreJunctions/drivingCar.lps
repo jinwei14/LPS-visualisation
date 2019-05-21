@@ -242,7 +242,7 @@ studioUpdateObj(Vehicle, coordinate(Xold,Yold),coordinate(Xnew,Ynew))<-
   % MoveX = Xnew * 100,
   % MoveY = Ynew * 100,
   lpsAnimateMoveObject(Vehicle, 1, Xnew * 100, Ynew * 100) from T1 to T2.
- 
+
   % Some geography:
   %
 next(coordinate(X,Y1), northward, coordinate(X,Y2)) <- Y2 = Y1 + 1.
