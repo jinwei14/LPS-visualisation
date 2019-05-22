@@ -120,30 +120,30 @@ location(Vehicle, PresentPlace, Heading) at T ->
 
   % Finding directions is easiest when the start and finish locations are on the same street:
   %
-  directions(Start, [pair(Heading , Street)], Finish) <-
-    % testPrint(Heading),
-    % testPrint('chekcing directionsMethod1'),
-  	on(Start, Street),
-    % testPrint('chekcing directions1'),
-    % testPrint(Start+Finish+Street),
-    on(Finish, Street),
-    % testPrint('chekcing directions2'+Start+ Finish),
-  	orientation(Start, Finish, Heading).
+directions(Start, [pair(Heading , Street)], Finish) <-
+  % testPrint(Heading),
+  % testPrint('chekcing directionsMethod1'),
+	on(Start, Street),
+  % testPrint('chekcing directions1'),
+  % testPrint(Start+Finish+Street),
+  on(Finish, Street),
+  % testPrint('chekcing directions2'+Start+ Finish),
+	orientation(Start, Finish, Heading).
 
-  orientation(coordinate(X,Y1), coordinate(X,Y2), northward) <- Y1 < Y2.
-  orientation(coordinate(X,Y1), coordinate(X,Y2), southward) <- Y1 > Y2.
-  orientation(coordinate(X1,Y), coordinate(X2,Y), eastward) <- X1 < X2.
-  orientation(coordinate(X1,Y), coordinate(X2,Y), westward) <- X1 > X2.
+orientation(coordinate(X,Y1), coordinate(X,Y2), northward) <- Y1 < Y2.
+orientation(coordinate(X,Y1), coordinate(X,Y2), southward) <- Y1 > Y2.
+orientation(coordinate(X1,Y), coordinate(X2,Y), eastward) <- X1 < X2.
+orientation(coordinate(X1,Y), coordinate(X2,Y), westward) <- X1 > X2.
 
 % Otherwise, directions can be found by consulting a database of long distance routes
 % and extracting segments of those routes.
 %
-  directions(Start, NewRoute, Finish) <-
-    % testPrint('chekcing2.1 Start, Finish:' + Start + Finish),
-    on(Finish, Street2),
-    on(Start, Street1),
-    % testPrint('chekcing 2.2 Start+Finish+Street2'+ '     '+Start+Finish+Street1+Street2),
-    route(Start, NewRoute, Finish).
+directions(Start, NewRoute, Finish) <-
+  % testPrint('chekcing2.1 Start, Finish:' + Start + Finish),
+  on(Finish, Street2),
+  on(Start, Street1),
+  % testPrint('chekcing 2.2 Start+Finish+Street2'+ '     '+Start+Finish+Street1+Street2),
+  route(Start, NewRoute, Finish).
 
 
 route(coordinate(Xs,Ys), [pair(eastward , northStreet)], coordinate(Xf,Yf)) <- Xs==2,Ys==9,Xf == 9, Yf == 9.
@@ -196,7 +196,7 @@ notEqual(coordinate(Xold,Yold),coordinate(Xnew,Ynew)) <-
 
 
 drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Rest], NewPlace) from T to T3 <-
-  testPrint('testing driving 2'),
+  % testPrint('testing driving 2'),
 	location(Vehicle, OldPlace, OldHeading),
 	next(OldPlace, OldHeading, NextPlace),
 	not on(NextPlace, NewStreet),
@@ -205,7 +205,7 @@ drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Res
  	drive(Vehicle, [pair(OldHeading ,OldStreet), pair(NewHeading , NewStreet) | Rest], NewPlace) from T2 to T3.
 
 drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Rest], NewPlace) from T to T3 <-
-  testPrint('testing driving 2'),
+  % testPrint('testing driving 2'),
 	location(Vehicle, OldPlace, OldHeading),
 	next(OldPlace, OldHeading, NextPlace),
 	not on(NextPlace, NewStreet),
@@ -217,7 +217,7 @@ drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Res
 
 
 drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Rest], NewPlace) from T to T3 <-
-  testPrint('testing driving 3'),
+  % testPrint('testing driving 3'),
 	location(Vehicle, OldPlace, OldHeading),
 	next(OldPlace, OldHeading, NextPlace),
 	on(NextPlace, NewStreet),
@@ -227,7 +227,7 @@ drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Res
 	drive(Vehicle, [pair(NewHeading , NewStreet)| Rest], NewPlace) from T2 to T3.
 
 drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Rest], NewPlace) from T to T3 <-
-  testPrint('testing driving 3'),
+  % testPrint('testing driving 3'),
 	location(Vehicle, OldPlace, OldHeading),
 	next(OldPlace, OldHeading, NextPlace),
 	on(NextPlace, NewStreet),
@@ -238,7 +238,7 @@ updates(step(Vehicle, OldPlace, NextPlace), location(Vehicle, OldPlace, Heading)
 updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading)).
 
 studioUpdateObj(Vehicle, coordinate(Xold,Yold),coordinate(Xnew,Ynew))<-
-  testPrint("updating Vehicle" + Vehicle+Xold +Yold+Xnew+Ynew),
+  testPrint("updating " + Vehicle+' '+Xold +Yold+Xnew+Ynew),
   % MoveX = Xnew * 100,
   % MoveY = Ynew * 100,
   lpsAnimateMoveObject(Vehicle, 1, Xnew * 100, Ynew * 100) from T1 to T2.
@@ -273,31 +273,31 @@ next(coordinate(X1,Y), westward, coordinate(X2,Y)) <- X2 = X1 - 1.
   	collisionWarning(Vehicle1, Vehicle2, NextPlace),
   	not rightOfWay(Vehicle1, Vehicle2, NextPlace).
 
-  collisionWarning(Vehicle1, Vehicle2, NextPlace) at T <-
-  	location(Vehicle1, Place1, Heading1) at T,
-  	location(Vehicle2, Place2, Heading2) at T,
-  	next(Place1, Heading1, NextPlace),
-  	next(Place2, Heading2, NextPlace),
-  	clash(Heading1, Heading2).
+collisionWarning(Vehicle1, Vehicle2, NextPlace) at T <-
+	location(Vehicle1, Place1, Heading1) at T,
+	location(Vehicle2, Place2, Heading2) at T,
+	next(Place1, Heading1, NextPlace),
+	next(Place2, Heading2, NextPlace),
+	clash(Heading1, Heading2).
 
-  clash(Heading1, Heading2) <-
-      horizontal(Heading1), vertical(Heading2).
-  clash(Heading1, Heading2) <-
-      vertical(Heading1), horizontal(Heading2).
+clash(Heading1, Heading2) <-
+    horizontal(Heading1), vertical(Heading2).
+clash(Heading1, Heading2) <-
+    vertical(Heading1), horizontal(Heading2).
 
-  horizontal(H) <- H=eastward;H=westward.
-  vertical(H) <- H=northward;H=southward.
+horizontal(H) <- H=eastward;H=westward.
+vertical(H) <- H=northward;H=southward.
 
-  rightOfWay(Vehicle1, Vehicle2, NextPlace) <-
-  	priorityTjunction(NextPlace, Street),
-  	location(Vehicle1, Place, _),
-  	on(Place, Street).
+rightOfWay(Vehicle1, Vehicle2, NextPlace) <-
+	priorityTjunction(NextPlace, Street),
+	location(Vehicle1, Place, _),
+	on(Place, Street).
 
-  rightOfWay(Vehicle1, Vehicle2, NextPlace) <-
-  	crossRoads(NextPlace),
-  	location(Vehicle1, _, Heading1) at T,
-  	location(Vehicle2, _, Heading2) at T,
-  	rightOf(Heading1, Heading2).
+rightOfWay(Vehicle1, Vehicle2, NextPlace) <-
+	crossRoads(NextPlace),
+	location(Vehicle1, _, Heading1) at T,
+	location(Vehicle2, _, Heading2) at T,
+	rightOf(Heading1, Heading2).
 
   rightOf(westward, northward).
   rightOf(southward, westward).
