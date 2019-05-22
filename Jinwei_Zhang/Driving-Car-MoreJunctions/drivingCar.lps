@@ -1,6 +1,5 @@
 loadModule('./modules/module.js').
 true -> testPrint('The car has started').
-
 /*
 This simplified example is inspired by
 Zhao, Lihua, Ryutaro Ichise, Zheng Liu, Seiichi Mita, and Yutaka Sasaki.
@@ -148,7 +147,7 @@ directions(Start, NewRoute, Finish) <-
 
 route(coordinate(Xs,Ys), [pair(eastward , northStreet)], coordinate(Xf,Yf)) <- Xs==2,Ys==9,Xf == 9, Yf == 9.
 route(coordinate(Xs,Ys), [pair(northward , westStreet), pair(eastward , northStreet)], coordinate(Xf,Yf))<- Xs==2,Ys==1,Xf == 9, Yf == 9.
-route(coordinate(Xs,Ys), [pair(northward , highStreet), pair(eastward , northStreet)], coordinate(Xf,Yf))<- Xs==6,Ys==9,Xf == 9, Yf == 9.
+route(coordinate(Xs,Ys), [pair(northward , highStreet), pair(eastward , northStreet)], coordinate(Xf,Yf))<- Xs==6,Ys==1,Xf == 9, Yf == 9.
 route(coordinate(Xs,Ys), [pair(westward , northStreet), pair(southward , westStreet)], coordinate(Xf,Yf))<- Xs==9,Ys==9,Xf == 2, Yf == 1.
 route(coordinate(Xs,Ys), [pair(westward , mainStreet), pair(southward , highStreet)], coordinate(Xf,Yf))<- Xs==10,Ys==5,Xf == 6, Yf == 1.
 route(coordinate(Xs,Ys), [pair(northward , highStreet), pair(eastward , northStreet)], coordinate(Xf,Yf))<- Xs==6,Ys==2,Xf == 8, Yf == 9.
