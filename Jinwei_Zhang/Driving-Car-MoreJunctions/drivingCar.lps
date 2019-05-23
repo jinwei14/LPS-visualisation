@@ -176,16 +176,16 @@ drive(Vehicle, [pair(Heading , Street)], NewPlace) from T to T3 <-
   notEqual(  OldPlace , NewPlace),
 	next(OldPlace, Heading, NextPlace),
 	on(NextPlace, Street),
-  studioUpdateObj(Vehicle, OldPlace, NextPlace),
+  % studioUpdateObj(Vehicle, OldPlace, NextPlace),
 	step(Vehicle, OldPlace, NextPlace)from T1 to T2,
 	drive(Vehicle, [pair(Heading , Street)], NewPlace) from T2 to T3.
 
-% drive(Vehicle, [pair(Heading , Street)], NewPlace) from T to T3 <-
-% 	location(Vehicle, OldPlace, Heading) at T,
-%   notEqual(  OldPlace , NewPlace),
-% 	next(OldPlace, Heading, NextPlace),
-% 	on(NextPlace, Street),
-%   studioUpdateObj(Vehicle, OldPlace, NextPlace).
+drive(Vehicle, [pair(Heading , Street)], NewPlace) from T to T3 <-
+	location(Vehicle, OldPlace, Heading) at T,
+  notEqual(  OldPlace , NewPlace),
+	next(OldPlace, Heading, NextPlace),
+	on(NextPlace, Street),
+  studioUpdateObj(Vehicle, OldPlace, NextPlace).
 
 notEqual(coordinate(Xold,Yold),coordinate(Xnew,Ynew)) <-
   Xold != Xnew.
@@ -199,16 +199,16 @@ drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Res
 	location(Vehicle, OldPlace, OldHeading),
 	next(OldPlace, OldHeading, NextPlace),
 	not on(NextPlace, NewStreet),
-  studioUpdateObj(Vehicle, OldPlace, NextPlace),
+  % studioUpdateObj(Vehicle, OldPlace, NextPlace),
 	step(Vehicle, OldPlace, NextPlace) from T1 to T2,
  	drive(Vehicle, [pair(OldHeading ,OldStreet), pair(NewHeading , NewStreet) | Rest], NewPlace) from T2 to T3.
 
-% drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Rest], NewPlace) from T to T3 <-
-%   % testPrint('testing driving 2'),
-% 	location(Vehicle, OldPlace, OldHeading),
-% 	next(OldPlace, OldHeading, NextPlace),
-% 	not on(NextPlace, NewStreet),
-%   studioUpdateObj(Vehicle, OldPlace, NextPlace).
+drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Rest], NewPlace) from T to T3 <-
+  % testPrint('testing driving 2'),
+	location(Vehicle, OldPlace, OldHeading),
+	next(OldPlace, OldHeading, NextPlace),
+	not on(NextPlace, NewStreet),
+  studioUpdateObj(Vehicle, OldPlace, NextPlace).
 
 
 % Here step and turn are executed concurrently.
@@ -220,17 +220,17 @@ drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Res
 	location(Vehicle, OldPlace, OldHeading),
 	next(OldPlace, OldHeading, NextPlace),
 	on(NextPlace, NewStreet),
-  studioUpdateObj(Vehicle, OldPlace, NextPlace) ,
+  % studioUpdateObj(Vehicle, OldPlace, NextPlace) ,
 	step(Vehicle, OldPlace, NextPlace) from T1 to T2,
 	turn(Vehicle, NewHeading) from T1 to T2,
 	drive(Vehicle, [pair(NewHeading , NewStreet)| Rest], NewPlace) from T2 to T3.
 
-% drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Rest], NewPlace) from T to T3 <-
-%   % testPrint('testing driving 3'),
-% 	location(Vehicle, OldPlace, OldHeading),
-% 	next(OldPlace, OldHeading, NextPlace),
-% 	on(NextPlace, NewStreet),
-%   studioUpdateObj(Vehicle, OldPlace, NextPlace).
+drive(Vehicle, [pair(OldHeading , OldStreet), pair(NewHeading , NewStreet) | Rest], NewPlace) from T to T3 <-
+  % testPrint('testing driving 3'),
+	location(Vehicle, OldPlace, OldHeading),
+	next(OldPlace, OldHeading, NextPlace),
+	on(NextPlace, NewStreet),
+  studioUpdateObj(Vehicle, OldPlace, NextPlace).
 
 
 updates(step(Vehicle, OldPlace, NextPlace), location(Vehicle, OldPlace, Heading),  location(Vehicle, NextPlace, Heading)). %<- studioUpdateObj(Vehicle, OldPlace, NextPlace).

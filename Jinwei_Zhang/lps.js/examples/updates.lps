@@ -33,6 +33,3 @@ updates(carTurnTo(Obj,NEW), car_location(Obj, _),  car_location(Obj,NEW))<-testP
 % 1. two updates can not be put together --------no it can be
 % 2. both of the example above will work
 % 3. never to put a print after the update function it will be weird anyway
-
-
-
