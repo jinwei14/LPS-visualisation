@@ -39,7 +39,8 @@ drive(Vehicle, coordinate(Xold,Yold),coordinate(Xnew,Ynew))from T1 to T3<-
   testPrint('____________________________ss--updaing'+Vehicle+Xnew+Ynew),
 
   OldPlace = coordinate(Xold,Yold),
-  NewPlace = coordinate(Xnew,Ynew),
+  NextPlace = coordinate(Xnew,Ynew),
+  testPrint('____________________________ss--updaing'+Vehicle+OldPlace+NextPlace),
   % step(Vehicle, OldPlace, NextPlace) from T1 to T2,
   MoveX = Xnew + 1,
   MoveY = Ynew + 1,
@@ -48,15 +49,17 @@ drive(Vehicle, coordinate(Xold,Yold),coordinate(Xnew,Ynew))from T1 to T3<-
   step(Vehicle, OldPlace, NextPlace)from T1 to T2,
   drive(Vehicle, coordinate(Xnew,Ynew),coordinate(MoveX,MoveY)) from T2 to T3 .
 
-drive(Vehicle, coordinate(Xold,Yold),coordinate(Xnew,Ynew))from T1 to T2<-
-  studioUpdateObj(Vehicle, coordinate(Xold,Yold),coordinate(Xnew,Ynew))from T1 to T2.
+% drive(Vehicle, coordinate(Xold,Yold),coordinate(Xnew,Ynew))from T1 to T2<-
+%   studioUpdateObj(Vehicle, coordinate(Xold,Yold),coordinate(Xnew,Ynew))from T1 to T2.
 
 
 studioUpdateObj(Vehicle, coordinate(Xold,Yold),coordinate(Xnew,Ynew))from T1 to T2<-
   testPrint("Animation -- to "+Xold+Yold+Xnew+Ynew),
   lpsAnimateMoveObject(Vehicle, 1, Xnew, Ynew).
 
-updates(step(Vehicle, OldPlace, NextPlace), location(Vehicle, OldPlace, Heading),  location(Vehicle, NextPlace, Heading))<-testPrint("updating").
+updates(step(Vehicle, OldPlace, NextPlace), location(Vehicle, OldPlace, Heading),  location(Vehicle, NextPlace, Heading))<-
+  testPrint(OldPlace+NextPlace),
+  studioUpdateObj(Vehicle, OldPlace,NextPlace)from T1 to T2.
 
 
 % updates(step(Vehicle, OldPlace, NextPlace), location(Vehicle, OldPlace, Heading),  location(Vehicle, NextPlace, Heading)). %<- studioUpdateObj(Vehicle, OldPlace, NextPlace).

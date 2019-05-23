@@ -28,10 +28,19 @@ lpsDefineObject(myCar, image, [
 ]).
 
 
-true -> studioUpdateObj(myCar, coordinate(0,0), coordinate(500,500)).
+true -> studioUpdateObj(myCar, coordinate(0,0), coordinate(200,200)).
+
+studioUpdateObj(Vehicle, coordinate(Xold,Yold),coordinate(Xnew,Ynew))<-
+  Xnew<=300,Ynew<=300,
+  testPrint('____________________________--animation updaing'+Vehicle+Xnew+Ynew),
+  MoveX = Xnew + 100,
+  MoveY = Ynew + 100,
+  lpsAnimateMoveObject(Vehicle, 2, Xnew, Ynew) from T1 to T2 .
 
 studioUpdateObj(Vehicle, coordinate(Xold,Yold),coordinate(Xnew,Ynew))<-
   testPrint('____________________________--updaing'+Vehicle+Xnew+Ynew),
+  Xnew<=300,Ynew<=300,
   MoveX = Xnew + 100,
   MoveY = Ynew + 100,
-  lpsAnimateMoveObject(Vehicle, 2, Xnew, MoveY) from T1 to T2 .
+  % lpsAnimateMoveObject(Vehicle, 2, Xnew, Ynew) from T1 to T2 .
+  studioUpdateObj(Vehicle, coordinate(Xnew,Ynew),coordinate(Xnew+10,Ynew+10)).
