@@ -279,7 +279,7 @@ function Engine(programArg) {
         ];
         newFiredGoals = processRules(this, _program, state, _currentTime, _profiler);
         _goals = _goals.concat(newFiredGoals);
-        return evaluateGoalTrees(_currentTime, _goals, _processedNodes, _profiler)
+        return evaluateGoalTrees(_currentTime, _goals, _processedNodes, _profiler);
       })
       .then((newGoals) => {
         // preparation for next cycle
