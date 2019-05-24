@@ -26,7 +26,7 @@ console.log('index -> LPS(loadFile) -> ProgramFactory(fromFile) -> Parser(source
 // const LPS = require('lps');
 // const commandLineArgs = require('command-line-args');
 // const commandLineUsage = require('command-line-usage');
-const Logger = require('../src/utility/Logger');
+// const Logger = require('../src/utility/Logger');
 // const buildOptionList = require('../src/utility/buildOptionList');
 // const optionDefinitions = require('../src/options/generate-spec');
 // const printVersion = require('../src/utility/printVersion');
@@ -35,84 +35,85 @@ const fs = require('fs');
 const INDENTATION = '  ';
 
 function generateSpec(programFile, specFile) {
-  let buffer = '';
+  // let buffer = '';
 
-  const writeOutput = (output) => {
-    if (specFile !== null) {
-      buffer += output;
-      return;
-    }
-    process.stdout.write(output);
-  };
+  // const writeOutput = (output) => {
+  //   if (specFile !== null) {
+  //     buffer += output;
+  //     return;
+  //   }
+  //   process.stdout.write(output);
+  // };
 
   LPS.loadFile(programFile)
     .then((engine) => {
       let profiler = engine.getProfiler();
-      writeOutput('% --- Specification generated for ' + programFile + '\n');
+      console.log('% --- Specification generated for ' + programFile + '\n');
 
       engine.on('postCycle', () => {
         let currentTime = engine.getCurrentTime();
         let startTime = currentTime - 1;
         let endTime = currentTime;
 
-        writeOutput('% --- Start of cycle ' + endTime + ' ---\n');
-        writeOutput('expect_num_of(' + ['fluent', currentTime, profiler.get('numState')].join(', ') + ').\n');
+        console.log('% --- Start of cycle ' + endTime + ' ---\n');
+        console.log('expect_num_of(' + ['fluent', currentTime, profiler.get('numState')].join(', ') + ').\n');
         engine.getActiveFluents().forEach((termArg) => {
           let lpsTerm = LPS.literal(termArg);
           let args = lpsTerm.getArguments();
           let term = new LPS.Functor(lpsTerm.getName(), args);
-          writeOutput(INDENTATION + 'expect(' + ['fluent', currentTime, term.toString()].join(', ') + ').\n');
+          console.log(INDENTATION + 'expect(' + ['fluent', currentTime, term.toString()].join(', ') + ').\n');
         });
 
         if (startTime === 0) {
-          writeOutput('\n');
+          console.log('\n');
           return;
         }
 
-        writeOutput('expect_num_of(' + ['action', startTime, endTime, profiler.get('lastCycleNumActions')].join(', ') + ').\n');
+        console.log('expect_num_of(' + ['action', startTime, endTime, profiler.get('lastCycleNumActions')].join(', ') + ').\n');
         engine.getLastCycleActions().forEach((termArg) => {
           let lpsTerm = LPS.literal(termArg);
           let args = lpsTerm.getArguments();
           let term = new LPS.Functor(lpsTerm.getName(), args);
-          writeOutput(INDENTATION + 'expect(' + ['action', startTime, endTime, term.toString()].join(', ') + ').\n');
+          console.log(INDENTATION + 'expect(' + ['action', startTime, endTime, term.toString()].join(', ') + ').\n');
         });
 
-        writeOutput('expect_num_of(' + ['observation', startTime, endTime, profiler.get('lastCycleNumObservations')].join(', ') + ').\n');
+        console.log('expect_num_of(' + ['observation', startTime, endTime, profiler.get('lastCycleNumObservations')].join(', ') + ').\n');
         engine.getLastCycleObservations().forEach((termArg) => {
           let lpsTerm = LPS.literal(termArg);
           let args = lpsTerm.getArguments();
           let term = new LPS.Functor(lpsTerm.getName(), args);
-          writeOutput(INDENTATION + 'expect(' + ['observation', startTime, endTime, term.toString()].join(', ') + ').\n');
+          console.log(INDENTATION + 'expect(' + ['observation', startTime, endTime, term.toString()].join(', ') + ').\n');
         });
 
-        writeOutput('expect_num_of(' + ['firedRules', endTime, profiler.get('lastCycleNumFiredRules')].join(', ') + ').\n');
-        writeOutput('expect_num_of(' + ['resolvedGoals', endTime, profiler.get('lastCycleNumResolvedGoals')].join(', ') + ').\n');
-        writeOutput('expect_num_of(' + ['unresolvedGoals', endTime, profiler.get('lastCycleNumUnresolvedGoals')].join(', ') + ').\n');
-        writeOutput('expect_num_of(' + ['failedGoals', endTime, profiler.get('lastCycleNumFailedGoals')].join(', ') + ').\n');
+        console.log('expect_num_of(' + ['firedRules', endTime, profiler.get('lastCycleNumFiredRules')].join(', ') + ').\n');
+        console.log('expect_num_of(' + ['resolvedGoals', endTime, profiler.get('lastCycleNumResolvedGoals')].join(', ') + ').\n');
+        console.log('expect_num_of(' + ['unresolvedGoals', endTime, profiler.get('lastCycleNumUnresolvedGoals')].join(', ') + ').\n');
+        console.log('expect_num_of(' + ['failedGoals', endTime, profiler.get('lastCycleNumFailedGoals')].join(', ') + ').\n');
 
-        writeOutput('\n');
+        console.log('\n');
       });
 
       engine.on('error', (err) => {
-        Logger.error(err);
+        // Logger.error(err);
+        console.log('this is the error message: ' + err);
       });
 
       if (specFile !== null) {
         // write to file when program is done
         engine.on('done', () => {
-          fs.writeFile(specFile, buffer, () => {
-            Logger.log('Spec file written to ' + specFile);
-          });
+          // fs.writeFile(specFile, buffer, () => {
+          //   Logger.log('Spec file written to ' + specFile);
+          // });
         });
       }
 
-      Logger.log('Executing ' + programFile);
-      Logger.log('-----');
+      // Logger.log('Executing ' + programFile);
+      // Logger.log('-----');
       engine.run();
     })
     .catch((err) => {
       // Logger.error(err);
-      console('this is the error message: '+err)
+      console.log('this is the error message: ' + err);
     });
 }
 
