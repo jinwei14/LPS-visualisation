@@ -38,14 +38,14 @@ console.log('index -> LPS(loadFile) -> ProgramFactory(fromFile) -> Parser(source
 
 const INDENTATION = '  ';
 // this the object that need to be process at every time cycle
-var resultDict = {
-  FULLPHRASE: null,
-  OBJECT: null,
-  FLUENT: null,
-  POSITION: null,
-  HEADING: null,
-  TIMESTAMP: null
-};
+// var resultDict = {
+//   FULLPHRASE: null,
+//   OBJECT: null,
+//   FLUENT: null,
+//   POSITION: null,
+//   HEADING: null,
+//   TIMESTAMP: null
+// };
 // location(yourCar, coordinate(9, 9), eastward)
 function ResultDict(fullPhrase, timeStamp) {
   this.fullPhrase = fullPhrase;
@@ -60,9 +60,14 @@ function ResultDict(fullPhrase, timeStamp) {
     return fullPhrase.slice(0, endPos);
   };
   this.position = function () {
-    var x = fullPhrase.match(/\d+/)[0];
-    var y = fullPhrase.match(/\d+/)[1];
-    return [x, y];
+    var r = /\d+/g;
+    var s = 'location(yourCar, coordinate(59, 90), eastward)';
+    var m;
+    var retList = [];
+    while ((m = r.exec(s)) != null) {
+      retList.push(m[0]);
+    }
+    return retList;
   };
   this.heading = function () {
     var startPos = fullPhrase.lastIndexOf(',');
@@ -72,7 +77,7 @@ function ResultDict(fullPhrase, timeStamp) {
 }
 
 // this is a list of object that can access the
-var TimeLine = [];
+
 function generateSpec(programFile, specFile) {
   // let buffer = '';
   //
@@ -83,7 +88,7 @@ function generateSpec(programFile, specFile) {
   //   }
   //   process.stdout.write(output);
   // };
-
+  var TimeLine = [];
   LPS.loadFile(programFile)
     .then((engine) => {
       let profiler = engine.getProfiler();
@@ -103,7 +108,6 @@ function generateSpec(programFile, specFile) {
           let term = new LPS.Functor(lpsTerm.getName(), args);
           // location(yourCar, coordinate(9, 9), eastward)
           console.log(INDENTATION + 'expect(' + ['fluent', currentTime, term.toString()].join(', ') + ').\n');
-
         });
 
         if (startTime === 0) {
