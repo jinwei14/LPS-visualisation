@@ -22,7 +22,6 @@ console.log('index -> LPS(loadFile) -> ProgramFactory(fromFile) -> Parser(source
 // module.exports = LPS;
 
 
-//s
 // const LPS = require('lps');
 // const commandLineArgs = require('command-line-args');
 // const commandLineUsage = require('command-line-usage');
@@ -30,13 +29,53 @@ console.log('index -> LPS(loadFile) -> ProgramFactory(fromFile) -> Parser(source
 // const buildOptionList = require('../src/utility/buildOptionList');
 // const optionDefinitions = require('../src/options/generate-spec');
 // const printVersion = require('../src/utility/printVersion');
-const fs = require('fs');
+/* 1.we leave the file system for now for start up
+   2. Read all the information into a dictionary
+   3. start the animation process dump the buggy lps studio.
+*/
+
+// const fs = require('fs');
 
 const INDENTATION = '  ';
+// this the object that need to be process at every time cycle
+var resultDict = {
+  FULLPHRASE: null,
+  OBJECT: null,
+  FLUENT: null,
+  POSITION: null,
+  HEADING: null,
+  TIMESTAMP: null
+};
+// location(yourCar, coordinate(9, 9), eastward)
+function ResultDict(fullPhrase, timeStamp) {
+  this.fullPhrase = fullPhrase;
+  this.object = function () {
+    var startPos = fullPhrase.indexOf('(');
+    var endPos = fullPhrase.indexOf(',');
+    return fullPhrase.slice(startPos + 1, endPos);
+  };
+  // should be location
+  this.fluent = function () {
+    var endPos = fullPhrase.indexOf('(');
+    return fullPhrase.slice(0, endPos);
+  };
+  this.position = function () {
+    var x = fullPhrase.match(/\d+/)[0];
+    var y = fullPhrase.match(/\d+/)[1];
+    return [x, y];
+  };
+  this.heading = function () {
+    var startPos = fullPhrase.lastIndexOf(',');
+    return fullPhrase.slice(startPos + 1, -1);
+  };
+  this.timeStamp = timeStamp;
+}
 
+// this is a list of object that can access the
+var TimeLine = [];
 function generateSpec(programFile, specFile) {
   // let buffer = '';
-
+  //
   // const writeOutput = (output) => {
   //   if (specFile !== null) {
   //     buffer += output;
@@ -56,12 +95,15 @@ function generateSpec(programFile, specFile) {
         let endTime = currentTime;
 
         console.log('% --- Start of cycle ' + endTime + ' ---\n');
+        var cycle = [];
         console.log('expect_num_of(' + ['fluent', currentTime, profiler.get('numState')].join(', ') + ').\n');
         engine.getActiveFluents().forEach((termArg) => {
           let lpsTerm = LPS.literal(termArg);
           let args = lpsTerm.getArguments();
           let term = new LPS.Functor(lpsTerm.getName(), args);
+          // location(yourCar, coordinate(9, 9), eastward)
           console.log(INDENTATION + 'expect(' + ['fluent', currentTime, term.toString()].join(', ') + ').\n');
+
         });
 
         if (startTime === 0) {
@@ -94,8 +136,7 @@ function generateSpec(programFile, specFile) {
       });
 
       engine.on('error', (err) => {
-        // Logger.error(err);
-        console.log('this is the error message: ' + err);
+        console.log(err);
       });
 
       if (specFile !== null) {
@@ -113,7 +154,7 @@ function generateSpec(programFile, specFile) {
     })
     .catch((err) => {
       // Logger.error(err);
-      console.log('this is the error message: ' + err);
+      console('this is the error message: ' + err);
     });
 }
 
@@ -146,7 +187,6 @@ function generateSpec(programFile, specFile) {
 //   // console.log(usage);
 //   // process.exit(-1);
 // }
-
 // const options = commandLineArgs(optionDefinitions, { stopAtFirstUnknown: true });
 //
 // Logger.verbose = options._all.verbose;
