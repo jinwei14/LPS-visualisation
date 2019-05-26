@@ -35,7 +35,7 @@ const forEachToString = (arr) => {
 function Engine(programArg) {
   let _program = programArg;
   let _maxTime = 20;
-  let _cycleInterval = 1000; // milliseconds
+  let _cycleInterval = 500; // milliseconds
   let _isContinuousExecution = false;
   let _isInCycle = false;
   let _isPaused = false;

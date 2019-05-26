@@ -2,7 +2,7 @@
   This file is part of the lps.js project, released open source under
   the BSD 3-Clause license. For more info, please see https://github.com/mauris/lps.js
  */
-
+const PIXI = require('./src/pixi.min.js');
 const LPS = require('./src/LPS');
 const meta = require('./package.json');
 LPS.meta = meta;
@@ -14,81 +14,82 @@ if (process.browser) {
 console.log('Order of execution: ');
 console.log('index -> LPS(loadFile) -> ProgramFactory(fromFile) -> Parser(source, pathname) -> _lexer.get()');
 
-// LPS.loadFile('../Driving-Car-MoreJunctions/drivingCar.lps')
-//   .then((engine) => {
-//     engine.run();
-//   });
+let type = "WebGL";
+if(!PIXI.utils.isWebGLSupported()){
+  type = "canvas";
+}
+
+PIXI.utils.sayHello(type);
+
+// var canvas = document.creaElement('canvas');
+// document.body.appendChild(canvas);
 //
-// module.exports = LPS;
+// canvas.width = window.screen.width;
+// canvas.height = window.screen.height;
+//
+// var context  = canvas.getContext('2d');
+//
+// var x = 0;
+// var y = 0;
+// window.requestAnimationFrame(function loop() {
+//   x += 1;
+//   y += 0.5;
+//
+//   context.clearRect(0, 0, canvas.width, canvas.height);
+//
+//   context.fillStyle = 'red';
+//   context.fillRect(x, 0, 100, 100);
+//
+//   context.fillStyle = 'green';
+//   context.fillRect(200, y, 100, 100);
+//
+//   window.requestAnimationFrame(loop);
+// });
 
-
-// const LPS = require('lps');
-// const commandLineArgs = require('command-line-args');
-// const commandLineUsage = require('command-line-usage');
-// const Logger = require('../src/utility/Logger');
-// const buildOptionList = require('../src/utility/buildOptionList');
-// const optionDefinitions = require('../src/options/generate-spec');
-// const printVersion = require('../src/utility/printVersion');
 /* 1.we leave the file system for now for start up
    2. Read all the information into a dictionary
    3. start the animation process dump the buggy lps studio.
 */
 
-// const fs = require('fs');
 
 const INDENTATION = '  ';
 // this the object that need to be process at every time cycle
-// var resultDict = {
-//   FULLPHRASE: null,
-//   OBJECT: null,
-//   FLUENT: null,
-//   POSITION: null,
-//   HEADING: null,
-//   TIMESTAMP: null
-// };
 // location(yourCar, coordinate(9, 9), eastward)
 function ResultDict(fullPhrase, timeStamp) {
   this.fullPhrase = fullPhrase;
-  this.object = function () {
+  this.getObject = function () {
     var startPos = fullPhrase.indexOf('(');
     var endPos = fullPhrase.indexOf(',');
     return fullPhrase.slice(startPos + 1, endPos);
   };
   // should be location
-  this.fluent = function () {
+  this.getFluent = function () {
     var endPos = fullPhrase.indexOf('(');
     return fullPhrase.slice(0, endPos);
   };
-  this.position = function () {
+  this.getPosition = function () {
     var r = /\d+/g;
-    var s = 'location(yourCar, coordinate(59, 90), eastward)';
+    var s = fullPhrase;
     var m;
     var retList = [];
     while ((m = r.exec(s)) != null) {
-      retList.push(m[0]);
+      retList.push(parseInt(m[0], 10));
     }
     return retList;
   };
-  this.heading = function () {
+  this.getHeading = function () {
     var startPos = fullPhrase.lastIndexOf(',');
-    return fullPhrase.slice(startPos + 1, -1);
+    return fullPhrase.slice(startPos + 1, -1).trim();
   };
   this.timeStamp = timeStamp;
 }
 
 // this is a list of object that can access the
+// eslint-disable-next-line vars-on-top
+var TimeLine = [];
 
 function generateSpec(programFile, specFile) {
-  // let buffer = '';
-  //
-  // const writeOutput = (output) => {
-  //   if (specFile !== null) {
-  //     buffer += output;
-  //     return;
-  //   }
-  //   process.stdout.write(output);
-  // };
-  var TimeLine = [];
+
   LPS.loadFile(programFile)
     .then((engine) => {
       let profiler = engine.getProfiler();
@@ -108,8 +109,10 @@ function generateSpec(programFile, specFile) {
           let term = new LPS.Functor(lpsTerm.getName(), args);
           // location(yourCar, coordinate(9, 9), eastward)
           console.log(INDENTATION + 'expect(' + ['fluent', currentTime, term.toString()].join(', ') + ').\n');
+          let obj1 = new ResultDict(term.toString(), currentTime);
+          cycle.push(obj1);
         });
-
+        TimeLine.push(cycle);
         if (startTime === 0) {
           console.log('\n');
           return;
@@ -137,6 +140,7 @@ function generateSpec(programFile, specFile) {
         console.log('expect_num_of(' + ['failedGoals', endTime, profiler.get('lastCycleNumFailedGoals')].join(', ') + ').\n');
 
         console.log('\n');
+        // console.log(TimeLine);
       });
 
       engine.on('error', (err) => {
@@ -155,60 +159,20 @@ function generateSpec(programFile, specFile) {
       // Logger.log('Executing ' + programFile);
       // Logger.log('-----');
       engine.run();
-    })
-    .catch((err) => {
+    }).catch((err) => {
       // Logger.error(err);
       console('this is the error message: ' + err);
     });
 }
 
-// function showHelp() {
-//   const sections = [
-//     {
-//       header: 'lps-generate-spec',
-//       content: 'LPS Program Specification Generator'
-//     },
-//     {
-//       header: 'Synopsis',
-//       content: [
-//         '$ lps-generate-spec [options ...] {underline program-file}',
-//         '$ lps-test {bold --help}'
-//       ]
-//     },
-//     {
-//       header: 'Options',
-//       optionList: buildOptionList(optionDefinitions, 'main')
-//     },
-//     {
-//       header: 'Updating and more info',
-//       content: [
-//         'Use \'npm i -g lps-cli\' to update LPS CLI tools package.',
-//         'For bug reports and other contributions, please visit https://github.com/mauris/lps-cli'
-//       ]
-//     }
-//   ];
-//   // const usage = commandLineUsage(sections);
-//   // console.log(usage);
-//   // process.exit(-1);
-// }
-// const options = commandLineArgs(optionDefinitions, { stopAtFirstUnknown: true });
-//
-// Logger.verbose = options._all.verbose;
-// Logger.quiet = options._all.quiet;
-//
-// if (options._all.help) {
-//   showHelp();
-// } else if (options._all.version) {
-//   // if version option is set, show version.
-//   printVersion(options._all.verbose);
-// } else if (options._all.program) {
-//   console.log(options._all.program);
-//   console.log(options._all.out);
-//   console.log('------------------');
-//   generateSpec(options._all.program, options._all.out);
-// } else {
-//   showHelp();
-// }
-
-
 generateSpec('../Driving-Car-MoreJunctions/drivingCar.lps', null);
+// var obj1 = new ResultDict('location(yourCar, coordinate(9, 9), eastward)', 6);
+// console.log(obj1.getFluent());
+// console.log(obj1.getHeading());
+// console.log(obj1.getObject());
+// console.log(obj1.getPosition());
+// console.log(obj1.timeStamp);
+//
+// console.log(parseInt(obj1.getPosition()[0], 10));
+
+// module.exports.ResultDict = ResultDict;

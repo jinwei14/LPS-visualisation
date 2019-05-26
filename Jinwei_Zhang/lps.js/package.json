@@ -15,7 +15,8 @@
   ],
   "scripts": {
     "test": "npm run test:source && npm run test:programs",
-    "test:browser": "echo TODO",
+    "test:browser": "budo index.js --live",
+    "start": "budo index.js",
     "test:source": "nyc --all --cache mocha --check-leaks --require ./test/init.js \"test/lps.js/**/*.test.js\"",
     "test:source:fast": "mocha --require ./test/init.js \"test/lps.js/**/*.test.js\"",
     "test:programs": "mocha --require ./test/init.js \"test/programs/**/*.test.js\"",
@@ -35,6 +36,7 @@
   },
   "license": "BSD-3-Clause",
   "devDependencies": {
+    "budo": "^11.6.2",
     "chai": "^4.1.2",
     "eslint": "^5.3.0",
     "eslint-config-airbnb-base": "^13.1.0",
@@ -46,6 +48,7 @@
     "nyc": "^13.0.1",
     "raw-loader": "^0.5.1",
     "sinon": "^6.1.5",
+    "watchify": "^3.11.1",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0"
   },
