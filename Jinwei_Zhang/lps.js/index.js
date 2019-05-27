@@ -2,7 +2,6 @@
   This file is part of the lps.js project, released open source under
   the BSD 3-Clause license. For more info, please see https://github.com/mauris/lps.js
  */
-const PIXI = require('./src/pixi.min.js');
 const LPS = require('./src/LPS');
 const meta = require('./package.json');
 LPS.meta = meta;
@@ -14,12 +13,33 @@ if (process.browser) {
 console.log('Order of execution: ');
 console.log('index -> LPS(loadFile) -> ProgramFactory(fromFile) -> Parser(source, pathname) -> _lexer.get()');
 
-let type = "WebGL";
-if(!PIXI.utils.isWebGLSupported()){
-  type = "canvas";
-}
+// Require pixi module
+var pixi = require('pixi');
 
-PIXI.utils.sayHello(type);
+// You can use either WebGLRenderer or CanvasRenderer
+var renderer = pixi.WebGLRenderer(800, 600);
+document.body.appendChild(renderer.view);
+
+var stage = new pixi.Stage();
+var bunnyTexture = pixi.Texture.fromImage('./imgs/bunny.jpg');
+var bunny = new pixi.Sprite(bunnyTexture);
+
+bunny.position.x = 400;
+bunny.position.y = 300;
+bunny.scale.x = 2;
+bunny.scale.y = 2;
+
+stage.addChild(bunny);
+
+requestAnimationFrame(animate);
+
+function animate() {
+  bunny.rotation += 0.01;
+
+  renderer.render(stage);
+
+  requestAnimationFrame(animate);
+}
 
 // var canvas = document.creaElement('canvas');
 // document.body.appendChild(canvas);

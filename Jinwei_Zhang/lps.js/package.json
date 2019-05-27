@@ -63,5 +63,8 @@
     "statements": 90,
     "functions": 90,
     "branches": 90
+  },
+  "dependencies": {
+    "pixi": "^0.3.1"
   }
 }
