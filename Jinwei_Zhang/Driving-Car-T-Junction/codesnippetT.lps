@@ -8,7 +8,7 @@ actions ([arrival,carMoveTo(Obj,Loc_X, Loc_Y),notMovingAction(Obj,X, Y)]).
 % describes the facts that are true at time 1
 initially([moving(car1),moving(car2),car_location(car1, 150, 340),car_location(car2, 520, 650)]).
 
-lpsDefineObject(car1, image, [ position(150, 340),size(64, 64),isHidden(0),image(car1),zIndex(100)]).
+lpsDefineObject(car1, image, [position(150, 340),size(64, 64),isHidden(0),image(car1),zIndex(100)]).
 lpsDefineObject(car2, image, [position(520, 650),size(64, 64),isHidden(0),image(car2),zIndex(100)]).
 
 % describe events taking place in the transition from one time point to the next
