@@ -1,0 +1,18 @@
+maxTime(15).
+% set of facts
+fluents moving, stopped.
+% cause state transition via init fact terminate fact
+events redLight,greenLight.
+% describes the facts that are true at time 1.
+initially moving.
+
+% describe events taking place in the transition from one time point to the next.
+observe redLight from 1 to 2.
+observe greenLight from 3 to 4.
+observe redLight from 10 to 11.
+
+% describe the laws of cause and effect
+redLight initiates 	stopped if moving.
+redLight terminates moving if moving.
+greenLight initiates moving if stopped.
+greenLight terminates stopped if stopped.

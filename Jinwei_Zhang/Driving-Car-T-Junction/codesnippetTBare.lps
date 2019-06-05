@@ -1,5 +1,3 @@
-% loadModule('./modules/module.js').
-% true -> testPrint('The car has started').
 % set of facts.
 fluents([moving(Obj), stop(Obj), waitting(Obj),car_location(Obj,_,_)]).
 % cause state transition via init fact terminate fact
@@ -15,7 +13,7 @@ observe(greenLight,9,10).
 goal_location(car1, 800, 340).
 goal_location(car2, 150, 340).
 
-%car moving sepraate the first car and the second car
+%car moving seprate the first car and the second car
 goal_location(car1, A, B), car_location(car1,X,Y,T), X@<A, moving(car1,T) ->
    NextX = X + 64,
    carMoveTo(car1, NextX,Y) from T to _.
@@ -30,7 +28,9 @@ goal_location(car2, A, B),
   NextX = X - 64,
   carMoveTo(car2, NextX,Y) from T to _.
 
+% carMoveTo action will terminates the old the car_location and initiates a new car_location to X Y
 updates(carMoveTo(Obj,X, Y), car_location(Obj,_, _), car_location(Obj,X, Y)).
+
 initiates(redLight, waitting(Obj)).
 terminates(redLight, moving(Obj)) .
 initiates(greenLight, moving(Obj)).

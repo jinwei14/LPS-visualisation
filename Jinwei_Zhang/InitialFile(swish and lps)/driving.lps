@@ -1,53 +1,24 @@
-maxTime(15).
 % set of facts.
-fluents([
-  move, stop, waitting
-]).
-
-
+fluents([moving, stopped, waitting]).
 % cause state transition via init fact terminate fact
 events ([redLight,greenLight]).
-
-% Reactive rules
-actions ([arrival]).
+% action to change fluents
+action (arrival).
 
 % describes the facts that are true at time 1
-initially( move).
-
+initially([moving]).
 
 % describe events taking place in the transition from one time point to the next
-observe( redLight) from 1 to 2.
-observe( greenLight) from 3 to 4.
-observe (redLight) from 7 to 8.
-observe (greenLight) from 9 to 10.
+observe(redLight,1,2).
+observe(greenLight,3,4).
+observe(redLight,7,8).
+observe(greenLight,9,10).
 
-%stop at time 13
-if (move) at 12 ->
-   arrival from 12 to 13.
 
-% % describe the laws of cause and effect
-% (redLight) initiates 	waitting if move.
-% (redLight)  terminates move if move.
-%
-% (greenLight) initiates move if waitting.
-% (greenLight) terminates waitting if waitting.
-%
-% (arrival) initiates stop if move.
-% (arrival) terminates move if move.
-initiates(redLight, waitting) <-
-  move.
+initiates(redLight, waitting).
+terminates(redLight, moving).
 
-terminates(redLight, move). <-
-  move.
-
-initiates(greenLight, move) <-
-  waitting.
-
-terminates(greenLight, waitting). <-
-  waitting.
-
-initiates(arrival, stop) <-
-  move.
-
-terminates(arrival, move). <-
-  move.
+initiates(greenLight, moving).
+terminates(greenLight, waitting).
+initiates(arrival, stopped).
+terminates(arrival, moving).
