@@ -1,0 +1,37 @@
+% loadModule('./modules/module.js').
+% true -> testPrint('The car has started').
+% set of facts.
+fluents([moving(Obj), stop(Obj), waitting(Obj),car_location(Obj,_,_)]).
+% cause state transition via init fact terminate fact
+events ([redLight, greenLight]).
+actions ([carMoveTo(Obj,Loc_X, Loc_Y)]).
+% describes the facts that are true at time 1
+initially([moving(car1),moving(car2),car_location(car1, 150, 340),car_location(car2, 520, 650)]).
+
+% describe events taking place in the transition from one time point to the next
+observe(redLight,4,5).
+observe(greenLight,9,10).
+
+goal_location(car1, 800, 340).
+goal_location(car2, 150, 340).
+
+%car moving sepraate the first car and the second car
+goal_location(car1, A, B), car_location(car1,X,Y,T), X@<A, moving(car1,T) ->
+   NextX = X + 64,
+   carMoveTo(car1, NextX,Y) from T to _.
+
+goal_location(car2, A, B),
+  car_location(car2,X,Y,T), car_location(car1,P,Q,T),abs(X - P)+abs(Y - Q) > 200, Y>=B, moving(car2,T) ->
+   NextY = Y - 64,
+   carMoveTo(car2, X,NextY) from T to _.
+
+goal_location(car2, A, B),
+ car_location(car2,X,Y,T), car_location(car1,P,Q,T),abs(X - P)+abs(Y - Q) > 200, X@>A, Y<=B, moving(car2,T) ->
+  NextX = X - 64,
+  carMoveTo(car2, NextX,Y) from T to _.
+
+updates(carMoveTo(Obj,X, Y), car_location(Obj,_, _), car_location(Obj,X, Y)).
+initiates(redLight, waitting(Obj)).
+terminates(redLight, moving(Obj)) .
+initiates(greenLight, moving(Obj)).
+terminates(greenLight, waitting(Obj)) .
