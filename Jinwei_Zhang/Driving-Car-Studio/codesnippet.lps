@@ -23,8 +23,7 @@ observe(greenLight,3,4).
 observe(redLight,7,8).
 observe(greenLight,9,10).
 %stop at time 13
-moving(12)->
-   arrival(12,13).
+moving(12) -> arrival(12,13).
 
 moving(T1),loc(car,A,B) ->
   carMoveTo(car, A + 100, B) from T1 to T2,
