@@ -73,7 +73,7 @@ waitting(T2) ->
 %   lpsDefineObject(Id, Type).
 
 
-% updates(fireTruckMove(X, Y), fireTruckPosition(_, _), fireTruckPosition(X, Y)).
+updates(fireTruckMove(X, Y), fireTruckPosition(_, _), fireTruckPosition(X, Y)).
 
 initiates(redLight, waitting) <-
   move.
