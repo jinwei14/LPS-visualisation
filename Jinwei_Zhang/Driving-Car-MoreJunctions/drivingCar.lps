@@ -126,7 +126,6 @@ directions(Start, [pair(Heading , Street)], Finish) <-
   % testPrint('chekcing directions1'),
   % testPrint(Start+Finish+Street),
   on(Finish, Street),
-  % testPrint('chekcing directions2'+Start+ Finish),
 	orientation(Start, Finish, Heading).
 
 orientation(coordinate(X,Y1), coordinate(X,Y2), northward) <- Y1 < Y2.
