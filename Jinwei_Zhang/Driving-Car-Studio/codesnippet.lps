@@ -9,7 +9,7 @@ action (arrival).
 action(carMoveTo(Car,NewX, B)).
 
 % describes the facts that are true at time 1
-initially([ moving, loc(car,150,340)]).
+initially([moving, loc(car,150,340)]).
 lpsDefineObject(car, image, [
   position(150, 340),
   size(64, 64),
