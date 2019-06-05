@@ -2,7 +2,8 @@
 consult('./loadImages.lps').
 consult('./animatingClouds.lps').
 consult('./town.lps').
-consult('./drivingCar.lps').
+% consult('./drivingCar.lps').
+consult('./codesnippet.lps').
 
 cycleInterval(200).
 maxTime(20).

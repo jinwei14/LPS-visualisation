@@ -1,3 +1,5 @@
+% loadModule('./modules/module.js').
+% true -> testPrint('The car has started').
 % set of facts.
 fluents([moving, stopped, waitting, loc(Car,X,Y)]).
 % cause state transition via init fact terminate fact
