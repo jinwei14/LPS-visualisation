@@ -3,19 +3,16 @@ true -> testPrint('The car has started').
 
 
 % set of facts.
-fluents([
-  move, stop, waitting
-]).
+fluents([move, stop, waitting，loc(car,X,Y)]).
 
 % cause state transition via init fact terminate fact
 events ([redLight,greenLight]).
 
 % Reactive rules
-actions ([arrival]).
-action(fireTruckMove/2).
+actions ([arrival，truckMove/2]).
 
 % describes the facts that are true at time 1
-initially( move).
+initially([ move, loc(car,150,340)]).
 
 lpsDefineObject(car, image, [
   position(150, 340),
@@ -39,12 +36,103 @@ move(12)->
 
 move(T1) ->
   testPrint('I am moving'),
+  % fireTruckPosition(X, Y, T1),
+  % townPosition(trafficLight1, _, Tx, Ty),
+  % NumCyclesNeeded = floor(abs(X - Tx) / 64),
+  % T2 = T1 + NumCyclesNeeded,
+  % cycleInterval(CT),
+  % AnimationDuration = CT * NumCyclesNeeded,
   lpsAnimateMoveObject(car, 2, 250, 340) from T1 to T2,
   fireTruckMove(250, 340) from T1 to T2.
 
-initiates(redLight, waitting) <- move.
-terminates(redLight, move) <- move.
-initiates(greenLight, move) <- waitting.
-terminates(greenLight, waitting) <-waitting.
-initiates(arrival, stop) <- move.
-terminates(arrival, move) <- move.
+
+waitting(T2) ->
+  testPrint('I am waitting'),
+  testPrint(T2).
+
+
+% lpsShowObject(Id) from T1 to T2 <-
+%   lpsUpdateObject(Id, [
+%     isHidden(0)
+%   ]) from T1 to T2.
+%
+% lpsHideObject(Id) from T1 to T2 <-
+%   lpsUpdateObject(Id, [
+%     isHidden(1)
+%   ]) from T1 to T2.
+%
+% lpsAnimateMoveObject(Id, Duration, X, Y) from T1 to T2 <-
+%   lpsAnimateObject(Id, Duration, [
+%     position(X, Y)
+%   ]) from T1 to T2.
+%
+% lpsDefineObject(Id, Type, []) <-
+%   lpsDefineObject(Id, Type).
+
+
+updates(fireTruckMove(X, Y), fireTruckPosition(_, _), fireTruckPosition(X, Y)).
+
+initiates(redLight, waitting) <-
+  move.
+
+terminates(redLight, move) <-
+  move.
+
+initiates(greenLight, move) <-
+  waitting.
+
+terminates(greenLight, waitting) <-
+  waitting.
+
+initiates(arrival, stop) <-
+  move.
+
+terminates(arrival, move) <-
+  move.
+
+
+%
+% %------------------------------------------------------------
+%
+%
+%   %%%%%%%%%%%%%%%%%%% LPS JS %%%%%%%%%%%%%%%%%%%%%%%%
+%   maxTime(5).
+%   fluent(fire).
+%   actions([eliminate, escape]).
+%   event(deal_with_fire).
+%
+%   initially(fire).
+%
+%   fire(T1) -> deal_with_fire(T1, T2).
+%
+%   deal_with_fire(T1, T2) <- eliminate(T1, T2).
+%   deal_with_fire(T1, T2) <- escape(T1, T2).
+%
+%   terminates(eliminate, fire).
+%
+%   %%%%%%%%%%%%%%%%% Swish %%%%%%%%%%%%%%%%%%%%%%%
+%
+%   maxTime(5).
+%
+%   fluents 	fire.
+%   actions 	eliminate, escape.
+%   events 		deal_with_fire.
+%
+%   initially 	fire.
+%   % reactive rules if fluents then action
+%   if 		fire at T1
+%   then 	deal_with_fire from T1 to T2.
+%
+%   %law of cause event/action dowhat if fluent
+%   deal_with_fire from T1 to T2
+%   if 		eliminate from T1 to T2.
+%
+%   deal_with_fire from T1 to T2
+%   if		 escape from T1 to T2.
+%
+%   eliminate  terminates fire.
+%
+%
+%   /** <examples>
+%   ?- go(Timeline).
+%   */
