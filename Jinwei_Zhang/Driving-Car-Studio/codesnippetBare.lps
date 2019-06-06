@@ -1,5 +1,3 @@
-% loadModule('./modules/module.js').
-% true -> testPrint('The car has started').
 % set of facts.
 fluents([moving, stopped, waitting, loc(Car,X,Y)]).
 % cause state transition via init fact terminate fact
@@ -16,6 +14,7 @@ observe(greenLight,3,4).
 observe(redLight,7,8).
 observe(greenLight,9,10).
 
+%reactive rule
 moving(T1),loc(car,A,B) ->
   carMoveTo(car, A + 100, B) from T1 to T2.
 
