@@ -7,22 +7,26 @@ actions ([carMoveTo(Obj,Loc_X, Loc_Y)]).
 initially([moving(car1),moving(car2),car_location(car1, 150, 340),car_location(car2, 520, 650)]).
 
 % describe events taking place in the transition from one time point to the next
+% event redLight will happeded from T4 to T5
 observe(redLight,4,5).
+% event greenLight will happeded from T8 to T10
+% all the car stop moving between time 5 and time 9
 observe(greenLight,9,10).
-
+%goal location of the two cars
 goal_location(car1, 800, 340).
 goal_location(car2, 150, 340).
 
-%car moving seprate the first car and the second car
+%the reactive rules for car1, checking if car1 has reached it's goal
 goal_location(car1, A, B), car_location(car1,X,Y,T), X@<A, moving(car1,T) ->
    NextX = X + 64,
    carMoveTo(car1, NextX,Y) from T to _.
 
+%the reactive rules for car2 checking the distance between car1 and car2 and whether it need to move up
 goal_location(car2, A, B),
   car_location(car2,X,Y,T), car_location(car1,P,Q,T),abs(X - P)+abs(Y - Q) > 200, Y>=B, moving(car2,T) ->
    NextY = Y - 64,
    carMoveTo(car2, X,NextY) from T to _.
-
+%the reactive rules for car2 checking the distance between car1 and car2 and whether it can move to the left
 goal_location(car2, A, B),
  car_location(car2,X,Y,T), car_location(car1,P,Q,T),abs(X - P)+abs(Y - Q) > 200, X@>A, Y<=B, moving(car2,T) ->
   NextX = X - 64,
