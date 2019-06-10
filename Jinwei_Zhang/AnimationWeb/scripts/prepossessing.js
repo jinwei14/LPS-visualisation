@@ -1,4 +1,3 @@
-
 // if (process.browser) {
 //     window.LPS = LPS;
 // }
@@ -43,9 +42,9 @@ console.log('index -> LPS(loadFile) -> ProgramFactory(fromFile) -> Parser(source
 var program = '';
 
 
-// Event handling on the broswer life clcle
+// Event handling on the broswer life clcle for parse the text file
 document.addEventListener("DOMContentLoaded", function (event) {
-        function sayHello (event) {
+        function parserText(event) {
             console.log(this);
             this.textContent = "Said it already!";
             var name =
@@ -72,15 +71,29 @@ document.addEventListener("DOMContentLoaded", function (event) {
         // // this method will have soome convint point like
         // change the button text after click
         // instead of using another selector API.
-        document.querySelector("button").addEventListener("click", sayHello);
+        document.querySelector("AnimateButton").addEventListener("click", parserText);
 
 
-        // //we can use the object that we select
-        // document.querySelector("button")
-        //   .onclick = sayHello;
     }
 );
 
+
+// Event handling on the broswer life clcle
+document.addEventListener("DOMContentLoaded", function (event) {
+        // clear the text in the text box
+        function clearText(event) {
+
+        }
+
+        // Unobtrusive event binding
+        // // this method will have soome convint point like
+        // change the button text after click
+        // instead of using another selector API.
+        document.querySelector("ClearButton").addEventListener("click", clearText);
+
+
+    }
+);
 
 
 /* 1.we leave the file system for now for start up
@@ -207,7 +220,6 @@ function generateSpec(programFile, specFile) {
     //     console.log('this is the error message: ' + err);
     // });
 }
-
 
 
 generateSpec(program, null);
