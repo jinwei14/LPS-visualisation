@@ -1,7 +1,7 @@
 PIXI.utils.sayHello();
 
 
-const app = new PIXI.Application({ backgroundColor: 0x1099bb, width: 1200, height: 1000 });
+const app = new PIXI.Application({ backgroundColor: 0xFFFFFF, width: 1200, height: 1000 });
 document.body.appendChild(app.view);
 
 // const basicText = new PIXI.Text('Basic text in pixi');
