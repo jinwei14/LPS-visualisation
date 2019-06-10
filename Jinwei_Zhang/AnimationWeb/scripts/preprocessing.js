@@ -178,7 +178,7 @@ function generateSpec(programFile, specFile) {
     });
 }
 
-generateSpec('drivingCar.lps', null);
+generateSpec('./lpsProgram/drivingCar.lps', null);
 // var obj1 = new ResultDict('location(yourCar, coordinate(9, 9), eastward)', 6);
 // console.log(obj1.getFluent());
 // console.log(obj1.getHeading());

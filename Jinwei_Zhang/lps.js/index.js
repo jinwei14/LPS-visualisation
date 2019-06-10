@@ -74,6 +74,7 @@ console.log('index -> LPS(loadFile) -> ProgramFactory(fromFile) -> Parser(source
 
 const INDENTATION = '  ';
 // this the object that need to be process at every time cycle
+// the program should define the location as this format.
 // location(yourCar, coordinate(9, 9), eastward)
 function ResultDict(fullPhrase, timeStamp) {
   this.fullPhrase = fullPhrase;
@@ -87,6 +88,7 @@ function ResultDict(fullPhrase, timeStamp) {
     var endPos = fullPhrase.indexOf('(');
     return fullPhrase.slice(0, endPos);
   };
+  //
   this.getPosition = function () {
     var r = /\d+/g;
     var s = fullPhrase;
@@ -109,7 +111,6 @@ function ResultDict(fullPhrase, timeStamp) {
 var TimeLine = [];
 
 function generateSpec(programFile, specFile) {
-
   LPS.loadFile(programFile)
     .then((engine) => {
       let profiler = engine.getProfiler();
@@ -121,6 +122,7 @@ function generateSpec(programFile, specFile) {
         let endTime = currentTime;
 
         console.log('% --- Start of cycle ' + endTime + ' ---\n');
+        // eslint-disable-next-line vars-on-top
         var cycle = [];
         console.log('expect_num_of(' + ['fluent', currentTime, profiler.get('numState')].join(', ') + ').\n');
         engine.getActiveFluents().forEach((termArg) => {
