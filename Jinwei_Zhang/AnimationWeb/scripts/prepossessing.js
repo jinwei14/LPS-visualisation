@@ -45,8 +45,8 @@ var program = '';
 // Event handling on the broswer life clcle for parse the text file
 document.addEventListener("DOMContentLoaded", function (event) {
         function parserText(event) {
-            // console.log(this);
 
+            //open up the content of the  visualiser
             program = document.getElementById("exampleFormControlTextarea1").value;
             console.log(program);
             var message = "<h6> Successfully passing LPS program to the parser ! </h6>";
@@ -54,31 +54,24 @@ document.addEventListener("DOMContentLoaded", function (event) {
             document.getElementById("output").innerHTML = message;
 
             //make display text box appear
-            var x = document.getElementById("content");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
+            var vis = document.getElementById("content");
+            if (vis.style.display === "none") {
+                vis.style.display = "block";
             }
 
-            // document.getElementById('content').style.display = "block";
-            // if (name === "student") {
-            //     var title =
-            //         document
-            //             .querySelector("#title")
-            //             .textContent;
-            //     title += " & Lovin' it!";
-            //     document
-            //         .querySelector("h1")
-            //         .textContent = title;
-            // }
+            generateSpec(program, null);
         }
 
+        //clear the content of the input box and disable the visualiser
         function clearText(event){
             document.getElementById("exampleFormControlTextarea1").value = "";
             var message = "<h6> Successfully cleared the lps program ! </h6>";
 
             document.getElementById("output").innerHTML = message;
+            var vis = document.getElementById("content");
+            if (vis.style.display === "block") {
+                vis.style.display = "none";
+            }
         }
         // Unobtrusive event binding
         // // this method will have soome convint point like
@@ -137,90 +130,86 @@ function ResultDict(fullPhrase, timeStamp) {
 var TimeLine = [];
 
 function generateSpec(programFile, specFile) {
+
+
+
     LPS.loadString(programFile)
         .then((engine) => {
-            console.log(programFile);
+            let profiler = engine.getProfiler();
+            console.log('% --- Specification generated for ' + programFile + '\n');
+
+            engine.on('postCycle', () => {
+                let currentTime = engine.getCurrentTime();
+                let startTime = currentTime - 1;
+                let endTime = currentTime;
+
+                console.log('% --- Start of cycle ' + endTime + ' ---\n');
+                var cycle = [];
+                console.log('expect_num_of(' + ['fluent', currentTime, profiler.get('numState')].join(', ') + ').\n');
+                engine.getActiveFluents().forEach((termArg) => {
+                    let lpsTerm = LPS.literal(termArg);
+                    let args = lpsTerm.getArguments();
+                    let term = new LPS.Functor(lpsTerm.getName(), args);
+                    // location(yourCar, coordinate(9, 9), eastward)
+                    console.log(INDENTATION + 'expect(' + ['fluent', currentTime, term.toString()].join(', ') + ').\n');
+                    let obj1 = new ResultDict(term.toString(), currentTime);
+                    cycle.push(obj1);
+                });
+                TimeLine.push(cycle);
+                if (startTime === 0) {
+                    console.log('\n');
+                    return;
+                }
+
+                console.log('expect_num_of(' + ['action', startTime, endTime, profiler.get('lastCycleNumActions')].join(', ') + ').\n');
+                engine.getLastCycleActions().forEach((termArg) => {
+                    let lpsTerm = LPS.literal(termArg);
+                    let args = lpsTerm.getArguments();
+                    let term = new LPS.Functor(lpsTerm.getName(), args);
+                    console.log(INDENTATION + 'expect(' + ['action', startTime, endTime, term.toString()].join(', ') + ').\n');
+                });
+
+                console.log('expect_num_of(' + ['observation', startTime, endTime, profiler.get('lastCycleNumObservations')].join(', ') + ').\n');
+                engine.getLastCycleObservations().forEach((termArg) => {
+                    let lpsTerm = LPS.literal(termArg);
+                    let args = lpsTerm.getArguments();
+                    let term = new LPS.Functor(lpsTerm.getName(), args);
+                    console.log(INDENTATION + 'expect(' + ['observation', startTime, endTime, term.toString()].join(', ') + ').\n');
+                });
+
+                console.log('expect_num_of(' + ['firedRules', endTime, profiler.get('lastCycleNumFiredRules')].join(', ') + ').\n');
+                console.log('expect_num_of(' + ['resolvedGoals', endTime, profiler.get('lastCycleNumResolvedGoals')].join(', ') + ').\n');
+                console.log('expect_num_of(' + ['unresolvedGoals', endTime, profiler.get('lastCycleNumUnresolvedGoals')].join(', ') + ').\n');
+                console.log('expect_num_of(' + ['failedGoals', endTime, profiler.get('lastCycleNumFailedGoals')].join(', ') + ').\n');
+
+                console.log('\n');
+                // console.log(TimeLine);
+            });
+
+            engine.on('error', (err) => {
+                console.log(err);
+            });
+
+            if (specFile !== null) {
+                // write to file when program is done
+                engine.on('done', () => {
+                    // fs.writeFile(specFile, buffer, () => {
+                    //   Logger.log('Spec file written to ' + specFile);
+                    // });
+                });
+            }
+
+            // Logger.log('Executing ' + programFile);
+            // Logger.log('-----');
             engine.run();
-        });
-
-
-    // LPS.loadFile(programFile)
-    //     .then((engine) => {
-    //         let profiler = engine.getProfiler();
-    //         console.log('% --- Specification generated for ' + programFile + '\n');
-    //
-    //         engine.on('postCycle', () => {
-    //             let currentTime = engine.getCurrentTime();
-    //             let startTime = currentTime - 1;
-    //             let endTime = currentTime;
-    //
-    //             console.log('% --- Start of cycle ' + endTime + ' ---\n');
-    //             var cycle = [];
-    //             console.log('expect_num_of(' + ['fluent', currentTime, profiler.get('numState')].join(', ') + ').\n');
-    //             engine.getActiveFluents().forEach((termArg) => {
-    //                 let lpsTerm = LPS.literal(termArg);
-    //                 let args = lpsTerm.getArguments();
-    //                 let term = new LPS.Functor(lpsTerm.getName(), args);
-    //                 // location(yourCar, coordinate(9, 9), eastward)
-    //                 console.log(INDENTATION + 'expect(' + ['fluent', currentTime, term.toString()].join(', ') + ').\n');
-    //                 let obj1 = new ResultDict(term.toString(), currentTime);
-    //                 cycle.push(obj1);
-    //             });
-    //             TimeLine.push(cycle);
-    //             if (startTime === 0) {
-    //                 console.log('\n');
-    //                 return;
-    //             }
-    //
-    //             console.log('expect_num_of(' + ['action', startTime, endTime, profiler.get('lastCycleNumActions')].join(', ') + ').\n');
-    //             engine.getLastCycleActions().forEach((termArg) => {
-    //                 let lpsTerm = LPS.literal(termArg);
-    //                 let args = lpsTerm.getArguments();
-    //                 let term = new LPS.Functor(lpsTerm.getName(), args);
-    //                 console.log(INDENTATION + 'expect(' + ['action', startTime, endTime, term.toString()].join(', ') + ').\n');
-    //             });
-    //
-    //             console.log('expect_num_of(' + ['observation', startTime, endTime, profiler.get('lastCycleNumObservations')].join(', ') + ').\n');
-    //             engine.getLastCycleObservations().forEach((termArg) => {
-    //                 let lpsTerm = LPS.literal(termArg);
-    //                 let args = lpsTerm.getArguments();
-    //                 let term = new LPS.Functor(lpsTerm.getName(), args);
-    //                 console.log(INDENTATION + 'expect(' + ['observation', startTime, endTime, term.toString()].join(', ') + ').\n');
-    //             });
-    //
-    //             console.log('expect_num_of(' + ['firedRules', endTime, profiler.get('lastCycleNumFiredRules')].join(', ') + ').\n');
-    //             console.log('expect_num_of(' + ['resolvedGoals', endTime, profiler.get('lastCycleNumResolvedGoals')].join(', ') + ').\n');
-    //             console.log('expect_num_of(' + ['unresolvedGoals', endTime, profiler.get('lastCycleNumUnresolvedGoals')].join(', ') + ').\n');
-    //             console.log('expect_num_of(' + ['failedGoals', endTime, profiler.get('lastCycleNumFailedGoals')].join(', ') + ').\n');
-    //
-    //             console.log('\n');
-    //             // console.log(TimeLine);
-    //         });
-    //
-    //         engine.on('error', (err) => {
-    //             console.log(err);
-    //         });
-    //
-    //         if (specFile !== null) {
-    //             // write to file when program is done
-    //             engine.on('done', () => {
-    //                 // fs.writeFile(specFile, buffer, () => {
-    //                 //   Logger.log('Spec file written to ' + specFile);
-    //                 // });
-    //             });
-    //         }
-    //
-    //         // Logger.log('Executing ' + programFile);
-    //         // Logger.log('-----');
-    //         engine.run();
-    //     }).catch((err) => {
-    //     // Logger.error(err);
-    //     console.log('this is the error message: ' + err);
-    // });
+        }).catch((err) => {
+        // Logger.error(err);
+        console.log('this is the error message: ' + err);
+    });
 }
 
 
-generateSpec(program, null);
+
 // var obj1 = new ResultDict('location(yourCar, coordinate(9, 9), eastward)', 6);
 // console.log(obj1.getFluent());
 // console.log(obj1.getHeading());
