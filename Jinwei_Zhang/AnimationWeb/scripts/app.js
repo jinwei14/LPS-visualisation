@@ -1,5 +1,5 @@
 PIXI.utils.sayHello();
-
+// app.js should read the data through either json or xml or anydata structure and visualise here.
 
 const app = new PIXI.Application({ backgroundColor: 0xFFFFFF, width: 1200, height: 1000 });
 document.body.appendChild(app.view);

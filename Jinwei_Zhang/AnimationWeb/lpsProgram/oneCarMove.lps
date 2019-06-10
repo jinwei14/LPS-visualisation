@@ -1,0 +1,35 @@
+% loadModule('./modules/module.js').
+% true -> testPrint('The car has started').
+% set of facts.
+fluents([moving, stopped, waitting, loc(Car,X,Y)]).
+% cause state transition via init fact terminate fact
+events ([redLight,greenLight]).
+
+actions([arrival,carMoveTo(Car,NewX, B)]).
+
+% describes the facts that are true at time 1
+initially([moving, loc(car,150,340)]).
+lpsDefineObject(car, image, [
+  position(150, 340),
+  size(64, 64),
+  isHidden(0),
+  image(car),
+  zIndex(100)
+]).
+% describe events taking place in the transition from one time point to the next
+observe(redLight,1,2).
+observe(greenLight,3,4).
+observe(redLight,7,8).
+observe(greenLight,9,10).
+
+moving(T1),loc(car,A,B) ->
+  carMoveTo(car, A + 100, B) from T1 to T2,
+  lpsAnimateMoveObject(car, 2, A + 100, B) from T2 to T3.
+
+updates(carMoveTo(CAR, X, Y), loc(CAR,_, Y), loc(CAR,X, Y)).
+initiates(redLight, waitting).
+terminates(redLight, moving).
+initiates(greenLight, moving).
+terminates(greenLight, waitting).
+initiates(arrival, stopped).
+terminates(arrival, moving).

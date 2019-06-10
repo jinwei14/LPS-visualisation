@@ -3,61 +3,85 @@
 //     window.LPS = LPS;
 // }
 
-console.log('Order of execution: ');
 console.log('index -> LPS(loadFile) -> ProgramFactory(fromFile) -> Parser(source, pathname) -> _lexer.get()');
+// let program = '% loadModule(\'./modules/module.js\').\n' +
+//     '% true -> testPrint(\'The car has started\').\n' +
+//     '% set of facts.\n' +
+//     'fluents([moving, stopped, waitting, loc(Car,X,Y)]).\n' +
+//     '% cause state transition via init fact terminate fact\n' +
+//     'events ([redLight,greenLight]).\n' +
+//     '\n' +
+//     'actions([arrival,carMoveTo(Car,NewX, B)]).\n' +
+//     '\n' +
+//     '% describes the facts that are true at time 1\n' +
+//     'initially([moving, loc(car,150,340)]).\n' +
+//     'lpsDefineObject(car, image, [\n' +
+//     '  position(150, 340),\n' +
+//     '  size(64, 64),\n' +
+//     '  isHidden(0),\n' +
+//     '  image(car),\n' +
+//     '  zIndex(100)\n' +
+//     ']).\n' +
+//     '% describe events taking place in the transition from one time point to the next\n' +
+//     'observe(redLight,1,2).\n' +
+//     'observe(greenLight,3,4).\n' +
+//     'observe(redLight,7,8).\n' +
+//     'observe(greenLight,9,10).\n' +
+//     '\n' +
+//     'moving(T1),loc(car,A,B) ->\n' +
+//     '  carMoveTo(car, A + 100, B) from T1 to T2,\n' +
+//     '  lpsAnimateMoveObject(car, 2, A + 100, B) from T2 to T3.\n' +
+//     '\n' +
+//     'updates(carMoveTo(CAR, X, Y), loc(CAR,_, Y), loc(CAR,X, Y)).\n' +
+//     'initiates(redLight, waitting).\n' +
+//     'terminates(redLight, moving).\n' +
+//     'initiates(greenLight, moving).\n' +
+//     'terminates(greenLight, waitting).\n' +
+//     'initiates(arrival, stopped).\n' +
+//     'terminates(arrival, moving).\n';
 
-// // Require pixi module
-// var pixi = require('pixi');
-//
-// // You can use either WebGLRenderer or CanvasRenderer
-// var renderer = pixi.WebGLRenderer(800, 600);
-// document.body.appendChild(renderer.view);
-//
-// var stage = new pixi.Stage();
-// var bunnyTexture = pixi.Texture.fromImage('./imgs/bunny.jpg');
-// var bunny = new pixi.Sprite(bunnyTexture);
-//
-// bunny.position.x = 400;
-// bunny.position.y = 300;
-// bunny.scale.x = 2;
-// bunny.scale.y = 2;
-//
-// stage.addChild(bunny);
-//
-// requestAnimationFrame(animate);
-//
-// function animate() {
-//     bunny.rotation += 0.01;
-//
-//     renderer.render(stage);
-//
-//     requestAnimationFrame(animate);
-// }
+var program = '';
 
-// var canvas = document.creaElement('canvas');
-// document.body.appendChild(canvas);
-//
-// canvas.width = window.screen.width;
-// canvas.height = window.screen.height;
-//
-// var context  = canvas.getContext('2d');
-//
-// var x = 0;
-// var y = 0;
-// window.requestAnimationFrame(function loop() {
-//   x += 1;
-//   y += 0.5;
-//
-//   context.clearRect(0, 0, canvas.width, canvas.height);
-//
-//   context.fillStyle = 'red';
-//   context.fillRect(x, 0, 100, 100);
-//
-//   context.fillStyle = 'green';
-//   context.fillRect(200, y, 100, 100);
-//
-//   window.requestAnimationFrame(loop);
-// });
+
+// Event handling on the broswer life clcle
+document.addEventListener("DOMContentLoaded", function (event) {
+        function sayHello (event) {
+            console.log(this);
+            this.textContent = "Said it already!";
+            var name =
+                document.getElementById("name").value;
+            var message = "<h2>Hello " + name + "!</h2>";
+
+            document
+                .getElementById("content")
+                .innerHTML = message;
+
+            if (name === "student") {
+                var title =
+                    document
+                        .querySelector("#title")
+                        .textContent;
+                title += " & Lovin' it!";
+                document
+                    .querySelector("h1")
+                    .textContent = title;
+            }
+        }
+
+        // Unobtrusive event binding
+        // // this method will have soome convint point like
+        // change the button text after click
+        // instead of using another selector API.
+        document.querySelector("button").addEventListener("click", sayHello);
+
+
+        // //we can use the object that we select
+        // document.querySelector("button")
+        //   .onclick = sayHello;
+    }
+);
+
+
 
 /* 1.we leave the file system for now for start up
    2. Read all the information into a dictionary
@@ -102,83 +126,91 @@ function ResultDict(fullPhrase, timeStamp) {
 var TimeLine = [];
 
 function generateSpec(programFile, specFile) {
-
-    LPS.loadFile(programFile)
+    LPS.loadString(programFile)
         .then((engine) => {
-            let profiler = engine.getProfiler();
-            console.log('% --- Specification generated for ' + programFile + '\n');
-
-            engine.on('postCycle', () => {
-                let currentTime = engine.getCurrentTime();
-                let startTime = currentTime - 1;
-                let endTime = currentTime;
-
-                console.log('% --- Start of cycle ' + endTime + ' ---\n');
-                var cycle = [];
-                console.log('expect_num_of(' + ['fluent', currentTime, profiler.get('numState')].join(', ') + ').\n');
-                engine.getActiveFluents().forEach((termArg) => {
-                    let lpsTerm = LPS.literal(termArg);
-                    let args = lpsTerm.getArguments();
-                    let term = new LPS.Functor(lpsTerm.getName(), args);
-                    // location(yourCar, coordinate(9, 9), eastward)
-                    console.log(INDENTATION + 'expect(' + ['fluent', currentTime, term.toString()].join(', ') + ').\n');
-                    let obj1 = new ResultDict(term.toString(), currentTime);
-                    cycle.push(obj1);
-                });
-                TimeLine.push(cycle);
-                if (startTime === 0) {
-                    console.log('\n');
-                    return;
-                }
-
-                console.log('expect_num_of(' + ['action', startTime, endTime, profiler.get('lastCycleNumActions')].join(', ') + ').\n');
-                engine.getLastCycleActions().forEach((termArg) => {
-                    let lpsTerm = LPS.literal(termArg);
-                    let args = lpsTerm.getArguments();
-                    let term = new LPS.Functor(lpsTerm.getName(), args);
-                    console.log(INDENTATION + 'expect(' + ['action', startTime, endTime, term.toString()].join(', ') + ').\n');
-                });
-
-                console.log('expect_num_of(' + ['observation', startTime, endTime, profiler.get('lastCycleNumObservations')].join(', ') + ').\n');
-                engine.getLastCycleObservations().forEach((termArg) => {
-                    let lpsTerm = LPS.literal(termArg);
-                    let args = lpsTerm.getArguments();
-                    let term = new LPS.Functor(lpsTerm.getName(), args);
-                    console.log(INDENTATION + 'expect(' + ['observation', startTime, endTime, term.toString()].join(', ') + ').\n');
-                });
-
-                console.log('expect_num_of(' + ['firedRules', endTime, profiler.get('lastCycleNumFiredRules')].join(', ') + ').\n');
-                console.log('expect_num_of(' + ['resolvedGoals', endTime, profiler.get('lastCycleNumResolvedGoals')].join(', ') + ').\n');
-                console.log('expect_num_of(' + ['unresolvedGoals', endTime, profiler.get('lastCycleNumUnresolvedGoals')].join(', ') + ').\n');
-                console.log('expect_num_of(' + ['failedGoals', endTime, profiler.get('lastCycleNumFailedGoals')].join(', ') + ').\n');
-
-                console.log('\n');
-                // console.log(TimeLine);
-            });
-
-            engine.on('error', (err) => {
-                console.log(err);
-            });
-
-            if (specFile !== null) {
-                // write to file when program is done
-                engine.on('done', () => {
-                    // fs.writeFile(specFile, buffer, () => {
-                    //   Logger.log('Spec file written to ' + specFile);
-                    // });
-                });
-            }
-
-            // Logger.log('Executing ' + programFile);
-            // Logger.log('-----');
+            console.log(programFile);
             engine.run();
-        }).catch((err) => {
-        // Logger.error(err);
-        console.log('this is the error message: ' + err);
-    });
+        });
+
+
+    // LPS.loadFile(programFile)
+    //     .then((engine) => {
+    //         let profiler = engine.getProfiler();
+    //         console.log('% --- Specification generated for ' + programFile + '\n');
+    //
+    //         engine.on('postCycle', () => {
+    //             let currentTime = engine.getCurrentTime();
+    //             let startTime = currentTime - 1;
+    //             let endTime = currentTime;
+    //
+    //             console.log('% --- Start of cycle ' + endTime + ' ---\n');
+    //             var cycle = [];
+    //             console.log('expect_num_of(' + ['fluent', currentTime, profiler.get('numState')].join(', ') + ').\n');
+    //             engine.getActiveFluents().forEach((termArg) => {
+    //                 let lpsTerm = LPS.literal(termArg);
+    //                 let args = lpsTerm.getArguments();
+    //                 let term = new LPS.Functor(lpsTerm.getName(), args);
+    //                 // location(yourCar, coordinate(9, 9), eastward)
+    //                 console.log(INDENTATION + 'expect(' + ['fluent', currentTime, term.toString()].join(', ') + ').\n');
+    //                 let obj1 = new ResultDict(term.toString(), currentTime);
+    //                 cycle.push(obj1);
+    //             });
+    //             TimeLine.push(cycle);
+    //             if (startTime === 0) {
+    //                 console.log('\n');
+    //                 return;
+    //             }
+    //
+    //             console.log('expect_num_of(' + ['action', startTime, endTime, profiler.get('lastCycleNumActions')].join(', ') + ').\n');
+    //             engine.getLastCycleActions().forEach((termArg) => {
+    //                 let lpsTerm = LPS.literal(termArg);
+    //                 let args = lpsTerm.getArguments();
+    //                 let term = new LPS.Functor(lpsTerm.getName(), args);
+    //                 console.log(INDENTATION + 'expect(' + ['action', startTime, endTime, term.toString()].join(', ') + ').\n');
+    //             });
+    //
+    //             console.log('expect_num_of(' + ['observation', startTime, endTime, profiler.get('lastCycleNumObservations')].join(', ') + ').\n');
+    //             engine.getLastCycleObservations().forEach((termArg) => {
+    //                 let lpsTerm = LPS.literal(termArg);
+    //                 let args = lpsTerm.getArguments();
+    //                 let term = new LPS.Functor(lpsTerm.getName(), args);
+    //                 console.log(INDENTATION + 'expect(' + ['observation', startTime, endTime, term.toString()].join(', ') + ').\n');
+    //             });
+    //
+    //             console.log('expect_num_of(' + ['firedRules', endTime, profiler.get('lastCycleNumFiredRules')].join(', ') + ').\n');
+    //             console.log('expect_num_of(' + ['resolvedGoals', endTime, profiler.get('lastCycleNumResolvedGoals')].join(', ') + ').\n');
+    //             console.log('expect_num_of(' + ['unresolvedGoals', endTime, profiler.get('lastCycleNumUnresolvedGoals')].join(', ') + ').\n');
+    //             console.log('expect_num_of(' + ['failedGoals', endTime, profiler.get('lastCycleNumFailedGoals')].join(', ') + ').\n');
+    //
+    //             console.log('\n');
+    //             // console.log(TimeLine);
+    //         });
+    //
+    //         engine.on('error', (err) => {
+    //             console.log(err);
+    //         });
+    //
+    //         if (specFile !== null) {
+    //             // write to file when program is done
+    //             engine.on('done', () => {
+    //                 // fs.writeFile(specFile, buffer, () => {
+    //                 //   Logger.log('Spec file written to ' + specFile);
+    //                 // });
+    //             });
+    //         }
+    //
+    //         // Logger.log('Executing ' + programFile);
+    //         // Logger.log('-----');
+    //         engine.run();
+    //     }).catch((err) => {
+    //     // Logger.error(err);
+    //     console.log('this is the error message: ' + err);
+    // });
 }
 
-generateSpec('./lpsProgram/drivingCar.lps', null);
+
+
+generateSpec(program, null);
 // var obj1 = new ResultDict('location(yourCar, coordinate(9, 9), eastward)', 6);
 // console.log(obj1.getFluent());
 // console.log(obj1.getHeading());
