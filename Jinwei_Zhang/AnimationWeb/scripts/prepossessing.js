@@ -183,27 +183,15 @@ function generateSpec(programFile, specFile) {
                 console.log('expect_num_of(' + ['failedGoals', endTime, profiler.get('lastCycleNumFailedGoals')].join(', ') + ').\n');
 
                 console.log('\n');
-                // console.log(TimeLine);
+
             });
 
             engine.on('error', (err) => {
                 console.log(err);
             });
 
-            if (specFile !== null) {
-                // write to file when program is done
-                engine.on('done', () => {
-                    // fs.writeFile(specFile, buffer, () => {
-                    //   Logger.log('Spec file written to ' + specFile);
-                    // });
-                });
-            }
-
-            // Logger.log('Executing ' + programFile);
-            // Logger.log('-----');
             engine.run();
         }).catch((err) => {
-        // Logger.error(err);
         console.log('this is the error message: ' + err);
     });
 }
