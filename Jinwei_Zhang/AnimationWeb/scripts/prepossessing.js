@@ -45,55 +45,53 @@ var program = '';
 // Event handling on the broswer life clcle for parse the text file
 document.addEventListener("DOMContentLoaded", function (event) {
         function parserText(event) {
-            console.log(this);
-            this.textContent = "Said it already!";
-            var name =
-                document.getElementById("name").value;
-            var message = "<h2>Hello " + name + "!</h2>";
+            // console.log(this);
 
-            document
-                .getElementById("content")
-                .innerHTML = message;
+            program = document.getElementById("exampleFormControlTextarea1").value;
+            console.log(program);
+            var message = "<h6> Successfully passing LPS program to the parser ! </h6>";
 
-            if (name === "student") {
-                var title =
-                    document
-                        .querySelector("#title")
-                        .textContent;
-                title += " & Lovin' it!";
-                document
-                    .querySelector("h1")
-                    .textContent = title;
+            document.getElementById("output").innerHTML = message;
+
+            //make display text box appear
+            var x = document.getElementById("content");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
             }
+
+            // document.getElementById('content').style.display = "block";
+            // if (name === "student") {
+            //     var title =
+            //         document
+            //             .querySelector("#title")
+            //             .textContent;
+            //     title += " & Lovin' it!";
+            //     document
+            //         .querySelector("h1")
+            //         .textContent = title;
+            // }
         }
 
+        function clearText(event){
+            document.getElementById("exampleFormControlTextarea1").value = "";
+            var message = "<h6> Successfully cleared the lps program ! </h6>";
+
+            document.getElementById("output").innerHTML = message;
+        }
         // Unobtrusive event binding
         // // this method will have soome convint point like
         // change the button text after click
         // instead of using another selector API.
-        document.querySelector("AnimateButton").addEventListener("click", parserText);
+        document.querySelector("#AnimateButton").addEventListener("click", parserText);
+        document.querySelector("#ClearButton").addEventListener("click", clearText);
 
 
     }
 );
 
 
-// Event handling on the broswer life clcle
-document.addEventListener("DOMContentLoaded", function (event) {
-        // clear the text in the text box
-        function clearText(event) {
-
-        }
-
-        // Unobtrusive event binding
-        // // this method will have soome convint point like
-        // change the button text after click
-        // instead of using another selector API.
-        document.querySelector("ClearButton").addEventListener("click", clearText);
-
-
-    }
-);
 
 
 /* 1.we leave the file system for now for start up
