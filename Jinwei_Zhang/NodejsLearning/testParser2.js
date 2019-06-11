@@ -3,13 +3,20 @@ const INDENTATION = '  ';
 // location(yourCar, coordinate(9, 9), eastward)
 function ResultDict(fullPhrase, timeStamp) {
 
+
     //the full phrase of the user defined fluent such as loc(car, 1650, 340)).
     this.fullPhrase = fullPhrase;
 
     //the time stamp that this fluent changed
     this.timeStamp = timeStamp;
 
-    //the object that is changing such as Car , Truck etx
+    //regulation match array
+    var regex = /(\w+)/g;
+    this.matchArray =this.fullPhrase.match(regex);
+
+    console.log(this.matchArray);
+
+        //the object that is changing such as Car , Truck etx
     this.getObject = function () {
         var startPos = fullPhrase.indexOf('(');
         var endPos = fullPhrase.indexOf(',');
@@ -41,8 +48,10 @@ function ResultDict(fullPhrase, timeStamp) {
     };
 
 }
-
-var obj2 = new ResultDict('loc(car, 1650, 340)).',30);
+//location(yourCar, coordinate(9, 9), eastward)
+//loc(car, 1650, 340))
+//position(dummyCar, xy(66.90)).
+var obj2 = new ResultDict('location(yourCar, coordinate(9, 9), eastward)',30);
 console.log('Fluent: '+obj2.getFluent());
 console.log('heading: '+ obj2.getHeading());
 console.log('Object:' + obj2.getObject());
@@ -50,3 +59,4 @@ console.log('Position: '+ obj2.getPosition());
 console.log('Timestamp: '+ obj2.timeStamp);
 
 console.log(parseInt(obj2.getPosition()[0], 10));
+console.log(parseInt(obj2.getPosition()[1], 10));

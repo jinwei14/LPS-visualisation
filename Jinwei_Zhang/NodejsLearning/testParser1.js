@@ -41,3 +41,13 @@ function ResultDict(fullPhrase, timeStamp) {
     };
 
 }
+
+
+var obj2 = new ResultDict('loc(car, 1650, 340)).',30);
+console.log('Fluent: '+obj2.getFluent());
+console.log('heading: '+ obj2.getHeading());
+console.log('Object:' + obj2.getObject());
+console.log('Position: '+ obj2.getPosition());
+console.log('Timestamp: '+ obj2.timeStamp);
+
+console.log(parseInt(obj2.getPosition()[0], 10));
