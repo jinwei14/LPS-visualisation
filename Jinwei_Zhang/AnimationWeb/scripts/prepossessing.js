@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 const INDENTATION = '  ';
 // this the object that need to be process at every time cycle
 // location(yourCar, coordinate(9, 9), eastward)
-function ResultDict(fullPhrase, timeStamp) {
+    function ResultDict(fullPhrase, timeStamp) {
     this.fullPhrase = fullPhrase;
     this.getObject = function () {
         var startPos = fullPhrase.indexOf('(');
@@ -108,6 +108,7 @@ function ResultDict(fullPhrase, timeStamp) {
         var endPos = fullPhrase.indexOf('(');
         return fullPhrase.slice(0, endPos);
     };
+    //position is a list of number which specify the number of position.
     this.getPosition = function () {
         var r = /\d+/g;
         var s = fullPhrase;
@@ -197,14 +198,21 @@ function generateSpec(programFile, specFile) {
 }
 
 
+var obj2 = new ResultDict('loc(car, 1650, 340)).',10);
+console.log('Fluent: '+obj2.getFluent());
+console.log('heading: '+ obj2.getHeading());
+console.log('Object:' + obj2.getObject());
+console.log('Position: '+ obj2.getPosition());
+console.log('Timestamp: '+ obj2.timeStamp);
 
+console.log(parseInt(obj2.getPosition()[0], 10));
 // var obj1 = new ResultDict('location(yourCar, coordinate(9, 9), eastward)', 6);
 // console.log(obj1.getFluent());
 // console.log(obj1.getHeading());
 // console.log(obj1.getObject());
 // console.log(obj1.getPosition());
 // console.log(obj1.timeStamp);
-//
+
 // console.log(parseInt(obj1.getPosition()[0], 10));
 
 // module.exports.ResultDict = ResultDict;
