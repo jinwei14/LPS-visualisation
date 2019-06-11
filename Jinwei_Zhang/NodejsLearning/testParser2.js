@@ -76,6 +76,5 @@ console.log('heading: ' + obj2.getHeading());
 console.log('Object: ' + obj2.getObject());
 console.log('Position: ' + obj2.getPosition());
 console.log('Timestamp: ' + obj2.timeStamp);
-
 console.log(parseInt(obj2.getPosition()[0], 10));
 console.log(parseInt(obj2.getPosition()[1], 10));
