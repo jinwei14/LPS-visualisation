@@ -33,9 +33,9 @@
 
                 document.getElementById("output").innerHTML = message;
                 var vis = document.getElementById("content");
-                if (vis.style.display === "block") {
-                    vis.style.display = "none";
-                }
+                // if (vis.style.display === "block") {
+                //     vis.style.display = "none";
+                // }
             }
 
             // Unobtrusive event binding
