@@ -12,7 +12,7 @@ document.getElementById("content").appendChild(app.view);
 
 const style = new PIXI.TextStyle({
     fontFamily: 'Arial',
-    fontSize: 36,
+    fontSize: 20,
     fontStyle: 'italic',
     fontWeight: 'bold',
     fill: ['#ffffff', '#00ff99'], // gradient
