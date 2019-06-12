@@ -24,6 +24,7 @@
                 }
 
                 generateSpec(program, null);
+                createVisulaiser();
             }
 
             //clear the content of the input box and disable the visualiser
@@ -48,15 +49,13 @@
 
         }
     );
-
-
     /* 1.we leave the file system for now for start up
        2. Read all the information into a dictionary
        3. start the animation process dump the buggy lps studio.
     */
     const INDENTATION = '  ';
 
-// this the object that need to be process at every time cycle
+    // this the object that need to be process at every time cycle
     function ResultDict(fullPhrase, timeStamp) {
 
 
@@ -124,8 +123,8 @@
     }
 
 
-// this is a list of object that can access the
-// eslint-disable-next-line vars-on-top
+    // this is a list of object that can access the
+    // eslint-disable-next-line vars-on-top
     var TimeLine = [];
 
     function generateSpec(programFile, specFile) {
