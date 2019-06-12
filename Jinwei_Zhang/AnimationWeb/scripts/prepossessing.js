@@ -24,7 +24,9 @@
                 }
 
                 generateSpec(program, null);
-                createVisulaiser();
+                appManager.createVisualizer();
+                appManager.addChildren();
+                console.log('the inner called');
             }
 
             //clear the content of the input box and disable the visualiser
@@ -158,28 +160,28 @@
                         return;
                     }
 
-                    console.log('expect_num_of(' + ['action', startTime, endTime, profiler.get('lastCycleNumActions')].join(', ') + ').\n');
-                    engine.getLastCycleActions().forEach((termArg) => {
-                        let lpsTerm = LPS.literal(termArg);
-                        let args = lpsTerm.getArguments();
-                        let term = new LPS.Functor(lpsTerm.getName(), args);
-                        console.log(INDENTATION + 'expect(' + ['action', startTime, endTime, term.toString()].join(', ') + ').\n');
-                    });
+                    // console.log('expect_num_of(' + ['action', startTime, endTime, profiler.get('lastCycleNumActions')].join(', ') + ').\n');
+                    // engine.getLastCycleActions().forEach((termArg) => {
+                    //     let lpsTerm = LPS.literal(termArg);
+                    //     let args = lpsTerm.getArguments();
+                    //     let term = new LPS.Functor(lpsTerm.getName(), args);
+                    //     console.log(INDENTATION + 'expect(' + ['action', startTime, endTime, term.toString()].join(', ') + ').\n');
+                    // });
+                    //
+                    // console.log('expect_num_of(' + ['observation', startTime, endTime, profiler.get('lastCycleNumObservations')].join(', ') + ').\n');
+                    // engine.getLastCycleObservations().forEach((termArg) => {
+                    //     let lpsTerm = LPS.literal(termArg);
+                    //     let args = lpsTerm.getArguments();
+                    //     let term = new LPS.Functor(lpsTerm.getName(), args);
+                    //     console.log(INDENTATION + 'expect(' + ['observation', startTime, endTime, term.toString()].join(', ') + ').\n');
+                    // });
 
-                    console.log('expect_num_of(' + ['observation', startTime, endTime, profiler.get('lastCycleNumObservations')].join(', ') + ').\n');
-                    engine.getLastCycleObservations().forEach((termArg) => {
-                        let lpsTerm = LPS.literal(termArg);
-                        let args = lpsTerm.getArguments();
-                        let term = new LPS.Functor(lpsTerm.getName(), args);
-                        console.log(INDENTATION + 'expect(' + ['observation', startTime, endTime, term.toString()].join(', ') + ').\n');
-                    });
-
-                    console.log('expect_num_of(' + ['firedRules', endTime, profiler.get('lastCycleNumFiredRules')].join(', ') + ').\n');
-                    console.log('expect_num_of(' + ['resolvedGoals', endTime, profiler.get('lastCycleNumResolvedGoals')].join(', ') + ').\n');
-                    console.log('expect_num_of(' + ['unresolvedGoals', endTime, profiler.get('lastCycleNumUnresolvedGoals')].join(', ') + ').\n');
-                    console.log('expect_num_of(' + ['failedGoals', endTime, profiler.get('lastCycleNumFailedGoals')].join(', ') + ').\n');
-
-                    console.log('\n');
+                    // console.log('expect_num_of(' + ['firedRules', endTime, profiler.get('lastCycleNumFiredRules')].join(', ') + ').\n');
+                    // console.log('expect_num_of(' + ['resolvedGoals', endTime, profiler.get('lastCycleNumResolvedGoals')].join(', ') + ').\n');
+                    // console.log('expect_num_of(' + ['unresolvedGoals', endTime, profiler.get('lastCycleNumUnresolvedGoals')].join(', ') + ').\n');
+                    // console.log('expect_num_of(' + ['failedGoals', endTime, profiler.get('lastCycleNumFailedGoals')].join(', ') + ').\n');
+                    //
+                    // console.log('\n');
 
                 });
 
@@ -189,7 +191,7 @@
 
                 engine.run();
             }).catch((err) => {
-            console.log('this is the error message: ' + err);
+                console.log('this is the error message: ' + err);
         });
     }
 
