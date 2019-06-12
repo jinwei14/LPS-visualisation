@@ -163,7 +163,8 @@ function generateSpec(programFile, specFile) {
 
         console.log('\n');
         // console.log(TimeLine);
-      });
+      }).then(() => { console.log('try out') });
+
 
       engine.on('error', (err) => {
         console.log(err);
