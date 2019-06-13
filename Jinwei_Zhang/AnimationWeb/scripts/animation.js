@@ -26,24 +26,6 @@
     richText.x = 20;
     richText.y = 20;
     const graphics = new PIXI.Graphics();
-
-    appManager.createVisualizer = function () {
-        document.getElementById("content").appendChild(app.view);
-        console.log('the createVisualizer  has been called');
-    };
-
-
-//main street text
-    let streetText = new PIXI.Text('Main Street', {fontFamily: 'Arial', fontSize: 24, fill: 0xFFFFFF});
-    streetText.x = 400;
-    streetText.y = 340;
-    //main street
-    graphics.lineStyle(2, 0xFFFFFF, 1);
-    graphics.beginFill(0x333);
-    graphics.drawRect(200, 340, 900, 70);
-    graphics.endFill();
-
-
     // draw a coordinate system X
     graphics.lineStyle(5, 0x333, 1);
     graphics.moveTo(0, 0);
@@ -55,6 +37,7 @@
     graphics.lineStyle(5, 0x333, 1);
     graphics.moveTo(0, 0);
     graphics.lineTo(0, 200);
+
     const yText = new PIXI.Text('Y', {fontFamily: 'Arial', fontSize: 15, fill: 0x333, align: 'center'});
     yText.x = 0;
     yText.y = 150;
@@ -62,6 +45,26 @@
     const originText = new PIXI.Text('(0,0)', {fontFamily: 'Arial', fontSize: 15, fill: 0x333, align: 'center'});
     originText.x = 0;
     originText.y = 0;
+
+
+    appManager.createVisualizer = function () {
+        document.getElementById("content").appendChild(app.view);
+        console.log('the createVisualizer  has been called');
+    };
+
+    appManager.road = function (x, y, laneNumber, nameText) {
+
+    };
+
+    //main street text
+    let streetText = new PIXI.Text('Main Street', {fontFamily: 'Arial', fontSize: 24, fill: 0xFFFFFF});
+    streetText.x = 400;
+    streetText.y = 340;
+    //main street
+    graphics.lineStyle(2, 0xFFFFFF, 1);
+    graphics.beginFill(0x333);
+    graphics.drawRect(200, 340, 900, 70);
+    graphics.endFill();
 
 
 // create a new Sprite from an image path
