@@ -23,8 +23,8 @@
         wordWrapWidth: 440,
     });
     const richText = new PIXI.Text('LPS sample animation', style);
-    richText.x = 20;
-    richText.y = 20;
+    richText.x = 300;
+    richText.y = 0;
     const graphics = new PIXI.Graphics();
     // draw a coordinate system X
     graphics.lineStyle(5, 0x333, 1);
