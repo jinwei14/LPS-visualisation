@@ -157,7 +157,7 @@
                     TimeLine.push(cycle);
                     if (startTime === 0) {
                         console.log('\n');
-                        return;
+
                     }
 
                     // console.log('expect_num_of(' + ['action', startTime, endTime, profiler.get('lastCycleNumActions')].join(', ') + ').\n');
@@ -192,7 +192,7 @@
                 engine.run();
                 console.log('engine finished running')
             }).catch((err) => {
-                console.log('this is the error message: ' + err);
+            console.log('this is the error message: ' + err);
         });
     }
 
