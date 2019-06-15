@@ -7,25 +7,29 @@
 
 
 // Event handling on the broswer life clcle for parse the text file
-    document.addEventListener("DOMContentLoaded", function (event) {
+    document.addEventListener("DOMContentLoaded", function () {
         function parserText(event) {
             //open up the content of the  visualiser
             program = document.getElementById("exampleFormControlTextarea1").value;
-            console.log(program);
-            var message = "<h6> Successfully passing LPS program to the parser ! </h6>";
+            if (program!=='' && program.trim().length !==0 ){
+                var message = "<h6> Successfully passing LPS program to the parser ! </h6>";
+                document.getElementById("output").innerHTML = message;
 
-            document.getElementById("output").innerHTML = message;
+                //make display text box appear
+                var vis = document.getElementById("content");
+                if (vis.style.display === "none") {
+                    vis.style.display = "block";
+                }
 
-            //make display text box appear
-            var vis = document.getElementById("content");
-            if (vis.style.display === "none") {
-                vis.style.display = "block";
+                generateSpec(program, null);
+                appManager.createVisualizer();
+                appManager.addChildren();
+                console.log('the inner called');
+            }else{
+                alert( 'Empty program detected via ' +event+', Please input a program ');
             }
 
-            generateSpec(program, null);
-            appManager.createVisualizer();
-            appManager.addChildren();
-            console.log('the inner called');
+
         }
 
         //clear the content of the input box and disable the visualiser
@@ -40,8 +44,6 @@
             // }
         }
 
-        // Unobtrusive event binding
-        // // this method will have soome convint point like
         // change the button text after click
         // instead of using another selector API.
         document.querySelector("#AnimateButton").addEventListener("click", parserText);
@@ -49,6 +51,7 @@
 
 
     });
+
     document.addEventListener("DOMContentLoaded", function () {
         function loadTextFromFile(evt) {
             //Retrieve the first (and only!) File from the FileList object
