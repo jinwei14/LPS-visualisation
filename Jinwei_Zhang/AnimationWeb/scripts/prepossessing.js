@@ -8,49 +8,75 @@
 
 // Event handling on the broswer life clcle for parse the text file
     document.addEventListener("DOMContentLoaded", function (event) {
-            function parserText(event) {
+        function parserText(event) {
+            //open up the content of the  visualiser
+            program = document.getElementById("exampleFormControlTextarea1").value;
+            console.log(program);
+            var message = "<h6> Successfully passing LPS program to the parser ! </h6>";
 
-                //open up the content of the  visualiser
-                program = document.getElementById("exampleFormControlTextarea1").value;
-                console.log(program);
-                var message = "<h6> Successfully passing LPS program to the parser ! </h6>";
+            document.getElementById("output").innerHTML = message;
 
-                document.getElementById("output").innerHTML = message;
-
-                //make display text box appear
-                var vis = document.getElementById("content");
-                if (vis.style.display === "none") {
-                    vis.style.display = "block";
-                }
-
-                generateSpec(program, null);
-                appManager.createVisualizer();
-                appManager.addChildren();
-                console.log('the inner called');
+            //make display text box appear
+            var vis = document.getElementById("content");
+            if (vis.style.display === "none") {
+                vis.style.display = "block";
             }
 
-            //clear the content of the input box and disable the visualiser
-            function clearText(event) {
-                document.getElementById("exampleFormControlTextarea1").value = "";
-                var message = "<h6> Successfully cleared the lps program ! </h6>";
-
-                document.getElementById("output").innerHTML = message;
-                var vis = document.getElementById("content");
-                // if (vis.style.display === "block") {
-                //     vis.style.display = "none";
-                // }
-            }
-
-            // Unobtrusive event binding
-            // // this method will have soome convint point like
-            // change the button text after click
-            // instead of using another selector API.
-            document.querySelector("#AnimateButton").addEventListener("click", parserText);
-            document.querySelector("#ClearButton").addEventListener("click", clearText);
-
-
+            generateSpec(program, null);
+            appManager.createVisualizer();
+            appManager.addChildren();
+            console.log('the inner called');
         }
-    );
+
+        //clear the content of the input box and disable the visualiser
+        function clearText(event) {
+            document.getElementById("exampleFormControlTextarea1").value = "";
+            var message = "<h6> Successfully cleared the lps program ! </h6>";
+
+            document.getElementById("output").innerHTML = message;
+            var vis = document.getElementById("content");
+            // if (vis.style.display === "block") {
+            //     vis.style.display = "none";
+            // }
+        }
+
+        // Unobtrusive event binding
+        // // this method will have soome convint point like
+        // change the button text after click
+        // instead of using another selector API.
+        document.querySelector("#AnimateButton").addEventListener("click", parserText);
+        document.querySelector("#ClearButton").addEventListener("click", clearText);
+
+
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        function loadTextFromFile(evt) {
+            //Retrieve the first (and only!) File from the FileList object
+            var f = evt.target.files[0];
+
+            if (f) {
+                var r = new FileReader();
+                r.onload = function (e) {
+                    var contents = e.target.result;
+                    // alert( "Got the file \n"
+                    //     +"name: " + f.name + "\n "
+                    //     +"size: " + f.size + " bytes" + "\n"
+                    //     + "starts with: " + contents.substr(1, contents.indexOf("n"))
+                    // );
+                    console.log(contents);
+                    document.getElementById("exampleFormControlTextarea1").value = contents;
+                };
+
+                r.readAsText(f);
+
+            } else {
+                alert("Failed to load file");
+            }
+        }
+
+        document.querySelector('#formControlFile1').addEventListener("change", loadTextFromFile);
+    });
+
     /* 1.we leave the file system for now for start up
        2. Read all the information into a dictionary
        3. start the animation process dump the buggy lps studio.
