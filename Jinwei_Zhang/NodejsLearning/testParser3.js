@@ -1,82 +1,46 @@
+//this test parser will test the street predicate
+
+
 const INDENTATION = '  ';
 // this the object that need to be process at every time cycle
-// loc(car, 1650, 340)).
-// location(yourCar, coordinate(9, 9), eastward)
-function ResultDict(fullPhrase) {
+
+// street(piccadillyRoad, coordinate(9, 9), 80, 70, 2)
+function Streets(fullPhrase) {
+
 
 
     //the full phrase of the user defined fluent such as loc(car, 1650, 340)).
     this.fullPhrase = fullPhrase;
 
-    //the time stamp that this fluent changed
-    this.timeStamp = timeStamp;
-
     //regulation match array
-    var regex = /(\w+)/g;
-    this.matchArray = this.fullPhrase.match(regex);
-
+    this.matchArray = this.fullPhrase.match(/(\w+)/g);
     console.log(this.matchArray);
 
-    //the object that is changing such as Car , Truck etx
-    this.getObject = function () {
-        var coordinate = ['coordinate', 'loc', 'location', 'coor','pos','position','xy'];
-        var len = this.matchArray.length;
-        //if the word is not one of the words in the coordinate array and not a digit it will be the name
-        //of the object
-        for (var i = 1; i < len; i++) {
-            if (isNaN(this.matchArray[i] ) && coordinate.includes(this.matchArray[i].toLowerCase()) === false){
-                return this.matchArray[i];
-            }
-        }
-    };
+    //the location and the name of the street
+    this.X = this.matchArray[3];
+    this.Y = this.matchArray[4];
+    this.name = this.matchArray[1];
 
-    // should be the fluent that changed such as : loc, location.
-    this.getFluent = function () {
-        var endPos = fullPhrase.indexOf('(');
-        return fullPhrase.slice(0, endPos);
-    };
+    //the width of the street
+    this.width = this.matchArray[5];
 
-    //position is a list of number which specify the number of position.
-    this.getPosition = function () {
-        var r = /\d+/g;
-        var s = fullPhrase;
-        var m;
-        var retList = [];
-        while ((m = r.exec(s)) != null) {
-            retList.push(parseInt(m[0], 10));
-        }
-        return retList;
-    };
+    //the height of the street
+    this.height = this.matchArray[6];
 
-    //the heading is optional. If there is a heading then get the heading as the form of
-    this.getHeading = function () {
-        var orientation =
-            [
-                'north', 'south', 'west', 'east',
-                'up', 'down', 'left', 'right',
-                'northward', 'southward', 'westward', 'eastward'
-            ];
-        var len = this.matchArray.length;
-        for (var i = 0; i < len; i++) {
-            //check if any of the works in the matching array is in the orientation array
-            if (orientation.includes(this.matchArray[i].toLowerCase())){
-                return this.matchArray[i];
-            }
-        }
-    };
+    //the number of lanes on the street
+    this.no_lane = this.matchArray[7];
 
 }
 
 //location(yourCar, coordinate(9, 9), eastward)
 //loc(car, 1650, 340))
 //position(dummyCar, xy(66.90)).
+var obj2 = new Streets('street(piccadillyRoad, coordinate(9, 9), 80, 70, 2).');
+console.log('fullPhrase: ' + obj2.fullPhrase);
+console.log('name: ' + obj2.name);
+console.log('x: ' + obj2.X);
+console.log('y: ' + obj2.Y);
+console.log('width: ' + obj2.width);
+console.log('height: ' + obj2.height);
+console.log('no_lane: ' + obj2.no_lane)
 
-
-// var obj2 = new ResultDict('moving(car1)', 30);
-// console.log('Fluent: ' + obj2.getFluent());
-// console.log('heading: ' + obj2.getHeading());
-// console.log('Object: ' + obj2.getObject());
-// console.log('Position: ' + obj2.getPosition());
-// console.log('Timestamp: ' + obj2.timeStamp);
-// console.log(parseInt(obj2.getPosition()[0], 10));
-// console.log(parseInt(obj2.getPosition()[1], 10));
