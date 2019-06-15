@@ -14,7 +14,7 @@
             if (program!=='' && program.trim().length !==0 ){
                 var message = "<h6> Successfully passing LPS program to the parser ! </h6>";
                 document.getElementById("output").innerHTML = message;
-
+                console.log(program);
                 //make display text box appear
                 var vis = document.getElementById("content");
                 if (vis.style.display === "none") {
@@ -61,11 +61,9 @@
                 var r = new FileReader();
                 r.onload = function (e) {
                     var contents = e.target.result;
-                    // alert( "Got the file \n"
-                    //     +"name: " + f.name + "\n "
-                    //     +"size: " + f.size + " bytes" + "\n"
-                    //     + "starts with: " + contents.substr(1, contents.indexOf("n"))
-                    // );
+                    // alert( "name: " + f.name
+                    // +" size: " + f.size
+                    // + "starts with: " + contents.substr(1, contents.indexOf("n")));
                     console.log(contents);
                     document.getElementById("exampleFormControlTextarea1").value = contents;
                 };
@@ -164,7 +162,7 @@
         LPS.loadString(programFile)
             .then((engine) => {
                 let profiler = engine.getProfiler();
-                console.log('% --- Specification generated for ' + programFile + '\n');
+
 
                 engine.on('postCycle', () => {
                     let currentTime = engine.getCurrentTime();
