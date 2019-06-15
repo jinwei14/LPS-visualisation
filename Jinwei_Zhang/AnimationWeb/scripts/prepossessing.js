@@ -11,10 +11,11 @@
         function parserText(event) {
             //open up the content of the  visualiser
             program = document.getElementById("exampleFormControlTextarea1").value;
-            if (program!=='' && program.trim().length !==0 ){
+            if (program !== '' && program.trim().length !== 0) {
                 var message = "<h6> Successfully passing LPS program to the parser ! </h6>";
                 document.getElementById("output").innerHTML = message;
                 console.log(program);
+                checkStreet(program);
                 //make display text box appear
                 var vis = document.getElementById("content");
                 if (vis.style.display === "none") {
@@ -25,8 +26,8 @@
                 appManager.createVisualizer();
                 appManager.addChildren();
                 console.log('the inner called');
-            }else{
-                alert( 'Empty program detected via ' +event+', Please input a program ');
+            } else {
+                alert('Empty program detected via ' + event + ', Please input a program ');
             }
 
 
@@ -85,8 +86,7 @@
     const INDENTATION = '  ';
 
     // this the object that need to be process at every time cycle
-    function ResultDict(fullPhrase, timeStamp) {
-
+    function ObjectLoc(fullPhrase, timeStamp) {
 
         //the full phrase of the user defined fluent such as loc(car, 1650, 340)).
         // // location(yourCar, coordinate(9, 9), eastward)
@@ -95,9 +95,8 @@
         //the time stamp that this fluent changed
         this.timeStamp = timeStamp;
 
-        //regulation match array
-        var regex = /(\w+)/g;
-        this.matchArray = this.fullPhrase.match(regex);
+        //regulation match array of word and numbers
+        this.matchArray = this.fullPhrase.match(/(\w+)/g);
 
         console.log(this.matchArray);
 
@@ -116,7 +115,9 @@
 
         // should be the fluent that changed such as : loc, location.
         this.getFluent = function () {
+
             var endPos = fullPhrase.indexOf('(');
+
             return fullPhrase.slice(0, endPos);
         };
 
@@ -151,6 +152,15 @@
 
     }
 
+    //this function will checkout parse the street from all of other fluents.
+    function checkStreet(program){
+
+    }
+    //this is the street object.
+    function Streets(fullPhrase){
+        // the street will be a
+        this.fullPhrase = fullPhrase;
+    }
 
     // this is a list of object that can access the
     // eslint-disable-next-line vars-on-top
@@ -178,7 +188,7 @@
                         let term = new LPS.Functor(lpsTerm.getName(), args);
                         // location(yourCar, coordinate(9, 9), eastward)
                         console.log(INDENTATION + 'expect(' + ['fluent', currentTime, term.toString()].join(', ') + ').\n');
-                        let obj1 = new ResultDict(term.toString(), currentTime);
+                        let obj1 = new ObjectLoc(term.toString(), currentTime);
                         cycle.push(obj1);
                     });
                     TimeLine.push(cycle);
@@ -187,28 +197,28 @@
 
                     }
 
-                    // console.log('expect_num_of(' + ['action', startTime, endTime, profiler.get('lastCycleNumActions')].join(', ') + ').\n');
-                    // engine.getLastCycleActions().forEach((termArg) => {
-                    //     let lpsTerm = LPS.literal(termArg);
-                    //     let args = lpsTerm.getArguments();
-                    //     let term = new LPS.Functor(lpsTerm.getName(), args);
-                    //     console.log(INDENTATION + 'expect(' + ['action', startTime, endTime, term.toString()].join(', ') + ').\n');
-                    // });
-                    //
-                    // console.log('expect_num_of(' + ['observation', startTime, endTime, profiler.get('lastCycleNumObservations')].join(', ') + ').\n');
-                    // engine.getLastCycleObservations().forEach((termArg) => {
-                    //     let lpsTerm = LPS.literal(termArg);
-                    //     let args = lpsTerm.getArguments();
-                    //     let term = new LPS.Functor(lpsTerm.getName(), args);
-                    //     console.log(INDENTATION + 'expect(' + ['observation', startTime, endTime, term.toString()].join(', ') + ').\n');
-                    // });
+                    console.log('expect_num_of(' + ['action', startTime, endTime, profiler.get('lastCycleNumActions')].join(', ') + ').\n');
+                    engine.getLastCycleActions().forEach((termArg) => {
+                        let lpsTerm = LPS.literal(termArg);
+                        let args = lpsTerm.getArguments();
+                        let term = new LPS.Functor(lpsTerm.getName(), args);
+                        console.log(INDENTATION + 'expect(' + ['action', startTime, endTime, term.toString()].join(', ') + ').\n');
+                    });
 
-                    // console.log('expect_num_of(' + ['firedRules', endTime, profiler.get('lastCycleNumFiredRules')].join(', ') + ').\n');
-                    // console.log('expect_num_of(' + ['resolvedGoals', endTime, profiler.get('lastCycleNumResolvedGoals')].join(', ') + ').\n');
-                    // console.log('expect_num_of(' + ['unresolvedGoals', endTime, profiler.get('lastCycleNumUnresolvedGoals')].join(', ') + ').\n');
-                    // console.log('expect_num_of(' + ['failedGoals', endTime, profiler.get('lastCycleNumFailedGoals')].join(', ') + ').\n');
-                    //
-                    // console.log('\n');
+                    console.log('expect_num_of(' + ['observation', startTime, endTime, profiler.get('lastCycleNumObservations')].join(', ') + ').\n');
+                    engine.getLastCycleObservations().forEach((termArg) => {
+                        let lpsTerm = LPS.literal(termArg);
+                        let args = lpsTerm.getArguments();
+                        let term = new LPS.Functor(lpsTerm.getName(), args);
+                        console.log(INDENTATION + 'expect(' + ['observation', startTime, endTime, term.toString()].join(', ') + ').\n');
+                    });
+
+                    console.log('expect_num_of(' + ['firedRules', endTime, profiler.get('lastCycleNumFiredRules')].join(', ') + ').\n');
+                    console.log('expect_num_of(' + ['resolvedGoals', endTime, profiler.get('lastCycleNumResolvedGoals')].join(', ') + ').\n');
+                    console.log('expect_num_of(' + ['unresolvedGoals', endTime, profiler.get('lastCycleNumUnresolvedGoals')].join(', ') + ').\n');
+                    console.log('expect_num_of(' + ['failedGoals', endTime, profiler.get('lastCycleNumFailedGoals')].join(', ') + ').\n');
+
+                    console.log('\n');
 
                 });
 
