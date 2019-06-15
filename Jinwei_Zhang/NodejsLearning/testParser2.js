@@ -2,7 +2,7 @@ const INDENTATION = '  ';
 // this the object that need to be process at every time cycle
 // loc(car, 1650, 340)).
 // location(yourCar, coordinate(9, 9), eastward)
-function ResultDict(fullPhrase) {
+function ResultDict(fullPhrase,timeStamp) {
 
 
     //the full phrase of the user defined fluent such as loc(car, 1650, 340)).
@@ -48,6 +48,9 @@ function ResultDict(fullPhrase) {
         return retList;
     };
 
+    this.X = parseInt(this.getPosition()[0], 10);
+    this.Y = parseInt(this.getPosition()[1], 10);
+
     //the heading is optional. If there is a heading then get the heading as the form of
     this.getHeading = function () {
         var orientation =
@@ -72,11 +75,13 @@ function ResultDict(fullPhrase) {
 //position(dummyCar, xy(66.90)).
 
 
-// var obj2 = new ResultDict('moving(car1)', 30);
-// console.log('Fluent: ' + obj2.getFluent());
-// console.log('heading: ' + obj2.getHeading());
-// console.log('Object: ' + obj2.getObject());
-// console.log('Position: ' + obj2.getPosition());
-// console.log('Timestamp: ' + obj2.timeStamp);
-// console.log(parseInt(obj2.getPosition()[0], 10));
-// console.log(parseInt(obj2.getPosition()[1], 10));
+var obj2 = new ResultDict('location(yourCar, coordinate(9, 9), eastward)', 30);
+console.log('Fluent: ' + obj2.getFluent());
+console.log('heading: ' + obj2.getHeading());
+console.log('Object: ' + obj2.getObject());
+console.log('Position: ' + obj2.getPosition());
+console.log('Timestamp: ' + obj2.timeStamp);
+console.log('x: ' + obj2.X);
+console.log('y: ' + obj2.Y);
+console.log(parseInt(obj2.getPosition()[0], 10));
+console.log(parseInt(obj2.getPosition()[1], 10));

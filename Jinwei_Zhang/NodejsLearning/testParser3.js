@@ -15,6 +15,7 @@ function Streets(fullPhrase) {
     //regulation match array
     this.matchArray = this.fullPhrase.match(/(\w+)/g);
     console.log(this.matchArray);
+    this.fluent = this.matchArray[0];
 
     //the location and the name of the street
     this.X = this.matchArray[3];
@@ -37,6 +38,7 @@ function Streets(fullPhrase) {
 //position(dummyCar, xy(66.90)).
 var obj2 = new Streets('street(piccadillyRoad, coordinate(9, 9), 80, 70, 2).');
 console.log('fullPhrase: ' + obj2.fullPhrase);
+console.log('fluent: ' + obj2.fluent);
 console.log('name: ' + obj2.name);
 console.log('x: ' + obj2.X);
 console.log('y: ' + obj2.Y);
