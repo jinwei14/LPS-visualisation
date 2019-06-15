@@ -3,7 +3,6 @@
     PIXI.utils.sayHello();
     var appManager = {};
 
-
     const app = new PIXI.Application({backgroundColor: 0xFFFFFF, width: 1200, height: 1000});
     //LPS sample animation text
     const style = new PIXI.TextStyle({
@@ -22,6 +21,7 @@
         wordWrap: true,
         wordWrapWidth: 440,
     });
+
     const richText = new PIXI.Text('LPS sample animation', style);
     richText.x = 300;
     richText.y = 0;
@@ -88,7 +88,6 @@
             if (myCar.x <= 600) {
                 myCar.x += 1;
             }
-
         });
         console.log('the children adding has been called');
     };

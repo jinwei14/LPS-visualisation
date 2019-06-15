@@ -18,11 +18,11 @@ observe(greenLight,9,10).
 goal_location(car1, 800, 340).
 goal_location(car2, 150, 340).
 
-%car moving sepraate the first car and the second car
+%car moving seprate the first car and the second car
 goal_location(car1, A, B), car_location(car1,X,Y,T), X@<A, moving(car1,T) ->
    NextX = X + 64,
-   carMoveTo(car1, NextX,Y) from T to _,
-   lpsAnimateMoveObject(car1, 2, NextX, Y) from T to _.
+   carMoveTo(car1, NextX,Y) from T to T1,
+   lpsAnimateMoveObject(car1, 2, NextX, Y) from T1 to _.
 
 goal_location(car2, A, B),
   car_location(car2,X,Y,T), car_location(car1,P,Q,T),abs(X - P)+abs(Y - Q) > 200, Y>=B, moving(car2,T) ->
