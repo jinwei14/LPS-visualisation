@@ -25,7 +25,7 @@ function TrafficLight(fullPhrase) {
 }
 
 
-var obj2 = new TrafficLight('trafficLight(coordinate(2, 2), on, Red, eastward).');
+var obj2 = new TrafficLight('trafficLight(coordinate(2, 2), on, red, eastward).');
 console.log('fullPhrase: ' + obj2.fullPhrase);
 console.log('fluent: ' + obj2.fluent);
 
@@ -33,4 +33,4 @@ console.log('x: ' + obj2.X);
 console.log('y: ' + obj2.Y);
 console.log('status: ' + obj2.status);
 console.log('color: ' + obj2.color);
-console.log('direct: ' + obj2.direct)
+console.log('direct: ' + obj2.direct);
