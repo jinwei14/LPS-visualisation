@@ -1,3 +1,4 @@
+//this parser file is for testing the parser for the location of the car.
 const INDENTATION = '  ';
 // this the object that need to be process at every time cycle
 // loc(car, 1650, 340)).
