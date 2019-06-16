@@ -1,4 +1,7 @@
 % we assume the destination is reachable
+maxTime(10).
+loadModule('../scripts/module.js').
+
 fluents([
    coordinate(X, Y),
    location(VehicleName, coordinate(X, Y), Direction),
@@ -13,18 +16,19 @@ events ([
 ]).
 
 actions ([
-  step(Vehicle, OldPlace, NextPlace),
+  step(Vehicle, NextPlace),
   turn(Vehicle, NewHeading)
 ]).
 
 initially([
-  location(carA, coordinate(100, 200), northward),
+  location(carA, coordinate(100, 200), eastward),
 	goal(carA,coordinate(600, 200)),
   street(mainStreet , coordinate(100, 200), 900, 50, 1)
 ]).
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
 location(VehicleName, coordinate(X, Y), Direction), A!=X at T ->
+    testPrint('start driving'),
     drive(Vehicle) from T to _.
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
@@ -34,35 +38,36 @@ location(VehicleName, coordinate(X, Y), Direction), B!=Y at T ->
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == northward,
-  NextPlace = coordinate(X, Y - 10)
-  step(Vehicle, OldPlace, NextPlace) from T1 to T2.
+  NewY = Y - 10
+  NextPlace = coordinate(X, NewY),
+  step(Vehicle, NextPlace) from T1 to T2.
 
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == southward,
-  NextPlace = coordinate(X, Y + 10)
-  step(Vehicle, OldPlace, NextPlace) from T1 to T2.
+  NewY = Y + 10
+  NextPlace = coordinate(X, NewY),
+  step(Vehicle, NextPlace) from T1 to T2.
 
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == westward,
-  NextPlace = coordinate(X-10, Y)
-  step(Vehicle, OldPlace, NextPlace) from T1 to T2.
+  NewX = X-10
+  NextPlace = coordinate(NewX, Y),
+  step(Vehicle, NextPlace) from T1 to T2.
 
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == eastward,
-  NextPlace = coordinate(X+10, Y)
-  step(Vehicle, OldPlace, NextPlace) from T1 to T2.
+  NewX = X + 10,
+  NextPlace = coordinate(NewX, Y),
+  step(Vehicle, NextPlace) from T1 to T2.
 
 % on(coordinate(X,Y),Street) <-
 
 
 
-
-
-
-updates(step(Vehicle, OldPlace, NextPlace), location(Vehicle, OldPlace, Heading),  location(Vehicle, NextPlace, Heading)).
+updates(step(Vehicle, NextPlace), location(VehicleName, OldPlace, Direction),  location(Vehicle, NextPlace, Direction)).
 
 updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading)).
 
