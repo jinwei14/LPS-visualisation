@@ -17,6 +17,6 @@ actions ([
 ]).
 
 initially([
-  location(carA, coordinate(2, 1), northward),
-	location(carB, coordinate(6, 1), northward)
+  location(carA, coordinate(100, 200), easthward),
+  goal(carA,coordinate(600, 200))
 ]).

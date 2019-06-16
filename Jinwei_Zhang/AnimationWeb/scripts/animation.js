@@ -59,21 +59,20 @@
     //main street text
     let streetText = new PIXI.Text('Main Street', {fontFamily: 'Arial', fontSize: 24, fill: 0xFFFFFF});
     streetText.x = 400;
-    streetText.y = 340;
+    streetText.y = 200;
     //main street
     graphics.lineStyle(2, 0xFFFFFF, 1);
     graphics.beginFill(0x333);
-    graphics.drawRect(200, 340, 900, 70);
+    graphics.drawRect(100, 200, 900, 50);
     graphics.endFill();
 
 
 // create a new Sprite from an image path
     const myCar = PIXI.Sprite.from('imgs/myCar.png');
 
-
 // center the sprite's anchor point
-    myCar.x = 150;
-    myCar.y = 340;
+    myCar.x = 100;
+    myCar.y = 200;
 
     appManager.addChildren = function () {
         app.stage.addChild(richText);

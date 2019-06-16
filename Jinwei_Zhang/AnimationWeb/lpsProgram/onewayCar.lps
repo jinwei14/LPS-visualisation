@@ -18,5 +18,26 @@ actions ([
 
 initially([
   location(carA, coordinate(2, 1), northward),
-	location(carB, coordinate(6, 1), northward)
+	goal(carA,coordinate(X, Y))
 ]).
+
+goal(Vehicle,coordinate(X, Y)) from _ to T,
+location(VehicleName, coordinate(X, Y), Direction) at T ->
+    drive(Vehicle, NewPlace) from T to _.
+
+drive(Vehicle, coordinate(X, Y)) from T to T1 <-
+  location(Vehicle, coordinate(X, Y), Direction),
+  step(Vehicle, OldPlace, NextPlace) from T1 to T2。
+
+moveNorth(Vehicle) from T to T1 <-
+
+moveSouth(Vehicle) from T to T1 <-
+
+moveEast(Vehicle) from T to T1 <-
+
+moveWest(Vehicle) from T to T1 <-
+
+
+updates(step(Vehicle, OldPlace, NextPlace), location(Vehicle, OldPlace, Heading),  location(Vehicle, NextPlace, Heading)).
+
+updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading)).
