@@ -94,6 +94,7 @@ function ResultDict(fullPhrase, timeStamp) {
     var s = fullPhrase;
     var m;
     var retList = [];
+    // eslint-disable-next-line no-cond-assign
     while ((m = r.exec(s)) != null) {
       retList.push(parseInt(m[0], 10));
     }
@@ -110,6 +111,7 @@ function ResultDict(fullPhrase, timeStamp) {
 // eslint-disable-next-line vars-on-top
 var TimeLine = [];
 
+// eslint-disable-next-line no-unused-vars
 function generateSpec(programFile, specFile) {
   LPS.loadFile(programFile)
     .then((engine) => {
@@ -199,22 +201,23 @@ function generateSpec(programFile, specFile) {
 
 // module.exports.ResultDict = ResultDict;
 
+// eslint-disable-next-line no-unused-vars
 function loadExample(element) {
-  var url = element.getAttribute('data-source');
-  var request = new XMLHttpRequest();
-  request.open('GET', url);
-  request.responseType = 'text';
-
-  request.onload = function () {
-    txtCodeInput.value = request.response;
-    txtCodeInput.disabled = false;
-    btnRunProgram.disabled = false;
-  };
-
-  txtCodeInput.value = 'Loading from ' + url;
-  txtCodeInput.disabled = true;
-  btnRunProgram.disabled = true;
-  request.send();
+  // var url = element.getAttribute('data-source');
+  // var request = new XMLHttpRequest();
+  // request.open('GET', url);
+  // request.responseType = 'text';
+  //
+  // request.onload = function () {
+  //   txtCodeInput.value = request.response;
+  //   txtCodeInput.disabled = false;
+  //   btnRunProgram.disabled = false;
+  // };
+  //
+  // txtCodeInput.value = 'Loading from ' + url;
+  // txtCodeInput.disabled = true;
+  // btnRunProgram.disabled = true;
+  // request.send();
 }
 
 function runProgram(program) {
@@ -233,6 +236,7 @@ function runProgram(program) {
 
       engine.on('error', (err) => {
         // outputArea.innerHTML = '<p>Error: ' + err + '</p>';
+        console.log(err);
       });
 
       engine.on('postCycle', () => {
@@ -243,6 +247,7 @@ function runProgram(program) {
           observations: engine.getLastCycleObservations(),
           duration: profiler.get('lastCycleExecutionTime')
         });
+        console.log(engine.getActiveFluents());
       });
 
       engine.on('done', () => {
@@ -289,8 +294,7 @@ function runProgram(program) {
                 }
               }
               for (let j = i + 1; j <= lastSeenCycle; j += 1) {
-                result[j].overlappingFluents
-                  = result[i].overlappingFluents
+                result[j].overlappingFluents = result[i].overlappingFluents
                   + numInCycle[j];
               }
               newFluents.push(f);
@@ -315,6 +319,7 @@ function runProgram(program) {
     })
     .catch((err) => {
       // outputArea.innerHTML = '<p>Error: ' + err + '</p>';
+      console.log(err);
     });
 }
 
