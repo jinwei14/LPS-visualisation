@@ -1,5 +1,5 @@
 % we assume the destination is reachable
-maxTime(10).
+maxTime(30).
 loadModule('../scripts/module.js').
 
 fluents([
@@ -22,37 +22,40 @@ actions ([
 
 initially([
   location(carA, coordinate(100, 200), eastward),
-	goal(carA,coordinate(600, 200)),
+	goal(carA,coordinate(300, 200)),
   street(mainStreet , coordinate(100, 200), 900, 50, 1)
 ]).
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
 location(VehicleName, coordinate(X, Y), Direction), A!=X at T ->
-    testPrint('start driving'),
+  % need to find the right direction here
+  % driving forward
     drive(Vehicle) from T to _.
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
 location(VehicleName, coordinate(X, Y), Direction), B!=Y at T ->
+  % need to find the right direction here
+  % driving forward
     drive(Vehicle) from T to _.
 
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == northward,
-  NewY = Y - 10
+  NewY = Y - 10,
   NextPlace = coordinate(X, NewY),
   step(Vehicle, NextPlace) from T1 to T2.
 
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == southward,
-  NewY = Y + 10
+  NewY = Y + 10,
   NextPlace = coordinate(X, NewY),
   step(Vehicle, NextPlace) from T1 to T2.
 
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == westward,
-  NewX = X-10
+  NewX = X-10,
   NextPlace = coordinate(NewX, Y),
   step(Vehicle, NextPlace) from T1 to T2.
 
