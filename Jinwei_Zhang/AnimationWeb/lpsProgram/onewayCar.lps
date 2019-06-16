@@ -1,3 +1,4 @@
+% we assume the destination is reachable
 fluents([
    coordinate(X, Y),
    location(VehicleName, coordinate(X, Y), Direction),
@@ -17,27 +18,53 @@ actions ([
 ]).
 
 initially([
-  location(carA, coordinate(2, 1), northward),
-	goal(carA,coordinate(X, Y))
+  location(carA, coordinate(100, 200), northward),
+	goal(carA,coordinate(600, 200)),
+  street(mainStreet , coordinate(100, 200), 900, 50, 1)
 ]).
 
-goal(Vehicle,coordinate(X, Y)) from _ to T,
-location(VehicleName, coordinate(X, Y), Direction) at T ->
-    drive(Vehicle, NewPlace) from T to _.
+goal(Vehicle,coordinate(A, B)) from _ to T,
+location(VehicleName, coordinate(X, Y), Direction), A!=X at T ->
+    drive(Vehicle) from T to _.
 
-drive(Vehicle, coordinate(X, Y)) from T to T1 <-
+goal(Vehicle,coordinate(A, B)) from _ to T,
+location(VehicleName, coordinate(X, Y), Direction), B!=Y at T ->
+    drive(Vehicle) from T to _.
+
+drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
-  step(Vehicle, OldPlace, NextPlace) from T1 to T2。
+  Direction == northward,
+  NextPlace = coordinate(X, Y - 10)
+  step(Vehicle, OldPlace, NextPlace) from T1 to T2.
 
-moveNorth(Vehicle) from T to T1 <-
+drive(Vehicle) from T to T1 <-
+  location(Vehicle, coordinate(X, Y), Direction),
+  Direction == southward,
+  NextPlace = coordinate(X, Y + 10)
+  step(Vehicle, OldPlace, NextPlace) from T1 to T2.
 
-moveSouth(Vehicle) from T to T1 <-
+drive(Vehicle) from T to T1 <-
+  location(Vehicle, coordinate(X, Y), Direction),
+  Direction == westward,
+  NextPlace = coordinate(X-10, Y)
+  step(Vehicle, OldPlace, NextPlace) from T1 to T2.
 
-moveEast(Vehicle) from T to T1 <-
+drive(Vehicle) from T to T1 <-
+  location(Vehicle, coordinate(X, Y), Direction),
+  Direction == eastward,
+  NextPlace = coordinate(X+10, Y)
+  step(Vehicle, OldPlace, NextPlace) from T1 to T2.
 
-moveWest(Vehicle) from T to T1 <-
+% on(coordinate(X,Y),Street) <-
+
+
+
+
 
 
 updates(step(Vehicle, OldPlace, NextPlace), location(Vehicle, OldPlace, Heading),  location(Vehicle, NextPlace, Heading)).
 
 updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading)).
+
+
+% you  can not move (x++) if you are not facing eastward
