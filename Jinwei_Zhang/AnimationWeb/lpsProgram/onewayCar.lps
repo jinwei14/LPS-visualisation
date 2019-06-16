@@ -1,0 +1,22 @@
+fluents([
+   coordinate(X, Y),
+   location(VehicleName, coordinate(X, Y), Direction),
+   trafficLight(coordinate(X, Y), Working_status, Color, FacingDirection),
+   street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane),
+   goal(VehicleName,coordinate(X, Y))
+]).
+
+% events will reserved for traffic lights
+events ([
+
+]).
+
+actions ([
+  step(Vehicle, OldPlace, NextPlace),
+  turn(Vehicle, NewHeading)
+]).
+
+initially([
+  location(carA, coordinate(2, 1), northward),
+	location(carB, coordinate(6, 1), northward)
+]).
