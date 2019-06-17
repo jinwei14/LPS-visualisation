@@ -6,6 +6,7 @@
         vehicle: [],
         street: []
     };
+
     const app = new PIXI.Application({backgroundColor: 0xFFFFFF, width: 1200, height: 1000});
     const graphics = new PIXI.Graphics();
 
@@ -121,26 +122,33 @@
         carInstance.x = x;
         carInstance.y = y;
 
+        let carText = new PIXI.Text(vehicleName, {fontFamily: 'Arial', fontSize: 12, fill: 0x007bff});
+        carText.x = x-15;
+        carText.y = y-40;
 
 
         // carInstance.rotation = 45*(Math.PI/180);
 
         appManager.vehicle.push({
             name: vehicleName,
+            textObj:carText,
             xLoc: x,
             yLoc: y,
             direction: direction,
             obj: carInstance
         });
         app.stage.addChild(carInstance);
+        app.stage.addChild(carText);
     };
 
     //this field will modify the child in app
     appManager.changeVehicleLocation = function (vehicleName, x, y, direction) {
         appManager.vehicle.forEach(function (item, index) {
             if (item.name === vehicleName){
-                item.obj.x =x;
+                item.obj.x = x;
                 item.obj.y = y;
+                item.textObj.x = x-15;
+                item.textObj.y = y-40;
                 if (item.direction !== direction){
                     console.log('further turning implementation');
                 }

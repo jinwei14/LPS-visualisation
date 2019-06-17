@@ -1,7 +1,6 @@
 //this test parser will test the street predicate
 
 
-const INDENTATION = '  ';
 // this the object that need to be process at every time cycle
 
 // street(piccadillyRoad, coordinate(9, 9), 80, 70, 2)

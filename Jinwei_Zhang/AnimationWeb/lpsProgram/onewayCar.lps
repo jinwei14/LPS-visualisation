@@ -23,8 +23,8 @@ actions ([
 ]).
 
 initially([
-  location(carA, coordinate(100, 200), eastward),
-	goal(carA,coordinate(300, 200)),
+  location(carA, coordinate(120, 225), eastward),
+	goal(carA,coordinate(200, 225)),
   street(mainStreet , coordinate(100, 200), 900, 50, 1)
 ]).
 

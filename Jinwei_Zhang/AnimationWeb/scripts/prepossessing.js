@@ -80,29 +80,25 @@
        3. start the animation process dump the buggy lps studio.
     */
 
-    // this the object that need to be process at every time cycle
-    function ObjectLoc(fullPhrase, timeStamp) {
-
+    function VehicleLoc(fullPhrase,timeStamp) {
         //the full phrase of the user defined fluent such as loc(car, 1650, 340)).
-        // // location(yourCar, coordinate(9, 9), eastward)
         this.fullPhrase = fullPhrase;
 
         //the time stamp that this fluent changed
         this.timeStamp = timeStamp;
 
-        //regulation match array of word and numbers
+        //regulation match array
         this.matchArray = this.fullPhrase.match(/(\w+)/g);
 
-        console.log(this.matchArray);
 
         //the object that is changing such as Car , Truck etx
-        this.getObject = function () {
-            var coordinate = ['coordinate', 'loc', 'location', 'coor', 'pos', 'position', 'xy'];
+        this.getObjectName = function () {
+            var coordinate = ['coordinate', 'loc', 'location', 'coor','pos','position','xy'];
             var len = this.matchArray.length;
             //if the word is not one of the words in the coordinate array and not a digit it will be the name
             //of the object
             for (var i = 1; i < len; i++) {
-                if (isNaN(this.matchArray[i]) && coordinate.includes(this.matchArray[i].toLowerCase()) === false) {
+                if (isNaN(this.matchArray[i] ) && coordinate.includes(this.matchArray[i].toLowerCase()) === false){
                     return this.matchArray[i];
                 }
             }
@@ -110,9 +106,7 @@
 
         // should be the fluent that changed such as : loc, location.
         this.getFluent = function () {
-
             var endPos = fullPhrase.indexOf('(');
-
             return fullPhrase.slice(0, endPos);
         };
 
@@ -128,6 +122,9 @@
             return retList;
         };
 
+        this.X = parseInt(this.getPosition()[0], 10);
+        this.Y = parseInt(this.getPosition()[1], 10);
+
         //the heading is optional. If there is a heading then get the heading as the form of
         this.getHeading = function () {
             var orientation =
@@ -139,14 +136,39 @@
             var len = this.matchArray.length;
             for (var i = 0; i < len; i++) {
                 //check if any of the works in the matching array is in the orientation array
-                if (orientation.includes(this.matchArray[i].toLowerCase())) {
+                if (orientation.includes(this.matchArray[i].toLowerCase())){
                     return this.matchArray[i];
                 }
             }
         };
-
     }
 
+    function Streets(fullPhrase) {
+
+
+        //the full phrase of the user defined fluent such as loc(car, 1650, 340)).
+        this.fullPhrase = fullPhrase;
+
+        //regulation match array
+        this.matchArray = this.fullPhrase.match(/(\w+)/g);
+        console.log(this.matchArray);
+        this.fluent = this.matchArray[0];
+
+        //the location and the name of the street
+        this.X = this.matchArray[3];
+        this.Y = this.matchArray[4];
+        this.name = this.matchArray[1];
+
+        //the width of the street
+        this.width = this.matchArray[5];
+
+        //the height of the street
+        this.height = this.matchArray[6];
+
+        //the number of lanes on the street
+        this.no_lane = this.matchArray[7];
+
+    }
     // this is a list of object that can access the
 
     function generateSpec(programFile, specFile) {
@@ -167,17 +189,19 @@
                         fluents.forEach(function (item, index) {
                             if (item.toLowerCase().startsWith('street')) {
                                 //street(mainStreet, coordinate(100, 200), 900, 50, 1)).
-                                appManager.createRoad('mainStreet',100,200,900,50,1);
+                                var street = new Streets(item);
+                                appManager.createRoad(street.name,street.X,street.Y,street.width,street.height,street.no_lane);
 
                             } else if (item.toLowerCase().startsWith('location')) {
-                                appManager.createVehicle('haha',120,225,'eastward')
+                                var loc = new VehicleLoc(item,currentTime);
+                                appManager.createVehicle(loc.getObjectName(),loc.X,loc.Y,loc.getHeading());
                             }
                         });
                         //Do something
                     }else if (currentTime > 1){
                         fluents.forEach(function (item, index) {
                         if (item.toLowerCase().startsWith('location')) {
-                            appManager.changeVehicleLocation('haha',200,225,'eastward')
+                            appManager.changeVehicleLocation(loc.getObjectName(),loc.X,loc.Y,loc.getHeading());
                         }
                         });
                     }

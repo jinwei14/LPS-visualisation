@@ -19,7 +19,7 @@ function ResultDict(fullPhrase,timeStamp) {
     console.log(this.matchArray);
 
     //the object that is changing such as Car , Truck etx
-    this.getObject = function () {
+    this.getObjectName = function () {
         var coordinate = ['coordinate', 'loc', 'location', 'coor','pos','position','xy'];
         var len = this.matchArray.length;
         //if the word is not one of the words in the coordinate array and not a digit it will be the name
@@ -79,7 +79,7 @@ function ResultDict(fullPhrase,timeStamp) {
 var obj2 = new ResultDict('location(yourCar, coordinate(9, 9), eastward)', 30);
 console.log('Fluent: ' + obj2.getFluent());
 console.log('heading: ' + obj2.getHeading());
-console.log('Object: ' + obj2.getObject());
+console.log('Object name: ' + obj2.getObjectName());
 console.log('Position: ' + obj2.getPosition());
 console.log('Timestamp: ' + obj2.timeStamp);
 console.log('x: ' + obj2.X);
