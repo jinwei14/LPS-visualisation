@@ -71,7 +71,7 @@
             streetText.x = (width + x)/2;
             streetText.y = y;
         }else{
-            streetText.x = x;
+            streetText.x = x+width;
             streetText.y = (height+y)/2;
             streetText.rotation = Math.PI / 2;
         }

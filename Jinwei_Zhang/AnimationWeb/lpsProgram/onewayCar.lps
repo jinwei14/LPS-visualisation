@@ -24,8 +24,9 @@ actions ([
 
 initially([
   location(carA, coordinate(120, 225), eastward),
-	goal(carA,coordinate(400, 225)),
-  street(mainStreet , coordinate(100, 200), 900, 50, 1)
+  goal(carA,coordinate(400, 225)),
+  street(mainStreet , coordinate(100, 200), 900, 50, 1),
+  street(westStreet , coordinate(10, 10), 50, 900, 1)
 ]).
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
