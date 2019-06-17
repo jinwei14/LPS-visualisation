@@ -170,9 +170,11 @@
                             if (item.toLowerCase().startsWith('goal')) {
                                 // appManager.addChildren();
                             } else if (item.toLowerCase().startsWith('street')) {
+                                //street(mainStreet, coordinate(100, 200), 900, 50, 1)).
+                                appManager.createRoad('mainStreet',100,200,900,50,1);
 
                             } else if (item.toLowerCase().startsWith('location')) {
-                                appManager.createVehicle('ha',6,7,'eastward');
+                                appManager.createVehicle('haha',100,200,'eastward')
                             }
                         });
                         //Do something

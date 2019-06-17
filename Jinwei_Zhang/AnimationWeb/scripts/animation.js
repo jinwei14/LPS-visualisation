@@ -7,6 +7,7 @@
         street: []
     };
     const app = new PIXI.Application({backgroundColor: 0xFFFFFF, width: 1200, height: 1000});
+    const graphics = new PIXI.Graphics();
 
     appManager.createVisualizer = function () {
         document.getElementById("content").appendChild(app.view);
@@ -33,7 +34,7 @@
         const richText = new PIXI.Text('LPS sample animation', style);
         richText.x = 300;
         richText.y = 0;
-        const graphics = new PIXI.Graphics();
+
         // draw a coordinate system X
         graphics.lineStyle(5, 0x333, 1);
         graphics.moveTo(0, 0);
@@ -64,13 +65,21 @@
         console.log(nameText, x, y, width, height, laneNumber);
         //main street text
         let streetText = new PIXI.Text(nameText, {fontFamily: 'Arial', fontSize: 24, fill: 0xFFFFFF});
-        streetText.x = (x + width) / 2;
-        streetText.y = (y + height) / 2;
+        if (width>height){
+            streetText.x = (width+x)/2;
+            streetText.y = y;
+        }else{
+            streetText.x = x;
+            streetText.y = (height+y)/2;
+            streetText.rotation = Math.PI / 2;
+        }
         //main street
         graphics.lineStyle(2, 0xFFFFFF, 1);
         graphics.beginFill(0x333);
         graphics.drawRect(x, y, width, height);
         graphics.endFill();
+
+
 
         app.stage.addChild(streetText);
     };
@@ -81,6 +90,7 @@
         console.log(vehicleName, x, y, direction);
         // create a new Sprite from an image path
         var carInstance = null;
+        //the length of the car is 40
         switch(direction) {
             case 'northward':
                 // code block
@@ -101,9 +111,18 @@
                 carInstance = PIXI.Sprite.from('imgs/carNorth.png');
         }
 
+        // const graphics = new PIXI.Graphics();
+        // graphics.lineStyle(2, 0x000000, 1);
+        // graphics.beginFill(0x333);
+        // graphics.drawRect(x, y, 2, 2);
+        // graphics.endFill();
         // center the sprite's anchor point
         carInstance.x = x;
         carInstance.y = y;
+
+
+
+        // carInstance.rotation = 45*(Math.PI/180);
 
         appManager.vehicle.push({
             name: vehicleName,
