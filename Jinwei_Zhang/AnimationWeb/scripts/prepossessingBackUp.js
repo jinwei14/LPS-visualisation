@@ -153,12 +153,11 @@
     }
 
     //this function will checkout parse the street from all of other fluents.
-    function checkStreet(program) {
+    function checkStreet(program){
 
     }
-
     //this is the street object.
-    function Streets(fullPhrase) {
+    function Streets(fullPhrase){
         // the street will be a
         this.fullPhrase = fullPhrase;
     }
@@ -174,30 +173,72 @@
             .then((engine) => {
                 let profiler = engine.getProfiler();
 
+
                 engine.on('postCycle', () => {
                     let currentTime = engine.getCurrentTime();
-                    let fluents = engine.getActiveFluents();
-                    let actions = engine.getLastCycleActions();
-                    let observations = engine.getLastCycleObservations();
-                    let duration = profiler.get('lastCycleExecutionTime');
-                    if (currentTime === 1){
+                    let startTime = currentTime - 1;
+                    let endTime = currentTime;
 
-                    }else{
+                    console.log('% --- Start of cycle ' + endTime + ' ---\n');
+                    var cycle = [];
+                    console.log('expect_num_of(' + ['fluent', currentTime, profiler.get('numState')].join(', ') + ').\n');
+
+
+
+                    engine.getActiveFluents().forEach((termArg) => {
+                        let lpsTerm = LPS.literal(termArg);
+                        let args = lpsTerm.getArguments();
+                        let term = new LPS.Functor(lpsTerm.getName(), args);
+                        // location(yourCar, coordinate(9, 9), eastward)
+                        console.log(INDENTATION + 'expect(' + ['fluent', currentTime, term.toString()].join(', ') + ').\n');
+                        let obj1 = new ObjectLoc(term.toString(), currentTime);
+                        cycle.push(obj1);
+                    });
+                    TimeLine.push(cycle);
+
+
+
+
+
+
+                    if (startTime === 0) {
+                        console.log('\n');
 
                     }
+
+                    console.log('expect_num_of(' + ['action', startTime, endTime, profiler.get('lastCycleNumActions')].join(', ') + ').\n');
+                    engine.getLastCycleActions().forEach((termArg) => {
+                        let lpsTerm = LPS.literal(termArg);
+                        let args = lpsTerm.getArguments();
+                        let term = new LPS.Functor(lpsTerm.getName(), args);
+                        console.log(INDENTATION + 'expect(' + ['action', startTime, endTime, term.toString()].join(', ') + ').\n');
+                    });
+
+                    console.log('expect_num_of(' + ['observation', startTime, endTime, profiler.get('lastCycleNumObservations')].join(', ') + ').\n');
+                    engine.getLastCycleObservations().forEach((termArg) => {
+                        let lpsTerm = LPS.literal(termArg);
+                        let args = lpsTerm.getArguments();
+                        let term = new LPS.Functor(lpsTerm.getName(), args);
+                        console.log(INDENTATION + 'expect(' + ['observation', startTime, endTime, term.toString()].join(', ') + ').\n');
+                    });
+
+                    console.log('expect_num_of(' + ['firedRules', endTime, profiler.get('lastCycleNumFiredRules')].join(', ') + ').\n');
+                    console.log('expect_num_of(' + ['resolvedGoals', endTime, profiler.get('lastCycleNumResolvedGoals')].join(', ') + ').\n');
+                    console.log('expect_num_of(' + ['unresolvedGoals', endTime, profiler.get('lastCycleNumUnresolvedGoals')].join(', ') + ').\n');
+                    console.log('expect_num_of(' + ['failedGoals', endTime, profiler.get('lastCycleNumFailedGoals')].join(', ') + ').\n');
+
+                    console.log('\n');
 
                 });
 
                 engine.on('error', (err) => {
                     console.log(err);
-                    alert("Error in running the program: " + err);
                 });
 
                 engine.run();
-                console.log('engine finished running');
+                console.log('engine finished running')
             }).catch((err) => {
             console.log('this is the error message: ' + err);
-            alert("Error in running the program: " + err);
         });
     }
 
