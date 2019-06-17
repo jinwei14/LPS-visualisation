@@ -23,8 +23,7 @@
                 }
 
                 generateSpec(program, null);
-                appManager.createVisualizer();
-                appManager.addChildren();
+
                 console.log('the inner called');
             } else {
                 alert('Empty program detected via ' + event + ', Please input a program ');
@@ -152,20 +151,8 @@
 
     }
 
-    //this function will checkout parse the street from all of other fluents.
-    function checkStreet(program) {
-
-    }
-
-    //this is the street object.
-    function Streets(fullPhrase) {
-        // the street will be a
-        this.fullPhrase = fullPhrase;
-    }
 
     // this is a list of object that can access the
-    // eslint-disable-next-line vars-on-top
-    var TimeLine = [];
 
     function generateSpec(programFile, specFile) {
 
@@ -173,17 +160,26 @@
         LPS.loadString(programFile)
             .then((engine) => {
                 let profiler = engine.getProfiler();
-
+                //start creating the pixiJS panel
+                appManager.createVisualizer();
                 engine.on('postCycle', () => {
                     let currentTime = engine.getCurrentTime();
                     let fluents = engine.getActiveFluents();
                     let actions = engine.getLastCycleActions();
                     let observations = engine.getLastCycleObservations();
                     let duration = profiler.get('lastCycleExecutionTime');
-                    if (currentTime === 1){
+                    if (currentTime === 1) {
+                        fluents.forEach(function (item, index) {
+                            if (item.toLowerCase().startsWith('goal')) {
 
-                    }else{
+                                appManager.addChildren();
+                            } else if (item.toLowerCase().startsWith('street')) {
 
+                            } else if (item.toLowerCase().startsWith('location')) {
+
+                            }
+                        });
+                        //Do something
                     }
 
                 });
