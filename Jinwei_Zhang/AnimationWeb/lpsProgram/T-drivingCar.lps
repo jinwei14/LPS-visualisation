@@ -9,7 +9,9 @@ fluents([
    location(VehicleName, coordinate(X, Y), Direction),
    trafficLight(coordinate(X, Y), Working_status, Color, FacingDirection),
    street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane),
-   goal(VehicleName,coordinate(X, Y))
+   goal(VehicleName,coordinate(X, Y)),
+   % define the junction coordinate
+   junction(Name,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H))
 ]).
 
 % events will reserved for traffic lights
@@ -26,7 +28,8 @@ initially([
   location(carA, coordinate(120, 225), eastward),
   goal(carA,coordinate(400, 225)),
   street(mainStreet , coordinate(100, 200), 900, 50, 1),
-  street(southStreet , coordinate(475, 250), 50, 500, 1)
+  street(southStreet , coordinate(475, 250), 50, 500, 1),
+  junction(tJuntion,coordinate(475, 200),coordinate(525, 200),coordinate(475, 250),coordinate(525, 250))
 ]).
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
@@ -69,9 +72,14 @@ drive(Vehicle) from T to T1 <-
   NextPlace = coordinate(NewX, Y),
   step(Vehicle, NextPlace) from T1 to T2.
 
-% on(coordinate(X,Y),Street) <-
+% step is false if the car is moving into a junction, not on main Road and there is a collision.
+<- step(Vehicle, NextPlace), onTjunction(coordinate(X, NewY)), not onMainRoad(Vehicle),collisionPossible(Vehicle1, Vehicle2).
 
-
+collisionPossible(Vehicle1, Vehicle2) at T <-
+  location(Vehicle1, Place1, Heading1) at T,
+  next(Place1, Heading1, Place2),
+  location(Vehicle2, Place2, Heading2) at T,
+  not opposite(Heading1, Heading2).
 
 updates(step(Vehicle, NextPlace), location(VehicleName, OldPlace, Direction),  location(Vehicle, NextPlace, Direction)).
 
