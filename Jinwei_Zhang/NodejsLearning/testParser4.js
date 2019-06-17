@@ -34,3 +34,6 @@ console.log('y: ' + obj2.Y);
 console.log('status: ' + obj2.status);
 console.log('color: ' + obj2.color);
 console.log('direct: ' + obj2.direct);
+
+
+console.log("car1","car2");

@@ -1,8 +1,11 @@
 (function (window) {
     // output test if pixi works in the browser or not.
     PIXI.utils.sayHello();
-    var appManager = {};
 
+    var appManager = {
+        vehicle: [],
+        street: []
+    };
     const app = new PIXI.Application({backgroundColor: 0xFFFFFF, width: 1200, height: 1000});
 
     appManager.createVisualizer = function () {
@@ -57,14 +60,16 @@
 
     //this field will create the Road
     appManager.createRoad = function (nameText, x, y, width, height, laneNumber) {
+        console.log('creating Road has been called in animation.js ' + window.name);
+        console.log(nameText, x, y, width, height, laneNumber);
         //main street text
-        let streetText = new PIXI.Text('Main Street', {fontFamily: 'Arial', fontSize: 24, fill: 0xFFFFFF});
-        streetText.x = 400;
-        streetText.y = 200;
+        let streetText = new PIXI.Text(nameText, {fontFamily: 'Arial', fontSize: 24, fill: 0xFFFFFF});
+        streetText.x = (x + width) / 2;
+        streetText.y = (y + height) / 2;
         //main street
         graphics.lineStyle(2, 0xFFFFFF, 1);
         graphics.beginFill(0x333);
-        graphics.drawRect(100, 200, 900, 50);
+        graphics.drawRect(x, y, width, height);
         graphics.endFill();
 
         app.stage.addChild(streetText);
@@ -72,16 +77,48 @@
 
     //this field will create the vehicles with name, location and direction.
     appManager.createVehicle = function (vehicleName, x, y, direction) {
+        console.log('creating vehicle has been called in animation.js ' + window.name);
+        console.log(vehicleName, x, y, direction);
         // create a new Sprite from an image path
-        const myCar = PIXI.Sprite.from('imgs/myCar.png');
+        var carInstance = null;
+        switch(direction) {
+            case 'northward':
+                // code block
+                carInstance = PIXI.Sprite.from('imgs/carNorth.png');
+                break;
+            case 'southward':
+                // code block
+                carInstance = PIXI.Sprite.from('imgs/carSouth.png');
+                break;
+            case 'eastward':
+                carInstance = PIXI.Sprite.from('imgs/carEast.png');
+                break;
+            case 'westward':
+                carInstance = PIXI.Sprite.from('imgs/carWest.png');
+                break;
+
+            default:
+                carInstance = PIXI.Sprite.from('imgs/carNorth.png');
+        }
 
         // center the sprite's anchor point
-        myCar.x = 100;
-        myCar.y = 200;
+        carInstance.x = x;
+        carInstance.y = y;
 
-        app.stage.addChild(myCar);
+        appManager.vehicle.push({
+            name: vehicleName,
+            xLoc: x,
+            yLoc: y,
+            direction: direction,
+            obj: carInstance
+        });
+        app.stage.addChild(carInstance);
     };
 
+    //this field will modify the child in app
+    appManager.changeVehicleLocation = function (vehicleName, x, y, direction) {
+
+    };
     // //this field will add all the children to the app
     // appManager.addChildren = function () {
     //     console.log('the children adding has been called');

@@ -6,7 +6,7 @@
     var program = '';
 
 
-// Event handling on the broswer life clcle for parse the text file
+    // Event handling on the broswer life clcle for parse the text file
     document.addEventListener("DOMContentLoaded", function () {
         function parserText(event) {
             //open up the content of the  visualiser
@@ -15,7 +15,6 @@
                 var message = "<h6> Successfully passing LPS program to the parser ! </h6>";
                 document.getElementById("output").innerHTML = message;
                 console.log(program);
-                checkStreet(program);
                 //make display text box appear
                 var vis = document.getElementById("content");
                 if (vis.style.display === "none") {
@@ -24,12 +23,10 @@
 
                 generateSpec(program, null);
 
-                console.log('the inner called');
+
             } else {
                 alert('Empty program detected via ' + event + ', Please input a program ');
             }
-
-
         }
 
         //clear the content of the input box and disable the visualiser
@@ -52,6 +49,7 @@
 
     });
 
+    //loading test button listener
     document.addEventListener("DOMContentLoaded", function () {
         function loadTextFromFile(evt) {
             //Retrieve the first (and only!) File from the FileList object
@@ -82,7 +80,6 @@
        2. Read all the information into a dictionary
        3. start the animation process dump the buggy lps studio.
     */
-    const INDENTATION = '  ';
 
     // this the object that need to be process at every time cycle
     function ObjectLoc(fullPhrase, timeStamp) {
@@ -171,12 +168,11 @@
                     if (currentTime === 1) {
                         fluents.forEach(function (item, index) {
                             if (item.toLowerCase().startsWith('goal')) {
-
-                                appManager.addChildren();
+                                // appManager.addChildren();
                             } else if (item.toLowerCase().startsWith('street')) {
 
                             } else if (item.toLowerCase().startsWith('location')) {
-
+                                appManager.createVehicle('ha',6,7,'eastward');
                             }
                         });
                         //Do something
@@ -197,6 +193,5 @@
         });
     }
 
-    window.TimeLine = TimeLine;
 
 })(window);
