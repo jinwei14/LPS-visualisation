@@ -13,22 +13,23 @@ function Streets(fullPhrase) {
 
     //regulation match array
     this.matchArray = this.fullPhrase.match(/(\w+)/g);
-    console.log(this.matchArray);
+
     this.fluent = this.matchArray[0];
 
     //the location and the name of the street
-    this.X = this.matchArray[3];
-    this.Y = this.matchArray[4];
+    this.X = parseInt(this.matchArray[3],10);
+    this.Y = parseInt(this.matchArray[4],10);
     this.name = this.matchArray[1];
 
+
     //the width of the street
-    this.width = this.matchArray[5];
+    this.width = parseInt(this.matchArray[5],10);
 
     //the height of the street
-    this.height = this.matchArray[6];
+    this.height = parseInt(this.matchArray[6],10);
 
     //the number of lanes on the street
-    this.no_lane = this.matchArray[7];
+    this.no_lane = parseInt(this.matchArray[7],10);
 
 }
 
@@ -36,6 +37,7 @@ function Streets(fullPhrase) {
 //loc(car, 1650, 340))
 //position(dummyCar, xy(66.90)).
 var obj2 = new Streets('street(piccadillyRoad, coordinate(9, 9), 80, 70, 2).');
+console.log('match array: '+ obj2.matchArray);
 console.log('fullPhrase: ' + obj2.fullPhrase);
 console.log('fluent: ' + obj2.fluent);
 console.log('name: ' + obj2.name);

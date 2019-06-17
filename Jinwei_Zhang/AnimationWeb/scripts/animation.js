@@ -66,8 +66,9 @@
         console.log(nameText, x, y, width, height, laneNumber);
         //main street text
         let streetText = new PIXI.Text(nameText, {fontFamily: 'Arial', fontSize: 18, fill: 0xFFFFFF});
+
         if (width>height){
-            streetText.x = (width+x)/2;
+            streetText.x = (width + x)/2;
             streetText.y = y;
         }else{
             streetText.x = x;
@@ -79,8 +80,6 @@
         graphics.beginFill(0x333);
         graphics.drawRect(x, y, width, height);
         graphics.endFill();
-
-
 
         app.stage.addChild(streetText);
     };

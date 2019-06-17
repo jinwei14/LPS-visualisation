@@ -80,7 +80,7 @@
        3. start the animation process dump the buggy lps studio.
     */
 
-    function VehicleLoc(fullPhrase,timeStamp) {
+    function VehicleLoc(fullPhrase, timeStamp) {
         //the full phrase of the user defined fluent such as loc(car, 1650, 340)).
         this.fullPhrase = fullPhrase;
 
@@ -93,12 +93,12 @@
 
         //the object that is changing such as Car , Truck etx
         this.getObjectName = function () {
-            var coordinate = ['coordinate', 'loc', 'location', 'coor','pos','position','xy'];
+            var coordinate = ['coordinate', 'loc', 'location', 'coor', 'pos', 'position', 'xy'];
             var len = this.matchArray.length;
             //if the word is not one of the words in the coordinate array and not a digit it will be the name
             //of the object
             for (var i = 1; i < len; i++) {
-                if (isNaN(this.matchArray[i] ) && coordinate.includes(this.matchArray[i].toLowerCase()) === false){
+                if (isNaN(this.matchArray[i]) && coordinate.includes(this.matchArray[i].toLowerCase()) === false) {
                     return this.matchArray[i];
                 }
             }
@@ -136,7 +136,7 @@
             var len = this.matchArray.length;
             for (var i = 0; i < len; i++) {
                 //check if any of the works in the matching array is in the orientation array
-                if (orientation.includes(this.matchArray[i].toLowerCase())){
+                if (orientation.includes(this.matchArray[i].toLowerCase())) {
                     return this.matchArray[i];
                 }
             }
@@ -145,30 +145,31 @@
 
     function Streets(fullPhrase) {
 
-
         //the full phrase of the user defined fluent such as loc(car, 1650, 340)).
         this.fullPhrase = fullPhrase;
 
         //regulation match array
         this.matchArray = this.fullPhrase.match(/(\w+)/g);
-        console.log(this.matchArray);
+
         this.fluent = this.matchArray[0];
 
         //the location and the name of the street
-        this.X = this.matchArray[3];
-        this.Y = this.matchArray[4];
+        this.X = parseInt(this.matchArray[3],10);
+        this.Y = parseInt(this.matchArray[4],10);
         this.name = this.matchArray[1];
 
+
         //the width of the street
-        this.width = this.matchArray[5];
+        this.width = parseInt(this.matchArray[5],10);
 
         //the height of the street
-        this.height = this.matchArray[6];
+        this.height = parseInt(this.matchArray[6],10);
 
         //the number of lanes on the street
-        this.no_lane = this.matchArray[7];
+        this.no_lane = parseInt(this.matchArray[7],10);
 
     }
+
     // this is a list of object that can access the
 
     function generateSpec(programFile, specFile) {
@@ -190,19 +191,20 @@
                             if (item.toLowerCase().startsWith('street')) {
                                 //street(mainStreet, coordinate(100, 200), 900, 50, 1)).
                                 var street = new Streets(item);
-                                appManager.createRoad(street.name,street.X,street.Y,street.width,street.height,street.no_lane);
+                                appManager.createRoad(street.name, street.X, street.Y, street.width, street.height, street.no_lane);
 
                             } else if (item.toLowerCase().startsWith('location')) {
-                                var loc = new VehicleLoc(item,currentTime);
-                                appManager.createVehicle(loc.getObjectName(),loc.X,loc.Y,loc.getHeading());
+                                var loc = new VehicleLoc(item, currentTime);
+                                appManager.createVehicle(loc.getObjectName(), loc.X, loc.Y, loc.getHeading());
                             }
                         });
                         //Do something
-                    }else if (currentTime > 1){
+                    } else if (currentTime > 1) {
                         fluents.forEach(function (item, index) {
-                        if (item.toLowerCase().startsWith('location')) {
-                            appManager.changeVehicleLocation(loc.getObjectName(),loc.X,loc.Y,loc.getHeading());
-                        }
+                            if (item.toLowerCase().startsWith('location')) {
+                                var loc = new VehicleLoc(item, currentTime);
+                                appManager.changeVehicleLocation(loc.getObjectName(), loc.X, loc.Y, loc.getHeading());
+                            }
                         });
                     }
                 });

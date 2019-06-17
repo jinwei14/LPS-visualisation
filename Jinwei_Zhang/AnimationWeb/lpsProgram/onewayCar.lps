@@ -1,5 +1,5 @@
 % we assume the destination is reachable
-maxTime(30).
+maxTime(40).
 cycleInterval(200).
 
 loadModule('../scripts/module.js').
@@ -24,7 +24,7 @@ actions ([
 
 initially([
   location(carA, coordinate(120, 225), eastward),
-	goal(carA,coordinate(200, 225)),
+	goal(carA,coordinate(400, 225)),
   street(mainStreet , coordinate(100, 200), 900, 50, 1)
 ]).
 
