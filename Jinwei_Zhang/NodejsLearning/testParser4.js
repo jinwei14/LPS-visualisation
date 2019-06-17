@@ -10,8 +10,8 @@ function TrafficLight(fullPhrase) {
 
     this.fluent = this.matchArray[0];
     //the location and the name of the street
-    this.X = this.matchArray[2];
-    this.Y = this.matchArray[3];
+    this.X = parseInt(this.matchArray[2],10);
+    this.Y = parseInt(this.matchArray[3],10);
 
     //ths status of the traffic light
     this.status = this.matchArray[4];
