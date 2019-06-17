@@ -1,5 +1,7 @@
 % we assume the destination is reachable
-maxTime(30).
+maxTime(40).
+cycleInterval(200).
+
 loadModule('../scripts/module.js').
 
 fluents([
@@ -21,9 +23,10 @@ actions ([
 ]).
 
 initially([
-  location(carA, coordinate(100, 200), eastward),
-	goal(carA,coordinate(300, 200)),
-  street(mainStreet , coordinate(100, 200), 900, 50, 1)
+  location(carA, coordinate(120, 225), eastward),
+  goal(carA,coordinate(400, 225)),
+  street(mainStreet , coordinate(100, 200), 900, 50, 1),
+  street(southStreet , coordinate(475, 250), 50, 500, 1)
 ]).
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
@@ -73,3 +76,6 @@ drive(Vehicle) from T to T1 <-
 updates(step(Vehicle, NextPlace), location(VehicleName, OldPlace, Direction),  location(Vehicle, NextPlace, Direction)).
 
 updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading)).
+
+
+% you  can not move (x++) if you are not facing eastward
