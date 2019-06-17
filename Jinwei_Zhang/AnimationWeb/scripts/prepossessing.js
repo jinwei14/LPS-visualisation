@@ -5,7 +5,6 @@
     console.log('index -> LPS(loadFile) -> ProgramFactory(fromFile) -> Parser(source, pathname) -> _lexer.get()');
     var program = '';
 
-
     // Event handling on the broswer life clcle for parse the text file
     document.addEventListener("DOMContentLoaded", function () {
         function parserText(event) {
@@ -148,7 +147,6 @@
 
     }
 
-
     // this is a list of object that can access the
 
     function generateSpec(programFile, specFile) {
@@ -167,19 +165,22 @@
                     let duration = profiler.get('lastCycleExecutionTime');
                     if (currentTime === 1) {
                         fluents.forEach(function (item, index) {
-                            if (item.toLowerCase().startsWith('goal')) {
-                                // appManager.addChildren();
-                            } else if (item.toLowerCase().startsWith('street')) {
+                            if (item.toLowerCase().startsWith('street')) {
                                 //street(mainStreet, coordinate(100, 200), 900, 50, 1)).
                                 appManager.createRoad('mainStreet',100,200,900,50,1);
 
                             } else if (item.toLowerCase().startsWith('location')) {
-                                appManager.createVehicle('haha',100,200,'eastward')
+                                appManager.createVehicle('haha',120,225,'eastward')
                             }
                         });
                         //Do something
+                    }else if (currentTime > 1){
+                        fluents.forEach(function (item, index) {
+                        if (item.toLowerCase().startsWith('location')) {
+                            appManager.changeVehicleLocation('haha',200,225,'eastward')
+                        }
+                        });
                     }
-
                 });
 
                 engine.on('error', (err) => {

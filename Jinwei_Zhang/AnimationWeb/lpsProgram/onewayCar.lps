@@ -1,5 +1,7 @@
 % we assume the destination is reachable
 maxTime(30).
+cycleInterval(200).
+
 loadModule('../scripts/module.js').
 
 fluents([

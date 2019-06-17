@@ -64,7 +64,7 @@
         console.log('creating Road has been called in animation.js ' + window.name);
         console.log(nameText, x, y, width, height, laneNumber);
         //main street text
-        let streetText = new PIXI.Text(nameText, {fontFamily: 'Arial', fontSize: 24, fill: 0xFFFFFF});
+        let streetText = new PIXI.Text(nameText, {fontFamily: 'Arial', fontSize: 18, fill: 0xFFFFFF});
         if (width>height){
             streetText.x = (width+x)/2;
             streetText.y = y;
@@ -117,6 +117,7 @@
         // graphics.drawRect(x, y, 2, 2);
         // graphics.endFill();
         // center the sprite's anchor point
+        carInstance.anchor.set(0.5);
         carInstance.x = x;
         carInstance.y = y;
 
@@ -136,6 +137,15 @@
 
     //this field will modify the child in app
     appManager.changeVehicleLocation = function (vehicleName, x, y, direction) {
+        appManager.vehicle.forEach(function (item, index) {
+            if (item.name === vehicleName){
+                item.obj.x =x;
+                item.obj.y = y;
+                if (item.direction !== direction){
+                    console.log('further turning implementation');
+                }
+            }
+        });
 
     };
     // //this field will add all the children to the app
