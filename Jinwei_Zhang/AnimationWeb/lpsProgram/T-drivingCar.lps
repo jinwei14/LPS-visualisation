@@ -2,7 +2,7 @@
 % and car length is 40 x 40 based on the image
 % speed is 5 unit per cycle.
 maxTime(500).
-cycleInterval(100).
+cycleInterval(10).
 
 loadModule('../scripts/module.js').
 
@@ -181,6 +181,45 @@ drive(Vehicle) from T to T1 <-
 <- step(Vehicle, NextPlace),
   not onMainRoad(Vehicle) at T,
   collisionPossible(Vehicle, Vehicle2) at T.
+
+% case where car should not step forward
+<- step(Vehicle, NextPlace),
+  location(Vehicle, coordinate(A, B), Direction),
+  % street(_, coordinate(A, B), Width, Height, _, _),
+  goal(Vehicle,coordinate(C, D)),
+  A == C,
+  D < B,
+  Direction != northward.
+
+% this bit need furter improvement.
+<- step(Vehicle, NextPlace),
+  location(Vehicle, coordinate(A, B), Direction),
+  % street(_, coordinate(A, B), Width, Height, _, _),
+  goal(Vehicle,coordinate(C, D)),
+  A == C,
+  D > B,
+  Direction != southward.
+
+<- step(Vehicle, NextPlace),
+  location(Vehicle, coordinate(A, B), Direction),
+  % street(_, coordinate(A, B), Width, Height, _, _),
+  goal(Vehicle,coordinate(C, D)),
+  D == B,
+  C < A,
+  Direction != westward.
+
+<- step(Vehicle, NextPlace),
+  location(Vehicle, coordinate(A, B), Direction),
+  % street(_, coordinate(A, B), Width, Height, _, _),
+  goal(Vehicle,coordinate(C, D)),
+  D == B,
+  C > A,
+  Direction != eastward.
+%
+% % car has drive beyond the street to the far southward
+% <- step(Vehicle, coordinate(X, Y)),
+%   street(_, coordinate(A, B), Width, Height, _, _),
+%   Y + 20 > B.
 
 collisionPossible(Vehicle1, Vehicle2) at T <-
 

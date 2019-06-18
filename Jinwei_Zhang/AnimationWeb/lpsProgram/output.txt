@@ -308,137 +308,926 @@ carB start driving
 carB move northward
 updating turing carB westward
 updating loc carA coordinate(600, 225)
-updating loc carB coordinate(500, 220)
 updating turing carB westward
 updating loc carA coordinate(600, 225)
-updating loc carB coordinate(500, 220)
 carA 600 225 Direction eastward----------------Reactive rule----------------
 checking in Juntion or not ?
-carB 500 220 Direction westward----------------Reactive rule----------------
+carB 500 225 Direction westward----------------Reactive rule----------------
 checking in Juntion or not ?
+checking in turnning westward or not ?
+carB turing westward
+checking in turnning eastward or not ?
+checking in turnning northward or not ?
+checking in turnning southward or not ?
 carA start driving
 carA move eastward
 carB start driving
 carB move westward
+updating turing carB westward
+updating loc carB coordinate(500, 220)
 updating loc carA coordinate(605, 225)
-updating loc carB coordinate(495, 220)
+updating loc carB coordinate(495, 225)
+updating turing carB westward
+updating loc carB coordinate(500, 220)
+updating loc carB coordinate(495, 225)
 updating loc carA coordinate(605, 225)
-updating loc carB coordinate(495, 220)
 carA 605 225 Direction eastward----------------Reactive rule----------------
 checking in Juntion or not ?
-carB 495 220 Direction westward----------------Reactive rule----------------
+carB 495 225 Direction westward----------------Reactive rule----------------
 checking in Juntion or not ?
 carA start driving
 carA move eastward
 carB start driving
 carB move westward
 updating loc carA coordinate(610, 225)
-updating loc carB coordinate(490, 220)
+updating loc carB coordinate(490, 225)
 updating loc carA coordinate(610, 225)
-updating loc carB coordinate(490, 220)
+updating loc carB coordinate(490, 225)
 carA 610 225 Direction eastward----------------Reactive rule----------------
 checking in Juntion or not ?
-carB 490 220 Direction westward----------------Reactive rule----------------
+carB 490 225 Direction westward----------------Reactive rule----------------
 checking in Juntion or not ?
 carA start driving
 carA move eastward
 carB start driving
 carB move westward
 updating loc carA coordinate(615, 225)
-updating loc carB coordinate(485, 220)
+updating loc carB coordinate(485, 225)
 updating loc carA coordinate(615, 225)
-updating loc carB coordinate(485, 220)
+updating loc carB coordinate(485, 225)
 carA 615 225 Direction eastward----------------Reactive rule----------------
 checking in Juntion or not ?
-carB 485 220 Direction westward----------------Reactive rule----------------
+carB 485 225 Direction westward----------------Reactive rule----------------
 checking in Juntion or not ?
 carA start driving
 carA move eastward
 carB start driving
 carB move westward
 updating loc carA coordinate(620, 225)
-updating loc carB coordinate(480, 220)
+updating loc carB coordinate(480, 225)
 updating loc carA coordinate(620, 225)
-updating loc carB coordinate(480, 220)
+updating loc carB coordinate(480, 225)
 carA 620 225 Direction eastward----------------Reactive rule----------------
 checking in Juntion or not ?
-carB 480 220 Direction westward----------------Reactive rule----------------
+carB 480 225 Direction westward----------------Reactive rule----------------
 checking in Juntion or not ?
 carA start driving
 carA move eastward
 carB start driving
 carB move westward
 updating loc carA coordinate(625, 225)
-updating loc carB coordinate(475, 220)
+updating loc carB coordinate(475, 225)
 updating loc carA coordinate(625, 225)
-updating loc carB coordinate(475, 220)
+updating loc carB coordinate(475, 225)
 carA 625 225 Direction eastward----------------Reactive rule----------------
 checking in Juntion or not ?
-carB 475 220 Direction westward----------------Reactive rule----------------
+carB 475 225 Direction westward----------------Reactive rule----------------
 checking in Juntion or not ?
 carA start driving
 carA move eastward
 carB start driving
 carB move westward
 updating loc carA coordinate(630, 225)
-updating loc carB coordinate(470, 220)
+updating loc carB coordinate(470, 225)
 updating loc carA coordinate(630, 225)
-updating loc carB coordinate(470, 220)
+updating loc carB coordinate(470, 225)
 carA 630 225 Direction eastward----------------Reactive rule----------------
 checking in Juntion or not ?
-carB 470 220 Direction westward----------------Reactive rule----------------
+carB 470 225 Direction westward----------------Reactive rule----------------
 checking in Juntion or not ?
 carA start driving
 carA move eastward
 carB start driving
 carB move westward
 updating loc carA coordinate(635, 225)
-updating loc carB coordinate(465, 220)
+updating loc carB coordinate(465, 225)
 updating loc carA coordinate(635, 225)
-updating loc carB coordinate(465, 220)
+updating loc carB coordinate(465, 225)
 carA 635 225 Direction eastward----------------Reactive rule----------------
 checking in Juntion or not ?
-carB 465 220 Direction westward----------------Reactive rule----------------
+carB 465 225 Direction westward----------------Reactive rule----------------
 checking in Juntion or not ?
 carA start driving
 carA move eastward
 carB start driving
 carB move westward
 updating loc carA coordinate(640, 225)
-updating loc carB coordinate(460, 220)
+updating loc carB coordinate(460, 225)
 updating loc carA coordinate(640, 225)
-updating loc carB coordinate(460, 220)
+updating loc carB coordinate(460, 225)
 carA 640 225 Direction eastward----------------Reactive rule----------------
 checking in Juntion or not ?
-carB 460 220 Direction westward----------------Reactive rule----------------
+carB 460 225 Direction westward----------------Reactive rule----------------
 checking in Juntion or not ?
 carA start driving
 carA move eastward
 carB start driving
 carB move westward
 updating loc carA coordinate(645, 225)
-updating loc carB coordinate(455, 220)
+updating loc carB coordinate(455, 225)
 updating loc carA coordinate(645, 225)
-updating loc carB coordinate(455, 220)
+updating loc carB coordinate(455, 225)
 carA 645 225 Direction eastward----------------Reactive rule----------------
 checking in Juntion or not ?
-carB 455 220 Direction westward----------------Reactive rule----------------
+carB 455 225 Direction westward----------------Reactive rule----------------
 checking in Juntion or not ?
 carA start driving
 carA move eastward
 carB start driving
 carB move westward
 updating loc carA coordinate(650, 225)
-updating loc carB coordinate(450, 220)
+updating loc carB coordinate(450, 225)
 updating loc carA coordinate(650, 225)
-updating loc carB coordinate(450, 220)
+updating loc carB coordinate(450, 225)
 carA 650 225 Direction eastward----------------Reactive rule----------------
 checking in Juntion or not ?
-carB 450 220 Direction westward----------------Reactive rule----------------
+carB 450 225 Direction westward----------------Reactive rule----------------
 checking in Juntion or not ?
 carA start driving
 carA move eastward
 carB start driving
 carB move westward
 updating loc carA coordinate(655, 225)
-updating loc carB coordinate(445, 220)
+updating loc carB coordinate(445, 225)
+updating loc carA coordinate(655, 225)
+updating loc carB coordinate(445, 225)
+carA 655 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 445 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(660, 225)
+updating loc carB coordinate(440, 225)
+updating loc carA coordinate(660, 225)
+updating loc carB coordinate(440, 225)
+carA 660 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 440 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(665, 225)
+updating loc carB coordinate(435, 225)
+updating loc carA coordinate(665, 225)
+updating loc carB coordinate(435, 225)
+carA 665 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 435 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(670, 225)
+updating loc carB coordinate(430, 225)
+updating loc carA coordinate(670, 225)
+updating loc carB coordinate(430, 225)
+carA 670 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 430 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(675, 225)
+updating loc carB coordinate(425, 225)
+updating loc carA coordinate(675, 225)
+updating loc carB coordinate(425, 225)
+carA 675 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 425 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(680, 225)
+updating loc carB coordinate(420, 225)
+updating loc carA coordinate(680, 225)
+updating loc carB coordinate(420, 225)
+carA 680 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 420 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(685, 225)
+updating loc carB coordinate(415, 225)
+updating loc carA coordinate(685, 225)
+updating loc carB coordinate(415, 225)
+carA 685 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 415 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(690, 225)
+updating loc carB coordinate(410, 225)
+updating loc carA coordinate(690, 225)
+updating loc carB coordinate(410, 225)
+carA 690 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 410 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(695, 225)
+updating loc carB coordinate(405, 225)
+updating loc carA coordinate(695, 225)
+updating loc carB coordinate(405, 225)
+carA 695 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 405 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(700, 225)
+updating loc carB coordinate(400, 225)
+updating loc carA coordinate(700, 225)
+updating loc carB coordinate(400, 225)
+carA 700 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 400 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(705, 225)
+updating loc carB coordinate(395, 225)
+updating loc carA coordinate(705, 225)
+updating loc carB coordinate(395, 225)
+carA 705 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 395 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(710, 225)
+updating loc carB coordinate(390, 225)
+updating loc carA coordinate(710, 225)
+updating loc carB coordinate(390, 225)
+carA 710 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 390 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(715, 225)
+updating loc carB coordinate(385, 225)
+updating loc carA coordinate(715, 225)
+updating loc carB coordinate(385, 225)
+carA 715 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 385 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(720, 225)
+updating loc carB coordinate(380, 225)
+updating loc carA coordinate(720, 225)
+updating loc carB coordinate(380, 225)
+carA 720 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 380 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(725, 225)
+updating loc carB coordinate(375, 225)
+updating loc carA coordinate(725, 225)
+updating loc carB coordinate(375, 225)
+carA 725 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 375 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(730, 225)
+updating loc carB coordinate(370, 225)
+updating loc carA coordinate(730, 225)
+updating loc carB coordinate(370, 225)
+carA 730 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 370 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(735, 225)
+updating loc carB coordinate(365, 225)
+updating loc carA coordinate(735, 225)
+updating loc carB coordinate(365, 225)
+carA 735 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 365 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(740, 225)
+updating loc carB coordinate(360, 225)
+updating loc carA coordinate(740, 225)
+updating loc carB coordinate(360, 225)
+carA 740 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 360 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(745, 225)
+updating loc carB coordinate(355, 225)
+updating loc carA coordinate(745, 225)
+updating loc carB coordinate(355, 225)
+carA 745 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 355 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(750, 225)
+updating loc carB coordinate(350, 225)
+updating loc carA coordinate(750, 225)
+updating loc carB coordinate(350, 225)
+carA 750 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 350 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(755, 225)
+updating loc carB coordinate(345, 225)
+updating loc carA coordinate(755, 225)
+updating loc carB coordinate(345, 225)
+carA 755 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 345 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(760, 225)
+updating loc carB coordinate(340, 225)
+updating loc carA coordinate(760, 225)
+updating loc carB coordinate(340, 225)
+carA 760 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 340 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(765, 225)
+updating loc carB coordinate(335, 225)
+updating loc carA coordinate(765, 225)
+updating loc carB coordinate(335, 225)
+carA 765 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 335 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(770, 225)
+updating loc carB coordinate(330, 225)
+updating loc carA coordinate(770, 225)
+updating loc carB coordinate(330, 225)
+carA 770 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 330 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(775, 225)
+updating loc carB coordinate(325, 225)
+updating loc carA coordinate(775, 225)
+updating loc carB coordinate(325, 225)
+carA 775 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 325 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(780, 225)
+updating loc carB coordinate(320, 225)
+updating loc carA coordinate(780, 225)
+updating loc carB coordinate(320, 225)
+carA 780 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 320 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(785, 225)
+updating loc carB coordinate(315, 225)
+updating loc carA coordinate(785, 225)
+updating loc carB coordinate(315, 225)
+carA 785 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 315 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(790, 225)
+updating loc carB coordinate(310, 225)
+updating loc carA coordinate(790, 225)
+updating loc carB coordinate(310, 225)
+carA 790 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 310 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(795, 225)
+updating loc carB coordinate(305, 225)
+updating loc carA coordinate(795, 225)
+updating loc carB coordinate(305, 225)
+carA 795 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 305 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(800, 225)
+updating loc carB coordinate(300, 225)
+updating loc carA coordinate(800, 225)
+updating loc carB coordinate(300, 225)
+carA 800 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 300 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(805, 225)
+updating loc carB coordinate(295, 225)
+updating loc carA coordinate(805, 225)
+updating loc carB coordinate(295, 225)
+carA 805 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 295 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(810, 225)
+updating loc carB coordinate(290, 225)
+updating loc carA coordinate(810, 225)
+updating loc carB coordinate(290, 225)
+carA 810 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 290 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(815, 225)
+updating loc carB coordinate(285, 225)
+updating loc carA coordinate(815, 225)
+updating loc carB coordinate(285, 225)
+carA 815 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 285 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(820, 225)
+updating loc carB coordinate(280, 225)
+updating loc carA coordinate(820, 225)
+updating loc carB coordinate(280, 225)
+carA 820 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 280 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(825, 225)
+updating loc carB coordinate(275, 225)
+updating loc carA coordinate(825, 225)
+updating loc carB coordinate(275, 225)
+carA 825 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 275 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(830, 225)
+updating loc carB coordinate(270, 225)
+updating loc carA coordinate(830, 225)
+updating loc carB coordinate(270, 225)
+carA 830 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 270 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(835, 225)
+updating loc carB coordinate(265, 225)
+updating loc carA coordinate(835, 225)
+updating loc carB coordinate(265, 225)
+carA 835 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 265 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(840, 225)
+updating loc carB coordinate(260, 225)
+updating loc carA coordinate(840, 225)
+updating loc carB coordinate(260, 225)
+carA 840 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 260 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(845, 225)
+updating loc carB coordinate(255, 225)
+updating loc carA coordinate(845, 225)
+updating loc carB coordinate(255, 225)
+carA 845 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 255 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(850, 225)
+updating loc carB coordinate(250, 225)
+updating loc carA coordinate(850, 225)
+updating loc carB coordinate(250, 225)
+carA 850 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 250 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(855, 225)
+updating loc carB coordinate(245, 225)
+updating loc carA coordinate(855, 225)
+updating loc carB coordinate(245, 225)
+carA 855 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 245 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(860, 225)
+updating loc carB coordinate(240, 225)
+updating loc carA coordinate(860, 225)
+updating loc carB coordinate(240, 225)
+carA 860 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 240 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(865, 225)
+updating loc carB coordinate(235, 225)
+updating loc carA coordinate(865, 225)
+updating loc carB coordinate(235, 225)
+carA 865 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 235 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(870, 225)
+updating loc carB coordinate(230, 225)
+updating loc carA coordinate(870, 225)
+updating loc carB coordinate(230, 225)
+carA 870 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 230 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(875, 225)
+updating loc carB coordinate(225, 225)
+updating loc carA coordinate(875, 225)
+updating loc carB coordinate(225, 225)
+carA 875 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 225 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(880, 225)
+updating loc carB coordinate(220, 225)
+updating loc carA coordinate(880, 225)
+updating loc carB coordinate(220, 225)
+carA 880 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 220 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(885, 225)
+updating loc carB coordinate(215, 225)
+updating loc carA coordinate(885, 225)
+updating loc carB coordinate(215, 225)
+carA 885 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 215 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(890, 225)
+updating loc carB coordinate(210, 225)
+updating loc carA coordinate(890, 225)
+updating loc carB coordinate(210, 225)
+carA 890 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 210 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(895, 225)
+updating loc carB coordinate(205, 225)
+updating loc carA coordinate(895, 225)
+updating loc carB coordinate(205, 225)
+carA 895 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 205 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(900, 225)
+updating loc carB coordinate(200, 225)
+updating loc carA coordinate(900, 225)
+updating loc carB coordinate(200, 225)
+carA 900 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 200 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(905, 225)
+updating loc carB coordinate(195, 225)
+updating loc carA coordinate(905, 225)
+updating loc carB coordinate(195, 225)
+carA 905 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 195 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(910, 225)
+updating loc carB coordinate(190, 225)
+updating loc carA coordinate(910, 225)
+updating loc carB coordinate(190, 225)
+carA 910 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 190 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(915, 225)
+updating loc carB coordinate(185, 225)
+updating loc carA coordinate(915, 225)
+updating loc carB coordinate(185, 225)
+carA 915 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 185 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(920, 225)
+updating loc carB coordinate(180, 225)
+updating loc carA coordinate(920, 225)
+updating loc carB coordinate(180, 225)
+carA 920 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 180 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(925, 225)
+updating loc carB coordinate(175, 225)
+updating loc carA coordinate(925, 225)
+updating loc carB coordinate(175, 225)
+carA 925 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 175 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(930, 225)
+updating loc carB coordinate(170, 225)
+updating loc carA coordinate(930, 225)
+updating loc carB coordinate(170, 225)
+carA 930 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 170 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(935, 225)
+updating loc carB coordinate(165, 225)
+updating loc carA coordinate(935, 225)
+updating loc carB coordinate(165, 225)
+carA 935 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 165 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(940, 225)
+updating loc carB coordinate(160, 225)
+updating loc carA coordinate(940, 225)
+updating loc carB coordinate(160, 225)
+carA 940 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 160 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(945, 225)
+updating loc carB coordinate(155, 225)
+updating loc carA coordinate(945, 225)
+updating loc carB coordinate(155, 225)
+carA 945 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 155 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(950, 225)
+updating loc carB coordinate(150, 225)
+updating loc carA coordinate(950, 225)
+updating loc carB coordinate(150, 225)
+carA 950 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 150 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(955, 225)
+updating loc carB coordinate(145, 225)
+updating loc carA coordinate(955, 225)
+updating loc carB coordinate(145, 225)
+carA 955 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 145 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(960, 225)
+updating loc carB coordinate(140, 225)
+updating loc carA coordinate(960, 225)
+updating loc carB coordinate(140, 225)
+carA 960 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 140 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(965, 225)
+updating loc carB coordinate(135, 225)
+updating loc carA coordinate(965, 225)
+updating loc carB coordinate(135, 225)
+carA 965 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 135 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(970, 225)
+updating loc carB coordinate(130, 225)
+updating loc carA coordinate(970, 225)
+updating loc carB coordinate(130, 225)
+carA 970 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 130 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(975, 225)
+updating loc carB coordinate(125, 225)
+updating loc carA coordinate(975, 225)
+updating loc carB coordinate(125, 225)
+carA 975 225 Direction eastward----------------Reactive rule----------------
+checking in Juntion or not ?
+carB 125 225 Direction westward----------------Reactive rule----------------
+checking in Juntion or not ?
+carA start driving
+carA move eastward
+carB start driving
+carB move westward
+updating loc carA coordinate(980, 225)
+updating loc carB coordinate(120, 225)
+updating loc carA coordinate(980, 225)
+updating loc carB coordinate(120, 225)

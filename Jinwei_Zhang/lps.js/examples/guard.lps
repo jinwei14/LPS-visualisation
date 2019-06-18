@@ -9,8 +9,14 @@ action(reportBack(_)).
 
 initially(fire).
 
-fire(T1) -> findguard(P, T1), free(P, T1), activate(P, T2, T3).
-findguard(P, T1) <- guards(G, T1), member(P, G).
+fire(T1) ->
+  findguard(P, T1),
+  free(P, T1),
+  activate(P, T2, T3).
+  
+findguard(P, T1) <-
+  guards(G, T1), member(P, G).
+
 activate(P, T1, T4) <-
   moveOut(P, T1, T2),
   putOutFire(T2, T3),
