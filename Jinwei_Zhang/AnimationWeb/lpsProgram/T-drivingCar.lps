@@ -53,9 +53,9 @@ initially([
 
 % ---------------------------------Reactive rules---------------------------------------------
 goal(Vehicle,coordinate(A, B)) from _ to T,
-location(Vehicle, coordinate(X, Y), Direction), A==X, B==Y at T ->
+location(Vehicle, coordinate(X, Y), Direction), A==X, B==Y,moving(Vehicle) at T ->
   testPrint(Vehicle+ ' we have arrived'),
-  arrive(Vehicle).
+  arrive(Vehicle) at T.
 
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
