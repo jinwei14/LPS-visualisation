@@ -1,8 +1,8 @@
 % we assume the destination is reachable
 % and car length is 40 x 40 based on the image
 % speed is 5 unit per cycle.
-maxTime(500).
-cycleInterval(10).
+maxTime(200).
+cycleInterval(50).
 
 loadModule('../scripts/module.js').
 
@@ -33,8 +33,8 @@ initially([
   moving(carA),
   moving(carB),
   % % normal start
-  location(carA, coordinate(445, 225), eastward),
-  location(carB, coordinate(500, 280), northward),
+  location(carA, coordinate(145, 225), eastward),
+  location(carB, coordinate(500, 580), northward),
 
   % %  start from Tjunction
   % location(carA, coordinate(500, 225), eastward),
@@ -54,7 +54,7 @@ initially([
 % ---------------------------------Reactive rules---------------------------------------------
 goal(Vehicle,coordinate(A, B)) from _ to T,
 location(Vehicle, coordinate(X, Y), Direction), A==X, B==Y,moving(Vehicle) at T ->
-  testPrint(Vehicle+ ' we have arrived'),
+  % testPrint(Vehicle+ ' we have arrived'),
   arrive(Vehicle) at T.
 
 
@@ -63,7 +63,7 @@ location(Vehicle, coordinate(X, Y), Direction),
   moving(Vehicle) at T ->
     % need to find the right direction here
     % driving forward
-    testPrint(Vehicle+' '+X+' '+Y+' Direction '+Direction + '----------------Reactive rule----------------'),
+    % testPrint(Vehicle+' '+X+' '+Y+' Direction '+Direction + '----------------Reactive rule----------------'),
     direction(Vehicle) at T.
 
 
@@ -71,14 +71,14 @@ goal(Vehicle,coordinate(A, B)) from T to T1,
 location(Vehicle, coordinate(X, Y), Direction),
   moving(Vehicle) at T1 ->
 
-    testPrint(Vehicle + " start driving"),
+    % testPrint(Vehicle + " start driving"),
     drive(Vehicle) from T1 to _.
 
 
 % ---------------------------------------------------------------------------------------------
 % the case where car is not at t junction.
 direction(Vehicle) at T<-
-  testPrint('checking in Juntion or not ?'),
+  % testPrint('checking in Juntion or not ?'),
   location(Vehicle, coordinate(X, Y), _),
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
   notAtTjunction(X,Y,A,B,C,D,E,F).
@@ -93,7 +93,7 @@ notAtTjunction(X,Y,A,B,C,D,E,F)<-
 
 % you only turn when you are in the middle of the juction.
 direction(Vehicle) at T<-
-  testPrint('checking in turnning westward or not ?'),
+  % testPrint('checking in turnning westward or not ?'),
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
@@ -101,11 +101,11 @@ direction(Vehicle) at T<-
   Y == (B+F)/2,
   P == Y,
   K < X,
-  testPrint(Vehicle +' turing westward'),
+  % testPrint(Vehicle +' turing westward'),
   turn(Vehicle,westward) at T.
 
 direction(Vehicle) at T<-
-  testPrint('checking in turnning eastward or not ?'),
+  % testPrint('checking in turnning eastward or not ?'),
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
@@ -113,11 +113,11 @@ direction(Vehicle) at T<-
   Y == (B+F)/2,
   P == Y,
   K > X,
-  testPrint(Vehicle +' turing eastward'),
+  % testPrint(Vehicle +' turing eastward'),
   turn(Vehicle, eastward) at T.
 
 direction(Vehicle) at T<-
-  testPrint('checking in turnning northward or not ?'),
+  % testPrint('checking in turnning northward or not ?'),
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
@@ -125,11 +125,11 @@ direction(Vehicle) at T<-
   Y == (B+F)/2,
   K == X,
   P < Y,
-  testPrint(Vehicle +' turing northward'),
+  % testPrint(Vehicle +' turing northward'),
   turn(Vehicle,northward) at T.
 
 direction(Vehicle) at T<-
-  testPrint('checking in turnning southward or not ?'),
+  % testPrint('checking in turnning southward or not ?'),
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
@@ -137,7 +137,7 @@ direction(Vehicle) at T<-
   Y == (B+F)/2,
   K == X,
   P > Y,
-  testPrint(Vehicle +' turing southward'),
+  % testPrint(Vehicle +' turing southward'),
   turn(Vehicle,southward) at T.
 
 
@@ -156,7 +156,7 @@ drive(Vehicle) from T to T1 <-
   Direction == northward,
   NewY = Y - 5,
   NextPlace = coordinate(X, NewY),
-  testPrint(Vehicle+ ' move northward'),
+  % testPrint(Vehicle+ ' move northward'),
   step(Vehicle, NextPlace) at T1.
 
 drive(Vehicle) from T to T1 <-
@@ -164,7 +164,7 @@ drive(Vehicle) from T to T1 <-
   Direction == southward,
   NewY = Y + 5,
   NextPlace = coordinate(X, NewY),
-  testPrint(Vehicle+ ' move southward'),
+  % testPrint(Vehicle+ ' move southward'),
   step(Vehicle, NextPlace) at T1.
 
 drive(Vehicle) from T to T1 <-
@@ -172,7 +172,7 @@ drive(Vehicle) from T to T1 <-
   Direction == westward,
   NewX = X-5,
   NextPlace = coordinate(NewX, Y),
-  testPrint(Vehicle+ ' move westward'),
+  % testPrint(Vehicle+ ' move westward'),
   step(Vehicle, NextPlace) at T1.
 
 drive(Vehicle) from T to T1 <-
@@ -180,7 +180,7 @@ drive(Vehicle) from T to T1 <-
   Direction == eastward,
   NewX = X + 5,
   NextPlace = coordinate(NewX, Y),
-  testPrint(Vehicle+ ' move eastward'),
+  % testPrint(Vehicle+ ' move eastward'),
   step(Vehicle, NextPlace) at T1.
 
 % ---------------------------------------------------------------------------------------------
@@ -223,18 +223,13 @@ drive(Vehicle) from T to T1 <-
   D == B,
   C > A,
   Direction != eastward.
-%
-% % car has drive beyond the street to the far southward
-% <- step(Vehicle, coordinate(X, Y)),
-%   street(_, coordinate(A, B), Width, Height, _, _),
-%   Y + 20 > B.
 
 collisionPossible(Vehicle1, Vehicle2) at T <-
 
   location(Vehicle1, coordinate(X, Y), Direction1) at T,
   location(Vehicle2, coordinate(A, B), Direction2) at T,
   Vehicle1 != Vehicle2,
-  testPrint('collisionPossible' + Vehicle1 + ' '+Vehicle2),
+  % testPrint('collisionPossible' + Vehicle1 + ' '+Vehicle2),
   % there is a collision possiblity if the two direction are not the same
   Direction1 != Direction2,
   warningZone(coordinate(X, Y),coordinate(A, B)).
@@ -256,12 +251,12 @@ onMainRoad(Vehicle) at T <-
 
 
 updates(step(Vehicle, NextPlace), location(VehicleIns, OldPlace, Direction),  location(VehicleIns, NextPlace, Direction))<-
-  VehicleIns == Vehicle,
-  testPrint('updating loc ' + Vehicle + ' '+ NextPlace).
+  VehicleIns == Vehicle.
+  % ('updating loc ' + Vehicle + ' '+ NextPlace).
 
 updates(turn(Vehicle, NewHeading) , location(VehicleIns, Place, OldHeading), location(VehicleIns, Place, NewHeading))<-
-  Vehicle == VehicleIns,
-  testPrint('updating turing ' + Vehicle + ' '+NewHeading).
+  Vehicle == VehicleIns.
+  % ('updating turing ' + Vehicle + ' '+NewHeading).
 
 terminates(arrive(Vehicle), moving(Vehicle)).
 initiates(arrive(Vehicle), stopped(Vehicle)).

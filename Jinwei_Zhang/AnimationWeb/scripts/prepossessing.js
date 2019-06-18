@@ -200,8 +200,10 @@
                         });
                         //Do something
                     } else if (currentTime > 1) {
+                        console.log(currentTime);
                         fluents.forEach(function (item, index) {
                             if (item.toLowerCase().startsWith('location')) {
+                                console.log(item);
                                 var loc = new VehicleLoc(item, currentTime);
                                 appManager.changeVehicleLocation(loc.getObjectName(), loc.X, loc.Y, loc.getHeading());
                             }
