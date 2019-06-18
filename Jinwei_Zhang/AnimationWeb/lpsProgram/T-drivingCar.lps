@@ -32,8 +32,8 @@ actions ([
 initially([
   moving(carA),
   moving(carB),
-  location(carA, coordinate(120, 225), eastward),
-  location(carB, coordinate(500, 580), northward),
+  location(carA, coordinate(445, 225), eastward),
+  location(carB, coordinate(500, 280), northward),
   goal(carA,coordinate(980, 225)),
   goal(carB,coordinate(120, 225)),
   street(mainStreet , coordinate(100, 200), 900, 50, 1,1),
@@ -81,6 +81,7 @@ direction(Vehicle) <-
   turn(Vehicle,westward).
 
 direction(Vehicle) <-
+  testPrint('turing eastward'),
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
@@ -160,7 +161,8 @@ collisionPossible(Vehicle1, Vehicle2) at T <-
 
 warningZone(coordinate(X, Y),coordinate(A, B)) <-
   Manhattan = abs(X-A) + abs(Y-B),
-  Manhattan < 80.
+  % 80 is two times the length of the car.
+  Manhattan <= 90.
 
 onMainRoad(Vehicle) at T <-
   testPrint('this is exe onMainRoad'),
