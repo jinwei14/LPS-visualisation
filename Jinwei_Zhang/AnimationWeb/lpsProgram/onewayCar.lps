@@ -29,13 +29,13 @@ initially([
 ]).
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
-location(VehicleName, coordinate(X, Y), Direction), A!=X at T ->
+location(Vehicle, coordinate(X, Y), Direction), A!=X at T ->
   % need to find the right direction here
   % driving forward
     drive(Vehicle) from T to _.
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
-location(VehicleName, coordinate(X, Y), Direction), B!=Y at T ->
+location(Vehicle, coordinate(X, Y), Direction), B!=Y at T ->
   % need to find the right direction here
   % driving forward
     drive(Vehicle) from T to _.
@@ -72,7 +72,7 @@ drive(Vehicle) from T to T1 <-
 
 
 
-updates(step(Vehicle, NextPlace), location(VehicleName, OldPlace, Direction),  location(Vehicle, NextPlace, Direction)).
+updates(step(Vehicle, NextPlace), location(Vehicle, OldPlace, Direction),  location(Vehicle, NextPlace, Direction)).
 
 updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading)).
 

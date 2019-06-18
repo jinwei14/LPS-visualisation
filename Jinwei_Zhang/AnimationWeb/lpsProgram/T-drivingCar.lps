@@ -2,18 +2,20 @@
 % and car length is 40 x 40 based on the image
 % speed is 5 unit per cycle.
 maxTime(500).
-% cycleInterval(50).
+cycleInterval(100).
 
 loadModule('../scripts/module.js').
 
 fluents([
-   coordinate(X, Y),
-   location(VehicleName, coordinate(X, Y), Direction),
-   trafficLight(coordinate(X, Y), Working_status, Color, FacingDirection),
-   street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane, Priority),
-   goal(VehicleName,coordinate(X, Y)),
-   % define the junction coordinate
-   junction(Name,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H))
+  stopped(VehicleName),
+  moving(VehicleName),
+  coordinate(X, Y),
+  location(VehicleName, coordinate(X, Y), Direction),
+  trafficLight(coordinate(X, Y), Working_status, Color, FacingDirection),
+  street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane, Priority),
+  goal(VehicleName,coordinate(X, Y)),
+  % define the junction coordinate
+  junction(Name,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H))
 ]).
 
 % events will reserved for traffic lights
@@ -23,10 +25,13 @@ events ([
 
 actions ([
   step(Vehicle, NextPlace),
-  turn(Vehicle, NewHeading)
+  turn(Vehicle, NewHeading),
+  arrive(Vehicle)
 ]).
 
 initially([
+  moving(carA),
+  moving(carB),
   location(carA, coordinate(120, 225), eastward),
   location(carB, coordinate(500, 580), northward),
   goal(carA,coordinate(980, 225)),
@@ -35,20 +40,34 @@ initially([
   street(southStreet , coordinate(475, 250), 50, 500, 1,0),
   junction(tJuntion,coordinate(475, 200),coordinate(525, 200),coordinate(475, 250),coordinate(525, 250))
 ]).
+goal(Vehicle,coordinate(A, B)) from _ to T,
+location(Vehicle, coordinate(X, Y), _), A==X, B==Y at T ->
+  arrive(Vehicle).
+
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
-location(VehicleName, coordinate(X, Y), Direction), A!=X at T ->
-  % need to find the right direction here
-  % driving forward
-  direction(VehicleName),
-  drive(Vehicle) from T to _.
+location(Vehicle, coordinate(X, Y), Direction),
+  moving(Vehicle) at T ->
+    % need to find the right direction here
+    % driving forward
+    testPrint(Vehicle+' '+X+' '+Y+' Direction '+Direction + '----------------Reactive rule----------------'),
+    direction(Vehicle),
 
-goal(Vehicle,coordinate(A, B)) from _ to T,
-location(VehicleName, coordinate(X, Y), Direction), B!=Y at T ->
-  % need to find the right direction here
-  % driving forward
-  direction(VehicleName),
-  drive(Vehicle) from T to _.
+    drive(Vehicle) from T to _.
+
+
+% the case where car is not at t junction.
+direction(Vehicle) <-
+  testPrint('checking1'),
+  location(Vehicle, coordinate(X, Y), _),
+  junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
+  notAtTjunction(X,Y,A,B,C,D,E,F).
+
+
+notAtTjunction(X,Y,A,B,C,D,E,F)<-
+  Y != (B+F)/2.
+notAtTjunction(X,Y,A,B,C,D,E,F)<-
+  X != (A+C)/2.
 
 % you only turn when you are in the middle of the juction.
 direction(Vehicle) <-
@@ -91,6 +110,7 @@ direction(Vehicle) <-
   P > Y,
   turn(Vehicle,southward).
 
+% drive macro envent.
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == northward,
@@ -115,18 +135,25 @@ drive(Vehicle) from T to T1 <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == eastward,
+  testPrint("east car invoking"),
   NewX = X + 5,
   NextPlace = coordinate(NewX, Y),
   step(Vehicle, NextPlace) from T1 to T2.
 
-% step is false if the car is moving into a junction, not on main Road and there is a collision.
+%step is false if the car is moving into a junction, not on main Road and there is a collision.
+% this part need further developemnt for other cases
 <- step(Vehicle, NextPlace),
-  not onMainRoad(Vehicle),
-  collisionPossible(Vehicle, Vehicle2).
+  testPrint(Vehicle+' this is not step'),
+  not onMainRoad(Vehicle) at T,
+  testPrint(Vehicle+' this is not onMainRoad'),
+  collisionPossible(Vehicle, Vehicle2) at T.
 
 collisionPossible(Vehicle1, Vehicle2) at T <-
+
   location(Vehicle1, coordinate(X, Y), Direction1) at T,
   location(Vehicle2, coordinate(A, B), Direction2) at T,
+  Vehicle1 != Vehicle2,
+  testPrint('collisionPossible' + Vehicle1 + ' '+Vehicle2),
   % there is a collision possiblity if the two direction are not the same
   Direction1 != Direction2,
   warningZone(coordinate(X, Y),coordinate(A, B)).
@@ -136,6 +163,7 @@ warningZone(coordinate(X, Y),coordinate(A, B)) <-
   Manhattan < 80.
 
 onMainRoad(Vehicle) at T <-
+  testPrint('this is exe onMainRoad'),
   location(Vehicle, coordinate(X, Y), Direction1) at T,
   street(StreetName, coordinate(A, B), Width, Height, Number_of_lane, Priority),
   X<=A+Width, X>=A,
@@ -144,6 +172,11 @@ onMainRoad(Vehicle) at T <-
 
 
 
-updates(step(Vehicle, NextPlace), location(VehicleName, OldPlace, Direction),  location(Vehicle, NextPlace, Direction)).
+updates(step(Vehicle, NextPlace), location(Vehicle, OldPlace, Direction),  location(Vehicle, NextPlace, Direction))<-
+  testPrint('updating loc ' + Vehicle + ' '+ NextPlace).
 
-updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading)).
+updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading))<-
+  testPrint('updating turing ' + Vehicle).
+
+initiates(arrive(Vehicle), stopped(Vehicle))<-testPrint('stopped ' + Vehicle).
+terminates(arrive(Vehicle), moving(Vehicle)).
