@@ -1,341 +1,100 @@
 carA 445 225 Direction eastward----------------Reactive rule----------------
 checking1
-east car invoking
 carB 500 280 Direction northward----------------Reactive rule----------------
 checking1
-carA this is not step
-this is exe onMainRoad
-updating loc carA coordinate(450, 225)
-updating loc carB coordinate(450, 225)
-carA this is not step
-this is exe onMainRoad
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-updating loc carA coordinate(500, 275)
-updating loc carB coordinate(500, 275)
-updating loc carA coordinate(450, 225)
-updating loc carB coordinate(450, 225)
-updating loc carB coordinate(500, 275)
-updating loc carA coordinate(500, 275)
-carA 450 225 Direction eastward----------------Reactive rule----------------
+carA 445 225 Direction eastward----------------Reactive rule----------------
 checking1
-east car invoking
-carB 500 275 Direction northward----------------Reactive rule----------------
+carB 500 280 Direction northward----------------Reactive rule----------------
 checking1
-carA this is not step
-this is exe onMainRoad
-updating loc carA coordinate(455, 225)
-updating loc carB coordinate(455, 225)
-carA this is not step
-this is exe onMainRoad
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-updating loc carA coordinate(500, 270)
-updating loc carB coordinate(500, 270)
-updating loc carA coordinate(455, 225)
-updating loc carB coordinate(455, 225)
-updating loc carB coordinate(500, 270)
-updating loc carA coordinate(500, 270)
-carA 455 225 Direction eastward----------------Reactive rule----------------
+carA 445 225 Direction eastward----------------Reactive rule----------------
 checking1
-east car invoking
-carB 500 270 Direction northward----------------Reactive rule----------------
+carB 500 280 Direction northward----------------Reactive rule----------------
 checking1
-carA this is not step
-this is exe onMainRoad
-updating loc carA coordinate(460, 225)
-updating loc carB coordinate(460, 225)
-carA this is not step
-this is exe onMainRoad
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-updating loc carA coordinate(460, 225)
-updating loc carB coordinate(460, 225)
-carA 460 225 Direction eastward----------------Reactive rule----------------
+carA 445 225 Direction eastward----------------Reactive rule----------------
 checking1
-east car invoking
-carB 500 270 Direction northward----------------Reactive rule----------------
+carB 500 280 Direction northward----------------Reactive rule----------------
 checking1
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carA this is not step
-this is exe onMainRoad
-updating loc carB coordinate(465, 225)
-updating loc carA coordinate(465, 225)
-carA this is not step
-this is exe onMainRoad
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-updating loc carB coordinate(465, 225)
-updating loc carA coordinate(465, 225)
-carA 465 225 Direction eastward----------------Reactive rule----------------
+carA 445 225 Direction eastward----------------Reactive rule----------------
 checking1
-east car invoking
-carB 500 270 Direction northward----------------Reactive rule----------------
+carB 500 280 Direction northward----------------Reactive rule----------------
 checking1
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carA this is not step
-this is exe onMainRoad
-updating loc carB coordinate(470, 225)
-updating loc carA coordinate(470, 225)
-carA this is not step
-this is exe onMainRoad
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-updating loc carB coordinate(470, 225)
-updating loc carA coordinate(470, 225)
-carA 470 225 Direction eastward----------------Reactive rule----------------
+carA 445 225 Direction eastward----------------Reactive rule----------------
 checking1
-east car invoking
-carB 500 270 Direction northward----------------Reactive rule----------------
+carB 500 280 Direction northward----------------Reactive rule----------------
 checking1
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carA this is not step
-this is exe onMainRoad
-updating loc carB coordinate(475, 225)
-updating loc carA coordinate(475, 225)
-carA this is not step
-this is exe onMainRoad
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-updating loc carB coordinate(475, 225)
-updating loc carA coordinate(475, 225)
-carA 475 225 Direction eastward----------------Reactive rule----------------
+carA 445 225 Direction eastward----------------Reactive rule----------------
 checking1
-east car invoking
-carB 500 270 Direction northward----------------Reactive rule----------------
+carB 500 280 Direction northward----------------Reactive rule----------------
 checking1
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carA this is not step
-this is exe onMainRoad
-updating loc carB coordinate(480, 225)
-updating loc carA coordinate(480, 225)
-carA this is not step
-this is exe onMainRoad
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-updating loc carB coordinate(480, 225)
-updating loc carA coordinate(480, 225)
-carA 480 225 Direction eastward----------------Reactive rule----------------
+carA 445 225 Direction eastward----------------Reactive rule----------------
 checking1
-east car invoking
-carB 500 270 Direction northward----------------Reactive rule----------------
+carB 500 280 Direction northward----------------Reactive rule----------------
 checking1
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carA this is not step
-this is exe onMainRoad
-updating loc carB coordinate(485, 225)
-updating loc carA coordinate(485, 225)
-carA this is not step
-this is exe onMainRoad
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-updating loc carB coordinate(485, 225)
-updating loc carA coordinate(485, 225)
-carA 485 225 Direction eastward----------------Reactive rule----------------
+carA 445 225 Direction eastward----------------Reactive rule----------------
 checking1
-east car invoking
-carB 500 270 Direction northward----------------Reactive rule----------------
+carB 500 280 Direction northward----------------Reactive rule----------------
 checking1
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carA this is not step
-this is exe onMainRoad
-updating loc carB coordinate(490, 225)
-updating loc carA coordinate(490, 225)
-carA this is not step
-this is exe onMainRoad
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-updating loc carB coordinate(490, 225)
-updating loc carA coordinate(490, 225)
-carA 490 225 Direction eastward----------------Reactive rule----------------
+carA 445 225 Direction eastward----------------Reactive rule----------------
 checking1
-east car invoking
-carB 500 270 Direction northward----------------Reactive rule----------------
+carB 500 280 Direction northward----------------Reactive rule----------------
 checking1
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carA this is not step
-this is exe onMainRoad
-updating loc carB coordinate(495, 225)
-updating loc carA coordinate(495, 225)
-carA this is not step
-this is exe onMainRoad
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-updating loc carB coordinate(495, 225)
-updating loc carA coordinate(495, 225)
-carA 495 225 Direction eastward----------------Reactive rule----------------
+carA 445 225 Direction eastward----------------Reactive rule----------------
 checking1
-east car invoking
-carB 500 270 Direction northward----------------Reactive rule----------------
+carB 500 280 Direction northward----------------Reactive rule----------------
 checking1
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-carA this is not step
-this is exe onMainRoad
-updating loc carB coordinate(500, 225)
-updating loc carA coordinate(500, 225)
-carA this is not step
-this is exe onMainRoad
-carB this is not step
-this is exe onMainRoad
-carB this is not onMainRoad
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 225)
-updating loc carA coordinate(500, 225)
-carA 500 225 Direction eastward----------------Reactive rule----------------
+carA 445 225 Direction eastward----------------Reactive rule----------------
+checking1
+carB 500 280 Direction northward----------------Reactive rule----------------
+checking1
+carA 445 225 Direction eastward----------------Reactive rule----------------
+checking1
+carB 500 280 Direction northward----------------Reactive rule----------------
+checking1
+carA 445 225 Direction eastward----------------Reactive rule----------------
+checking1
+carB 500 280 Direction northward----------------Reactive rule----------------
+checking1
+carA 445 225 Direction eastward----------------Reactive rule----------------
+checking1
+carB 500 280 Direction northward----------------Reactive rule----------------
+checking1
+carA 445 225 Direction eastward----------------Reactive rule----------------
+checking1
+carB 500 280 Direction northward----------------Reactive rule----------------
+checking1
+carA 445 225 Direction eastward----------------Reactive rule----------------
+checking1
+carB 500 280 Direction northward----------------Reactive rule----------------
+checking1
+carA 445 225 Direction eastward----------------Reactive rule----------------
+checking1
+carB 500 280 Direction northward----------------Reactive rule----------------
+checking1
+carA 445 225 Direction eastward----------------Reactive rule----------------
+checking1
+carB 500 280 Direction northward----------------Reactive rule----------------
+checking1
+carA 445 225 Direction eastward----------------Reactive rule----------------
+checking1
+carB 500 280 Direction northward----------------Reactive rule----------------
+checking1
+carA 445 225 Direction eastward----------------Reactive rule----------------
+checking1
+carB 500 280 Direction northward----------------Reactive rule----------------
+checking1
+carA 445 225 Direction eastward----------------Reactive rule----------------
+checking1
+carB 500 280 Direction northward----------------Reactive rule----------------
+checking1
+carA 445 225 Direction eastward----------------Reactive rule----------------
+checking1
+carB 500 280 Direction northward----------------Reactive rule----------------
+checking1
+carA 445 225 Direction eastward----------------Reactive rule----------------
+checking1
+carB 500 280 Direction northward----------------Reactive rule----------------
+checking1
+carA 445 225 Direction eastward----------------Reactive rule----------------
+checking1
+carB 500 280 Direction northward----------------Reactive rule----------------
 checking1

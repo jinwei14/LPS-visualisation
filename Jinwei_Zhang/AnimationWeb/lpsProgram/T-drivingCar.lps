@@ -32,14 +32,19 @@ actions ([
 initially([
   moving(carA),
   moving(carB),
-  location(carA, coordinate(445, 225), eastward),
-  location(carB, coordinate(500, 280), northward),
+  % location(carA, coordinate(445, 225), eastward),
+  % location(carB, coordinate(500, 280), northward),
+  location(carA, coordinate(500, 225), eastward),
+  location(carB, coordinate(500 ,270), northward),
+
   goal(carA,coordinate(980, 225)),
   goal(carB,coordinate(120, 225)),
   street(mainStreet , coordinate(100, 200), 900, 50, 1,1),
   street(southStreet , coordinate(475, 250), 50, 500, 1,0),
   junction(tJuntion,coordinate(475, 200),coordinate(525, 200),coordinate(475, 250),coordinate(525, 250))
 ]).
+
+% ---------------------------------Reactive rules---------------------------------------------
 goal(Vehicle,coordinate(A, B)) from _ to T,
 location(Vehicle, coordinate(X, Y), _), A==X, B==Y at T ->
   arrive(Vehicle).
@@ -52,10 +57,11 @@ location(Vehicle, coordinate(X, Y), Direction),
     % driving forward
     testPrint(Vehicle+' '+X+' '+Y+' Direction '+Direction + '----------------Reactive rule----------------'),
     direction(Vehicle),
-
     drive(Vehicle) from T to _.
 
 
+
+% ---------------------------------------------------------------------------------------------
 % the case where car is not at t junction.
 direction(Vehicle) <-
   testPrint('checking1'),
@@ -69,6 +75,7 @@ notAtTjunction(X,Y,A,B,C,D,E,F)<-
 notAtTjunction(X,Y,A,B,C,D,E,F)<-
   X != (A+C)/2.
 
+
 % you only turn when you are in the middle of the juction.
 direction(Vehicle) <-
   location(Vehicle, coordinate(X, Y), Direction),
@@ -78,10 +85,9 @@ direction(Vehicle) <-
   Y == (B+F)/2,
   P == Y,
   K < X,
-  turn(Vehicle,westward).
+  turn(Vehicle,westward) at T.
 
 direction(Vehicle) <-
-  testPrint('turing eastward'),
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
@@ -89,7 +95,8 @@ direction(Vehicle) <-
   Y == (B+F)/2,
   P == Y,
   K > X,
-  turn(Vehicle,eastward).
+  testPrint(Vehicle +'turing eastward'),
+  turn(Vehicle, eastward) at T.
 
 direction(Vehicle) <-
   location(Vehicle, coordinate(X, Y), Direction),
@@ -99,7 +106,7 @@ direction(Vehicle) <-
   Y == (B+F)/2,
   K == X,
   P < Y,
-  turn(Vehicle,northward).
+  turn(Vehicle,northward) at T.
 
 direction(Vehicle) <-
   location(Vehicle, coordinate(X, Y), Direction),
@@ -109,7 +116,17 @@ direction(Vehicle) <-
   Y == (B+F)/2,
   K == X,
   P > Y,
-  turn(Vehicle,southward).
+  turn(Vehicle,southward) at T.
+
+
+
+
+
+
+
+
+% ---------------------------------------------------------------------------------------------
+
 
 % drive macro envent.
 drive(Vehicle) from T to T1 <-
@@ -117,6 +134,7 @@ drive(Vehicle) from T to T1 <-
   Direction == northward,
   NewY = Y - 5,
   NextPlace = coordinate(X, NewY),
+  % testPrint(Vehicle+ ' move northward'),
   step(Vehicle, NextPlace) from T1 to T2.
 
 drive(Vehicle) from T to T1 <-
@@ -124,6 +142,7 @@ drive(Vehicle) from T to T1 <-
   Direction == southward,
   NewY = Y + 5,
   NextPlace = coordinate(X, NewY),
+  % testPrint(Vehicle+ ' move southward'),
   step(Vehicle, NextPlace) from T1 to T2.
 
 drive(Vehicle) from T to T1 <-
@@ -131,22 +150,22 @@ drive(Vehicle) from T to T1 <-
   Direction == westward,
   NewX = X-5,
   NextPlace = coordinate(NewX, Y),
+  % testPrint(Vehicle+ ' move westward'),
   step(Vehicle, NextPlace) from T1 to T2.
 
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == eastward,
-  testPrint("east car invoking"),
   NewX = X + 5,
   NextPlace = coordinate(NewX, Y),
+  % testing(Vehicle+ ' move eastward'),
   step(Vehicle, NextPlace) from T1 to T2.
 
+% ---------------------------------------------------------------------------------------------
 %step is false if the car is moving into a junction, not on main Road and there is a collision.
 % this part need further developemnt for other cases
 <- step(Vehicle, NextPlace),
-  testPrint(Vehicle+' this is not step'),
   not onMainRoad(Vehicle) at T,
-  testPrint(Vehicle+' this is not onMainRoad'),
   collisionPossible(Vehicle, Vehicle2) at T.
 
 collisionPossible(Vehicle1, Vehicle2) at T <-
@@ -165,7 +184,6 @@ warningZone(coordinate(X, Y),coordinate(A, B)) <-
   Manhattan <= 90.
 
 onMainRoad(Vehicle) at T <-
-  testPrint('this is exe onMainRoad'),
   location(Vehicle, coordinate(X, Y), Direction1) at T,
   street(StreetName, coordinate(A, B), Width, Height, Number_of_lane, Priority),
   X<=A+Width, X>=A,
@@ -173,12 +191,17 @@ onMainRoad(Vehicle) at T <-
   Priority > 0.
 
 
+% ---------------------------------------------------------------------------------------------
 
-updates(step(Vehicle, NextPlace), location(Vehicle, OldPlace, Direction),  location(Vehicle, NextPlace, Direction))<-
+
+updates(step(Vehicle, NextPlace), location(VehicleIns, OldPlace, Direction),  location(VehicleIns, NextPlace, Direction))<-
+  VehicleIns == Vehicle,
   testPrint('updating loc ' + Vehicle + ' '+ NextPlace).
 
-updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading))<-
-  testPrint('updating turing ' + Vehicle).
+updates(turn(Vehicle, NewHeading) , location(VehicleIns, Place, OldHeading), location(VehicleIns, Place, NewHeading))<-
+  Vehicle == VehicleIns,
+  testPrint('updating turing ' + Vehicle + ' '+NewHeading).
+
 
 initiates(arrive(Vehicle), stopped(Vehicle))<-testPrint('stopped ' + Vehicle).
 terminates(arrive(Vehicle), moving(Vehicle)).
