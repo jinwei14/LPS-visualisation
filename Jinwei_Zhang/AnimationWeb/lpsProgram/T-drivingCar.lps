@@ -33,16 +33,16 @@ initially([
   moving(carA),
   moving(carB),
   % % normal start
-  % location(carA, coordinate(445, 225), eastward),
-  % location(carB, coordinate(500, 280), northward),
+  location(carA, coordinate(445, 225), eastward),
+  location(carB, coordinate(500, 280), northward),
 
   % %  start from Tjunction
   % location(carA, coordinate(500, 225), eastward),
   % location(carB, coordinate(500 ,270), northward),
 
   % %  start from goal townPosition
-  location(carA, coordinate(980, 225), eastward),
-  location(carB, coordinate(120 ,225), northward),
+  % location(carA, coordinate(980, 225), eastward),
+  % location(carB, coordinate(120 ,225), northward),
 
   goal(carA,coordinate(980, 225)),
   goal(carB,coordinate(120, 225)),
