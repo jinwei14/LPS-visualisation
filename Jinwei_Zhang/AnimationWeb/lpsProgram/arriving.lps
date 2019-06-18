@@ -1,0 +1,63 @@
+% we assume the destination is reachable
+% and car length is 40 x 40 based on the image
+% speed is 5 unit per cycle.
+maxTime(500).
+cycleInterval(10).
+
+loadModule('../scripts/module.js').
+
+fluents([
+  stopped(VehicleName),
+  moving(VehicleName),
+  coordinate(X, Y),
+  location(VehicleName, coordinate(X, Y), Direction),
+  trafficLight(coordinate(X, Y), Working_status, Color, FacingDirection),
+  street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane, Priority),
+  goal(VehicleName,coordinate(X, Y)),
+  % define the junction coordinate
+  junction(Name,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H))
+]).
+
+% events will reserved for traffic lights
+events ([
+
+]).
+
+actions ([
+  step(Vehicle, NextPlace),
+  turn(Vehicle, NewHeading),
+  arrive(Vehicle)
+]).
+
+initially([
+  moving(carA),
+  moving(carB),
+  % % normal start
+  % location(carA, coordinate(445, 225), eastward),
+  % location(carB, coordinate(500, 280), northward),
+
+  % %  start from Tjunction
+  % location(carA, coordinate(500, 225), eastward),
+  % location(carB, coordinate(500 ,270), northward),
+
+  % %  start from goal townPosition
+  location(carA, coordinate(980, 225), eastward),
+  location(carB, coordinate(120 ,225), northward),
+
+  goal(carA,coordinate(980, 225)),
+  goal(carB,coordinate(120, 225)),
+  street(mainStreet , coordinate(100, 200), 900, 50, 1,1),
+  street(southStreet , coordinate(475, 250), 50, 500, 1,0),
+  junction(tJuntion,coordinate(475, 200),coordinate(525, 200),coordinate(475, 250),coordinate(525, 250))
+]).
+
+
+% ---------------------------------Reactive rules---------------------------------------------
+goal(Vehicle,coordinate(A, B)) from _ to T,
+location(Vehicle, coordinate(X, Y), Direction), A==X, B==Y at T ->
+  testPrint(Vehicle+ ' we have arrived'),
+  arrive(Vehicle).
+
+
+terminates(arrive(Vehicle), moving(Vehicle)).
+initiates(arrive(Vehicle), stopped(Vehicle)).
