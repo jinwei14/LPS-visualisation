@@ -59,12 +59,12 @@ location(Vehicle, coordinate(X, Y), Direction),
     direction(Vehicle) at T.
 
 
-goal(Vehicle,coordinate(A, B)) from _ to T,
+goal(Vehicle,coordinate(A, B)) from T to T1,
 location(Vehicle, coordinate(X, Y), Direction),
-  moving(Vehicle) at T ->
+  moving(Vehicle) at T1 ->
 
     testPrint(Vehicle + " start driving"),
-    drive(Vehicle) from T to _.
+    drive(Vehicle) from T1 to _.
 
 
 % ---------------------------------------------------------------------------------------------
