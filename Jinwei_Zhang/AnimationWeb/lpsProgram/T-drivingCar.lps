@@ -1,6 +1,8 @@
 % we assume the destination is reachable
-maxTime(40).
-cycleInterval(200).
+% and car length is 40 x 40 based on the image
+% speed is 5 unit per cycle.
+maxTime(1000).
+cycleInterval(50).
 
 loadModule('../scripts/module.js').
 
@@ -8,7 +10,7 @@ fluents([
    coordinate(X, Y),
    location(VehicleName, coordinate(X, Y), Direction),
    trafficLight(coordinate(X, Y), Working_status, Color, FacingDirection),
-   street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane),
+   street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane, Priority),
    goal(VehicleName,coordinate(X, Y)),
    % define the junction coordinate
    junction(Name,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H))
@@ -26,9 +28,11 @@ actions ([
 
 initially([
   location(carA, coordinate(120, 225), eastward),
-  goal(carA,coordinate(400, 225)),
-  street(mainStreet , coordinate(100, 200), 900, 50, 1),
-  street(southStreet , coordinate(475, 250), 50, 500, 1),
+  location(carB, coordinate(500, 580), northward),
+  goal(carA,coordinate(980, 225)),
+  goal(carB,coordinate(120, 225)),
+  street(mainStreet , coordinate(100, 200), 900, 50, 1,1),
+  street(southStreet , coordinate(475, 250), 50, 500, 1,0),
   junction(tJuntion,coordinate(475, 200),coordinate(525, 200),coordinate(475, 250),coordinate(525, 250))
 ]).
 
@@ -47,43 +51,56 @@ location(VehicleName, coordinate(X, Y), Direction), B!=Y at T ->
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == northward,
-  NewY = Y - 10,
+  NewY = Y - 5,
   NextPlace = coordinate(X, NewY),
   step(Vehicle, NextPlace) from T1 to T2.
 
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == southward,
-  NewY = Y + 10,
+  NewY = Y + 5,
   NextPlace = coordinate(X, NewY),
   step(Vehicle, NextPlace) from T1 to T2.
 
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == westward,
-  NewX = X-10,
+  NewX = X-5,
   NextPlace = coordinate(NewX, Y),
   step(Vehicle, NextPlace) from T1 to T2.
 
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == eastward,
-  NewX = X + 10,
+  NewX = X + 5,
   NextPlace = coordinate(NewX, Y),
   step(Vehicle, NextPlace) from T1 to T2.
 
 % step is false if the car is moving into a junction, not on main Road and there is a collision.
-<- step(Vehicle, NextPlace), onTjunction(coordinate(X, NewY)), not onMainRoad(Vehicle),collisionPossible(Vehicle1, Vehicle2).
+<- step(Vehicle, NextPlace),
+  not onMainRoad(Vehicle),
+  collisionPossible(Vehicle, Vehicle2).
 
 collisionPossible(Vehicle1, Vehicle2) at T <-
-  location(Vehicle1, Place1, Heading1) at T,
-  next(Place1, Heading1, Place2),
-  location(Vehicle2, Place2, Heading2) at T,
-  not opposite(Heading1, Heading2).
+  location(Vehicle1, coordinate(X, Y), Direction1) at T,
+  location(Vehicle2, coordinate(A, B), Direction2) at T,
+  % there is a collision possiblity if the two direction are not the same
+  Direction1 !@= Direction2,
+  warningZone(coordinate(X, Y),coordinate(A, B)).
+
+warningZone(coordinate(X, Y),coordinate(A, B)) <-
+  Manhattan = abs(X-A) + abs(Y-B),
+  Manhattan < 80.
+
+onMainRoad(Vehicle) at T <-
+  location(Vehicle, coordinate(X, Y), Direction1) at T,
+  street(StreetName, coordinate(A, B), Width, Height, Number_of_lane, Priority),
+  X<=A+Width, X>=A,
+  Y<=B+Height, Y>=B,
+  Priority > 0.
+
+
 
 updates(step(Vehicle, NextPlace), location(VehicleName, OldPlace, Direction),  location(Vehicle, NextPlace, Direction)).
 
 updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading)).
-
-
-% you  can not move (x++) if you are not facing eastward

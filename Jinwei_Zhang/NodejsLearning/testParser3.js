@@ -31,13 +31,16 @@ function Streets(fullPhrase) {
     //the number of lanes on the street
     this.no_lane = parseInt(this.matchArray[7],10);
 
+     // The priority of the road
+    this.priority = parseInt(this.matchArray[8],10);
 }
 
 //location(yourCar, coordinate(9, 9), eastward)
 //loc(car, 1650, 340))
 //position(dummyCar, xy(66.90)).
-var obj2 = new Streets('street(piccadillyRoad, coordinate(9, 9), 80, 70, 2).');
-console.log('match array: '+ obj2.matchArray);
+var obj2 = new Streets('street(piccadillyRoad, coordinate(9, 9), 80, 70, 2, 2).');
+console.log('match array: ');
+console.log( obj2.matchArray);
 console.log('fullPhrase: ' + obj2.fullPhrase);
 console.log('fluent: ' + obj2.fluent);
 console.log('name: ' + obj2.name);
@@ -45,5 +48,6 @@ console.log('x: ' + obj2.X);
 console.log('y: ' + obj2.Y);
 console.log('width: ' + obj2.width);
 console.log('height: ' + obj2.height);
-console.log('no_lane: ' + obj2.no_lane)
+console.log('no_lane: ' + obj2.no_lane);
 
+console.log('priority: ' + obj2.priority);
