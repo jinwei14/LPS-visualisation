@@ -56,18 +56,25 @@ location(Vehicle, coordinate(X, Y), Direction),
     % need to find the right direction here
     % driving forward
     testPrint(Vehicle+' '+X+' '+Y+' Direction '+Direction + '----------------Reactive rule----------------'),
-    direction(Vehicle),
-    drive(Vehicle) from T to _.
+    direction(Vehicle) at T.
 
+
+goal(Vehicle,coordinate(A, B)) from _ to T,
+location(Vehicle, coordinate(X, Y), Direction),
+  moving(Vehicle) at T ->
+
+    testPrint(Vehicle + " start driving"),
+    drive(Vehicle) from T to _.
 
 
 % ---------------------------------------------------------------------------------------------
 % the case where car is not at t junction.
-direction(Vehicle) <-
-  testPrint('checking1'),
+direction(Vehicle) at T<-
+  testPrint('checking in Juntion or not ?'),
   location(Vehicle, coordinate(X, Y), _),
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
   notAtTjunction(X,Y,A,B,C,D,E,F).
+
 
 
 notAtTjunction(X,Y,A,B,C,D,E,F)<-
@@ -77,7 +84,8 @@ notAtTjunction(X,Y,A,B,C,D,E,F)<-
 
 
 % you only turn when you are in the middle of the juction.
-direction(Vehicle) <-
+direction(Vehicle) at T<-
+  testPrint('checking in turnning westward or not ?'),
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
@@ -85,9 +93,11 @@ direction(Vehicle) <-
   Y == (B+F)/2,
   P == Y,
   K < X,
+  testPrint(Vehicle +' turing westward'),
   turn(Vehicle,westward) at T.
 
-direction(Vehicle) <-
+direction(Vehicle) at T<-
+  testPrint('checking in turnning eastward or not ?'),
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
@@ -95,10 +105,11 @@ direction(Vehicle) <-
   Y == (B+F)/2,
   P == Y,
   K > X,
-  testPrint(Vehicle +'turing eastward'),
+  testPrint(Vehicle +' turing eastward'),
   turn(Vehicle, eastward) at T.
 
-direction(Vehicle) <-
+direction(Vehicle) at T<-
+  testPrint('checking in turnning northward or not ?'),
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
@@ -106,9 +117,11 @@ direction(Vehicle) <-
   Y == (B+F)/2,
   K == X,
   P < Y,
+  testPrint(Vehicle +' turing northward'),
   turn(Vehicle,northward) at T.
 
-direction(Vehicle) <-
+direction(Vehicle) at T<-
+  testPrint('checking in turnning southward or not ?'),
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
@@ -116,6 +129,7 @@ direction(Vehicle) <-
   Y == (B+F)/2,
   K == X,
   P > Y,
+  testPrint(Vehicle +' turing southward'),
   turn(Vehicle,southward) at T.
 
 
@@ -134,32 +148,32 @@ drive(Vehicle) from T to T1 <-
   Direction == northward,
   NewY = Y - 5,
   NextPlace = coordinate(X, NewY),
-  % testPrint(Vehicle+ ' move northward'),
-  step(Vehicle, NextPlace) from T1 to T2.
+  testPrint(Vehicle+ ' move northward'),
+  step(Vehicle, NextPlace) at T1.
 
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == southward,
   NewY = Y + 5,
   NextPlace = coordinate(X, NewY),
-  % testPrint(Vehicle+ ' move southward'),
-  step(Vehicle, NextPlace) from T1 to T2.
+  testPrint(Vehicle+ ' move southward'),
+  step(Vehicle, NextPlace) at T1.
 
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == westward,
   NewX = X-5,
   NextPlace = coordinate(NewX, Y),
-  % testPrint(Vehicle+ ' move westward'),
-  step(Vehicle, NextPlace) from T1 to T2.
+  testPrint(Vehicle+ ' move westward'),
+  step(Vehicle, NextPlace) at T1.
 
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == eastward,
   NewX = X + 5,
   NextPlace = coordinate(NewX, Y),
-  % testing(Vehicle+ ' move eastward'),
-  step(Vehicle, NextPlace) from T1 to T2.
+  testPrint(Vehicle+ ' move eastward'),
+  step(Vehicle, NextPlace) at T1.
 
 % ---------------------------------------------------------------------------------------------
 %step is false if the car is moving into a junction, not on main Road and there is a collision.

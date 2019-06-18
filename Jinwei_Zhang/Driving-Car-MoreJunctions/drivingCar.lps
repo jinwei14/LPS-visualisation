@@ -165,7 +165,7 @@ on(coordinate(6,Y), highStreet) <- 1 <= Y, Y <= 9.
 on(coordinate(2,Y), westStreet) <- 1 <= Y, Y <= 9.
 on(coordinate(8,Y), eastStreet) <- 1 <= Y, Y <= 9.
 
-%
+
 % There are three cases for driving. It might be desirable to refactor them.
 % Notice that in all three cases, driving starts at "time" (really state) T, but stepping forward starts at T1.
 % This takes into account that it might be necessary to wait from T to T1 for the step to be possible.
