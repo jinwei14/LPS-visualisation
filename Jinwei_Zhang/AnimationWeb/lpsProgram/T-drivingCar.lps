@@ -1,8 +1,8 @@
 % we assume the destination is reachable
 % and car length is 40 x 40 based on the image
 % speed is 5 unit per cycle.
-maxTime(1000).
-cycleInterval(50).
+maxTime(500).
+% cycleInterval(50).
 
 loadModule('../scripts/module.js').
 
@@ -40,13 +40,56 @@ goal(Vehicle,coordinate(A, B)) from _ to T,
 location(VehicleName, coordinate(X, Y), Direction), A!=X at T ->
   % need to find the right direction here
   % driving forward
-    drive(Vehicle) from T to _.
+  direction(VehicleName),
+  drive(Vehicle) from T to _.
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
 location(VehicleName, coordinate(X, Y), Direction), B!=Y at T ->
   % need to find the right direction here
   % driving forward
-    drive(Vehicle) from T to _.
+  direction(VehicleName),
+  drive(Vehicle) from T to _.
+
+% you only turn when you are in the middle of the juction.
+direction(Vehicle) <-
+  location(Vehicle, coordinate(X, Y), Direction),
+  goal(Vehicle,coordinate(K, P)),
+  junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
+  X == (A+C)/2,
+  Y == (B+F)/2,
+  P == Y,
+  K < X,
+  turn(Vehicle,westward).
+
+direction(Vehicle) <-
+  location(Vehicle, coordinate(X, Y), Direction),
+  goal(Vehicle,coordinate(K, P)),
+  junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
+  X == (A+C)/2,
+  Y == (B+F)/2,
+  P == Y,
+  K > X,
+  turn(Vehicle,eastward).
+
+direction(Vehicle) <-
+  location(Vehicle, coordinate(X, Y), Direction),
+  goal(Vehicle,coordinate(K, P)),
+  junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
+  X == (A+C)/2,
+  Y == (B+F)/2,
+  K == X,
+  P < Y,
+  turn(Vehicle,northward).
+
+direction(Vehicle) <-
+  location(Vehicle, coordinate(X, Y), Direction),
+  goal(Vehicle,coordinate(K, P)),
+  junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
+  X == (A+C)/2,
+  Y == (B+F)/2,
+  K == X,
+  P > Y,
+  turn(Vehicle,southward).
 
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
@@ -85,7 +128,7 @@ collisionPossible(Vehicle1, Vehicle2) at T <-
   location(Vehicle1, coordinate(X, Y), Direction1) at T,
   location(Vehicle2, coordinate(A, B), Direction2) at T,
   % there is a collision possiblity if the two direction are not the same
-  Direction1 !@= Direction2,
+  Direction1 != Direction2,
   warningZone(coordinate(X, Y),coordinate(A, B)).
 
 warningZone(coordinate(X, Y),coordinate(A, B)) <-
