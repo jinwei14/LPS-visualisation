@@ -54,6 +54,7 @@ initially([
 % ---------------------------------Reactive rules---------------------------------------------
 goal(Vehicle,coordinate(A, B)) from _ to T,
 location(Vehicle, coordinate(X, Y), Direction), A==X, B==Y,moving(Vehicle) at T ->
+  % testPrint(Vehicle+ ' we have arrived'),
   arrive(Vehicle) at T.
 
 
@@ -62,6 +63,7 @@ location(Vehicle, coordinate(X, Y), Direction),
   moving(Vehicle) at T ->
     % need to find the right direction here
     % driving forward
+    % testPrint(Vehicle+' '+X+' '+Y+' Direction '+Direction + '----------------Reactive rule----------------'),
     direction(Vehicle) at T.
 
 
@@ -69,12 +71,14 @@ goal(Vehicle,coordinate(A, B)) from T to T1,
 location(Vehicle, coordinate(X, Y), Direction),
   moving(Vehicle) at T1 ->
 
+    % testPrint(Vehicle + " start driving"),
     drive(Vehicle) from T1 to _.
 
 
 % ---------------------------------------------------------------------------------------------
 % the case where car is not at t junction.
 direction(Vehicle) at T<-
+  % testPrint('checking in Juntion or not ?'),
   location(Vehicle, coordinate(X, Y), _),
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
   notAtTjunction(X,Y,A,B,C,D,E,F).
@@ -89,6 +93,7 @@ notAtTjunction(X,Y,A,B,C,D,E,F)<-
 
 % you only turn when you are in the middle of the juction.
 direction(Vehicle) at T<-
+  % testPrint('checking in turnning westward or not ?'),
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
@@ -96,9 +101,11 @@ direction(Vehicle) at T<-
   Y == (B+F)/2,
   P == Y,
   K < X,
+  % testPrint(Vehicle +' turing westward'),
   turn(Vehicle,westward) at T.
 
 direction(Vehicle) at T<-
+  % testPrint('checking in turnning eastward or not ?'),
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
@@ -106,9 +113,11 @@ direction(Vehicle) at T<-
   Y == (B+F)/2,
   P == Y,
   K > X,
+  % testPrint(Vehicle +' turing eastward'),
   turn(Vehicle, eastward) at T.
 
 direction(Vehicle) at T<-
+  % testPrint('checking in turnning northward or not ?'),
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
@@ -116,9 +125,11 @@ direction(Vehicle) at T<-
   Y == (B+F)/2,
   K == X,
   P < Y,
+  % testPrint(Vehicle +' turing northward'),
   turn(Vehicle,northward) at T.
 
 direction(Vehicle) at T<-
+  % testPrint('checking in turnning southward or not ?'),
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
@@ -126,6 +137,7 @@ direction(Vehicle) at T<-
   Y == (B+F)/2,
   K == X,
   P > Y,
+  % testPrint(Vehicle +' turing southward'),
   turn(Vehicle,southward) at T.
 
 
@@ -144,6 +156,7 @@ drive(Vehicle) from T to T1 <-
   Direction == northward,
   NewY = Y - 5,
   NextPlace = coordinate(X, NewY),
+  % testPrint(Vehicle+ ' move northward'),
   step(Vehicle, NextPlace) at T1.
 
 drive(Vehicle) from T to T1 <-
@@ -151,6 +164,7 @@ drive(Vehicle) from T to T1 <-
   Direction == southward,
   NewY = Y + 5,
   NextPlace = coordinate(X, NewY),
+  % testPrint(Vehicle+ ' move southward'),
   step(Vehicle, NextPlace) at T1.
 
 drive(Vehicle) from T to T1 <-
@@ -158,6 +172,7 @@ drive(Vehicle) from T to T1 <-
   Direction == westward,
   NewX = X-5,
   NextPlace = coordinate(NewX, Y),
+  % testPrint(Vehicle+ ' move westward'),
   step(Vehicle, NextPlace) at T1.
 
 drive(Vehicle) from T to T1 <-
@@ -165,6 +180,7 @@ drive(Vehicle) from T to T1 <-
   Direction == eastward,
   NewX = X + 5,
   NextPlace = coordinate(NewX, Y),
+  % testPrint(Vehicle+ ' move eastward'),
   step(Vehicle, NextPlace) at T1.
 
 % ---------------------------------------------------------------------------------------------
@@ -177,6 +193,7 @@ drive(Vehicle) from T to T1 <-
 % case where car should not step forward
 <- step(Vehicle, NextPlace),
   location(Vehicle, coordinate(A, B), Direction),
+  % street(_, coordinate(A, B), Width, Height, _, _),
   goal(Vehicle,coordinate(C, D)),
   A == C,
   D < B,
@@ -185,6 +202,7 @@ drive(Vehicle) from T to T1 <-
 % this bit need furter improvement.
 <- step(Vehicle, NextPlace),
   location(Vehicle, coordinate(A, B), Direction),
+  % street(_, coordinate(A, B), Width, Height, _, _),
   goal(Vehicle,coordinate(C, D)),
   A == C,
   D > B,
@@ -192,6 +210,7 @@ drive(Vehicle) from T to T1 <-
 
 <- step(Vehicle, NextPlace),
   location(Vehicle, coordinate(A, B), Direction),
+  % street(_, coordinate(A, B), Width, Height, _, _),
   goal(Vehicle,coordinate(C, D)),
   D == B,
   C < A,
@@ -199,6 +218,7 @@ drive(Vehicle) from T to T1 <-
 
 <- step(Vehicle, NextPlace),
   location(Vehicle, coordinate(A, B), Direction),
+  % street(_, coordinate(A, B), Width, Height, _, _),
   goal(Vehicle,coordinate(C, D)),
   D == B,
   C > A,
@@ -209,10 +229,12 @@ collisionPossible(Vehicle1, Vehicle2) at T <-
   location(Vehicle1, coordinate(X, Y), Direction1) at T,
   location(Vehicle2, coordinate(A, B), Direction2) at T,
   Vehicle1 != Vehicle2,
-  % there is a validation possiblity if the two direction are not the same
+  % testPrint('collisionPossible' + Vehicle1 + ' '+Vehicle2),
+  % there is a collision possiblity if the two direction are not the same
   Direction1 != Direction2,
   warningZone(coordinate(X, Y),coordinate(A, B)).
 
+% warnning zone is two times the length of the car plus 10
 warningZone(coordinate(X, Y),coordinate(A, B)) <-
   Manhattan = abs(X-A) + abs(Y-B),
   % 80 is two times the length of the car.
@@ -231,9 +253,11 @@ onMainRoad(Vehicle) at T <-
 
 updates(step(Vehicle, NextPlace), location(VehicleIns, OldPlace, Direction),  location(VehicleIns, NextPlace, Direction))<-
   VehicleIns == Vehicle.
+  % ('updating loc ' + Vehicle + ' '+ NextPlace).
 
 updates(turn(Vehicle, NewHeading) , location(VehicleIns, Place, OldHeading), location(VehicleIns, Place, NewHeading))<-
   Vehicle == VehicleIns.
+  % ('updating turing ' + Vehicle + ' '+NewHeading).
 
 terminates(arrive(Vehicle), moving(Vehicle)).
 initiates(arrive(Vehicle), stopped(Vehicle)).
