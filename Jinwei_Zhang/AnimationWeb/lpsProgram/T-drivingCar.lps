@@ -174,6 +174,7 @@ drive(Vehicle) from T to T1 <-
   not onMainRoad(Vehicle) at T,
   collisionPossible(Vehicle, Vehicle2) at T.
 
+% this bit need furter improvement.
 % case where car should not step forward
 <- step(Vehicle, NextPlace),
   location(Vehicle, coordinate(A, B), Direction),
@@ -182,7 +183,7 @@ drive(Vehicle) from T to T1 <-
   D < B,
   Direction != northward.
 
-% this bit need furter improvement.
+
 <- step(Vehicle, NextPlace),
   location(Vehicle, coordinate(A, B), Direction),
   goal(Vehicle,coordinate(C, D)),

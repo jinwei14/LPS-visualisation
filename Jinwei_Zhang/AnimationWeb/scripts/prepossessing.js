@@ -219,6 +219,7 @@
                 engine.run();
                 console.log('engine finished running');
             }).catch((err) => {
+
             console.log('this is the error message: ' + err);
             alert("Error in running the program: " + err);
         });

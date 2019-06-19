@@ -89,24 +89,30 @@
         console.log('creating vehicle has been called in animation.js ' + window.name);
         console.log(vehicleName, x, y, direction);
         // create a new Sprite from an image path
-        var carInstance = null;
+        var carInstance = PIXI.Sprite.from('imgs/carNorth.png');
+        carInstance.anchor.set(0.5);
+        carInstance.x = x;
+        carInstance.y = y;
+
         //the length of the car is 40
         switch(direction) {
             case 'northward':
                 // code block
-                carInstance = PIXI.Sprite.from('imgs/carNorth.png');
+                // carInstance = PIXI.Sprite.from('imgs/carNorth.png');
                 break;
             case 'southward':
                 // code block
-                carInstance = PIXI.Sprite.from('imgs/carSouth.png');
+                // carInstance = PIXI.Sprite.from('imgs/carSouth.png');
+                carInstance.rotation += Math.PI;
                 break;
             case 'eastward':
-                carInstance = PIXI.Sprite.from('imgs/carEast.png');
+                // carInstance = PIXI.Sprite.from('imgs/carEast.png');
+                carInstance.rotation += (Math.PI)/2;
                 break;
             case 'westward':
-                carInstance = PIXI.Sprite.from('imgs/carWest.png');
+                // carInstance = PIXI.Sprite.from('imgs/carWest.png');
+                carInstance.rotation -= (Math.PI)/2;
                 break;
-
             default:
                 carInstance = PIXI.Sprite.from('imgs/carNorth.png');
         }
@@ -117,9 +123,7 @@
         // graphics.drawRect(x, y, 2, 2);
         // graphics.endFill();
         // center the sprite's anchor point
-        carInstance.anchor.set(0.5);
-        carInstance.x = x;
-        carInstance.y = y;
+
 
         let carText = new PIXI.Text(vehicleName, {fontFamily: 'Arial', fontSize: 12, fill: 0x007bff});
         carText.x = x-15;
@@ -149,7 +153,26 @@
                 item.textObj.x = x-15;
                 item.textObj.y = y-40;
                 if (item.direction !== direction){
-                    console.log('further turning implementation');
+
+                    if ((item.direction === 'southward' && direction === 'northward')||
+                        (item.direction === 'eastward' && direction === 'westward')||
+                        (item.direction === 'northward' && direction === 'southward')||
+                        (item.direction === 'westward' && direction === 'eastward')){
+                        item.obj.rotation += Math.PI;
+                    }else if((item.direction === 'southward' && direction === 'eastward')||
+                        (item.direction === 'eastward' && direction === 'northward')||
+                        (item.direction === 'northward' && direction === 'westward')||
+                        (item.direction === 'westward' && direction === 'southward')){
+                        item.obj.rotation -= Math.PI/2;
+
+                    }else if((item.direction === 'southward' && direction === 'westward')||
+                        (item.direction === 'westward' && direction === 'northward')||
+                        (item.direction === 'northward' && direction === 'eastward')||
+                        (item.direction === 'eastward' && direction === 'southward')){
+                        item.obj.rotation += Math.PI/2;
+                    }
+
+                    item.direction = direction;
                 }
             }
         });
