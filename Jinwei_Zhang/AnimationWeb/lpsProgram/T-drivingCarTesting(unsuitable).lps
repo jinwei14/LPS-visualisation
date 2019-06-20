@@ -36,8 +36,18 @@ initially([
   % location(carA, coordinate(145, 225), eastward),
   % location(carB, coordinate(500, 580), northward),
 
+  % %  carA start from Tjunction
+  % location(carA, coordinate(500, 225), eastward),
+  % location(carB, coordinate(500 ,270), northward),
 
-  % % carA wants to go straight from mainStreet, carB want to turn left from southStreet 
+% % carA carB drivr opposite to each other
+%   location(carA, coordinate(450, 225), eastward),
+%   location(carB, coordinate(980 ,225), westward),
+%   goal(carA,coordinate(980, 225)),
+%   goal(carB,coordinate(450, 225)),
+
+
+  % % carA wants to go straight from mainStreet, carB want to turn left from southStreet
   % goal(carA,coordinate(980, 225)),
   % goal(carB,coordinate(120, 225)),
 
@@ -45,8 +55,9 @@ initially([
   % goal(carA,coordinate(980, 225)),
   % goal(carB,coordinate(980, 225)),
 
-  goal(carA,coordinate(500, 580)),
-  goal(carB,coordinate(980, 225)),
+% %carB turn right fron southStreet, carA turn right fron mainStreet
+  % goal(carA,coordinate(500, 580)),
+  % goal(carB,coordinate(980, 225)),
 
   street(mainStreet , coordinate(100, 200), 900, 50, 1,1),
   street(southStreet , coordinate(475, 250), 50, 500, 1,0),
