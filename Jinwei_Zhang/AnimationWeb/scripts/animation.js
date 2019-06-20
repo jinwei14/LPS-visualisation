@@ -43,7 +43,7 @@
             wordWrapWidth: 440,
         });
 
-        const richText = new PIXI.Text('LPS sample animation', style);
+        const richText = new PIXI.Text('LPS Self-Driving car animation', style);
         richText.x = 300;
         richText.y = 0;
 

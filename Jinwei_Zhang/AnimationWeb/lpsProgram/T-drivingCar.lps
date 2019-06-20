@@ -44,8 +44,15 @@ initially([
   % location(carA, coordinate(980, 225), eastward),
   % location(carB, coordinate(120 ,225), northward),
 
-  goal(carA,coordinate(980, 225)),
-  goal(carB,coordinate(120, 225)),
+  % goal(carA,coordinate(980, 225)),
+  % goal(carB,coordinate(120, 225)),
+
+  % goal(carA,coordinate(980, 225)),
+  % goal(carB,coordinate(980, 225)),
+
+  goal(carA,coordinate(500, 580)),
+  goal(carB,coordinate(980, 225)),
+
   street(mainStreet , coordinate(100, 200), 900, 50, 1,1),
   street(southStreet , coordinate(475, 250), 50, 500, 1,0),
   junction(tJuntion,coordinate(475, 200),coordinate(525, 200),coordinate(475, 250),coordinate(525, 250))
@@ -174,6 +181,9 @@ drive(Vehicle) from T to T1 <-
   not onMainRoad(Vehicle) at T,
   collisionPossible(Vehicle, Vehicle2) at T.
 
+<- step(Vehicle, NextPlace),
+  collisionPossible(Vehicle, Vehicle2) at T,
+  stopped(Vehicle2).
 % this bit need furter improvement.
 % case where car should not step forward
 <- step(Vehicle, NextPlace),
@@ -211,7 +221,7 @@ collisionPossible(Vehicle1, Vehicle2) at T <-
   location(Vehicle2, coordinate(A, B), Direction2) at T,
   Vehicle1 != Vehicle2,
   % there is a validation possiblity if the two direction are not the same
-  Direction1 != Direction2,
+  % there is a validation possiblity if the two direction are the same
   warningZone(coordinate(X, Y),coordinate(A, B)).
 
 warningZone(coordinate(X, Y),coordinate(A, B)) <-

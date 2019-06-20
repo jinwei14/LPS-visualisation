@@ -44,8 +44,15 @@ initially([
   % location(carA, coordinate(980, 225), eastward),
   % location(carB, coordinate(120 ,225), northward),
 
-  goal(carA,coordinate(980, 225)),
-  goal(carB,coordinate(120, 225)),
+  % goal(carA,coordinate(980, 225)),
+  % goal(carB,coordinate(120, 225)),
+
+  % goal(carA,coordinate(980, 225)),
+  % goal(carB,coordinate(980, 225)),
+
+  goal(carA,coordinate(500, 580)),
+  goal(carB,coordinate(980, 225)),
+
   street(mainStreet , coordinate(100, 200), 900, 50, 1,1),
   street(southStreet , coordinate(475, 250), 50, 500, 1,0),
   junction(tJuntion,coordinate(475, 200),coordinate(525, 200),coordinate(475, 250),coordinate(525, 250))
@@ -190,7 +197,12 @@ drive(Vehicle) from T to T1 <-
   not onMainRoad(Vehicle) at T,
   collisionPossible(Vehicle, Vehicle2) at T.
 
-% case where car should not step forward
+% this is also not perfect need further development
+<- step(Vehicle, NextPlace),
+  collisionPossible(Vehicle, Vehicle2) at T,
+  stopped(Vehicle2).
+
+% case where car should not step forward is that your goal is on your left but you are facing in a wrong direction
 <- step(Vehicle, NextPlace),
   location(Vehicle, coordinate(A, B), Direction),
   % street(_, coordinate(A, B), Width, Height, _, _),
@@ -231,7 +243,7 @@ collisionPossible(Vehicle1, Vehicle2) at T <-
   Vehicle1 != Vehicle2,
   % testPrint('collisionPossible' + Vehicle1 + ' '+Vehicle2),
   % there is a collision possiblity if the two direction are not the same
-  Direction1 != Direction2,
+  % Direction1 != Direction2,
   warningZone(coordinate(X, Y),coordinate(A, B)).
 
 % warnning zone is two times the length of the car plus 10
