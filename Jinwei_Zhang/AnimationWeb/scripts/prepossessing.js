@@ -45,7 +45,7 @@
             // if (vis.style.display === "block") {
             //     vis.style.display = "none";
             // }
-            appManager.clearContent();
+            // appManager.clearContent();
         }
 
         // change the button text after click
