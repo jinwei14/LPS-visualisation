@@ -37,9 +37,11 @@ initially([
   % location(carB, coordinate(500, 580), northward),
 
 
+  % % carA wants to go straight from mainStreet, carB want to turn left from southStreet 
   % goal(carA,coordinate(980, 225)),
   % goal(carB,coordinate(120, 225)),
 
+% %same goal on the  mainStreet
   % goal(carA,coordinate(980, 225)),
   % goal(carB,coordinate(980, 225)),
 
