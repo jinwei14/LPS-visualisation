@@ -20,6 +20,7 @@
     var graphics = null;
 
     appManager.createVisualizer = function () {
+        // the graphics object will be used throughout the class
         graphics = new PIXI.Graphics();
         document.getElementById("content").appendChild(app.view);
         console.log('the createVisualizer  has been called');
@@ -195,24 +196,7 @@
         });
 
     };
-    // //this field will add all the children to the app
-    // appManager.addChildren = function () {
-    //     console.log('the children adding has been called');
-    //     app.stage.addChild(richText);
-    //     app.stage.addChild(graphics);
-    //     app.stage.addChild(xText, yText, originText);
-    //     app.stage.addChild(streetText);
-    //     app.stage.addChild(myCar);
-    //
-    //     // // Listen for animate update
-    //     // app.ticker.add((delta) => {
-    //     //
-    //     //     if (myCar.x <= 600) {
-    //     //         myCar.x += 1;
-    //     //     }
-    //     // });
-    //
-    // };
+
 
     /*
     * this method will clear out the street and vehicle information
@@ -224,6 +208,10 @@
         for (var i = app.stage.children.length - 1; i >= 0; i--) {
             app.stage.removeChild(app.stage.children[i]);
         }
+        // if (graphics!= null){
+        //     graphics.destroy();
+        // }
+
         // app.stage.children = [];
         // app = null;
         // graphics = null;

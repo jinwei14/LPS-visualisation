@@ -20,7 +20,7 @@
                     vis.style.display = "block";
                 }
                 //clear the content before running the
-                // appManager.clearContent();
+                appManager.clearContent();
                 LPSRunner(program, null);
 
 
