@@ -1,6 +1,6 @@
 % we assume the destination is reachable
-maxTime(200).
-cycleInterval(100).
+maxTime(50).
+cycleInterval(10).
 
 loadModule('../scripts/module.js').
 

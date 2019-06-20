@@ -20,7 +20,7 @@
                     vis.style.display = "block";
                 }
                 //clear the content before running the
-                appManager.clearContent();
+                // appManager.clearContent();
                 LPSRunner(program, null);
 
 
@@ -31,7 +31,13 @@
 
         //clear the content of the input box and disable the visualiser
         function clearText(event) {
+
             document.getElementById("exampleFormControlTextarea1").value = "";
+            console.log(document.getElementById("formControlFile1").value);
+            console.log(document.getElementById("formControlFile1").files);
+            document.getElementById("formControlFile1").value = null;
+            document.getElementById("formControlFile1").files = null;
+
             var message = "<h6> Successfully cleared the lps program ! </h6>";
 
             document.getElementById("output").innerHTML = message;
@@ -39,13 +45,14 @@
             // if (vis.style.display === "block") {
             //     vis.style.display = "none";
             // }
+            appManager.clearContent();
         }
 
         // change the button text after click
         // instead of using another selector API.
         document.querySelector("#AnimateButton").addEventListener("click", parserText);
         document.querySelector("#ClearButton").addEventListener("click", clearText);
-
+        // document.querySelector("#formControlFile1").addEventListener("click", clearText);
 
     });
 

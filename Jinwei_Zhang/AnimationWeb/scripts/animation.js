@@ -2,15 +2,25 @@
     // output test if pixi works in the browser or not.
     PIXI.utils.sayHello();
 
+    /*
+    * appManager is the object that allow other file to access the animation.
+    * */
     var appManager = {
         vehicle: [],
         street: []
     };
+    /*
+    *
+    * */
+    var app = new PIXI.Application({backgroundColor: 0xFFFFFF, width: 1200, height: 1000});;
 
-    const app = new PIXI.Application({backgroundColor: 0xFFFFFF, width: 1200, height: 1000});
-    const graphics = new PIXI.Graphics();
+    /*
+    *
+    * */
+    var graphics = null;
 
     appManager.createVisualizer = function () {
+        graphics = new PIXI.Graphics();
         document.getElementById("content").appendChild(app.view);
         console.log('the createVisualizer  has been called');
 
@@ -60,19 +70,21 @@
         app.stage.addChild(xText, yText, originText);
     };
 
-    //this field will create the Road
+    /*
+    * This field will create the Road
+    * */
     appManager.createRoad = function (nameText, x, y, width, height, laneNumber) {
         console.log('creating Road has been called in animation.js ' + window.name);
         console.log(nameText, x, y, width, height, laneNumber);
         //main street text
         let streetText = new PIXI.Text(nameText, {fontFamily: 'Arial', fontSize: 18, fill: 0xFFFFFF});
 
-        if (width>height){
-            streetText.x = (width + x)/2;
+        if (width > height) {
+            streetText.x = (width + x) / 2;
             streetText.y = y;
-        }else{
-            streetText.x = x+width;
-            streetText.y = (height+y)/2;
+        } else {
+            streetText.x = x + width;
+            streetText.y = (height + y) / 2;
             streetText.rotation = Math.PI / 2;
         }
         //main street
@@ -84,7 +96,10 @@
         app.stage.addChild(streetText);
     };
 
-    //this field will create the vehicles with name, location and direction.
+
+    /*
+    * This field will create the vehicles with name, location and direction.
+    * */
     appManager.createVehicle = function (vehicleName, x, y, direction) {
         console.log('creating vehicle has been called in animation.js ' + window.name);
         console.log(vehicleName, x, y, direction);
@@ -95,7 +110,7 @@
         carInstance.y = y;
 
         //the length of the car is 40
-        switch(direction) {
+        switch (direction) {
             case 'northward':
                 // code block
                 // carInstance = PIXI.Sprite.from('imgs/carNorth.png');
@@ -107,11 +122,11 @@
                 break;
             case 'eastward':
                 // carInstance = PIXI.Sprite.from('imgs/carEast.png');
-                carInstance.rotation += (Math.PI)/2;
+                carInstance.rotation += (Math.PI) / 2;
                 break;
             case 'westward':
                 // carInstance = PIXI.Sprite.from('imgs/carWest.png');
-                carInstance.rotation -= (Math.PI)/2;
+                carInstance.rotation -= (Math.PI) / 2;
                 break;
             default:
                 carInstance = PIXI.Sprite.from('imgs/carNorth.png');
@@ -126,15 +141,15 @@
 
 
         let carText = new PIXI.Text(vehicleName, {fontFamily: 'Arial', fontSize: 12, fill: 0x007bff});
-        carText.x = x-15;
-        carText.y = y-40;
+        carText.x = x - 15;
+        carText.y = y - 40;
 
 
         // carInstance.rotation = 45*(Math.PI/180);
 
         appManager.vehicle.push({
             name: vehicleName,
-            textObj:carText,
+            textObj: carText,
             xLoc: x,
             yLoc: y,
             direction: direction,
@@ -144,32 +159,34 @@
         app.stage.addChild(carText);
     };
 
-    //this field will modify the child in app
+    /*
+    * this field will modify the child in app
+    * */
     appManager.changeVehicleLocation = function (vehicleName, x, y, direction) {
         appManager.vehicle.forEach(function (item, index) {
-            if (item.name === vehicleName){
+            if (item.name === vehicleName) {
                 item.obj.x = x;
                 item.obj.y = y;
-                item.textObj.x = x-15;
-                item.textObj.y = y-40;
-                if (item.direction !== direction){
+                item.textObj.x = x - 15;
+                item.textObj.y = y - 40;
+                if (item.direction !== direction) {
 
-                    if ((item.direction === 'southward' && direction === 'northward')||
-                        (item.direction === 'eastward' && direction === 'westward')||
-                        (item.direction === 'northward' && direction === 'southward')||
-                        (item.direction === 'westward' && direction === 'eastward')){
+                    if ((item.direction === 'southward' && direction === 'northward') ||
+                        (item.direction === 'eastward' && direction === 'westward') ||
+                        (item.direction === 'northward' && direction === 'southward') ||
+                        (item.direction === 'westward' && direction === 'eastward')) {
                         item.obj.rotation += Math.PI;
-                    }else if((item.direction === 'southward' && direction === 'eastward')||
-                        (item.direction === 'eastward' && direction === 'northward')||
-                        (item.direction === 'northward' && direction === 'westward')||
-                        (item.direction === 'westward' && direction === 'southward')){
-                        item.obj.rotation -= Math.PI/2;
+                    } else if ((item.direction === 'southward' && direction === 'eastward') ||
+                        (item.direction === 'eastward' && direction === 'northward') ||
+                        (item.direction === 'northward' && direction === 'westward') ||
+                        (item.direction === 'westward' && direction === 'southward')) {
+                        item.obj.rotation -= Math.PI / 2;
 
-                    }else if((item.direction === 'southward' && direction === 'westward')||
-                        (item.direction === 'westward' && direction === 'northward')||
-                        (item.direction === 'northward' && direction === 'eastward')||
-                        (item.direction === 'eastward' && direction === 'southward')){
-                        item.obj.rotation += Math.PI/2;
+                    } else if ((item.direction === 'southward' && direction === 'westward') ||
+                        (item.direction === 'westward' && direction === 'northward') ||
+                        (item.direction === 'northward' && direction === 'eastward') ||
+                        (item.direction === 'eastward' && direction === 'southward')) {
+                        item.obj.rotation += Math.PI / 2;
                     }
 
                     item.direction = direction;
@@ -201,10 +218,15 @@
     * this method will clear out the street and vehicle information
     * the basic canvas will remain the same (coordinate axis and the title text)
     * */
-    appManager.clearContent = function(){
+    appManager.clearContent = function () {
         appManager.vehicle = [];
         appManager.street = [];
-        app.stage.children.forEach(function(c){ stage.removeChild(c)})
+        for (var i = app.stage.children.length - 1; i >= 0; i--) {
+            app.stage.removeChild(app.stage.children[i]);
+        }
+        // app.stage.children = [];
+        // app = null;
+        // graphics = null;
     };
 
 
