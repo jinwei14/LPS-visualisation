@@ -32,17 +32,10 @@ actions ([
 initially([
   moving(carA),
   moving(carB),
-  % % normal start
-  location(carA, coordinate(145, 225), eastward),
-  location(carB, coordinate(500, 580), northward),
+  % % % normal start one on the mainstreet and other on the southStreet
+  % location(carA, coordinate(145, 225), eastward),
+  % location(carB, coordinate(500, 580), northward),
 
-  % %  start from Tjunction
-  % location(carA, coordinate(500, 225), eastward),
-  % location(carB, coordinate(500 ,270), northward),
-
-  % %  start from goal townPosition
-  % location(carA, coordinate(980, 225), eastward),
-  % location(carB, coordinate(120 ,225), northward),
 
   % goal(carA,coordinate(980, 225)),
   % goal(carB,coordinate(120, 225)),
@@ -57,6 +50,7 @@ initially([
   street(southStreet , coordinate(475, 250), 50, 500, 1,0),
   junction(tJuntion,coordinate(475, 200),coordinate(525, 200),coordinate(475, 250),coordinate(525, 250))
 ]).
+
 
 % ---------------------------------Reactive rules---------------------------------------------
 goal(Vehicle,coordinate(A, B)) from _ to T,
@@ -190,12 +184,53 @@ drive(Vehicle) from T to T1 <-
   % testPrint(Vehicle+ ' move eastward'),
   step(Vehicle, NextPlace) at T1.
 
+clearRoute(Vehicle) at T<-
+  location(Vehicle, coordinate(X, Y), _),
+  goal(Vehicle,coordinate(P, Q)),
+  location(Vehicle2, coordinate(A, B), _),
+  Vehicle != Vehicle2,
+  Y == Q,
+  B != Q.
+
+clearRoute(Vehicle) at T<-
+  location(Vehicle, coordinate(X, Y), _),
+  goal(Vehicle,coordinate(P, Q)),
+  location(Vehicle2, coordinate(A, B), _),
+  Vehicle != Vehicle2,
+  A < X,
+  A < P.
+
+clearRoute(Vehicle) at T<-
+  location(Vehicle, coordinate(X, Y), _),
+  goal(Vehicle,coordinate(P, Q)),
+  location(Vehicle2, coordinate(A, B), _),
+  Vehicle != Vehicle2,
+  A > X,
+  A > P.
 % ---------------------------------------------------------------------------------------------
 %step is false if the car is moving into a junction, not on main Road and there is a collision.
 % this part need further developemnt for other cases
+
+
 <- step(Vehicle, NextPlace),
   not onMainRoad(Vehicle) at T,
-  collisionPossible(Vehicle, Vehicle2) at T.
+  collisionPossible(Vehicle, Vehicle2) at T,
+  Vehicle != Vehicle2,
+  not clearRoute(Vehicle) at T.
+
+% both clear routes
+<- step(Vehicle, NextPlace),
+  not onMainRoad(Vehicle) at T,
+  collisionPossible(Vehicle, Vehicle2) at T,
+  Vehicle != Vehicle2,
+  clearRoute(Vehicle) at T,
+  clearRoute(Vehicle2) at T.
+
+<- step(Vehicle, NextPlace),
+  onMainRoad(Vehicle) at T,
+  collisionPossible(Vehicle, Vehicle2) at T,
+  Vehicle != Vehicle2,
+  not clearRoute(Vehicle) at T.
 
 % this is also not perfect need further development
 <- step(Vehicle, NextPlace),
@@ -273,3 +308,7 @@ updates(turn(Vehicle, NewHeading) , location(VehicleIns, Place, OldHeading), loc
 
 terminates(arrive(Vehicle), moving(Vehicle)).
 initiates(arrive(Vehicle), stopped(Vehicle)).
+
+% % decision making will give a waiting state if car is not stopped
+% terminates(decision_making(Vehicle), moving(Vehicle))<- not stopped(Vehicle).
+% initiates(decision_making(Vehicle), waitting(Vehicle))<- not stopped(Vehicle).
