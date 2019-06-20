@@ -197,6 +197,16 @@
     //
     // };
 
+    /*
+    * this method will clear out the street and vehicle information
+    * the basic canvas will remain the same (coordinate axis and the title text)
+    * */
+    appManager.clearContent = function(){
+        appManager.vehicle = [];
+        appManager.street = [];
+        app.stage.children.forEach(function(c){ stage.removeChild(c)})
+    };
+
 
     window.appManager = appManager;
 

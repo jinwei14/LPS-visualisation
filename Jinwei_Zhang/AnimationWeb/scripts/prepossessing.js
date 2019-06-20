@@ -19,8 +19,9 @@
                 if (vis.style.display === "none") {
                     vis.style.display = "block";
                 }
-
-                generateSpec(program, null);
+                //clear the content before running the
+                appManager.clearContent();
+                LPSRunner(program, null);
 
 
             } else {
@@ -75,9 +76,9 @@
         document.querySelector('#formControlFile1').addEventListener("change", loadTextFromFile);
     });
 
-    /* 1.we leave the file system for now for start up
-       2. Read all the information into a dictionary
-       3. start the animation process dump the buggy lps studio.
+    /*
+    this is the data structure for parse the vehicle location from
+    the initial fluent to the  change of the state
     */
 
     function VehicleLoc(fullPhrase, timeStamp) {
@@ -143,6 +144,10 @@
         };
     }
 
+    /*
+    * this is the data structure for parse the street information Mentioned that
+    * this will only be call when cycle is 1.
+    * */
     function Streets(fullPhrase) {
 
         //the full phrase of the user defined fluent such as loc(car, 1650, 340)).
@@ -170,9 +175,10 @@
 
     }
 
-    // this is a list of object that can access the
-
-    function generateSpec(programFile, specFile) {
+    /*
+    * This function will be called when the animate button is clicked.
+    * */
+    function LPSRunner(programFile, specFile) {
 
 
         LPS.loadString(programFile)
@@ -213,13 +219,17 @@
 
                 engine.on('error', (err) => {
                     console.log(err);
-                    alert("Error in running the program: " + err);
+                    //clear the content if there is any error.
+                    appManager.clearContent();
+                    alert("Error in running the engine: " + err);
                 });
 
                 engine.run();
                 console.log('engine finished running');
             }).catch((err) => {
 
+            //clear the content if there is any error.
+            appManager.clearContent();
             console.log('this is the error message: ' + err);
             alert("Error in running the program: " + err);
         });
