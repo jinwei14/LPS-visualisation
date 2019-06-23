@@ -45,17 +45,17 @@ initially([
   % goal(carA,coordinate(980, 225)),
   % goal(carB,coordinate(120, 225)),
 
-%same goal on the  mainStreet
-  location(carA, coordinate(145, 225), eastward),
-  location(carB, coordinate(500, 580), northward),
-  goal(carA,coordinate(980, 225)),
-  goal(carB,coordinate(980, 225)),
-
-% %carB turn right from southStreet, carA turn right fron mainStreet
-% location(carA, coordinate(145, 225), eastward),
-% location(carB, coordinate(500, 580), northward),
-%   goal(carA,coordinate(500, 580)),
+% %same goal on the  mainStreet
+%   location(carA, coordinate(145, 225), eastward),
+%   location(carB, coordinate(500, 580), northward),
+%   goal(carA,coordinate(980, 225)),
 %   goal(carB,coordinate(980, 225)),
+
+%carB turn right from southStreet, carA turn right fron mainStreet
+location(carA, coordinate(145, 225), eastward),
+location(carB, coordinate(500, 580), northward),
+  goal(carA,coordinate(500, 580)),
+  goal(carB,coordinate(980, 225)),
 
 
 
