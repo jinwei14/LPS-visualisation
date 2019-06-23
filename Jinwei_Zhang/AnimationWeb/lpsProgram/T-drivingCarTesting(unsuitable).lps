@@ -102,7 +102,7 @@ location(Vehicle, coordinate(X, Y), Direction),
 % the case where car is not at t junction.
 direction(Vehicle) at T<-
   % testPrint('checking in Juntion or not ?'),
-  location(Vehicle, coordinate(X, Y), _),
+  location(Vehicle, coordinate(X, Y), _) at T,
   junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
   notAtTjunction(X,Y,A,B,C,D,E,F).
 
@@ -173,7 +173,7 @@ direction(Vehicle) at T<-
 % ---------------------------------------------------------------------------------------------
 
 
-% drive macro envent.
+% drive macro event.
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == northward,
