@@ -13,9 +13,9 @@ fluents([
   location(VehicleName, coordinate(X, Y), Direction),
   trafficLight(coordinate(X, Y), Working_status, Color, FacingDirection),
   street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane, Priority),
-  goal(VehicleName,coordinate(X, Y)),
+  goal(VehicleName,coordinate(X, Y))
   % define the junction coordinate
-  junction(Name,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H))
+  % junction(Name,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H))
 ]).
 
 % events will reserved for traffic lights
@@ -53,10 +53,9 @@ initially([
 
 % prblem
   % %carA carB start driving to a same goal both turnnig into southStreet
-    % location(carA, coordinate(145, 175), eastward),
-    % location(carB, coordinate(200, 175), eastward),
-        location(carB, coordinate(500, 175), eastward),
-    % goal(carA,coordinate(500, 580)),
+    location(carA, coordinate(145, 175), eastward),
+    location(carB, coordinate(200, 175), eastward),
+    goal(carA,coordinate(500, 580)),
     goal(carB,coordinate(500, 580)),
 
 
