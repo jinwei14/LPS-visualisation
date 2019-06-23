@@ -1,7 +1,7 @@
 % we assume the destination is reachable
 % and car length is 40 x 40 based on the image
 % speed is 5 unit per cycle.
-maxTime(200).
+maxTime(170).
 cycleInterval(50).
 
 loadModule('../scripts/module.js').
@@ -33,22 +33,27 @@ initially([
   moving(carA),
   moving(carB),
   % % normal start one on the mainstreet and other on the southStreet
-  location(carA, coordinate(145, 225), eastward),
-  location(carB, coordinate(500, 580), northward),
+  %   % carA wants to go straight from mainStreet, carB want to turn left from southStreet
+  % location(carA, coordinate(145, 225), eastward),
+  % location(carB, coordinate(500, 580), northward),
+  % goal(carA,coordinate(980, 225)),
+  % goal(carB,coordinate(120, 225)),
 
   % %  carA start from Tjunction
   % location(carA, coordinate(500, 225), eastward),
   % location(carB, coordinate(500 ,270), northward),
+  % goal(carA,coordinate(980, 225)),
+  % goal(carB,coordinate(120, 225)),
 
-  % carA wants to go straight from mainStreet, carB want to turn left from southStreet
+%same goal on the  mainStreet
+  location(carA, coordinate(145, 225), eastward),
+  location(carB, coordinate(500, 580), northward),
   goal(carA,coordinate(980, 225)),
-  goal(carB,coordinate(120, 225)),
-
-% %same goal on the  mainStreet
-%   goal(carA,coordinate(980, 225)),
-%   goal(carB,coordinate(980, 225)),
+  goal(carB,coordinate(980, 225)),
 
 % %carB turn right from southStreet, carA turn right fron mainStreet
+% location(carA, coordinate(145, 225), eastward),
+% location(carB, coordinate(500, 580), northward),
 %   goal(carA,coordinate(500, 580)),
 %   goal(carB,coordinate(980, 225)),
 
