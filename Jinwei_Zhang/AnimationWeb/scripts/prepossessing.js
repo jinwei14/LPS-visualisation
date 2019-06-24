@@ -183,6 +183,33 @@
     }
 
     /*
+    * this is the data structure for parse the traffic light information. Mentioned that
+    * this will only be call when cycle is 1 and updated on each cycle.
+    * */
+    function TrafficLight(fullPhrase) {
+
+        //the full phrase of the user defined fluent such as loc(car, 1650, 340)).
+        this.fullPhrase = fullPhrase;
+
+        //regulation match array
+        this.matchArray = this.fullPhrase.match(/(\w+)/g);
+        console.log(this.matchArray);
+
+        this.fluent = this.matchArray[0];
+        //the location and the name of the street
+        this.X = parseInt(this.matchArray[2],10);
+        this.Y = parseInt(this.matchArray[3],10);
+
+
+        //the color of the traffic light
+        this.color = this.matchArray[4];
+
+        //the direction that the traffic light os facing
+        this.direct = this.matchArray[5];
+
+    }
+
+    /*
     * This function will be called when the animate button is clicked.
     * */
     function LPSRunner(programFile, specFile) {
@@ -214,10 +241,13 @@
                         });
                         fluents.forEach(function (item, index) {
                              if (item.toLowerCase().startsWith('location')) {
+                                // initialise the location of the car.
                                 var loc = new VehicleLoc(item, currentTime);
                                 appManager.createVehicle(loc.getObjectName(), loc.X, loc.Y, loc.getHeading());
                             }else if (item.toLowerCase().startsWith('trafficLight')){
                                  //    need to implement a function to create traffic light.
+                                 var light = new TrafficLight(item);
+                                 appManager.createTrafficLight(light.X,light.Y,light.color);
                              }
                         });
                         //Do something
