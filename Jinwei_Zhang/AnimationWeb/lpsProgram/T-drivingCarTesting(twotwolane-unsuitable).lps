@@ -83,12 +83,16 @@ initially([
   trafficLight(coordinate(525, 270), green, eastward,mainStreet),
   trafficLight(coordinate(620, 225), green, southward,southStreet)
 
+
 ]).
 
 % define the junction coordinate facts
 % junction(Name,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H))
 
-junction(tJuntion,coordinate(475, 200),coordinate(525, 200),coordinate(475, 250),coordinate(525, 250)).
+junction(tJuntion1,coordinate(450, 150),coordinate(500, 150),coordinate(450, 200),coordinate(500, 200)).
+junction(tJuntion2,coordinate(450, 150),coordinate(525, 150),coordinate(475, 200),coordinate(525, 200)).
+junction(tJuntion3,coordinate(450, 150),coordinate(525, 150),coordinate(475, 200),coordinate(525, 200)).
+junction(tJuntion4,coordinate(450, 150),coordinate(525, 150),coordinate(475, 200),coordinate(525, 200)).
 
 
 % define the street coordinate facts.
@@ -96,12 +100,9 @@ street(mainStreet , coordinate(100, 150), 900, 50, 2,1).
 
 street(mainStreet , coordinate(100, 200), 900, 50, 2,1).
 
+street(southStreet , coordinate(450, 250), 50, 500, 2,0).
+
 street(southStreet , coordinate(500, 250), 50, 500, 2,0).
-
-street(southStreet , coordinate(550, 250), 50, 500, 2,0).
-
-
-
 % atTjunction(coordinate(A,B),junction(tJuntion1,coordinate(A1, A2),coordinate(B1, B2),coordinate(C1, C2),coordinate(D1, D2))) <-
 %   X1==475,Y1==200,X2 == 525, Y2 == 200, X3==.
 % atTjunction(tJuntion2,coordinate(475, 150),coordinate(525, 150),coordinate(475, 200),coordinate(525, 200)) <-

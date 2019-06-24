@@ -81,9 +81,9 @@ location(carB, coordinate(500, 580), northward),
 
 ]).
 
-street(mainStreet , coordinate(100, 200), 900, 50, 1,1),
-street(southStreet , coordinate(475, 250), 50, 500, 1,0),
-junction(tJuntion,coordinate(475, 200),coordinate(525, 200),coordinate(475, 250),coordinate(525, 250))
+street(mainStreet , coordinate(100, 200), 900, 50, 1,1).
+street(southStreet , coordinate(475, 250), 50, 500, 1,0).
+junction(tJuntion,coordinate(475, 200),coordinate(525, 200),coordinate(475, 250),coordinate(525, 250)).
 
 % ---------------------------------Reactive rules---------------------------------------------
 goal(Vehicle,coordinate(A, B)) from _ to T,
