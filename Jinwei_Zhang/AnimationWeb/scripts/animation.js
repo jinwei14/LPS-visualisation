@@ -210,7 +210,7 @@
         lightInstance.x = x;
         lightInstance.y = y;
 
-        let lightText = new PIXI.Text(initialColor, {fontFamily: 'Arial', fontSize: 12, fill: 0xff0000});
+        let lightText = new PIXI.Text(initialColor, {fontFamily: 'Arial', fontSize: 12, fill: 0x00ff00});
         lightText.x = x - 15;
         lightText.y = y - 40;
         appManager.lights.push({
