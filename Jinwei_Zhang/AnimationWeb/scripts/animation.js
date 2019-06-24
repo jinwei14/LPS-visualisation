@@ -82,11 +82,11 @@
         let streetText = new PIXI.Text(nameText, {fontFamily: 'Arial', fontSize: 18, fill: 0xFFFFFF});
 
         if (width > height) {
-            streetText.x = (width + x) / 2;
+            streetText.x = (x + width + x) / 2;
             streetText.y = y;
         } else {
             streetText.x = x + width;
-            streetText.y = (height + y) / 2;
+            streetText.y = (y + height + y) / 2;
             streetText.rotation = Math.PI / 2;
         }
         //main street
@@ -205,12 +205,22 @@
     appManager.createTrafficLight = function(x, y, initialColor){
         console.log('creating createTrafficLight has been called in animation.js ' + window.name);
         console.log( x, y, initialColor);
-        var lightInstance = PIXI.Sprite.from('imgs/TrafficLight.png');
+        var lightInstance = null;
+
+
+        var lightText = null;
+        if (initialColor === 'red' ){
+            lightInstance = PIXI.Sprite.from('imgs/TrafficLight.png');
+            lightText = new PIXI.Text(initialColor, {fontFamily: 'Arial', fontSize: 14, fill: 0xff0000});
+        }else if (initialColor === 'green' ){
+            lightInstance = PIXI.Sprite.from('imgs/TrafficLight.png');
+            lightText = new PIXI.Text(initialColor, {fontFamily: 'Arial', fontSize: 14, fill: 0x00ff00});
+        }
+
         lightInstance.anchor.set(0.5);
         lightInstance.x = x;
         lightInstance.y = y;
 
-        let lightText = new PIXI.Text(initialColor, {fontFamily: 'Arial', fontSize: 12, fill: 0x00ff00});
         lightText.x = x - 15;
         lightText.y = y - 40;
         appManager.lights.push({
