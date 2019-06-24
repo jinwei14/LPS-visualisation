@@ -28,7 +28,6 @@ console.log('fullPhrase: ' + obj2.fullPhrase);
 console.log('fluent: ' + obj2.fluent);
 console.log('x: ' + obj2.X);
 console.log('y: ' + obj2.Y);
-console.log('status: ' + obj2.status);
 console.log('color: ' + obj2.color);
 console.log('direct: ' + obj2.direct);
 
