@@ -197,6 +197,18 @@
 
     };
 
+    /*
+    * this field will create the traffic light based on the location
+    * */
+
+    appManager.createTrafficLight = function(x, y, initialColor){}
+
+    /*
+    * this field will change the traffic
+    * */
+    appManager.changeTrafficLight = function(x, y, color){
+
+    }
 
     /*
     * this method will clear out the street and vehicle information
@@ -216,6 +228,9 @@
         // app = null;
         // graphics = null;
     };
+
+
+
 
 
     window.appManager = appManager;

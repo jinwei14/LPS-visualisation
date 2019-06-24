@@ -198,29 +198,38 @@
                     let fluents = engine.getActiveFluents();
                     let actions = engine.getLastCycleActions();
                     let observations = engine.getLastCycleObservations();
+                    //get all the fact other wise needs to define all the fact as fluents
+                    let facts = engine.getTimelessFacts();
+
                     let duration = profiler.get('lastCycleExecutionTime');
                     if (currentTime === 1) {
-                        fluents.forEach(function (item, index) {
+                        console.log(facts);
+                        facts.forEach(function (item, index) {
                             if (item.toLowerCase().startsWith('street')) {
                                 //street(mainStreet, coordinate(100, 200), 900, 50, 1)).
                                 var street = new Streets(item);
                                 appManager.createRoad(street.name, street.X, street.Y, street.width, street.height, street.no_lane);
 
-                            } else if (item.toLowerCase().startsWith('location')) {
+                            }
+                        });
+                        fluents.forEach(function (item, index) {
+                             if (item.toLowerCase().startsWith('location')) {
                                 var loc = new VehicleLoc(item, currentTime);
                                 appManager.createVehicle(loc.getObjectName(), loc.X, loc.Y, loc.getHeading());
-                            }
+                            }else if (item.toLowerCase().startsWith('trafficLight')){
+                                 //    need to implement a function to create traffic light.
+                             }
                         });
                         //Do something
                     } else if (currentTime > 1) {
-                        console.log(currentTime);
-                        fluents.forEach(function (item, index) {
-                            if (item.toLowerCase().startsWith('location')) {
-                                console.log(item);
-                                var loc = new VehicleLoc(item, currentTime);
-                                appManager.changeVehicleLocation(loc.getObjectName(), loc.X, loc.Y, loc.getHeading());
-                            }
-                        });
+                        // console.log(currentTime);
+                        // fluents.forEach(function (item, index) {
+                        //     if (item.toLowerCase().startsWith('location')) {
+                        //         console.log(item);
+                        //         var loc = new VehicleLoc(item, currentTime);
+                        //         appManager.changeVehicleLocation(loc.getObjectName(), loc.X, loc.Y, loc.getHeading());
+                        //     }
+                        // });
                     }
                 });
 
