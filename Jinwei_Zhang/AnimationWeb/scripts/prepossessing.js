@@ -244,7 +244,7 @@
                                 // initialise the location of the car.
                                 var loc = new VehicleLoc(item, currentTime);
                                 appManager.createVehicle(loc.getObjectName(), loc.X, loc.Y, loc.getHeading());
-                            }else if (item.toLowerCase().startsWith('trafficLight')){
+                            }else if (item.toLowerCase().startsWith('trafficlight')){
                                  //    need to implement a function to create traffic light.
                                  var light = new TrafficLight(item);
                                  appManager.createTrafficLight(light.X,light.Y,light.color);

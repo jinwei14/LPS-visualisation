@@ -23,11 +23,11 @@ actions ([
 ]).
 
 initially([
-  location(carA, coordinate(120, 225), eastward),
-  goal(carA,coordinate(800, 225)),
-  street(mainStreet , coordinate(100, 200), 900, 50, 1)
+  location(carA, coordinate(500, 225), eastward),
+  goal(carA,coordinate(800, 225))
 ]).
 
+street(mainStreet , coordinate(0, 200), 1000, 50, 1).
 goal(Vehicle,coordinate(A, B)) from _ to T,
 location(Vehicle, coordinate(X, Y), Direction), A!=X at T ->
   % need to find the right direction here

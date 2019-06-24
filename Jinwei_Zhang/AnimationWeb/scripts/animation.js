@@ -7,7 +7,8 @@
     * */
     var appManager = {
         vehicle: [],
-        street: []
+        street: [],
+        lights: []
     };
     /*
     *
@@ -201,7 +202,28 @@
     * this field will create the traffic light based on the location
     * */
 
-    appManager.createTrafficLight = function(x, y, initialColor){}
+    appManager.createTrafficLight = function(x, y, initialColor){
+        console.log('creating createTrafficLight has been called in animation.js ' + window.name);
+        console.log( x, y, initialColor);
+        var lightInstance = PIXI.Sprite.from('imgs/TrafficLight.png');
+        lightInstance.anchor.set(0.5);
+        lightInstance.x = x;
+        lightInstance.y = y;
+
+        let lightText = new PIXI.Text(initialColor, {fontFamily: 'Arial', fontSize: 12, fill: 0xff0000});
+        lightText.x = x - 15;
+        lightText.y = y - 40;
+        appManager.lights.push({
+            name: "trafficLight",
+            textObj: lightText,
+            xLoc: x,
+            yLoc: y,
+            obj: lightInstance
+        });
+        app.stage.addChild(lightInstance);
+        app.stage.addChild(lightText);
+
+    };
 
     /*
     * this field will change the traffic

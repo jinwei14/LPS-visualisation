@@ -79,26 +79,26 @@ initially([
   %   goal(carA,coordinate(980, 175)),
   %   goal(carB,coordinate(145, 225)),
 
-  trafficLight(coordinate(450, 150), green, westward,mainStreet),
-  trafficLight(coordinate(550, 250), green, eastward,mainStreet),
-  trafficLight(coordinate(450, 250), green, southward,southStreet).
+  trafficLight(coordinate(480, 175), green, westward,mainStreet),
+  trafficLight(coordinate(525, 270), green, eastward,mainStreet),
+  trafficLight(coordinate(620, 225), green, southward,southStreet)
 
 ]).
 
-% define the junction coordinate
+% define the junction coordinate facts
 % junction(Name,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H))
 
-junction(tJuntion1,coordinate(475, 200),coordinate(525, 200),coordinate(475, 250),coordinate(525, 250)).
+junction(tJuntion,coordinate(475, 200),coordinate(525, 200),coordinate(475, 250),coordinate(525, 250)).
 
-junction(tJuntion2,coordinate(475, 150),coordinate(525, 150),coordinate(475, 200),coordinate(525, 200)).
 
+% define the street coordinate facts.
 street(mainStreet , coordinate(100, 150), 900, 50, 2,1).
 
 street(mainStreet , coordinate(100, 200), 900, 50, 2,1).
 
-street(southStreet , coordinate(475, 250), 50, 500, 2,0).
+street(southStreet , coordinate(500, 250), 50, 500, 2,0).
 
-street(southStreet , coordinate(525, 250), 50, 500, 2,0).
+street(southStreet , coordinate(550, 250), 50, 500, 2,0).
 
 
 
