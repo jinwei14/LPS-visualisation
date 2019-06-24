@@ -1,6 +1,11 @@
 % we assume the destination is reachable
 % and car length is 40 x 40 based on the image
 % speed is 5 unit per cycle.
+% LPS visualisation for self-driving car
+% Define street as: street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane) eg: street(piccadillyRoad, coordinate(9, 9), 80, 70, 2)
+% Define location of car as location(Name_of_car, coordinate(X, Y), Direction) eg: location(yourCar, coordinate(9, 9), eastward)
+% Define traffic light as trafficLight(coordinate(X, Y), Working_status, Color, FacingDirection) eg: trafficLight(coordinate(2, 2), on, Red, eastward)
+
 maxTime(170).
 cycleInterval(50).
 

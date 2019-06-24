@@ -1,3 +1,8 @@
+% LPS visualisation for self-driving car
+% Define street as: street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane) eg: street(piccadillyRoad, coordinate(9, 9), 80, 70, 2)
+% Define location of car as location(Name_of_car, coordinate(X, Y), Direction) eg: location(yourCar, coordinate(9, 9), eastward)
+% Define traffic light as trafficLight(coordinate(X, Y), Working_status, Color, FacingDirection) eg: trafficLight(coordinate(2, 2), on, Red, eastward)
+
 % we assume the destination is reachable
 % and car length is 40 x 40 based on the image
 % speed is 5 unit per cycle.
@@ -39,13 +44,13 @@ initially([
  %  goal(carA,coordinate(980, 175)),
  %  goal(carB,coordinate(120, 225)),
 
-  % %  carA start from Tjunction
-   %  % normal start one on the mainstreet and other on the southStreet
-   % carA wants to go straight from mainStreet, carB want to turn left from southStreet
-  location(carA, coordinate(500, 175), eastward),
-  location(carB, coordinate(500 ,300), northward),
-  goal(carA,coordinate(980, 175)),
-  goal(carB,coordinate(120, 225)),
+  % % %  carA start from Tjunction
+  %  %  % normal start one on the mainstreet and other on the southStreet
+  %  % carA wants to go straight from mainStreet, carB want to turn left from southStreet
+  % location(carA, coordinate(500, 175), eastward),
+  % location(carB, coordinate(500 ,300), northward),
+  % goal(carA,coordinate(980, 175)),
+  % goal(carB,coordinate(120, 225)),
 
   % % %carA carB start driving to a same goal straightly
   %   location(carA, coordinate(145, 175), eastward),
@@ -61,18 +66,18 @@ initially([
   %   goal(carB,coordinate(500, 580)),
 
 
-% %carB turn left from southStreet, carA turn right from mainStreet
-%   location(carA, coordinate(145, 175), eastward),
-%   location(carB, coordinate(500, 580), northward),
-%   goal(carA,coordinate(500, 580)),
-%   goal(carB,coordinate(145, 225)),
+%carB turn left from southStreet, carA turn right from mainStreet
+  location(carA, coordinate(145, 175), eastward),
+  location(carB, coordinate(500, 580), northward),
+  goal(carA,coordinate(500, 580)),
+  goal(carB,coordinate(145, 225)),
 
 
 
   % % carA carB drivr opposite to each other
   %   location(carA, coordinate(450, 175), eastward),
   %   location(carB, coordinate(980 ,225), westward),
-  %   goal(carA,coordinate(980, 225)),
+  %   goal(carA,coordinate(980, 175)),
   %   goal(carB,coordinate(145, 225)),
 
 
@@ -232,6 +237,7 @@ drive(Vehicle) from T to T1 <-
   % testPrint(Vehicle+ ' move eastward'),
   step(Vehicle, NextPlace) at T1.
 
+% if Vehicle is at same horizontal level as its goal and there is another car whose
 clearRoute(Vehicle) at T<-
   location(Vehicle, coordinate(X, Y), _),
   goal(Vehicle,coordinate(P, Q)),
