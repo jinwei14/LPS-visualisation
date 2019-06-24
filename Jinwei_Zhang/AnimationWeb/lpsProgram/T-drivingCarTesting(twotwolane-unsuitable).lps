@@ -79,9 +79,10 @@ initially([
   %   goal(carA,coordinate(980, 175)),
   %   goal(carB,coordinate(145, 225)),
 
-  trafficLight(coordinate(480, 175), green, westward,mainStreet),
-  trafficLight(coordinate(525, 270), green, eastward,mainStreet),
-  trafficLight(coordinate(620, 225), green, southward,southStreet)
+  % the position that the car might step on, a traffic light is defined here for further instructions.
+  trafficLight(coordinate(430, 175), green, westward,mainStreet),
+  trafficLight(coordinate(475, 270), green, eastward,mainStreet),
+  trafficLight(coordinate(570, 225), green, southward,southStreet)
 
 
 ]).
@@ -90,9 +91,9 @@ initially([
 % junction(Name,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H))
 
 junction(tJuntion1,coordinate(450, 150),coordinate(500, 150),coordinate(450, 200),coordinate(500, 200)).
-junction(tJuntion2,coordinate(450, 150),coordinate(525, 150),coordinate(475, 200),coordinate(525, 200)).
-junction(tJuntion3,coordinate(450, 150),coordinate(525, 150),coordinate(475, 200),coordinate(525, 200)).
-junction(tJuntion4,coordinate(450, 150),coordinate(525, 150),coordinate(475, 200),coordinate(525, 200)).
+junction(tJuntion2,coordinate(500, 150),coordinate(550, 150),coordinate(500, 200),coordinate(550, 200)).
+junction(tJuntion3,coordinate(450, 200),coordinate(500, 200),coordinate(450, 250),coordinate(500, 250)).
+junction(tJuntion4,coordinate(500, 200),coordinate(550, 200),coordinate(500, 250),coordinate(550, 250)).
 
 
 % define the street coordinate facts.
