@@ -1,6 +1,6 @@
 % we assume the destination is reachable
 maxTime(100).
-cycleInterval(20).
+cycleInterval(50).
 
 loadModule('../scripts/module.js').
 
@@ -27,7 +27,17 @@ initially([
   goal(carA,coordinate(900, 225))
 ]).
 
+
+
 street(mainStreet , coordinate(100, 200), 900, 50, 1).
+
+cloud(coordinate(140,100)).
+cloud(coordinate(250,90)).
+cloud(coordinate(300,120)).
+cloud(coordinate(640,100)).
+cloud(coordinate(750,90)).
+cloud(coordinate(800,120)).
+
 goal(Vehicle,coordinate(A, B)) from _ to T,
 location(Vehicle, coordinate(X, Y), Direction), A!=X at T ->
   % need to find the right direction here

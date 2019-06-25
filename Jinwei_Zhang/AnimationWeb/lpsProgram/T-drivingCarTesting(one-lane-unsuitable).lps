@@ -85,6 +85,12 @@ street(mainStreet , coordinate(100, 200), 900, 50, 1,1).
 street(southStreet , coordinate(475, 250), 50, 500, 1,0).
 junction(tJuntion,coordinate(475, 200),coordinate(525, 200),coordinate(475, 250),coordinate(525, 250)).
 
+cloud(coordinate(140,100)).
+cloud(coordinate(250,90)).
+cloud(coordinate(300,120)).
+cloud(coordinate(640,100)).
+cloud(coordinate(750,90)).
+cloud(coordinate(800,120)).
 % ---------------------------------Reactive rules---------------------------------------------
 goal(Vehicle,coordinate(A, B)) from _ to T,
 location(Vehicle, coordinate(X, Y), Direction), A==X, B==Y,moving(Vehicle) at T ->

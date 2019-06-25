@@ -111,7 +111,6 @@ street(southStreet , coordinate(500, 250), 50, 500, 2,0).
 cloud(coordinate(140,100)).
 cloud(coordinate(250,90)).
 cloud(coordinate(300,120)).
-
 cloud(coordinate(640,100)).
 cloud(coordinate(750,90)).
 cloud(coordinate(800,120)).
