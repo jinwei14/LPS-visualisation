@@ -36,21 +36,22 @@ actions ([
 initially([
   moving(carA),
   moving(carB),
- %  normal start one on the mainstreet and other on the southStreet
- % carA wants to go straight from mainStreet, carB want to turn left from southStreet
-  location(carA, coordinate(145, 175), eastward),
-  % location(carB, coordinate(475, 580), northward),
-  location(carB, coordinate(475, 280), northward),
-  goal(carA,coordinate(980, 175)),
-  goal(carB,coordinate(120, 225)),
+ % %  normal start one on the mainstreet and other on the southStreet
+ % % carA wants to go straight from mainStreet, carB want to turn left from southStreet
+ %  location(carA, coordinate(145, 175), eastward),
+ %  location(carB, coordinate(475, 580), northward),
+ %  % % this if for test the function of traffic light
+ %  % % %location(carB, coordinate(475, 280), northward),
+ %  goal(carA,coordinate(980, 175)),
+ %  goal(carB,coordinate(120, 225)),
 
-  % % %  carA start from Tjunction
-  %  %  % normal start one on the mainstreet and other on the southStreet
-  %  % carA wants to go straight from mainStreet, carB want to turn left from southStreet
-  % location(carA, coordinate(500, 175), eastward),
-  % location(carB, coordinate(500 ,300), northward),
-  % goal(carA,coordinate(980, 175)),
-  % goal(carB,coordinate(120, 225)),
+  % %  carA start from Tjunction
+   %  % normal start one on the mainstreet and other on the southStreet
+   % carA wants to go straight from mainStreet, carB want to turn left from southStreet
+  location(carA, coordinate(145, 175), eastward),
+  location(carB, coordinate(475, 580), northward),
+  goal(carA,coordinate(525, 700)),
+  goal(carB,coordinate(145, 225)),
 
   % % %carA carB start driving to a same goal straightly
   %   location(carA, coordinate(145, 175), eastward),
@@ -303,14 +304,14 @@ clearRoute(Vehicle) at T<-
   not clearRoute(Vehicle) at T.
 
 
-
-% both car have clear routes but car on main street can not step
-<- step(Vehicle, NextPlace),
-  not onMainRoad(Vehicle) at T,
-  collisionPossible(Vehicle, Vehicle2) at T,
-  Vehicle != Vehicle2,
-  clearRoute(Vehicle) at T,
-  clearRoute(Vehicle2) at T.
+%
+% % both car have clear routes but car on main street can not step
+% <- step(Vehicle, NextPlace),
+%   not onMainRoad(Vehicle) at T,
+%   collisionPossible(Vehicle, Vehicle2) at T,
+%   Vehicle != Vehicle2,
+%   clearRoute(Vehicle) at T,
+%   clearRoute(Vehicle2) at T.
 
 % both car have clear routes and both on the same street and have the same goal.
 <- step(Vehicle, NextPlace),
@@ -326,7 +327,7 @@ clearRoute(Vehicle) at T<-
   B == Y.
 
 
-% this is also not perfect need further development
+% this is also not perfect need further development there is stopped car right in front of you
 <- step(Vehicle, NextPlace),
   collisionPossible(Vehicle, Vehicle2) at T,
   stopped(Vehicle2).
