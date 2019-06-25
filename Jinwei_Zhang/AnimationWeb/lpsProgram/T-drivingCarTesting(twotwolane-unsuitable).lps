@@ -39,7 +39,8 @@ initially([
  %  normal start one on the mainstreet and other on the southStreet
  % carA wants to go straight from mainStreet, carB want to turn left from southStreet
   location(carA, coordinate(145, 175), eastward),
-  location(carB, coordinate(475, 580), northward),
+  % location(carB, coordinate(475, 580), northward),
+  location(carB, coordinate(475, 280), northward),
   goal(carA,coordinate(980, 175)),
   goal(carB,coordinate(120, 225)),
 
@@ -83,7 +84,6 @@ initially([
   trafficLight(coordinate(430, 175), green, westward, mainStreet),
   trafficLight(coordinate(475, 270), red, eastward, mainStreet),
   trafficLight(coordinate(570, 225), green, southward, southStreet)
-
 
 ]).
 
@@ -281,9 +281,20 @@ clearRoute(Vehicle) at T<-
   A > X,
   A > P.
 % ---------------------------------------------------------------------------------------------
+
+
 %step is false if the car is moving into a junction, not on main Road and there is a collision.
 % this part need further developemnt for other cases
 
+
+% you can not step forward if there is a trafficLight at your postion
+% and the traffic light is red.
+<- step(Vehicle, NextPlace),
+
+  location(Vehicle, coordinate(X, Y), Direction1),
+  trafficLight(coordinate(A, B), red, Direction2, Street),
+  X==A,
+  Y==B.
 
 % if you dont have a clear route you can not step
 <- step(Vehicle, NextPlace),
@@ -313,6 +324,7 @@ clearRoute(Vehicle) at T<-
   goal(Vehicle2,coordinate(A, B)),
   A == X,
   B == Y.
+
 
 % this is also not perfect need further development
 <- step(Vehicle, NextPlace),
@@ -377,6 +389,10 @@ onMainRoad(Vehicle) at T <-
   Priority > 0.
 
 
+opposite(Dir1,Dir2)<-Dir1 == eastward, Dir2 == westward.
+opposite(Dir1,Dir2)<-Dir1 == westward, Dir2 == eastward.
+opposite(Dir1,Dir2)<-Dir1 == northward, Dir2 == southward.
+opposite(Dir1,Dir2)<-Dir1 == southward, Dir2 == northward.
 % ---------------------------------------------------------------------------------------------
 
 
