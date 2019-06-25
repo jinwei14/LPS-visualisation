@@ -277,10 +277,10 @@
          app.ticker.add((delta) => {
 
              // use delta to transform the cloud image
-             if (cloudInstance.x >= 800){
-                 cloudInstance.x = 10;
+             if (cloudInstance.x >= 1000){
+                 cloudInstance.x = 100;
              }else{
-                 cloudInstance.x -= 0.01 * delta;
+                 cloudInstance.x += 0.2 * delta;
              }
          });
 

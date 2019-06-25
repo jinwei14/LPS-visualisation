@@ -107,6 +107,19 @@ street(mainStreet , coordinate(100, 200), 900, 50, 2,1).
 street(southStreet , coordinate(450, 250), 50, 500, 2,0).
 
 street(southStreet , coordinate(500, 250), 50, 500, 2,0).
+
+cloud(coordinate(140,100)).
+cloud(coordinate(250,90)).
+cloud(coordinate(300,120)).
+
+cloud(coordinate(640,100)).
+cloud(coordinate(750,90)).
+cloud(coordinate(800,120)).
+
+
+% cloud(coordinate(300,100)).
+% cloud(coordinate(330,90)).
+% cloud(coordinate(350,120)).
 % atTjunction(coordinate(A,B),junction(tJuntion1,coordinate(A1, A2),coordinate(B1, B2),coordinate(C1, C2),coordinate(D1, D2))) <-
 %   X1==475,Y1==200,X2 == 525, Y2 == 200, X3==.
 % atTjunction(tJuntion2,coordinate(475, 150),coordinate(525, 150),coordinate(475, 200),coordinate(525, 200)) <-
