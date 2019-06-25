@@ -7,7 +7,7 @@
 % and car length is 40 x 40 based on the image
 % speed is 5 unit per cycle.
 maxTime(200).
-cycleInterval(50).
+cycleInterval(10).
 
 loadModule('../scripts/module.js').
 
@@ -43,13 +43,13 @@ initially([
  %  goal(carA,coordinate(980, 175)),
  %  goal(carB,coordinate(120, 225))
 
-  % %  carA start from Tjunction
-   %  % normal start one on the mainstreet and other on the southStreet
-   % carA wants to go straight from mainStreet, carB want to turn left from southStreet
-  location(carA, coordinate(500, 175), eastward),
-  location(carB, coordinate(500 ,300), northward),
-  goal(carA,coordinate(980, 175)),
-  goal(carB,coordinate(120, 225))
+  % % %  carA start from Tjunction
+  %  %  % normal start one on the mainstreet and other on the southStreet
+  %  % carA wants to go straight from mainStreet, carB want to turn left from southStreet
+  % location(carA, coordinate(500, 175), eastward),
+  % location(carB, coordinate(500 ,300), northward),
+  % goal(carA,coordinate(980, 175)),
+  % goal(carB,coordinate(120, 225))
 
   % % %carA carB start driving to a same goal straightly
   %   location(carA, coordinate(145, 175), eastward),
@@ -58,11 +58,11 @@ initially([
   %   goal(carB,coordinate(980, 225))
 
 
-  % % %carA carB start driving to a same goal both turnnig into southStreet
-  %   location(carA, coordinate(145, 175), eastward),
-  %   location(carB, coordinate(200, 175), eastward),
-  %   goal(carA,coordinate(500, 580)),
-  %   goal(carB,coordinate(500, 580))
+  % %carA carB start driving to a same goal both turnnig into southStreet
+    location(carA, coordinate(145, 175), eastward),
+    location(carB, coordinate(200, 175), eastward),
+    goal(carA,coordinate(500, 580)),
+    goal(carB,coordinate(500, 580))
 
 
 % %carB turn left from southStreet, carA turn right from mainStreet
@@ -73,16 +73,11 @@ initially([
 
 
 
-  % % carA carB drivr opposite to each other
+  % % carA carB drive opposite to each other
   %   location(carA, coordinate(450, 175), eastward),
   %   location(carB, coordinate(980 ,225), westward),
   %   goal(carA,coordinate(980, 175)),
   %   goal(carB,coordinate(145, 225))
-
-
-
-
-
 ]).
 
 % define the junction coordinate
