@@ -13,7 +13,7 @@
     /*
     *
     * */
-    var app = new PIXI.Application({backgroundColor: 0xFFFFFF, width: 1200, height: 1000});;
+    var app = new PIXI.Application({backgroundColor: 0x1099bb, width: 1100, height: 1000});;
 
     /*
     *
