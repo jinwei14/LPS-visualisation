@@ -70,6 +70,8 @@
         app.stage.addChild(richText);
         app.stage.addChild(graphics);
         app.stage.addChild(xText, yText, originText);
+
+
     };
 
     /*
@@ -261,6 +263,21 @@
         // graphics = null;
     };
 
+
+    /*
+* this method will clear out the street and vehicle information
+* the basic canvas will remain the same (coordinate axis and the title text)
+* */
+     appManager.createClound = function(x,y){
+         //    define some cloud for the front end
+         var cloudInstance = PIXI.Sprite.from('imgs/clouds.png');
+         cloudInstance.anchor.set(0.5);
+         cloudInstance.x = x;
+         cloudInstance.y = y;
+         app.stage.addChild(cloudInstance);
+
+
+     }
 
 
 
