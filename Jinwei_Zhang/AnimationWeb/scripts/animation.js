@@ -265,8 +265,7 @@
 
 
     /*
-* this method will clear out the street and vehicle information
-* the basic canvas will remain the same (coordinate axis and the title text)
+* this method will create the cloud and animate the cloud in the canvas
 * */
      appManager.createClound = function(x,y){
          //    define some cloud for the front end
@@ -275,7 +274,15 @@
          cloudInstance.x = x;
          cloudInstance.y = y;
          app.stage.addChild(cloudInstance);
+         app.ticker.add((delta) => {
 
+             // use delta to transform the cloud image
+             if (cloudInstance.x >= 800){
+                 cloudInstance.x = 10;
+             }else{
+                 cloudInstance.x -= 0.01 * delta;
+             }
+         });
 
      }
 

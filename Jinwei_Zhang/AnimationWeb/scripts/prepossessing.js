@@ -237,6 +237,9 @@
                                 var street = new Streets(item);
                                 appManager.createRoad(street.name, street.X, street.Y, street.width, street.height, street.no_lane);
 
+                            }else if (item.toLowerCase().startsWith('cloud')){
+                                var cloud = new Cloud(item);
+                                appManager.createClound(x,y);
                             }
                         });
                         fluents.forEach(function (item, index) {
