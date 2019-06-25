@@ -24,8 +24,10 @@ fluents([
 
 % events will reserved for traffic lights
 events ([
-
+  changeTrafficLight(LightPlace)
 ]).
+
+observe(changeTrafficLight, 1, 2).
 
 actions ([
   step(Vehicle, NextPlace),
@@ -304,7 +306,7 @@ clearRoute(Vehicle) at T<-
   not clearRoute(Vehicle) at T.
 
 
-%
+
 % % both car have clear routes but car on main street can not step
 % <- step(Vehicle, NextPlace),
 %   not onMainRoad(Vehicle) at T,
