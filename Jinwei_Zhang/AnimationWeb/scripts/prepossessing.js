@@ -193,7 +193,6 @@
 
         //regulation match array
         this.matchArray = this.fullPhrase.match(/(\w+)/g);
-        console.log(this.matchArray);
 
         this.fluent = this.matchArray[0];
         //the location and the name of the street
@@ -218,7 +217,6 @@
 
         //regulation match array
         this.matchArray = this.fullPhrase.match(/(\w+)/g);
-        console.log(this.matchArray);
 
         this.fluent = this.matchArray[0];
         //the location and the name of the street
@@ -274,6 +272,7 @@
                         //Do something
                     } else if (currentTime > 1) {
                         console.log(currentTime);
+
                         fluents.forEach(function (item, index) {
                             if (item.toLowerCase().startsWith('location')) {
                                 console.log(item);
@@ -281,6 +280,16 @@
                                 appManager.changeVehicleLocation(loc.getObjectName(), loc.X, loc.Y, loc.getHeading());
                             }
                         });
+
+                        if (observations!==[]){
+                             console.log(observations);
+                            // var matchArray = observations[0].match(/(\w+)/g);
+                            // if (matchArray[0].toLowerCase() === 'changetrafficlight'){
+                            //     appManager.changeTrafficLight()
+                            // }
+                        }
+
+
                     }
                 });
 

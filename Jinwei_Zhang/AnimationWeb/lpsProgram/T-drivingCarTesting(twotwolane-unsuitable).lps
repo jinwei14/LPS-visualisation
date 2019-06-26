@@ -24,15 +24,18 @@ fluents([
 
 % events will reserved for traffic lights
 events ([
-  changeTrafficLight(LightPlace)
+
 ]).
 
-observe(changeTrafficLight, 1, 2).
+% random change traffic light at time 81
+% this does not make sense just for the sake of demonstration
+observe(changeTrafficLight(coordinate(475, 270),green), 80).
 
 actions ([
   step(Vehicle, NextPlace),
   turn(Vehicle, NewHeading),
-  arrive(Vehicle)
+  arrive(Vehicle),
+  changeTrafficLight(Place,Color)
 ]).
 
 initially([
@@ -146,7 +149,6 @@ location(Vehicle, coordinate(X, Y), Direction),
 
     % testPrint(Vehicle + " start driving"),
     drive(Vehicle) from T1 to _.
-
 
 % ---------------------------------------------------------------------------------------------
 % the case where car is not at t junction.
@@ -418,6 +420,11 @@ updates(step(Vehicle, NextPlace), location(VehicleIns, OldPlace, Direction),  lo
 updates(turn(Vehicle, NewHeading) , location(VehicleIns, Place, OldHeading), location(VehicleIns, Place, NewHeading))<-
   Vehicle == VehicleIns.
   % ('updating turing ' + Vehicle + ' '+NewHeading).
+
+% updating the traffic light
+updates(changeTrafficLight(Place,Color) , trafficLight(PlaceIns, OldColor, _, _), trafficLight(PlaceIns, Color, _, _))<-
+  % testPrint('traffic light as been updates'),
+  Place == PlaceIns.
 
 terminates(arrive(Vehicle), moving(Vehicle)).
 initiates(arrive(Vehicle), stopped(Vehicle)).

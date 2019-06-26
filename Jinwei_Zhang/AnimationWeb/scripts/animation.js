@@ -241,7 +241,15 @@
     * this field will change the traffic
     * */
     appManager.changeTrafficLight = function(x, y, color){
-
+        appManager.lights.forEach(function (item, index) {
+            if (item.x === x && item.y ===  y) {
+                if (color === 'green'){
+                    item.textObj = new PIXI.Text(color, {fontFamily: 'Arial', fontSize: 14, fill: 0x00ff00});
+                }else if(color === 'red'){
+                    item.textObj = new PIXI.Text(color, {fontFamily: 'Arial', fontSize: 14, fill: 0xff0000});
+                }
+            }
+        });
     }
 
     /*
