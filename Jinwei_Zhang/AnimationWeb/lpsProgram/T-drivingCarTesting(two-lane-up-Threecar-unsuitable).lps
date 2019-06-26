@@ -36,48 +36,15 @@ actions ([
 initially([
   moving(carA),
   moving(carB),
- % %  normal start one on the mainstreet and other on the southStreet
- % % carA wants to go straight from mainStreet, carB want to turn left from southStreet
- %  location(carA, coordinate(145, 175), eastward),
- %  location(carB, coordinate(500, 580), northward),
- %  goal(carA,coordinate(980, 175)),
- %  goal(carB,coordinate(120, 225))
+% %----------------------------------------three car scenario ------------------------------
+% carB turn right to the main street carA C give way
+  location(carA, coordinate(400, 175), eastward),
+  location(carB, coordinate(500, 325), northward),
+  location(carC, coordinate(600, 225), westward),
+  goal(carA,coordinate(500, 580)),
+  goal(carB,coordinate(800, 175)),
+  goal(carC,coordinate(145, 225))
 
-  % % %  carA start from Tjunction
-  %  %  % normal start one on the mainstreet and other on the southStreet
-  %  % carA wants to go straight from mainStreet, carB want to turn left from southStreet
-  % location(carA, coordinate(500, 175), eastward),
-  % location(carB, coordinate(500 ,300), northward),
-  % goal(carA,coordinate(980, 175)),
-  % goal(carB,coordinate(120, 225))
-
-  % % %carA carB start driving to a same goal straightly
-  %   location(carA, coordinate(145, 175), eastward),
-  %   location(carB, coordinate(200, 175), eastward),
-  %   goal(carA,coordinate(980, 225)),
-  %   goal(carB,coordinate(980, 225))
-
-
-  % %carA carB start driving to a same goal both turnnig into southStreet
-    location(carA, coordinate(145, 175), eastward),
-    location(carB, coordinate(200, 175), eastward),
-    goal(carA,coordinate(500, 580)),
-    goal(carB,coordinate(500, 580))
-
-
-% %carB turn left from southStreet, carA turn right from mainStreet
-%   location(carA, coordinate(145, 175), eastward),
-%   location(carB, coordinate(500, 580), northward),
-%   goal(carA,coordinate(500, 580)),
-%   goal(carB,coordinate(145, 225))
-
-
-
-  % % carA carB drive opposite to each other
-  %   location(carA, coordinate(450, 175), eastward),
-  %   location(carB, coordinate(980 ,225), westward),
-  %   goal(carA,coordinate(980, 175)),
-  %   goal(carB,coordinate(145, 225))
 ]).
 
 % define the junction coordinate
@@ -197,12 +164,6 @@ direction(Vehicle) at T<-
   turn(Vehicle,southward) at T.
 
 
-
-
-
-
-
-
 % ---------------------------------------------------------------------------------------------
 
 
@@ -239,8 +200,48 @@ drive(Vehicle) from T to T1 <-
   % testPrint(Vehicle+ ' move eastward'),
   step(Vehicle, NextPlace) at T1.
 
-% if Vehicle is at same horizontal level as its goal and there is another car whose
-clearRoute(Vehicle) at T<-
+% %----------------version 1--------------------------------
+% % if Vehicle is at same horizontal level as its goal and there is another car whose
+% clearRoute(Vehicle) at T<-
+%   location(Vehicle, coordinate(X, Y), _),
+%   goal(Vehicle,coordinate(P, Q)),
+%   location(Vehicle2, coordinate(A, B), _),
+%   Vehicle != Vehicle2,
+%   Y == Q,
+%   B != Q.
+%
+% clearRoute(Vehicle) at T<-
+%   location(Vehicle, coordinate(X, Y), _),
+%   goal(Vehicle,coordinate(P, Q)),
+%   location(Vehicle2, coordinate(A, B), _),
+%   Vehicle != Vehicle2,
+%   A < X,
+%   A < P.
+%
+% clearRoute(Vehicle) at T<-
+%   location(Vehicle, coordinate(X, Y), _),
+%   goal(Vehicle,coordinate(P, Q)),
+%   location(Vehicle2, coordinate(A, B), _),
+%   Vehicle != Vehicle2,
+%   A < X,
+%   A >= P,
+%   abs(B-Y) >= 50.
+%
+% clearRoute(Vehicle) at T<-
+%   location(Vehicle, coordinate(X, Y), _),
+%   goal(Vehicle,coordinate(P, Q)),
+%   location(Vehicle2, coordinate(A, B), _),
+%   Vehicle != Vehicle2,
+%   A > X,
+%   A > P.
+
+% ---------------------------------------------------------------------------------------------
+
+
+% %----------------version 2--------------------------------
+% % There are 7 (3+4) cases in total that your route will be blocked
+% if Vehicle is at same horizontal level as its goal and there is another car in between
+blockedRoute(Vehicle) at T<-
   location(Vehicle, coordinate(X, Y), _),
   goal(Vehicle,coordinate(P, Q)),
   location(Vehicle2, coordinate(A, B), _),
@@ -248,35 +249,34 @@ clearRoute(Vehicle) at T<-
   Y == Q,
   B != Q.
 
-clearRoute(Vehicle) at T<-
+% if Vehicle is at same horizontal level as its goal and there is another car in between
+blockedRoute(Vehicle) at T<-
   location(Vehicle, coordinate(X, Y), _),
   goal(Vehicle,coordinate(P, Q)),
   location(Vehicle2, coordinate(A, B), _),
   Vehicle != Vehicle2,
-  A < X,
-  A < P.
+  Y == Q,
+  B != Q.
 
-clearRoute(Vehicle) at T<-
+% if Vehicle is at same vertical level as its goal and there is another car in between
+blockedRoute(Vehicle) at T<-
   location(Vehicle, coordinate(X, Y), _),
   goal(Vehicle,coordinate(P, Q)),
   location(Vehicle2, coordinate(A, B), _),
   Vehicle != Vehicle2,
-  A < X,
-  A >= P,
-  abs(B-Y) >= 50.
+  Y == Q,
+  B != Q.
 
-clearRoute(Vehicle) at T<-
+% if Vehicle is at same vertical level as its goal and there is another car in between
+blockedRoute(Vehicle) at T<-
   location(Vehicle, coordinate(X, Y), _),
   goal(Vehicle,coordinate(P, Q)),
   location(Vehicle2, coordinate(A, B), _),
   Vehicle != Vehicle2,
-  A > X,
-  A > P.
+  Y == Q,
+  B != Q.
+
 % ---------------------------------------------------------------------------------------------
-%step is false if the car is moving into a junction, not on main Road and there is a collision.
-% this part need further developemnt for other cases
-
-
 % if you dont have a clear route you can not step
 <- step(Vehicle, NextPlace),
   collisionPossible(Vehicle, Vehicle2) at T,
@@ -358,7 +358,7 @@ collisionPossible(Vehicle1, Vehicle2) at T <-
 % warnning zone is two times the length of the car plus 10
 warningZone(coordinate(X, Y),coordinate(A, B)) <-
   Manhattan = abs(X-A) + abs(Y-B),
-  % 80 is two times the length of the car.
+  % 80 is two times the length of the car.s
   Manhattan <= 90.
 
 onMainRoad(Vehicle) at T <-
