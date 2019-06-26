@@ -241,12 +241,20 @@
     * this field will change the traffic
     * */
     appManager.changeTrafficLight = function(x, y, color){
+        console.log('change traffic light has been called');
         appManager.lights.forEach(function (item, index) {
-            if (item.x === x && item.y ===  y) {
+            console.log(item);
+
+            if (item.xLoc === x && item.yLoc ===  y) {
+
+                console.log(x, y, color);
                 if (color === 'green'){
-                    item.textObj = new PIXI.Text(color, {fontFamily: 'Arial', fontSize: 14, fill: 0x00ff00});
+                    console.log('this has also been called');
+                    item.textObj.text = color;
+                    item.textObj.style = {fontFamily: 'Arial', fontSize: 14, fill: 0x00ff00};
                 }else if(color === 'red'){
-                    item.textObj = new PIXI.Text(color, {fontFamily: 'Arial', fontSize: 14, fill: 0xff0000});
+                    item.textObj.text = color;
+                    item.textObj.style = {fontFamily: 'Arial', fontSize: 14, fill: 0xff0000};
                 }
             }
         });

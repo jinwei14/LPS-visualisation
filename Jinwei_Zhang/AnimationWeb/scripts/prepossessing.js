@@ -281,12 +281,15 @@
                             }
                         });
 
-                        if (observations!==[]){
-                             console.log(observations);
-                            // var matchArray = observations[0].match(/(\w+)/g);
-                            // if (matchArray[0].toLowerCase() === 'changetrafficlight'){
-                            //     appManager.changeTrafficLight()
-                            // }
+                        if (observations !== undefined && observations.length !== 0){
+                            console.log(observations);
+                             console.log(observations[0]);
+                            let matchArray = observations[0].match(/(\w+)/g);
+                            if (matchArray[0].toLowerCase() === 'changetrafficlight'){
+                                lightX = parseInt(matchArray[2],10);
+                                lightY = parseInt(matchArray[3],10);
+                                appManager.changeTrafficLight(lightX,lightY,matchArray[4]);
+                            }
                         }
 
 
