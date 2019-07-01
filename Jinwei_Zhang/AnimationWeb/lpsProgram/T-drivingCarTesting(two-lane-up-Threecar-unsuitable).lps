@@ -251,6 +251,7 @@ direction(Vehicle) at T<-
   % testPrint(Vehicle +' turing southward'),
   turn(Vehicle,southward) at T.
 
+%  these are 6 cases of intention
 intention(VehicleName, Plan) <-
   location(VehicleName, coordinate(X, Y), _),
   goal(VehicleName,coordinate(A, B)),
@@ -374,8 +375,9 @@ drive(Vehicle) from T to T1 <-
 % %----------------version 2--------------------------------
 % % There are 6 cases in total that your route will be blocked
 % if Vehicle is at same horizontal level as its goal and there is another car in between
-blockedRoute(Vehicle) at T<-
-  location(Vehicle, coordinate(X1, Y1), eastward),
+blockedRoute(Vehicle,Vehicle2) at T<-
+  location(Vehicle, coordinate(X1, Y1), Direction),
+  Direction == eastward,
   goal(Vehicle,coordinate(A1, B1)),
   location(Vehicle2, coordinate(X2, Y2), _),
   Vehicle != Vehicle2,
@@ -385,8 +387,9 @@ blockedRoute(Vehicle) at T<-
   X2 <= A1.
 
 % if Vehicle is at same horizontal level as its goal and there is another car in between
-blockedRoute(Vehicle) at T<-
-  location(Vehicle, coordinate(X1, Y1), westward),
+blockedRoute(Vehicle,Vehicle2) at T<-
+  location(Vehicle, coordinate(X1, Y1), Direction),
+  Direction == westward,
   goal(Vehicle,coordinate(A1, B1)),
   location(Vehicle2, coordinate(X2, Y2), _),
   Vehicle != Vehicle2,
@@ -396,8 +399,9 @@ blockedRoute(Vehicle) at T<-
   X2 <= X1.
 
 % if Vehicle is at same vertical level as its goal and there is another car in between
-blockedRoute(Vehicle) at T<-
-  location(Vehicle, coordinate(X1, Y1), northward),
+blockedRoute(Vehicle,Vehicle2) at T<-
+  location(Vehicle, coordinate(X1, Y1), Direction),
+  Direction == northward,
   goal(Vehicle,coordinate(A1, B1)),
   location(Vehicle2, coordinate(X2, Y2), _),
   Vehicle != Vehicle2,
@@ -408,8 +412,9 @@ blockedRoute(Vehicle) at T<-
 
 
 % if Vehicle is at same vertical level as its goal and there is another car in between
-blockedRoute(Vehicle) at T<-
-  location(Vehicle, coordinate(X1, Y1), southward),
+blockedRoute(Vehicle,Vehicle2) at T<-
+  location(Vehicle, coordinate(X1, Y1), Direction),
+  Direction == southward,
   goal(Vehicle,coordinate(A1, B1)),
   location(Vehicle2, coordinate(X2, Y2), _),
   Vehicle != Vehicle2,
@@ -418,47 +423,93 @@ blockedRoute(Vehicle) at T<-
   Y2 >= Y1,
   Y2 <= B1.
 
-% if there is in between a L shape Route
-blockedRoute(Vehicle) at T<-
-  location(Vehicle, coordinate(X1, Y1), northward),
+% if there is in between a L shape Route car is turnning left from narrow street
+blockedRoute(Vehicle,Vehicle2) at T<-
+  location(Vehicle, coordinate(X1, Y1), Direction1),
+  Direction1 == northward,
   goal(Vehicle,coordinate(A1, B1)),
-  location(Vehicle2, coordinate(X2, Y2), _),
+  location(Vehicle2, coordinate(X2, Y2), Direction2),
+  Direction2 == eastward
   Vehicle != Vehicle2,
-  X1 != A1,
-  Y1 != B1,
-  Y2 >= Y1,
-  Y2 <= B1.
+  X1 > A1,
+  Y1 > B1,
+  Y2 == B1,
+  X2 > A1,
+  X2 < B1.
+
+% if there is in between a L shape Route, car is turnning right from narrow street
+blockedRoute(Vehicle,Vehicle2) at T<-
+  location(Vehicle, coordinate(X1, Y1), Direction1),
+  Direction1 == northward,
+  goal(Vehicle,coordinate(A1, B1)),
+  location(Vehicle2, coordinate(X2, Y2), Direction2),
+  Direction2 == westward
+  Vehicle != Vehicle2,
+  X1 < A1,
+  Y1 > B1,
+  Y2 == B1,
+  X2 > X1,
+  X2 < A1.
+
+% if there is sth in between a L shape Route, car is turnning right from main street
+blockedRoute(Vehicle,Vehicle2) at T<-
+  location(Vehicle, coordinate(X1, Y1), Direction1),
+  Direction1 == eastward,
+  goal(Vehicle,coordinate(A1, B1)),
+  location(Vehicle2, coordinate(X2, Y2), Direction2),
+  Direction2 == northward
+  Vehicle != Vehicle2,
+  X1 < A1,
+  Y1 < B1,
+  X2 == A1,
+  Y2 > Y1,
+  Y2 < B1.
+
+% if there is sth in between a L shape Route, car is turnning left from main street
+blockedRoute(Vehicle,Vehicle2) at T<-
+  location(Vehicle, coordinate(X1, Y1), Direction1),
+  Direction1 == westward,
+  goal(Vehicle,coordinate(A1, B1)),
+  location(Vehicle2, coordinate(X2, Y2), Direction2),
+  Direction2 == northward
+  Vehicle != Vehicle2,
+  X1 > A1,
+  Y1 < B1,
+  X2 == A1,
+  Y2 > Y1,
+  Y2 < B1.
 
 
 % ---------------------------------------------------------------------------------------------
+
 % if you dont have a clear route you can not step
 <- step(Vehicle, NextPlace),
   collisionPossible(Vehicle, Vehicle2) at T,
   Vehicle != Vehicle2,
-  not clearRoute(Vehicle) at T.
+  not blockedRoute(Vehicle,Vehicle2) at T.
 
 
 
-% both car have clear routes but car on main street can not step
+% both car have clear routes but car on main street can not step (car on main street has higher priority)
 <- step(Vehicle, NextPlace),
   not onMainRoad(Vehicle) at T,
   collisionPossible(Vehicle, Vehicle2) at T,
   Vehicle != Vehicle2,
-  clearRoute(Vehicle) at T,
-  clearRoute(Vehicle2) at T.
+  not blockedRoute(Vehicle,Vehicle2) at T,
+  not blockedRoute(Vehicle2,Vehicle) at T.
 
-% both car have clear routes and both on the same street and have the same goal.
-<- step(Vehicle, NextPlace),
-  onMainRoad(Vehicle) at T,
-  collisionPossible(Vehicle, Vehicle2) at T,
-  Vehicle != Vehicle2,
-  onMainRoad(Vehicle2) at T,
-  clearRoute(Vehicle) at T,
-  clearRoute(Vehicle2) at T,
-  goal(Vehicle,coordinate(X, Y)),
-  goal(Vehicle2,coordinate(A, B)),
-  A == X,
-  B == Y.
+% % both car have clear routes and both on the same street lane and have the same goal.
+% <- step(Vehicle, NextPlace),
+%   onMainRoad(Vehicle) at T,
+%   collisionPossible(Vehicle, Vehicle2) at T,
+%   Vehicle != Vehicle2,
+%   onMainRoad(Vehicle2) at T,
+%   clearRoute(Vehicle) at T,
+%   clearRoute(Vehicle2) at T,
+%   goal(Vehicle,coordinate(X, Y)),
+%   goal(Vehicle2,coordinate(A, B)),
+%   A == X,
+%   B == Y.
 
 % this is also not perfect need further development
 <- step(Vehicle, NextPlace),

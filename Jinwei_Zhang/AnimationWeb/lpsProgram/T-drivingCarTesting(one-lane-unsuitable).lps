@@ -56,13 +56,18 @@ initially([
 %   goal(carA,coordinate(980, 225)),
 %   goal(carB,coordinate(980, 225))
 
-%carB turn right from southStreet, carA turn right from mainStreet
+% %carB turn right from southStreet, carA turn right from mainStreet
+% location(carA, coordinate(145, 225), eastward),
+% location(carB, coordinate(500, 580), northward),
+%   goal(carA,coordinate(500, 580)),
+%   goal(carB,coordinate(980, 225))
+
+
+%carB turn right from southStreet, carA go straight on mainStreet
 location(carA, coordinate(145, 225), eastward),
 location(carB, coordinate(500, 580), northward),
-  goal(carA,coordinate(500, 580)),
+  goal(carA,coordinate(980, 225)),
   goal(carB,coordinate(980, 225))
-
-
 
   % % carA carB drivr opposite to each other
   %   location(carA, coordinate(450, 225), eastward),
@@ -259,7 +264,7 @@ clearRoute(Vehicle) at T<-
 
 
 
-% both car have clear routes but car on main street can not step
+% both car have clear routes but car not on main street can not step
 <- step(Vehicle, NextPlace),
   not onMainRoad(Vehicle) at T,
   collisionPossible(Vehicle, Vehicle2) at T,
