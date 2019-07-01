@@ -45,6 +45,15 @@ initially([
   goal(carB,coordinate(800, 175)),
   goal(carC,coordinate(145, 225))
 
+
+  % carB turn right to the main street carA C give way
+    location(carA, coordinate(400, 175), eastward),
+    location(carB, coordinate(500, 325), northward),
+    location(carC, coordinate(600, 225), westward),
+    goal(carA,coordinate(500, 580)),
+    goal(carB,coordinate(800, 175)),
+    goal(carC,coordinate(145, 225))
+
 ]).
 
 % define the junction coordinate
