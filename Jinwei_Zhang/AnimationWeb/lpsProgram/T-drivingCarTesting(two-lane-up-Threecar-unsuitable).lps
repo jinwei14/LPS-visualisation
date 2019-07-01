@@ -7,7 +7,7 @@
 % and car length is 40 x 40 based on the image
 % speed is 5 unit per cycle.
 maxTime(200).
-cycleInterval(100).
+cycleInterval(1).
 
 loadModule('../scripts/module.js').
 
@@ -75,10 +75,10 @@ initially([
 % % CarA turn right to the narrow road,
 % % carB turn right to the main street
 % % carC turn left to the narrow road.
-
-% if two cars are going to enter the same lane, the car turning left has a
-% higher priority than the car turning right.
-
+%
+% % if two cars are going to enter the same lane, the car turning left has a
+% % higher priority than the car turning right.
+%
 %   location(carA, coordinate(400, 175), eastward),
 %   location(carB, coordinate(500, 325), northward),
 %   location(carC, coordinate(600, 225), westward),
@@ -87,7 +87,7 @@ initially([
 %   goal(carC,coordinate(500, 580))
 
 
-
+%
 % % CASE 4
 % % CarA turn right to the narrow road,
 % % carB turn left to the main street
@@ -100,32 +100,32 @@ initially([
 %   goal(carC,coordinate(500, 580))
 
 
-% CASE 5
-% CarA turn right to the narrow road,
-% carB go straight southward to the narrow road
-% carC go straight.
-    location(carA, coordinate(400, 175), eastward),
-    location(carB, coordinate(500, 325), southward),
-    location(carC, coordinate(600, 225), westward),
-    goal(carA,coordinate(500, 600)),
-    goal(carB,coordinate(500, 600)),
-    goal(carC,coordinate(145, 225))
-
-
-% % CASE 6
+% % CASE 5
 % % CarA turn right to the narrow road,
 % % carB go straight southward to the narrow road
-% % carC turn left to the narrow road
-%
-% % carA does not need to give way to the car running on the narrow
-% % two-way lane, because the driving direction will be the same
-%
+% % carC go straight.
 %     location(carA, coordinate(400, 175), eastward),
 %     location(carB, coordinate(500, 325), southward),
 %     location(carC, coordinate(600, 225), westward),
 %     goal(carA,coordinate(500, 600)),
 %     goal(carB,coordinate(500, 600)),
-%     goal(carC,coordinate(500, 600))
+%     goal(carC,coordinate(145, 225))
+
+
+% CASE 6
+% CarA turn right to the narrow road,
+% carB go straight southward to the narrow road
+% carC turn left to the narrow road
+
+% carA does not need to give way to the car running on the narrow
+% two-way lane, because the driving direction will be the same
+
+    location(carA, coordinate(400, 175), eastward),
+    location(carB, coordinate(500, 325), southward),
+    location(carC, coordinate(600, 225), westward),
+    goal(carA,coordinate(500, 600)),
+    goal(carB,coordinate(500, 600)),
+    goal(carC,coordinate(500, 600))
 %
 
 
@@ -429,7 +429,7 @@ blockedRoute(Vehicle,Vehicle2) at T<-
   Direction1 == northward,
   goal(Vehicle,coordinate(A1, B1)),
   location(Vehicle2, coordinate(X2, Y2), Direction2),
-  Direction2 == eastward
+  Direction2 == eastward,
   Vehicle != Vehicle2,
   X1 > A1,
   Y1 > B1,
@@ -443,7 +443,7 @@ blockedRoute(Vehicle,Vehicle2) at T<-
   Direction1 == northward,
   goal(Vehicle,coordinate(A1, B1)),
   location(Vehicle2, coordinate(X2, Y2), Direction2),
-  Direction2 == westward
+  Direction2 == westward,
   Vehicle != Vehicle2,
   X1 < A1,
   Y1 > B1,
@@ -457,7 +457,7 @@ blockedRoute(Vehicle,Vehicle2) at T<-
   Direction1 == eastward,
   goal(Vehicle,coordinate(A1, B1)),
   location(Vehicle2, coordinate(X2, Y2), Direction2),
-  Direction2 == northward
+  Direction2 == northward,
   Vehicle != Vehicle2,
   X1 < A1,
   Y1 < B1,
@@ -471,7 +471,7 @@ blockedRoute(Vehicle,Vehicle2) at T<-
   Direction1 == westward,
   goal(Vehicle,coordinate(A1, B1)),
   location(Vehicle2, coordinate(X2, Y2), Direction2),
-  Direction2 == northward
+  Direction2 == northward,
   Vehicle != Vehicle2,
   X1 > A1,
   Y1 < B1,
@@ -486,30 +486,31 @@ blockedRoute(Vehicle,Vehicle2) at T<-
 <- step(Vehicle, NextPlace),
   collisionPossible(Vehicle, Vehicle2) at T,
   Vehicle != Vehicle2,
-  not blockedRoute(Vehicle,Vehicle2) at T.
+  blockedRoute(Vehicle,Vehicle2) at T.
 
 
 
-% both car have clear routes but car on main street can not step (car on main street has higher priority)
+% both car have clear routes but car on the narrow road can not step
+% (car on main street has higher priority)
 <- step(Vehicle, NextPlace),
   not onMainRoad(Vehicle) at T,
   collisionPossible(Vehicle, Vehicle2) at T,
   Vehicle != Vehicle2,
+  onMainRoad(Vehicle2) at T,
   not blockedRoute(Vehicle,Vehicle2) at T,
   not blockedRoute(Vehicle2,Vehicle) at T.
 
-% % both car have clear routes and both on the same street lane and have the same goal.
-% <- step(Vehicle, NextPlace),
-%   onMainRoad(Vehicle) at T,
-%   collisionPossible(Vehicle, Vehicle2) at T,
-%   Vehicle != Vehicle2,
-%   onMainRoad(Vehicle2) at T,
-%   clearRoute(Vehicle) at T,
-%   clearRoute(Vehicle2) at T,
-%   goal(Vehicle,coordinate(X, Y)),
-%   goal(Vehicle2,coordinate(A, B)),
-%   A == X,
-%   B == Y.
+% both car have clear routes and both on the same street lane and have the same goal.
+<- step(Vehicle, NextPlace),
+  onMainRoad(Vehicle) at T,
+  collisionPossible(Vehicle, Vehicle2) at T,
+  Vehicle != Vehicle2,
+  onMainRoad(Vehicle2) at T,
+  not blockedRoute(Vehicle,Vehicle2) at T,
+  not blockedRoute(Vehicle2,Vehicle) at T,
+  intention(Vehicle,Plan),
+  intention(Vehicle2,Plan2),
+  Plan2 == straight.
 
 % this is also not perfect need further development
 <- step(Vehicle, NextPlace),
@@ -564,7 +565,8 @@ collisionPossible(Vehicle1, Vehicle2) at T <-
 warningZone(coordinate(X, Y),coordinate(A, B)) <-
   Manhattan = abs(X-A) + abs(Y-B),
   % 80 is two times the length of the car.s
-  Manhattan <= 90.
+  % Manhattan <= 90.
+  Manhattan <= 120.
 
 onMainRoad(Vehicle) at T <-
   location(Vehicle, coordinate(X, Y), Direction1) at T,
