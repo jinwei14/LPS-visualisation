@@ -7,7 +7,7 @@
 % and car length is 40 x 40 based on the image
 % speed is 5 unit per cycle.
 maxTime(200).
-cycleInterval(10).
+cycleInterval(100).
 
 loadModule('../scripts/module.js').
 
@@ -36,23 +36,100 @@ actions ([
 initially([
   moving(carA),
   moving(carB),
-% %----------------------------------------three car scenario ------------------------------
-% carB turn right to the main street carA C give way
-  location(carA, coordinate(400, 175), eastward),
-  location(carB, coordinate(500, 325), northward),
-  location(carC, coordinate(600, 225), westward),
-  goal(carA,coordinate(500, 580)),
-  goal(carB,coordinate(800, 175)),
-  goal(carC,coordinate(145, 225))
+  moving(carC),
+% %-----------------------three car scenario (Paper: Ontology-Based Driving Decision Making)----------------------
+
+% % CASE 1
+% % CarA turn right to the narrow road,
+% % carB turn right to the main street
+% % carC go straight.
+%
+%  % carA should give way to both cars because carC
+%  % is driving straight and the CarB is driving out from narrow road to
+%  % the wider road (turn). According to the Right-of- Way rules, a car driving straight
+%  % has a higher priority than a car turning right or left at an uncontrolled intersection.
+%  % If a car is going to drive into a narrow two-way road, it should
+%  % wait for the other car which is going to drive out from the narrow two-way road.
+%
+%   location(carA, coordinate(400, 175), eastward),
+%   location(carB, coordinate(500, 325), northward),
+%   location(carC, coordinate(600, 225), westward),
+%   goal(carA,coordinate(500, 580)),
+%   goal(carB,coordinate(800, 175)),
+%   goal(carC,coordinate(145, 225))
 
 
-  % carB turn right to the main street carA C give way
+% % CASE 2
+% % CarA turn right to the narrow road,
+% % carB turn left to the main street
+% % carC go straight.
+%     location(carA, coordinate(400, 175), eastward),
+%     location(carB, coordinate(500, 325), northward),
+%     location(carC, coordinate(600, 225), westward),
+%     goal(carA,coordinate(500, 580)),
+%     goal(carB,coordinate(145, 225)),
+%     goal(carC,coordinate(145, 225))
+
+
+% % CASE 3
+% % CarA turn right to the narrow road,
+% % carB turn right to the main street
+% % carC turn left to the narrow road.
+
+% if two cars are going to enter the same lane, the car turning left has a
+% higher priority than the car turning right.
+
+%   location(carA, coordinate(400, 175), eastward),
+%   location(carB, coordinate(500, 325), northward),
+%   location(carC, coordinate(600, 225), westward),
+%   goal(carA,coordinate(500, 580)),
+%   goal(carB,coordinate(800, 175)),
+%   goal(carC,coordinate(500, 580))
+
+
+
+% % CASE 4
+% % CarA turn right to the narrow road,
+% % carB turn left to the main street
+% % carC turn left to the narrow road.
+%   location(carA, coordinate(400, 175), eastward),
+%   location(carB, coordinate(500, 325), northward),
+%   location(carC, coordinate(600, 225), westward),
+%   goal(carA,coordinate(500, 580)),
+%   goal(carB,coordinate(145, 225)),
+%   goal(carC,coordinate(500, 580))
+
+
+% CASE 5
+% CarA turn right to the narrow road,
+% carB go straight southward to the narrow road
+% carC go straight.
     location(carA, coordinate(400, 175), eastward),
-    location(carB, coordinate(500, 325), northward),
+    location(carB, coordinate(500, 325), southward),
     location(carC, coordinate(600, 225), westward),
-    goal(carA,coordinate(500, 580)),
-    goal(carB,coordinate(800, 175)),
+    goal(carA,coordinate(500, 600)),
+    goal(carB,coordinate(500, 600)),
     goal(carC,coordinate(145, 225))
+
+
+% % CASE 6
+% % CarA turn right to the narrow road,
+% % carB go straight southward to the narrow road
+% % carC turn left to the narrow road
+%
+% % carA does not need to give way to the car running on the narrow
+% % two-way lane, because the driving direction will be the same
+%
+%     location(carA, coordinate(400, 175), eastward),
+%     location(carB, coordinate(500, 325), southward),
+%     location(carC, coordinate(600, 225), westward),
+%     goal(carA,coordinate(500, 600)),
+%     goal(carB,coordinate(500, 600)),
+%     goal(carC,coordinate(500, 600))
+%
+
+
+
 
 ]).
 
@@ -248,15 +325,17 @@ drive(Vehicle) from T to T1 <-
 
 
 % %----------------version 2--------------------------------
-% % There are 7 (3+4) cases in total that your route will be blocked
+% % There are 6 cases in total that your route will be blocked
 % if Vehicle is at same horizontal level as its goal and there is another car in between
 blockedRoute(Vehicle) at T<-
-  location(Vehicle, coordinate(X, Y), _),
-  goal(Vehicle,coordinate(P, Q)),
-  location(Vehicle2, coordinate(A, B), _),
+  location(Vehicle, coordinate(X1, Y1), eastward),
+  goal(Vehicle,coordinate(A1, B1)),
+  location(Vehicle2, coordinate(X2, Y2), _),
   Vehicle != Vehicle2,
-  Y == Q,
-  B != Q.
+  Y1 == B1,
+  Y2 == B1,
+  X2 >=
+  X2 <=
 
 % if Vehicle is at same horizontal level as its goal and there is another car in between
 blockedRoute(Vehicle) at T<-
