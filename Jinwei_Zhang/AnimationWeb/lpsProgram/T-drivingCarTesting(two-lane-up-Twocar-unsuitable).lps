@@ -36,12 +36,12 @@ actions ([
 initially([
   moving(carA),
   moving(carB),
- % %  normal start one on the mainstreet and other on the southStreet
- % % carA wants to go straight from mainStreet, carB want to turn left from southStreet
- %  location(carA, coordinate(145, 175), eastward),
- %  location(carB, coordinate(500, 580), northward),
- %  goal(carA,coordinate(980, 175)),
- %  goal(carB,coordinate(120, 225))
+ %  normal start one on the mainstreet and other on the southStreet
+ % carA wants to go straight from mainStreet, carB want to turn left from southStreet
+  location(carA, coordinate(145, 175), eastward),
+  location(carB, coordinate(500, 580), northward),
+  goal(carA,coordinate(980, 175)),
+  goal(carB,coordinate(120, 225))
 
   % % %  carA start from Tjunction
   %  %  % normal start one on the mainstreet and other on the southStreet

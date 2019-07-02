@@ -307,7 +307,6 @@ clearRoute(Vehicle) at T<-
 % you can not step forward if there is a trafficLight at your postion
 % and the traffic light is red.
 <- step(Vehicle, NextPlace),
-
   location(Vehicle, coordinate(X, Y), Direction1),
   trafficLight(coordinate(A, B), red, Direction2, Street),
   X==A,

@@ -59,16 +59,16 @@ initially([
 %   goal(carC,coordinate(145, 225))
 
 
-% % CASE 2
-% % CarA turn right to the narrow road,
-% % carB turn left to the main street
-% % carC go straight.
-%     location(carA, coordinate(400, 175), eastward),
-%     location(carB, coordinate(500, 325), northward),
-%     location(carC, coordinate(600, 225), westward),
-%     goal(carA,coordinate(500, 580)),
-%     goal(carB,coordinate(145, 225)),
-%     goal(carC,coordinate(145, 225))
+% CASE 2
+% CarA turn right to the narrow road,
+% carB turn left to the main street
+% carC go straight.
+    location(carA, coordinate(400, 175), eastward),
+    location(carB, coordinate(500, 325), northward),
+    location(carC, coordinate(600, 225), westward),
+    goal(carA,coordinate(500, 580)),
+    goal(carB,coordinate(145, 225))
+    % goal(carC,coordinate(145, 225))
 
 
 % % CASE 3
@@ -112,20 +112,20 @@ initially([
 %     goal(carC,coordinate(145, 225))
 
 
-% CASE 6
-% CarA turn right to the narrow road,
-% carB go straight southward to the narrow road
-% carC turn left to the narrow road
-
-% carA does not need to give way to the car running on the narrow
-% two-way lane, because the driving direction will be the same
-
-    location(carA, coordinate(400, 175), eastward),
-    location(carB, coordinate(500, 325), southward),
-    location(carC, coordinate(600, 225), westward),
-    goal(carA,coordinate(500, 600)),
-    goal(carB,coordinate(500, 600)),
-    goal(carC,coordinate(500, 600))
+% % CASE 6
+% % CarA turn right to the narrow road,
+% % carB go straight southward to the narrow road
+% % carC turn left to the narrow road
+%
+% % carA does not need to give way to the car running on the narrow
+% % two-way lane, because the driving direction will be the same
+%
+%     location(carA, coordinate(400, 175), eastward),
+%     location(carB, coordinate(500, 325), southward),
+%     location(carC, coordinate(600, 225), westward),
+%     goal(carA,coordinate(500, 600)),
+%     goal(carB,coordinate(500, 600)),
+%     goal(carC,coordinate(500, 600))
 %
 
 
