@@ -278,19 +278,23 @@
                                 console.log(item);
                                 var loc = new VehicleLoc(item, currentTime);
                                 appManager.changeVehicleLocation(loc.getObjectName(), loc.X, loc.Y, loc.getHeading());
+                            }else if (item.toLowerCase().startsWith('trafficlight')){
+                                var light = new TrafficLight(item);
+                                appManager.changeTrafficLight(light.X,light.Y,light.color);
+
                             }
                         });
 
-                        if (observations !== undefined && observations.length !== 0){
-                            console.log(observations);
-                             console.log(observations[0]);
-                            let matchArray = observations[0].match(/(\w+)/g);
-                            if (matchArray[0].toLowerCase() === 'changetrafficlight'){
-                                lightX = parseInt(matchArray[2],10);
-                                lightY = parseInt(matchArray[3],10);
-                                appManager.changeTrafficLight(lightX,lightY,matchArray[4]);
-                            }
-                        }
+                        // if (observations !== undefined && observations.length !== 0){
+                        //     console.log(observations);
+                        //      console.log(observations[0]);
+                        //     let matchArray = observations[0].match(/(\w+)/g);
+                        //     if (matchArray[0].toLowerCase() === 'changetrafficlight'){
+                        //         lightX = parseInt(matchArray[2],10);
+                        //         lightY = parseInt(matchArray[3],10);
+                        //         appManager.changeTrafficLight(lightX,lightY,matchArray[4]);
+                        //     }
+                        // }
 
 
                     }

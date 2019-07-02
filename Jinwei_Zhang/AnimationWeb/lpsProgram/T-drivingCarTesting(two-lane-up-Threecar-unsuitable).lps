@@ -67,8 +67,8 @@ initially([
     location(carB, coordinate(500, 325), northward),
     location(carC, coordinate(600, 225), westward),
     goal(carA,coordinate(500, 580)),
-    goal(carB,coordinate(145, 225))
-    % goal(carC,coordinate(145, 225))
+    goal(carB,coordinate(145, 225)),
+    goal(carC,coordinate(145, 225))
 
 
 % % CASE 3
