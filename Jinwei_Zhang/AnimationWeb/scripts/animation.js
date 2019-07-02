@@ -241,15 +241,15 @@
     * this field will change the traffic
     * */
     appManager.changeTrafficLight = function(x, y, color){
-        console.log('change traffic light has been called');
+        // console.log('change traffic light has been called');
         appManager.lights.forEach(function (item, index) {
-            console.log(item);
+            // console.log(item);
 
             if (item.xLoc === x && item.yLoc ===  y) {
 
-                console.log(x, y, color);
+                // console.log(x, y, color);
                 if (color === 'green'){
-                    console.log('this has also been called');
+                    // console.log('this has also been called');
                     item.textObj.text = color;
                     item.textObj.style = {fontFamily: 'Arial', fontSize: 14, fill: 0x00ff00};
                 }else if(color === 'red'){

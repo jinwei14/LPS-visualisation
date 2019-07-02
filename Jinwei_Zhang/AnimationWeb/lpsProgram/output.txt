@@ -1,1516 +1,1025 @@
-carA 445 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 280 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-updating loc carA coordinate(450, 225)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 275)
-updating loc carA coordinate(450, 225)
-updating loc carB coordinate(500, 275)
-carA 450 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 275 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-updating loc carA coordinate(455, 225)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 270)
-updating loc carA coordinate(455, 225)
-updating loc carB coordinate(500, 270)
-carA 455 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-updating loc carA coordinate(460, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(460, 225)
-carA 460 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-updating loc carA coordinate(465, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(465, 225)
-carA 465 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-updating loc carA coordinate(470, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(470, 225)
-carA 470 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-updating loc carA coordinate(475, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(475, 225)
-carA 475 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-updating loc carA coordinate(480, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(480, 225)
-carA 480 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-updating loc carA coordinate(485, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(485, 225)
-carA 485 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-updating loc carA coordinate(490, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(490, 225)
-carA 490 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-updating loc carA coordinate(495, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(495, 225)
-carA 495 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-updating loc carA coordinate(500, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(500, 225)
-carA 500 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-checking in turnning westward or not ?
-checking in turnning eastward or not ?
-carA turing eastward
-checking in turnning northward or not ?
-checking in turnning southward or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-updating turing carA eastward
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-updating loc carA coordinate(505, 225)
-collisionPossiblecarB carA
-updating turing carA eastward
-updating loc carA coordinate(505, 225)
-carA 505 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-updating loc carA coordinate(510, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(510, 225)
-carA 510 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-updating loc carA coordinate(515, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(515, 225)
-carA 515 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-updating loc carA coordinate(520, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(520, 225)
-carA 520 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-updating loc carA coordinate(525, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(525, 225)
-carA 525 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-updating loc carA coordinate(530, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(530, 225)
-carA 530 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-updating loc carA coordinate(535, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(535, 225)
-carA 535 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-updating loc carA coordinate(540, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(540, 225)
-carA 540 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-updating loc carA coordinate(545, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(545, 225)
-carA 545 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-collisionPossiblecarB carA
-updating loc carA coordinate(550, 225)
-collisionPossiblecarB carA
-updating loc carA coordinate(550, 225)
-carA 550 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 270 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-collisionPossiblecarB carA
-updating loc carA coordinate(555, 225)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 265)
-updating loc carB coordinate(500, 265)
-updating loc carA coordinate(555, 225)
-carA 555 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 265 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-updating loc carA coordinate(560, 225)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 260)
-updating loc carA coordinate(560, 225)
-updating loc carB coordinate(500, 260)
-carA 560 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 260 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-updating loc carA coordinate(565, 225)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 255)
-updating loc carA coordinate(565, 225)
-updating loc carB coordinate(500, 255)
-carA 565 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 255 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-updating loc carA coordinate(570, 225)
-collisionPossiblecarB carA
-updating loc carB coordinate(500, 250)
-updating loc carA coordinate(570, 225)
-updating loc carB coordinate(500, 250)
-carA 570 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 250 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-updating loc carA coordinate(575, 225)
-updating loc carB coordinate(500, 245)
-updating loc carA coordinate(575, 225)
-updating loc carB coordinate(500, 245)
-carA 575 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 245 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-updating loc carA coordinate(580, 225)
-updating loc carB coordinate(500, 240)
-updating loc carA coordinate(580, 225)
-updating loc carB coordinate(500, 240)
-carA 580 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 240 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-updating loc carA coordinate(585, 225)
-updating loc carB coordinate(500, 235)
-updating loc carA coordinate(585, 225)
-updating loc carB coordinate(500, 235)
-carA 585 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 235 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-updating loc carA coordinate(590, 225)
-updating loc carB coordinate(500, 230)
-updating loc carA coordinate(590, 225)
-updating loc carB coordinate(500, 230)
-carA 590 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 230 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-updating loc carA coordinate(595, 225)
-updating loc carB coordinate(500, 225)
-updating loc carA coordinate(595, 225)
-updating loc carB coordinate(500, 225)
-carA 595 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 225 Direction northward----------------Reactive rule----------------
-checking in Juntion or not ?
-checking in turnning westward or not ?
-carB turing westward
-checking in turnning eastward or not ?
-checking in turnning northward or not ?
-checking in turnning southward or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move northward
-updating turing carB westward
-updating loc carA coordinate(600, 225)
-updating turing carB westward
-updating loc carA coordinate(600, 225)
-carA 600 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 500 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-checking in turnning westward or not ?
-carB turing westward
-checking in turnning eastward or not ?
-checking in turnning northward or not ?
-checking in turnning southward or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating turing carB westward
-updating loc carB coordinate(500, 220)
-updating loc carA coordinate(605, 225)
-updating loc carB coordinate(495, 225)
-updating turing carB westward
-updating loc carB coordinate(500, 220)
-updating loc carB coordinate(495, 225)
-updating loc carA coordinate(605, 225)
-carA 605 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 495 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(610, 225)
-updating loc carB coordinate(490, 225)
-updating loc carA coordinate(610, 225)
-updating loc carB coordinate(490, 225)
-carA 610 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 490 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(615, 225)
-updating loc carB coordinate(485, 225)
-updating loc carA coordinate(615, 225)
-updating loc carB coordinate(485, 225)
-carA 615 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 485 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(620, 225)
-updating loc carB coordinate(480, 225)
-updating loc carA coordinate(620, 225)
-updating loc carB coordinate(480, 225)
-carA 620 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 480 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(625, 225)
-updating loc carB coordinate(475, 225)
-updating loc carA coordinate(625, 225)
-updating loc carB coordinate(475, 225)
-carA 625 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 475 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(630, 225)
-updating loc carB coordinate(470, 225)
-updating loc carA coordinate(630, 225)
-updating loc carB coordinate(470, 225)
-carA 630 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 470 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(635, 225)
-updating loc carB coordinate(465, 225)
-updating loc carA coordinate(635, 225)
-updating loc carB coordinate(465, 225)
-carA 635 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 465 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(640, 225)
-updating loc carB coordinate(460, 225)
-updating loc carA coordinate(640, 225)
-updating loc carB coordinate(460, 225)
-carA 640 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 460 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(645, 225)
-updating loc carB coordinate(455, 225)
-updating loc carA coordinate(645, 225)
-updating loc carB coordinate(455, 225)
-carA 645 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 455 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(650, 225)
-updating loc carB coordinate(450, 225)
-updating loc carA coordinate(650, 225)
-updating loc carB coordinate(450, 225)
-carA 650 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 450 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(655, 225)
-updating loc carB coordinate(445, 225)
-updating loc carA coordinate(655, 225)
-updating loc carB coordinate(445, 225)
-carA 655 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 445 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(660, 225)
-updating loc carB coordinate(440, 225)
-updating loc carA coordinate(660, 225)
-updating loc carB coordinate(440, 225)
-carA 660 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 440 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(665, 225)
-updating loc carB coordinate(435, 225)
-updating loc carA coordinate(665, 225)
-updating loc carB coordinate(435, 225)
-carA 665 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 435 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(670, 225)
-updating loc carB coordinate(430, 225)
-updating loc carA coordinate(670, 225)
-updating loc carB coordinate(430, 225)
-carA 670 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 430 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(675, 225)
-updating loc carB coordinate(425, 225)
-updating loc carA coordinate(675, 225)
-updating loc carB coordinate(425, 225)
-carA 675 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 425 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(680, 225)
-updating loc carB coordinate(420, 225)
-updating loc carA coordinate(680, 225)
-updating loc carB coordinate(420, 225)
-carA 680 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 420 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(685, 225)
-updating loc carB coordinate(415, 225)
-updating loc carA coordinate(685, 225)
-updating loc carB coordinate(415, 225)
-carA 685 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 415 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(690, 225)
-updating loc carB coordinate(410, 225)
-updating loc carA coordinate(690, 225)
-updating loc carB coordinate(410, 225)
-carA 690 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 410 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(695, 225)
-updating loc carB coordinate(405, 225)
-updating loc carA coordinate(695, 225)
-updating loc carB coordinate(405, 225)
-carA 695 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 405 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(700, 225)
-updating loc carB coordinate(400, 225)
-updating loc carA coordinate(700, 225)
-updating loc carB coordinate(400, 225)
-carA 700 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 400 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(705, 225)
-updating loc carB coordinate(395, 225)
-updating loc carA coordinate(705, 225)
-updating loc carB coordinate(395, 225)
-carA 705 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 395 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(710, 225)
-updating loc carB coordinate(390, 225)
-updating loc carA coordinate(710, 225)
-updating loc carB coordinate(390, 225)
-carA 710 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 390 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(715, 225)
-updating loc carB coordinate(385, 225)
-updating loc carA coordinate(715, 225)
-updating loc carB coordinate(385, 225)
-carA 715 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 385 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(720, 225)
-updating loc carB coordinate(380, 225)
-updating loc carA coordinate(720, 225)
-updating loc carB coordinate(380, 225)
-carA 720 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 380 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(725, 225)
-updating loc carB coordinate(375, 225)
-updating loc carA coordinate(725, 225)
-updating loc carB coordinate(375, 225)
-carA 725 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 375 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(730, 225)
-updating loc carB coordinate(370, 225)
-updating loc carA coordinate(730, 225)
-updating loc carB coordinate(370, 225)
-carA 730 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 370 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(735, 225)
-updating loc carB coordinate(365, 225)
-updating loc carA coordinate(735, 225)
-updating loc carB coordinate(365, 225)
-carA 735 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 365 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(740, 225)
-updating loc carB coordinate(360, 225)
-updating loc carA coordinate(740, 225)
-updating loc carB coordinate(360, 225)
-carA 740 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 360 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(745, 225)
-updating loc carB coordinate(355, 225)
-updating loc carA coordinate(745, 225)
-updating loc carB coordinate(355, 225)
-carA 745 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 355 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(750, 225)
-updating loc carB coordinate(350, 225)
-updating loc carA coordinate(750, 225)
-updating loc carB coordinate(350, 225)
-carA 750 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 350 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(755, 225)
-updating loc carB coordinate(345, 225)
-updating loc carA coordinate(755, 225)
-updating loc carB coordinate(345, 225)
-carA 755 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 345 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(760, 225)
-updating loc carB coordinate(340, 225)
-updating loc carA coordinate(760, 225)
-updating loc carB coordinate(340, 225)
-carA 760 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 340 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(765, 225)
-updating loc carB coordinate(335, 225)
-updating loc carA coordinate(765, 225)
-updating loc carB coordinate(335, 225)
-carA 765 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 335 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(770, 225)
-updating loc carB coordinate(330, 225)
-updating loc carA coordinate(770, 225)
-updating loc carB coordinate(330, 225)
-carA 770 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 330 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(775, 225)
-updating loc carB coordinate(325, 225)
-updating loc carA coordinate(775, 225)
-updating loc carB coordinate(325, 225)
-carA 775 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 325 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(780, 225)
-updating loc carB coordinate(320, 225)
-updating loc carA coordinate(780, 225)
-updating loc carB coordinate(320, 225)
-carA 780 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 320 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(785, 225)
-updating loc carB coordinate(315, 225)
-updating loc carA coordinate(785, 225)
-updating loc carB coordinate(315, 225)
-carA 785 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 315 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(790, 225)
-updating loc carB coordinate(310, 225)
-updating loc carA coordinate(790, 225)
-updating loc carB coordinate(310, 225)
-carA 790 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 310 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(795, 225)
-updating loc carB coordinate(305, 225)
-updating loc carA coordinate(795, 225)
-updating loc carB coordinate(305, 225)
-carA 795 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 305 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(800, 225)
-updating loc carB coordinate(300, 225)
-updating loc carA coordinate(800, 225)
-updating loc carB coordinate(300, 225)
-carA 800 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 300 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(805, 225)
-updating loc carB coordinate(295, 225)
-updating loc carA coordinate(805, 225)
-updating loc carB coordinate(295, 225)
-carA 805 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 295 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(810, 225)
-updating loc carB coordinate(290, 225)
-updating loc carA coordinate(810, 225)
-updating loc carB coordinate(290, 225)
-carA 810 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 290 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(815, 225)
-updating loc carB coordinate(285, 225)
-updating loc carA coordinate(815, 225)
-updating loc carB coordinate(285, 225)
-carA 815 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 285 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(820, 225)
-updating loc carB coordinate(280, 225)
-updating loc carA coordinate(820, 225)
-updating loc carB coordinate(280, 225)
-carA 820 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 280 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(825, 225)
-updating loc carB coordinate(275, 225)
-updating loc carA coordinate(825, 225)
-updating loc carB coordinate(275, 225)
-carA 825 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 275 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(830, 225)
-updating loc carB coordinate(270, 225)
-updating loc carA coordinate(830, 225)
-updating loc carB coordinate(270, 225)
-carA 830 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 270 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(835, 225)
-updating loc carB coordinate(265, 225)
-updating loc carA coordinate(835, 225)
-updating loc carB coordinate(265, 225)
-carA 835 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 265 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(840, 225)
-updating loc carB coordinate(260, 225)
-updating loc carA coordinate(840, 225)
-updating loc carB coordinate(260, 225)
-carA 840 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 260 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(845, 225)
-updating loc carB coordinate(255, 225)
-updating loc carA coordinate(845, 225)
-updating loc carB coordinate(255, 225)
-carA 845 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 255 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(850, 225)
-updating loc carB coordinate(250, 225)
-updating loc carA coordinate(850, 225)
-updating loc carB coordinate(250, 225)
-carA 850 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 250 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(855, 225)
-updating loc carB coordinate(245, 225)
-updating loc carA coordinate(855, 225)
-updating loc carB coordinate(245, 225)
-carA 855 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 245 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(860, 225)
-updating loc carB coordinate(240, 225)
-updating loc carA coordinate(860, 225)
-updating loc carB coordinate(240, 225)
-carA 860 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 240 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(865, 225)
-updating loc carB coordinate(235, 225)
-updating loc carA coordinate(865, 225)
-updating loc carB coordinate(235, 225)
-carA 865 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 235 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(870, 225)
-updating loc carB coordinate(230, 225)
-updating loc carA coordinate(870, 225)
-updating loc carB coordinate(230, 225)
-carA 870 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 230 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(875, 225)
-updating loc carB coordinate(225, 225)
-updating loc carA coordinate(875, 225)
-updating loc carB coordinate(225, 225)
-carA 875 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 225 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(880, 225)
-updating loc carB coordinate(220, 225)
-updating loc carA coordinate(880, 225)
-updating loc carB coordinate(220, 225)
-carA 880 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 220 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(885, 225)
-updating loc carB coordinate(215, 225)
-updating loc carA coordinate(885, 225)
-updating loc carB coordinate(215, 225)
-carA 885 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 215 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(890, 225)
-updating loc carB coordinate(210, 225)
-updating loc carA coordinate(890, 225)
-updating loc carB coordinate(210, 225)
-carA 890 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 210 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(895, 225)
-updating loc carB coordinate(205, 225)
-updating loc carA coordinate(895, 225)
-updating loc carB coordinate(205, 225)
-carA 895 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 205 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(900, 225)
-updating loc carB coordinate(200, 225)
-updating loc carA coordinate(900, 225)
-updating loc carB coordinate(200, 225)
-carA 900 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 200 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(905, 225)
-updating loc carB coordinate(195, 225)
-updating loc carA coordinate(905, 225)
-updating loc carB coordinate(195, 225)
-carA 905 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 195 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(910, 225)
-updating loc carB coordinate(190, 225)
-updating loc carA coordinate(910, 225)
-updating loc carB coordinate(190, 225)
-carA 910 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 190 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(915, 225)
-updating loc carB coordinate(185, 225)
-updating loc carA coordinate(915, 225)
-updating loc carB coordinate(185, 225)
-carA 915 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 185 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(920, 225)
-updating loc carB coordinate(180, 225)
-updating loc carA coordinate(920, 225)
-updating loc carB coordinate(180, 225)
-carA 920 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 180 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(925, 225)
-updating loc carB coordinate(175, 225)
-updating loc carA coordinate(925, 225)
-updating loc carB coordinate(175, 225)
-carA 925 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 175 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(930, 225)
-updating loc carB coordinate(170, 225)
-updating loc carA coordinate(930, 225)
-updating loc carB coordinate(170, 225)
-carA 930 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 170 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(935, 225)
-updating loc carB coordinate(165, 225)
-updating loc carA coordinate(935, 225)
-updating loc carB coordinate(165, 225)
-carA 935 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 165 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(940, 225)
-updating loc carB coordinate(160, 225)
-updating loc carA coordinate(940, 225)
-updating loc carB coordinate(160, 225)
-carA 940 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 160 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(945, 225)
-updating loc carB coordinate(155, 225)
-updating loc carA coordinate(945, 225)
-updating loc carB coordinate(155, 225)
-carA 945 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 155 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(950, 225)
-updating loc carB coordinate(150, 225)
-updating loc carA coordinate(950, 225)
-updating loc carB coordinate(150, 225)
-carA 950 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 150 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(955, 225)
-updating loc carB coordinate(145, 225)
-updating loc carA coordinate(955, 225)
-updating loc carB coordinate(145, 225)
-carA 955 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 145 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(960, 225)
-updating loc carB coordinate(140, 225)
-updating loc carA coordinate(960, 225)
-updating loc carB coordinate(140, 225)
-carA 960 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 140 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(965, 225)
-updating loc carB coordinate(135, 225)
-updating loc carA coordinate(965, 225)
-updating loc carB coordinate(135, 225)
-carA 965 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 135 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(970, 225)
-updating loc carB coordinate(130, 225)
-updating loc carA coordinate(970, 225)
-updating loc carB coordinate(130, 225)
-carA 970 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 130 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(975, 225)
-updating loc carB coordinate(125, 225)
-updating loc carA coordinate(975, 225)
-updating loc carB coordinate(125, 225)
-carA 975 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 125 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(980, 225)
-updating loc carB coordinate(120, 225)
-updating loc carA coordinate(980, 225)
-updating loc carB coordinate(120, 225)
-carA we have arrived
-carB we have arrived
-carA 980 225 Direction eastward----------------Reactive rule----------------
-checking in Juntion or not ?
-carB 120 225 Direction westward----------------Reactive rule----------------
-checking in Juntion or not ?
-carA start driving
-carA move eastward
-carB start driving
-carB move westward
-updating loc carA coordinate(985, 225)
-updating loc carB coordinate(115, 225)
-updating loc carA coordinate(985, 225)
-updating loc carB coordinate(115, 225)
+% --- Specification generated for T-drivingCarTesting(twotwolane-unsuitable).lps
+% --- Start of cycle 1 ---
+expect_num_of(fluent, 1, 9).
+  expect(fluent, 1, moving(carA)).
+  expect(fluent, 1, moving(carB)).
+  expect(fluent, 1, location(carA, coordinate(145, 175), eastward)).
+  expect(fluent, 1, location(carB, coordinate(475, 580), northward)).
+  expect(fluent, 1, goal(carA, coordinate(525, 700))).
+  expect(fluent, 1, goal(carB, coordinate(145, 225))).
+  expect(fluent, 1, trafficLight(coordinate(430, 175), green, westward, mainStreet)).
+  expect(fluent, 1, trafficLight(coordinate(475, 270), red, eastward, mainStreet)).
+  expect(fluent, 1, trafficLight(coordinate(570, 225), green, southward, southStreet)).
+
+% --- Start of cycle 2 ---
+expect_num_of(fluent, 2, 9).
+  expect(fluent, 2, moving(carA)).
+  expect(fluent, 2, moving(carB)).
+  expect(fluent, 2, location(carA, coordinate(150, 175), eastward)).
+  expect(fluent, 2, location(carB, coordinate(475, 575), northward)).
+  expect(fluent, 2, goal(carA, coordinate(525, 700))).
+  expect(fluent, 2, goal(carB, coordinate(145, 225))).
+  expect(fluent, 2, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 2, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 2, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 1, 2, 5).
+  expect(action, 1, 2, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 1, 2, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 1, 2, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 1, 2, step(carA, coordinate(150, 175))).
+  expect(action, 1, 2, step(carB, coordinate(475, 575))).
+expect_num_of(observation, 1, 2, 0).
+expect_num_of(firedRules, 2, 10).
+expect_num_of(resolvedGoals, 2, 7).
+expect_num_of(unresolvedGoals, 2, 8).
+expect_num_of(failedGoals, 2, 3).
+
+% --- Start of cycle 3 ---
+expect_num_of(fluent, 3, 9).
+  expect(fluent, 3, moving(carA)).
+  expect(fluent, 3, moving(carB)).
+  expect(fluent, 3, location(carA, coordinate(155, 175), eastward)).
+  expect(fluent, 3, location(carB, coordinate(475, 570), northward)).
+  expect(fluent, 3, goal(carA, coordinate(525, 700))).
+  expect(fluent, 3, goal(carB, coordinate(145, 225))).
+  expect(fluent, 3, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 3, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 3, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 2, 3, 5).
+  expect(action, 2, 3, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 2, 3, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 2, 3, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 2, 3, step(carA, coordinate(155, 175))).
+  expect(action, 2, 3, step(carB, coordinate(475, 570))).
+expect_num_of(observation, 2, 3, 0).
+expect_num_of(firedRules, 3, 10).
+expect_num_of(resolvedGoals, 3, 7).
+expect_num_of(unresolvedGoals, 3, 8).
+expect_num_of(failedGoals, 3, 3).
+
+% --- Start of cycle 4 ---
+expect_num_of(fluent, 4, 9).
+  expect(fluent, 4, moving(carA)).
+  expect(fluent, 4, moving(carB)).
+  expect(fluent, 4, location(carA, coordinate(160, 175), eastward)).
+  expect(fluent, 4, location(carB, coordinate(475, 565), northward)).
+  expect(fluent, 4, goal(carA, coordinate(525, 700))).
+  expect(fluent, 4, goal(carB, coordinate(145, 225))).
+  expect(fluent, 4, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 4, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 4, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 3, 4, 5).
+  expect(action, 3, 4, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 3, 4, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 3, 4, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 3, 4, step(carA, coordinate(160, 175))).
+  expect(action, 3, 4, step(carB, coordinate(475, 565))).
+expect_num_of(observation, 3, 4, 0).
+expect_num_of(firedRules, 4, 10).
+expect_num_of(resolvedGoals, 4, 7).
+expect_num_of(unresolvedGoals, 4, 8).
+expect_num_of(failedGoals, 4, 3).
+
+% --- Start of cycle 5 ---
+expect_num_of(fluent, 5, 9).
+  expect(fluent, 5, moving(carA)).
+  expect(fluent, 5, moving(carB)).
+  expect(fluent, 5, location(carA, coordinate(165, 175), eastward)).
+  expect(fluent, 5, location(carB, coordinate(475, 560), northward)).
+  expect(fluent, 5, goal(carA, coordinate(525, 700))).
+  expect(fluent, 5, goal(carB, coordinate(145, 225))).
+  expect(fluent, 5, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 5, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 5, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 4, 5, 5).
+  expect(action, 4, 5, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 4, 5, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 4, 5, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 4, 5, step(carA, coordinate(165, 175))).
+  expect(action, 4, 5, step(carB, coordinate(475, 560))).
+expect_num_of(observation, 4, 5, 0).
+expect_num_of(firedRules, 5, 10).
+expect_num_of(resolvedGoals, 5, 7).
+expect_num_of(unresolvedGoals, 5, 8).
+expect_num_of(failedGoals, 5, 3).
+
+% --- Start of cycle 6 ---
+expect_num_of(fluent, 6, 9).
+  expect(fluent, 6, moving(carA)).
+  expect(fluent, 6, moving(carB)).
+  expect(fluent, 6, location(carA, coordinate(170, 175), eastward)).
+  expect(fluent, 6, location(carB, coordinate(475, 555), northward)).
+  expect(fluent, 6, goal(carA, coordinate(525, 700))).
+  expect(fluent, 6, goal(carB, coordinate(145, 225))).
+  expect(fluent, 6, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 6, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 6, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 5, 6, 5).
+  expect(action, 5, 6, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 5, 6, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 5, 6, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 5, 6, step(carA, coordinate(170, 175))).
+  expect(action, 5, 6, step(carB, coordinate(475, 555))).
+expect_num_of(observation, 5, 6, 0).
+expect_num_of(firedRules, 6, 10).
+expect_num_of(resolvedGoals, 6, 7).
+expect_num_of(unresolvedGoals, 6, 8).
+expect_num_of(failedGoals, 6, 3).
+
+% --- Start of cycle 7 ---
+expect_num_of(fluent, 7, 9).
+  expect(fluent, 7, moving(carA)).
+  expect(fluent, 7, moving(carB)).
+  expect(fluent, 7, location(carA, coordinate(175, 175), eastward)).
+  expect(fluent, 7, location(carB, coordinate(475, 550), northward)).
+  expect(fluent, 7, goal(carA, coordinate(525, 700))).
+  expect(fluent, 7, goal(carB, coordinate(145, 225))).
+  expect(fluent, 7, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 7, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 7, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 6, 7, 5).
+  expect(action, 6, 7, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 6, 7, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 6, 7, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 6, 7, step(carA, coordinate(175, 175))).
+  expect(action, 6, 7, step(carB, coordinate(475, 550))).
+expect_num_of(observation, 6, 7, 0).
+expect_num_of(firedRules, 7, 10).
+expect_num_of(resolvedGoals, 7, 7).
+expect_num_of(unresolvedGoals, 7, 8).
+expect_num_of(failedGoals, 7, 3).
+
+% --- Start of cycle 8 ---
+expect_num_of(fluent, 8, 9).
+  expect(fluent, 8, moving(carA)).
+  expect(fluent, 8, moving(carB)).
+  expect(fluent, 8, location(carA, coordinate(180, 175), eastward)).
+  expect(fluent, 8, location(carB, coordinate(475, 545), northward)).
+  expect(fluent, 8, goal(carA, coordinate(525, 700))).
+  expect(fluent, 8, goal(carB, coordinate(145, 225))).
+  expect(fluent, 8, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 8, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 8, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 7, 8, 5).
+  expect(action, 7, 8, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 7, 8, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 7, 8, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 7, 8, step(carA, coordinate(180, 175))).
+  expect(action, 7, 8, step(carB, coordinate(475, 545))).
+expect_num_of(observation, 7, 8, 0).
+expect_num_of(firedRules, 8, 10).
+expect_num_of(resolvedGoals, 8, 7).
+expect_num_of(unresolvedGoals, 8, 8).
+expect_num_of(failedGoals, 8, 3).
+
+% --- Start of cycle 9 ---
+expect_num_of(fluent, 9, 9).
+  expect(fluent, 9, moving(carA)).
+  expect(fluent, 9, moving(carB)).
+  expect(fluent, 9, location(carA, coordinate(185, 175), eastward)).
+  expect(fluent, 9, location(carB, coordinate(475, 540), northward)).
+  expect(fluent, 9, goal(carA, coordinate(525, 700))).
+  expect(fluent, 9, goal(carB, coordinate(145, 225))).
+  expect(fluent, 9, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 9, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 9, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 8, 9, 5).
+  expect(action, 8, 9, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 8, 9, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 8, 9, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 8, 9, step(carA, coordinate(185, 175))).
+  expect(action, 8, 9, step(carB, coordinate(475, 540))).
+expect_num_of(observation, 8, 9, 0).
+expect_num_of(firedRules, 9, 10).
+expect_num_of(resolvedGoals, 9, 7).
+expect_num_of(unresolvedGoals, 9, 8).
+expect_num_of(failedGoals, 9, 3).
+
+% --- Start of cycle 10 ---
+expect_num_of(fluent, 10, 9).
+  expect(fluent, 10, moving(carA)).
+  expect(fluent, 10, moving(carB)).
+  expect(fluent, 10, location(carA, coordinate(190, 175), eastward)).
+  expect(fluent, 10, location(carB, coordinate(475, 535), northward)).
+  expect(fluent, 10, goal(carA, coordinate(525, 700))).
+  expect(fluent, 10, goal(carB, coordinate(145, 225))).
+  expect(fluent, 10, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 10, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 10, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 9, 10, 5).
+  expect(action, 9, 10, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 9, 10, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 9, 10, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 9, 10, step(carA, coordinate(190, 175))).
+  expect(action, 9, 10, step(carB, coordinate(475, 535))).
+expect_num_of(observation, 9, 10, 0).
+expect_num_of(firedRules, 10, 10).
+expect_num_of(resolvedGoals, 10, 7).
+expect_num_of(unresolvedGoals, 10, 8).
+expect_num_of(failedGoals, 10, 3).
+
+% --- Start of cycle 11 ---
+expect_num_of(fluent, 11, 9).
+  expect(fluent, 11, moving(carA)).
+  expect(fluent, 11, moving(carB)).
+  expect(fluent, 11, location(carA, coordinate(195, 175), eastward)).
+  expect(fluent, 11, location(carB, coordinate(475, 530), northward)).
+  expect(fluent, 11, goal(carA, coordinate(525, 700))).
+  expect(fluent, 11, goal(carB, coordinate(145, 225))).
+  expect(fluent, 11, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 11, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 11, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 10, 11, 5).
+  expect(action, 10, 11, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 10, 11, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 10, 11, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 10, 11, step(carA, coordinate(195, 175))).
+  expect(action, 10, 11, step(carB, coordinate(475, 530))).
+expect_num_of(observation, 10, 11, 0).
+expect_num_of(firedRules, 11, 10).
+expect_num_of(resolvedGoals, 11, 7).
+expect_num_of(unresolvedGoals, 11, 8).
+expect_num_of(failedGoals, 11, 3).
+
+% --- Start of cycle 12 ---
+expect_num_of(fluent, 12, 9).
+  expect(fluent, 12, moving(carA)).
+  expect(fluent, 12, moving(carB)).
+  expect(fluent, 12, location(carA, coordinate(200, 175), eastward)).
+  expect(fluent, 12, location(carB, coordinate(475, 525), northward)).
+  expect(fluent, 12, goal(carA, coordinate(525, 700))).
+  expect(fluent, 12, goal(carB, coordinate(145, 225))).
+  expect(fluent, 12, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 12, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 12, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 11, 12, 5).
+  expect(action, 11, 12, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 11, 12, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 11, 12, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 11, 12, step(carA, coordinate(200, 175))).
+  expect(action, 11, 12, step(carB, coordinate(475, 525))).
+expect_num_of(observation, 11, 12, 0).
+expect_num_of(firedRules, 12, 10).
+expect_num_of(resolvedGoals, 12, 7).
+expect_num_of(unresolvedGoals, 12, 8).
+expect_num_of(failedGoals, 12, 3).
+
+% --- Start of cycle 13 ---
+expect_num_of(fluent, 13, 9).
+  expect(fluent, 13, moving(carA)).
+  expect(fluent, 13, moving(carB)).
+  expect(fluent, 13, location(carA, coordinate(205, 175), eastward)).
+  expect(fluent, 13, location(carB, coordinate(475, 520), northward)).
+  expect(fluent, 13, goal(carA, coordinate(525, 700))).
+  expect(fluent, 13, goal(carB, coordinate(145, 225))).
+  expect(fluent, 13, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 13, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 13, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 12, 13, 5).
+  expect(action, 12, 13, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 12, 13, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 12, 13, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 12, 13, step(carA, coordinate(205, 175))).
+  expect(action, 12, 13, step(carB, coordinate(475, 520))).
+expect_num_of(observation, 12, 13, 0).
+expect_num_of(firedRules, 13, 10).
+expect_num_of(resolvedGoals, 13, 7).
+expect_num_of(unresolvedGoals, 13, 8).
+expect_num_of(failedGoals, 13, 3).
+
+% --- Start of cycle 14 ---
+expect_num_of(fluent, 14, 9).
+  expect(fluent, 14, moving(carA)).
+  expect(fluent, 14, moving(carB)).
+  expect(fluent, 14, location(carA, coordinate(210, 175), eastward)).
+  expect(fluent, 14, location(carB, coordinate(475, 515), northward)).
+  expect(fluent, 14, goal(carA, coordinate(525, 700))).
+  expect(fluent, 14, goal(carB, coordinate(145, 225))).
+  expect(fluent, 14, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 14, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 14, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 13, 14, 5).
+  expect(action, 13, 14, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 13, 14, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 13, 14, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 13, 14, step(carA, coordinate(210, 175))).
+  expect(action, 13, 14, step(carB, coordinate(475, 515))).
+expect_num_of(observation, 13, 14, 0).
+expect_num_of(firedRules, 14, 10).
+expect_num_of(resolvedGoals, 14, 7).
+expect_num_of(unresolvedGoals, 14, 8).
+expect_num_of(failedGoals, 14, 3).
+
+% --- Start of cycle 15 ---
+expect_num_of(fluent, 15, 9).
+  expect(fluent, 15, moving(carA)).
+  expect(fluent, 15, moving(carB)).
+  expect(fluent, 15, location(carA, coordinate(215, 175), eastward)).
+  expect(fluent, 15, location(carB, coordinate(475, 510), northward)).
+  expect(fluent, 15, goal(carA, coordinate(525, 700))).
+  expect(fluent, 15, goal(carB, coordinate(145, 225))).
+  expect(fluent, 15, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 15, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 15, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 14, 15, 5).
+  expect(action, 14, 15, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 14, 15, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 14, 15, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 14, 15, step(carA, coordinate(215, 175))).
+  expect(action, 14, 15, step(carB, coordinate(475, 510))).
+expect_num_of(observation, 14, 15, 0).
+expect_num_of(firedRules, 15, 10).
+expect_num_of(resolvedGoals, 15, 7).
+expect_num_of(unresolvedGoals, 15, 8).
+expect_num_of(failedGoals, 15, 3).
+
+% --- Start of cycle 16 ---
+expect_num_of(fluent, 16, 9).
+  expect(fluent, 16, moving(carA)).
+  expect(fluent, 16, moving(carB)).
+  expect(fluent, 16, location(carA, coordinate(220, 175), eastward)).
+  expect(fluent, 16, location(carB, coordinate(475, 505), northward)).
+  expect(fluent, 16, goal(carA, coordinate(525, 700))).
+  expect(fluent, 16, goal(carB, coordinate(145, 225))).
+  expect(fluent, 16, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 16, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 16, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 15, 16, 5).
+  expect(action, 15, 16, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 15, 16, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 15, 16, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 15, 16, step(carA, coordinate(220, 175))).
+  expect(action, 15, 16, step(carB, coordinate(475, 505))).
+expect_num_of(observation, 15, 16, 0).
+expect_num_of(firedRules, 16, 10).
+expect_num_of(resolvedGoals, 16, 7).
+expect_num_of(unresolvedGoals, 16, 8).
+expect_num_of(failedGoals, 16, 3).
+
+% --- Start of cycle 17 ---
+expect_num_of(fluent, 17, 9).
+  expect(fluent, 17, moving(carA)).
+  expect(fluent, 17, moving(carB)).
+  expect(fluent, 17, location(carA, coordinate(225, 175), eastward)).
+  expect(fluent, 17, location(carB, coordinate(475, 500), northward)).
+  expect(fluent, 17, goal(carA, coordinate(525, 700))).
+  expect(fluent, 17, goal(carB, coordinate(145, 225))).
+  expect(fluent, 17, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 17, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 17, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 16, 17, 5).
+  expect(action, 16, 17, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 16, 17, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 16, 17, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 16, 17, step(carA, coordinate(225, 175))).
+  expect(action, 16, 17, step(carB, coordinate(475, 500))).
+expect_num_of(observation, 16, 17, 0).
+expect_num_of(firedRules, 17, 10).
+expect_num_of(resolvedGoals, 17, 7).
+expect_num_of(unresolvedGoals, 17, 8).
+expect_num_of(failedGoals, 17, 3).
+
+% --- Start of cycle 18 ---
+expect_num_of(fluent, 18, 9).
+  expect(fluent, 18, moving(carA)).
+  expect(fluent, 18, moving(carB)).
+  expect(fluent, 18, location(carA, coordinate(230, 175), eastward)).
+  expect(fluent, 18, location(carB, coordinate(475, 495), northward)).
+  expect(fluent, 18, goal(carA, coordinate(525, 700))).
+  expect(fluent, 18, goal(carB, coordinate(145, 225))).
+  expect(fluent, 18, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 18, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 18, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 17, 18, 5).
+  expect(action, 17, 18, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 17, 18, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 17, 18, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 17, 18, step(carA, coordinate(230, 175))).
+  expect(action, 17, 18, step(carB, coordinate(475, 495))).
+expect_num_of(observation, 17, 18, 0).
+expect_num_of(firedRules, 18, 10).
+expect_num_of(resolvedGoals, 18, 7).
+expect_num_of(unresolvedGoals, 18, 8).
+expect_num_of(failedGoals, 18, 3).
+
+% --- Start of cycle 19 ---
+expect_num_of(fluent, 19, 9).
+  expect(fluent, 19, moving(carA)).
+  expect(fluent, 19, moving(carB)).
+  expect(fluent, 19, location(carA, coordinate(235, 175), eastward)).
+  expect(fluent, 19, location(carB, coordinate(475, 490), northward)).
+  expect(fluent, 19, goal(carA, coordinate(525, 700))).
+  expect(fluent, 19, goal(carB, coordinate(145, 225))).
+  expect(fluent, 19, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 19, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 19, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 18, 19, 5).
+  expect(action, 18, 19, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 18, 19, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 18, 19, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 18, 19, step(carA, coordinate(235, 175))).
+  expect(action, 18, 19, step(carB, coordinate(475, 490))).
+expect_num_of(observation, 18, 19, 0).
+expect_num_of(firedRules, 19, 10).
+expect_num_of(resolvedGoals, 19, 7).
+expect_num_of(unresolvedGoals, 19, 8).
+expect_num_of(failedGoals, 19, 3).
+
+% --- Start of cycle 20 ---
+expect_num_of(fluent, 20, 9).
+  expect(fluent, 20, moving(carA)).
+  expect(fluent, 20, moving(carB)).
+  expect(fluent, 20, location(carA, coordinate(240, 175), eastward)).
+  expect(fluent, 20, location(carB, coordinate(475, 485), northward)).
+  expect(fluent, 20, goal(carA, coordinate(525, 700))).
+  expect(fluent, 20, goal(carB, coordinate(145, 225))).
+  expect(fluent, 20, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 20, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 20, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 19, 20, 5).
+  expect(action, 19, 20, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 19, 20, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 19, 20, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 19, 20, step(carA, coordinate(240, 175))).
+  expect(action, 19, 20, step(carB, coordinate(475, 485))).
+expect_num_of(observation, 19, 20, 0).
+expect_num_of(firedRules, 20, 10).
+expect_num_of(resolvedGoals, 20, 7).
+expect_num_of(unresolvedGoals, 20, 8).
+expect_num_of(failedGoals, 20, 3).
+
+% --- Start of cycle 21 ---
+expect_num_of(fluent, 21, 9).
+  expect(fluent, 21, moving(carA)).
+  expect(fluent, 21, moving(carB)).
+  expect(fluent, 21, location(carA, coordinate(245, 175), eastward)).
+  expect(fluent, 21, location(carB, coordinate(475, 480), northward)).
+  expect(fluent, 21, goal(carA, coordinate(525, 700))).
+  expect(fluent, 21, goal(carB, coordinate(145, 225))).
+  expect(fluent, 21, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 21, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 21, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 20, 21, 5).
+  expect(action, 20, 21, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 20, 21, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 20, 21, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 20, 21, step(carA, coordinate(245, 175))).
+  expect(action, 20, 21, step(carB, coordinate(475, 480))).
+expect_num_of(observation, 20, 21, 0).
+expect_num_of(firedRules, 21, 10).
+expect_num_of(resolvedGoals, 21, 7).
+expect_num_of(unresolvedGoals, 21, 8).
+expect_num_of(failedGoals, 21, 3).
+
+% --- Start of cycle 22 ---
+expect_num_of(fluent, 22, 9).
+  expect(fluent, 22, moving(carA)).
+  expect(fluent, 22, moving(carB)).
+  expect(fluent, 22, location(carA, coordinate(250, 175), eastward)).
+  expect(fluent, 22, location(carB, coordinate(475, 475), northward)).
+  expect(fluent, 22, goal(carA, coordinate(525, 700))).
+  expect(fluent, 22, goal(carB, coordinate(145, 225))).
+  expect(fluent, 22, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 22, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 22, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 21, 22, 5).
+  expect(action, 21, 22, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 21, 22, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 21, 22, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 21, 22, step(carA, coordinate(250, 175))).
+  expect(action, 21, 22, step(carB, coordinate(475, 475))).
+expect_num_of(observation, 21, 22, 0).
+expect_num_of(firedRules, 22, 10).
+expect_num_of(resolvedGoals, 22, 7).
+expect_num_of(unresolvedGoals, 22, 8).
+expect_num_of(failedGoals, 22, 3).
+
+% --- Start of cycle 23 ---
+expect_num_of(fluent, 23, 9).
+  expect(fluent, 23, moving(carA)).
+  expect(fluent, 23, moving(carB)).
+  expect(fluent, 23, location(carA, coordinate(255, 175), eastward)).
+  expect(fluent, 23, location(carB, coordinate(475, 470), northward)).
+  expect(fluent, 23, goal(carA, coordinate(525, 700))).
+  expect(fluent, 23, goal(carB, coordinate(145, 225))).
+  expect(fluent, 23, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 23, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 23, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 22, 23, 5).
+  expect(action, 22, 23, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 22, 23, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 22, 23, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 22, 23, step(carA, coordinate(255, 175))).
+  expect(action, 22, 23, step(carB, coordinate(475, 470))).
+expect_num_of(observation, 22, 23, 0).
+expect_num_of(firedRules, 23, 10).
+expect_num_of(resolvedGoals, 23, 7).
+expect_num_of(unresolvedGoals, 23, 8).
+expect_num_of(failedGoals, 23, 3).
+
+% --- Start of cycle 24 ---
+expect_num_of(fluent, 24, 9).
+  expect(fluent, 24, moving(carA)).
+  expect(fluent, 24, moving(carB)).
+  expect(fluent, 24, location(carA, coordinate(260, 175), eastward)).
+  expect(fluent, 24, location(carB, coordinate(475, 465), northward)).
+  expect(fluent, 24, goal(carA, coordinate(525, 700))).
+  expect(fluent, 24, goal(carB, coordinate(145, 225))).
+  expect(fluent, 24, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 24, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 24, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 23, 24, 5).
+  expect(action, 23, 24, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 23, 24, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 23, 24, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 23, 24, step(carA, coordinate(260, 175))).
+  expect(action, 23, 24, step(carB, coordinate(475, 465))).
+expect_num_of(observation, 23, 24, 0).
+expect_num_of(firedRules, 24, 10).
+expect_num_of(resolvedGoals, 24, 7).
+expect_num_of(unresolvedGoals, 24, 8).
+expect_num_of(failedGoals, 24, 3).
+
+% --- Start of cycle 25 ---
+expect_num_of(fluent, 25, 9).
+  expect(fluent, 25, moving(carA)).
+  expect(fluent, 25, moving(carB)).
+  expect(fluent, 25, location(carA, coordinate(265, 175), eastward)).
+  expect(fluent, 25, location(carB, coordinate(475, 460), northward)).
+  expect(fluent, 25, goal(carA, coordinate(525, 700))).
+  expect(fluent, 25, goal(carB, coordinate(145, 225))).
+  expect(fluent, 25, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 25, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 25, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 24, 25, 5).
+  expect(action, 24, 25, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 24, 25, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 24, 25, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 24, 25, step(carA, coordinate(265, 175))).
+  expect(action, 24, 25, step(carB, coordinate(475, 460))).
+expect_num_of(observation, 24, 25, 0).
+expect_num_of(firedRules, 25, 10).
+expect_num_of(resolvedGoals, 25, 7).
+expect_num_of(unresolvedGoals, 25, 8).
+expect_num_of(failedGoals, 25, 3).
+
+% --- Start of cycle 26 ---
+expect_num_of(fluent, 26, 9).
+  expect(fluent, 26, moving(carA)).
+  expect(fluent, 26, moving(carB)).
+  expect(fluent, 26, location(carA, coordinate(270, 175), eastward)).
+  expect(fluent, 26, location(carB, coordinate(475, 455), northward)).
+  expect(fluent, 26, goal(carA, coordinate(525, 700))).
+  expect(fluent, 26, goal(carB, coordinate(145, 225))).
+  expect(fluent, 26, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 26, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 26, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 25, 26, 5).
+  expect(action, 25, 26, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 25, 26, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 25, 26, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 25, 26, step(carA, coordinate(270, 175))).
+  expect(action, 25, 26, step(carB, coordinate(475, 455))).
+expect_num_of(observation, 25, 26, 0).
+expect_num_of(firedRules, 26, 10).
+expect_num_of(resolvedGoals, 26, 7).
+expect_num_of(unresolvedGoals, 26, 8).
+expect_num_of(failedGoals, 26, 3).
+
+% --- Start of cycle 27 ---
+expect_num_of(fluent, 27, 9).
+  expect(fluent, 27, moving(carA)).
+  expect(fluent, 27, moving(carB)).
+  expect(fluent, 27, location(carA, coordinate(275, 175), eastward)).
+  expect(fluent, 27, location(carB, coordinate(475, 450), northward)).
+  expect(fluent, 27, goal(carA, coordinate(525, 700))).
+  expect(fluent, 27, goal(carB, coordinate(145, 225))).
+  expect(fluent, 27, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 27, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 27, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 26, 27, 5).
+  expect(action, 26, 27, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 26, 27, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 26, 27, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 26, 27, step(carA, coordinate(275, 175))).
+  expect(action, 26, 27, step(carB, coordinate(475, 450))).
+expect_num_of(observation, 26, 27, 0).
+expect_num_of(firedRules, 27, 10).
+expect_num_of(resolvedGoals, 27, 7).
+expect_num_of(unresolvedGoals, 27, 8).
+expect_num_of(failedGoals, 27, 3).
+
+% --- Start of cycle 28 ---
+expect_num_of(fluent, 28, 9).
+  expect(fluent, 28, moving(carA)).
+  expect(fluent, 28, moving(carB)).
+  expect(fluent, 28, location(carA, coordinate(280, 175), eastward)).
+  expect(fluent, 28, location(carB, coordinate(475, 445), northward)).
+  expect(fluent, 28, goal(carA, coordinate(525, 700))).
+  expect(fluent, 28, goal(carB, coordinate(145, 225))).
+  expect(fluent, 28, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 28, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 28, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 27, 28, 5).
+  expect(action, 27, 28, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 27, 28, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 27, 28, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 27, 28, step(carA, coordinate(280, 175))).
+  expect(action, 27, 28, step(carB, coordinate(475, 445))).
+expect_num_of(observation, 27, 28, 0).
+expect_num_of(firedRules, 28, 10).
+expect_num_of(resolvedGoals, 28, 7).
+expect_num_of(unresolvedGoals, 28, 8).
+expect_num_of(failedGoals, 28, 3).
+
+% --- Start of cycle 29 ---
+expect_num_of(fluent, 29, 9).
+  expect(fluent, 29, moving(carA)).
+  expect(fluent, 29, moving(carB)).
+  expect(fluent, 29, location(carA, coordinate(285, 175), eastward)).
+  expect(fluent, 29, location(carB, coordinate(475, 440), northward)).
+  expect(fluent, 29, goal(carA, coordinate(525, 700))).
+  expect(fluent, 29, goal(carB, coordinate(145, 225))).
+  expect(fluent, 29, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 29, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 29, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 28, 29, 5).
+  expect(action, 28, 29, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 28, 29, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 28, 29, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 28, 29, step(carA, coordinate(285, 175))).
+  expect(action, 28, 29, step(carB, coordinate(475, 440))).
+expect_num_of(observation, 28, 29, 0).
+expect_num_of(firedRules, 29, 10).
+expect_num_of(resolvedGoals, 29, 7).
+expect_num_of(unresolvedGoals, 29, 8).
+expect_num_of(failedGoals, 29, 3).
+
+% --- Start of cycle 30 ---
+expect_num_of(fluent, 30, 9).
+  expect(fluent, 30, moving(carA)).
+  expect(fluent, 30, moving(carB)).
+  expect(fluent, 30, location(carA, coordinate(290, 175), eastward)).
+  expect(fluent, 30, location(carB, coordinate(475, 435), northward)).
+  expect(fluent, 30, goal(carA, coordinate(525, 700))).
+  expect(fluent, 30, goal(carB, coordinate(145, 225))).
+  expect(fluent, 30, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 30, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 30, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 29, 30, 5).
+  expect(action, 29, 30, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 29, 30, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 29, 30, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 29, 30, step(carA, coordinate(290, 175))).
+  expect(action, 29, 30, step(carB, coordinate(475, 435))).
+expect_num_of(observation, 29, 30, 0).
+expect_num_of(firedRules, 30, 10).
+expect_num_of(resolvedGoals, 30, 7).
+expect_num_of(unresolvedGoals, 30, 8).
+expect_num_of(failedGoals, 30, 3).
+
+% --- Start of cycle 31 ---
+expect_num_of(fluent, 31, 9).
+  expect(fluent, 31, moving(carA)).
+  expect(fluent, 31, moving(carB)).
+  expect(fluent, 31, location(carA, coordinate(295, 175), eastward)).
+  expect(fluent, 31, location(carB, coordinate(475, 430), northward)).
+  expect(fluent, 31, goal(carA, coordinate(525, 700))).
+  expect(fluent, 31, goal(carB, coordinate(145, 225))).
+  expect(fluent, 31, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 31, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 31, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 30, 31, 5).
+  expect(action, 30, 31, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 30, 31, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 30, 31, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 30, 31, step(carA, coordinate(295, 175))).
+  expect(action, 30, 31, step(carB, coordinate(475, 430))).
+expect_num_of(observation, 30, 31, 0).
+expect_num_of(firedRules, 31, 10).
+expect_num_of(resolvedGoals, 31, 7).
+expect_num_of(unresolvedGoals, 31, 8).
+expect_num_of(failedGoals, 31, 3).
+
+% --- Start of cycle 32 ---
+expect_num_of(fluent, 32, 9).
+  expect(fluent, 32, moving(carA)).
+  expect(fluent, 32, moving(carB)).
+  expect(fluent, 32, location(carA, coordinate(300, 175), eastward)).
+  expect(fluent, 32, location(carB, coordinate(475, 425), northward)).
+  expect(fluent, 32, goal(carA, coordinate(525, 700))).
+  expect(fluent, 32, goal(carB, coordinate(145, 225))).
+  expect(fluent, 32, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 32, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 32, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 31, 32, 5).
+  expect(action, 31, 32, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 31, 32, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 31, 32, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 31, 32, step(carA, coordinate(300, 175))).
+  expect(action, 31, 32, step(carB, coordinate(475, 425))).
+expect_num_of(observation, 31, 32, 0).
+expect_num_of(firedRules, 32, 10).
+expect_num_of(resolvedGoals, 32, 7).
+expect_num_of(unresolvedGoals, 32, 8).
+expect_num_of(failedGoals, 32, 3).
+
+% --- Start of cycle 33 ---
+expect_num_of(fluent, 33, 9).
+  expect(fluent, 33, moving(carA)).
+  expect(fluent, 33, moving(carB)).
+  expect(fluent, 33, location(carA, coordinate(305, 175), eastward)).
+  expect(fluent, 33, location(carB, coordinate(475, 420), northward)).
+  expect(fluent, 33, goal(carA, coordinate(525, 700))).
+  expect(fluent, 33, goal(carB, coordinate(145, 225))).
+  expect(fluent, 33, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 33, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 33, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 32, 33, 5).
+  expect(action, 32, 33, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 32, 33, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 32, 33, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 32, 33, step(carA, coordinate(305, 175))).
+  expect(action, 32, 33, step(carB, coordinate(475, 420))).
+expect_num_of(observation, 32, 33, 0).
+expect_num_of(firedRules, 33, 10).
+expect_num_of(resolvedGoals, 33, 7).
+expect_num_of(unresolvedGoals, 33, 8).
+expect_num_of(failedGoals, 33, 3).
+
+% --- Start of cycle 34 ---
+expect_num_of(fluent, 34, 9).
+  expect(fluent, 34, moving(carA)).
+  expect(fluent, 34, moving(carB)).
+  expect(fluent, 34, location(carA, coordinate(310, 175), eastward)).
+  expect(fluent, 34, location(carB, coordinate(475, 415), northward)).
+  expect(fluent, 34, goal(carA, coordinate(525, 700))).
+  expect(fluent, 34, goal(carB, coordinate(145, 225))).
+  expect(fluent, 34, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 34, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 34, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 33, 34, 5).
+  expect(action, 33, 34, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 33, 34, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 33, 34, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 33, 34, step(carA, coordinate(310, 175))).
+  expect(action, 33, 34, step(carB, coordinate(475, 415))).
+expect_num_of(observation, 33, 34, 0).
+expect_num_of(firedRules, 34, 10).
+expect_num_of(resolvedGoals, 34, 7).
+expect_num_of(unresolvedGoals, 34, 8).
+expect_num_of(failedGoals, 34, 3).
+
+% --- Start of cycle 35 ---
+expect_num_of(fluent, 35, 9).
+  expect(fluent, 35, moving(carA)).
+  expect(fluent, 35, moving(carB)).
+  expect(fluent, 35, location(carA, coordinate(315, 175), eastward)).
+  expect(fluent, 35, location(carB, coordinate(475, 410), northward)).
+  expect(fluent, 35, goal(carA, coordinate(525, 700))).
+  expect(fluent, 35, goal(carB, coordinate(145, 225))).
+  expect(fluent, 35, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 35, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 35, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 34, 35, 5).
+  expect(action, 34, 35, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 34, 35, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 34, 35, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 34, 35, step(carA, coordinate(315, 175))).
+  expect(action, 34, 35, step(carB, coordinate(475, 410))).
+expect_num_of(observation, 34, 35, 0).
+expect_num_of(firedRules, 35, 10).
+expect_num_of(resolvedGoals, 35, 7).
+expect_num_of(unresolvedGoals, 35, 8).
+expect_num_of(failedGoals, 35, 3).
+
+% --- Start of cycle 36 ---
+expect_num_of(fluent, 36, 9).
+  expect(fluent, 36, moving(carA)).
+  expect(fluent, 36, moving(carB)).
+  expect(fluent, 36, location(carA, coordinate(320, 175), eastward)).
+  expect(fluent, 36, location(carB, coordinate(475, 405), northward)).
+  expect(fluent, 36, goal(carA, coordinate(525, 700))).
+  expect(fluent, 36, goal(carB, coordinate(145, 225))).
+  expect(fluent, 36, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 36, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 36, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 35, 36, 5).
+  expect(action, 35, 36, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 35, 36, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 35, 36, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 35, 36, step(carA, coordinate(320, 175))).
+  expect(action, 35, 36, step(carB, coordinate(475, 405))).
+expect_num_of(observation, 35, 36, 0).
+expect_num_of(firedRules, 36, 10).
+expect_num_of(resolvedGoals, 36, 7).
+expect_num_of(unresolvedGoals, 36, 8).
+expect_num_of(failedGoals, 36, 3).
+
+% --- Start of cycle 37 ---
+expect_num_of(fluent, 37, 9).
+  expect(fluent, 37, moving(carA)).
+  expect(fluent, 37, moving(carB)).
+  expect(fluent, 37, location(carA, coordinate(325, 175), eastward)).
+  expect(fluent, 37, location(carB, coordinate(475, 400), northward)).
+  expect(fluent, 37, goal(carA, coordinate(525, 700))).
+  expect(fluent, 37, goal(carB, coordinate(145, 225))).
+  expect(fluent, 37, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 37, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 37, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 36, 37, 5).
+  expect(action, 36, 37, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 36, 37, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 36, 37, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 36, 37, step(carA, coordinate(325, 175))).
+  expect(action, 36, 37, step(carB, coordinate(475, 400))).
+expect_num_of(observation, 36, 37, 0).
+expect_num_of(firedRules, 37, 10).
+expect_num_of(resolvedGoals, 37, 7).
+expect_num_of(unresolvedGoals, 37, 8).
+expect_num_of(failedGoals, 37, 3).
+
+% --- Start of cycle 38 ---
+expect_num_of(fluent, 38, 9).
+  expect(fluent, 38, moving(carA)).
+  expect(fluent, 38, moving(carB)).
+  expect(fluent, 38, location(carA, coordinate(330, 175), eastward)).
+  expect(fluent, 38, location(carB, coordinate(475, 395), northward)).
+  expect(fluent, 38, goal(carA, coordinate(525, 700))).
+  expect(fluent, 38, goal(carB, coordinate(145, 225))).
+  expect(fluent, 38, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 38, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 38, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 37, 38, 5).
+  expect(action, 37, 38, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 37, 38, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 37, 38, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 37, 38, step(carA, coordinate(330, 175))).
+  expect(action, 37, 38, step(carB, coordinate(475, 395))).
+expect_num_of(observation, 37, 38, 0).
+expect_num_of(firedRules, 38, 10).
+expect_num_of(resolvedGoals, 38, 7).
+expect_num_of(unresolvedGoals, 38, 8).
+expect_num_of(failedGoals, 38, 3).
+
+% --- Start of cycle 39 ---
+expect_num_of(fluent, 39, 9).
+  expect(fluent, 39, moving(carA)).
+  expect(fluent, 39, moving(carB)).
+  expect(fluent, 39, location(carA, coordinate(335, 175), eastward)).
+  expect(fluent, 39, location(carB, coordinate(475, 390), northward)).
+  expect(fluent, 39, goal(carA, coordinate(525, 700))).
+  expect(fluent, 39, goal(carB, coordinate(145, 225))).
+  expect(fluent, 39, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 39, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 39, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 38, 39, 5).
+  expect(action, 38, 39, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 38, 39, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 38, 39, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 38, 39, step(carA, coordinate(335, 175))).
+  expect(action, 38, 39, step(carB, coordinate(475, 390))).
+expect_num_of(observation, 38, 39, 0).
+expect_num_of(firedRules, 39, 10).
+expect_num_of(resolvedGoals, 39, 7).
+expect_num_of(unresolvedGoals, 39, 8).
+expect_num_of(failedGoals, 39, 3).
+
+% --- Start of cycle 40 ---
+expect_num_of(fluent, 40, 9).
+  expect(fluent, 40, moving(carA)).
+  expect(fluent, 40, moving(carB)).
+  expect(fluent, 40, location(carA, coordinate(340, 175), eastward)).
+  expect(fluent, 40, location(carB, coordinate(475, 385), northward)).
+  expect(fluent, 40, goal(carA, coordinate(525, 700))).
+  expect(fluent, 40, goal(carB, coordinate(145, 225))).
+  expect(fluent, 40, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 40, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 40, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 39, 40, 5).
+  expect(action, 39, 40, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 39, 40, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 39, 40, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 39, 40, step(carA, coordinate(340, 175))).
+  expect(action, 39, 40, step(carB, coordinate(475, 385))).
+expect_num_of(observation, 39, 40, 0).
+expect_num_of(firedRules, 40, 10).
+expect_num_of(resolvedGoals, 40, 7).
+expect_num_of(unresolvedGoals, 40, 8).
+expect_num_of(failedGoals, 40, 3).
+
+% --- Start of cycle 41 ---
+expect_num_of(fluent, 41, 9).
+  expect(fluent, 41, moving(carA)).
+  expect(fluent, 41, moving(carB)).
+  expect(fluent, 41, location(carA, coordinate(345, 175), eastward)).
+  expect(fluent, 41, location(carB, coordinate(475, 380), northward)).
+  expect(fluent, 41, goal(carA, coordinate(525, 700))).
+  expect(fluent, 41, goal(carB, coordinate(145, 225))).
+  expect(fluent, 41, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 41, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 41, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 40, 41, 5).
+  expect(action, 40, 41, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 40, 41, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 40, 41, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 40, 41, step(carA, coordinate(345, 175))).
+  expect(action, 40, 41, step(carB, coordinate(475, 380))).
+expect_num_of(observation, 40, 41, 0).
+expect_num_of(firedRules, 41, 10).
+expect_num_of(resolvedGoals, 41, 7).
+expect_num_of(unresolvedGoals, 41, 8).
+expect_num_of(failedGoals, 41, 3).
+
+% --- Start of cycle 42 ---
+expect_num_of(fluent, 42, 9).
+  expect(fluent, 42, moving(carA)).
+  expect(fluent, 42, moving(carB)).
+  expect(fluent, 42, location(carA, coordinate(350, 175), eastward)).
+  expect(fluent, 42, location(carB, coordinate(475, 375), northward)).
+  expect(fluent, 42, goal(carA, coordinate(525, 700))).
+  expect(fluent, 42, goal(carB, coordinate(145, 225))).
+  expect(fluent, 42, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 42, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 42, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 41, 42, 5).
+  expect(action, 41, 42, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 41, 42, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 41, 42, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 41, 42, step(carA, coordinate(350, 175))).
+  expect(action, 41, 42, step(carB, coordinate(475, 375))).
+expect_num_of(observation, 41, 42, 0).
+expect_num_of(firedRules, 42, 10).
+expect_num_of(resolvedGoals, 42, 7).
+expect_num_of(unresolvedGoals, 42, 8).
+expect_num_of(failedGoals, 42, 3).
+
+% --- Start of cycle 43 ---
+expect_num_of(fluent, 43, 9).
+  expect(fluent, 43, moving(carA)).
+  expect(fluent, 43, moving(carB)).
+  expect(fluent, 43, location(carA, coordinate(355, 175), eastward)).
+  expect(fluent, 43, location(carB, coordinate(475, 370), northward)).
+  expect(fluent, 43, goal(carA, coordinate(525, 700))).
+  expect(fluent, 43, goal(carB, coordinate(145, 225))).
+  expect(fluent, 43, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 43, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 43, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 42, 43, 5).
+  expect(action, 42, 43, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 42, 43, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 42, 43, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 42, 43, step(carA, coordinate(355, 175))).
+  expect(action, 42, 43, step(carB, coordinate(475, 370))).
+expect_num_of(observation, 42, 43, 0).
+expect_num_of(firedRules, 43, 10).
+expect_num_of(resolvedGoals, 43, 7).
+expect_num_of(unresolvedGoals, 43, 8).
+expect_num_of(failedGoals, 43, 3).
+
+% --- Start of cycle 44 ---
+expect_num_of(fluent, 44, 9).
+  expect(fluent, 44, moving(carA)).
+  expect(fluent, 44, moving(carB)).
+  expect(fluent, 44, location(carA, coordinate(360, 175), eastward)).
+  expect(fluent, 44, location(carB, coordinate(475, 365), northward)).
+  expect(fluent, 44, goal(carA, coordinate(525, 700))).
+  expect(fluent, 44, goal(carB, coordinate(145, 225))).
+  expect(fluent, 44, trafficLight(coordinate(570, 225), red, $_2, $_3)).
+  expect(fluent, 44, trafficLight(coordinate(430, 175), red, $_2, $_3)).
+  expect(fluent, 44, trafficLight(coordinate(475, 270), green, $_2, $_3)).
+expect_num_of(action, 43, 44, 5).
+  expect(action, 43, 44, changeTrafficLight(coordinate(570, 225), red)).
+  expect(action, 43, 44, changeTrafficLight(coordinate(430, 175), red)).
+  expect(action, 43, 44, changeTrafficLight(coordinate(475, 270), green)).
+  expect(action, 43, 44, step(carA, coordinate(360, 175))).
+  expect(action, 43, 44, step(carB, coordinate(475, 365))).
+expect_num_of(observation, 43, 44, 0).
+expect_num_of(firedRules, 44, 10).
+expect_num_of(resolvedGoals, 44, 7).
+expect_num_of(unresolvedGoals, 44, 8).
+expect_num_of(failedGoals, 44, 3).
+
+% --- Start of cycle 45 ---
+expect_num_of(fluent, 45, 9).
+  expect(fluent, 45, moving(carA)).
+  expect(fluent, 45, moving(carB)).
+  expect(fluent, 45, location(carA, coordinate(365, 175), eastward)).
+  expect(fluent, 45, location(carB, coordinate(475, 360), northward)).
+  expect(fluent, 45, goal(carA, coordinate(525, 700))).
+  expect(fluent, 45, goal(carB, coordinate(145, 225))).
+  expect(fluent, 45, trafficLight(coordinate(475, 270), red, $_2, $_3)).
+  expect(fluent, 45, trafficLight(coordinate(570, 225), green, $_2, $_3)).
+  expect(fluent, 45, trafficLight(coordinate(430, 175), green, $_2, $_3)).
+expect_num_of(action, 44, 45, 5).
+  expect(action, 44, 45, changeTrafficLight(coordinate(475, 270), red)).
+  expect(action, 44, 45, changeTrafficLight(coordinate(570, 225), green)).
+  expect(action, 44, 45, changeTrafficLight(coordinate(430, 175), green)).
+  expect(action, 44, 45, step(carA, coordinate(365, 175))).
+  expect(action, 44, 45, step(carB, coordinate(475, 360))).
+expect_num_of(observation, 44, 45, 0).
+expect_num_of(firedRules, 45, 10).
+expect_num_of(resolvedGoals, 45, 7).
+expect_num_of(unresolvedGoals, 45, 8).
+expect_num_of(failedGoals, 45, 3).
+

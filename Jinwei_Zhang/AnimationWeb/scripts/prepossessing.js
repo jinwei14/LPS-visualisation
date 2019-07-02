@@ -166,19 +166,19 @@
         this.fluent = this.matchArray[0];
 
         //the location and the name of the street
-        this.X = parseInt(this.matchArray[3],10);
-        this.Y = parseInt(this.matchArray[4],10);
+        this.X = parseInt(this.matchArray[3], 10);
+        this.Y = parseInt(this.matchArray[4], 10);
         this.name = this.matchArray[1];
 
 
         //the width of the street
-        this.width = parseInt(this.matchArray[5],10);
+        this.width = parseInt(this.matchArray[5], 10);
 
         //the height of the street
-        this.height = parseInt(this.matchArray[6],10);
+        this.height = parseInt(this.matchArray[6], 10);
 
         //the number of lanes on the street
-        this.no_lane = parseInt(this.matchArray[7],10);
+        this.no_lane = parseInt(this.matchArray[7], 10);
 
     }
 
@@ -196,8 +196,8 @@
 
         this.fluent = this.matchArray[0];
         //the location and the name of the street
-        this.X = parseInt(this.matchArray[2],10);
-        this.Y = parseInt(this.matchArray[3],10);
+        this.X = parseInt(this.matchArray[2], 10);
+        this.Y = parseInt(this.matchArray[3], 10);
 
 
         //the color of the traffic light
@@ -220,8 +220,8 @@
 
         this.fluent = this.matchArray[0];
         //the location and the name of the street
-        this.X = parseInt(this.matchArray[2],10);
-        this.Y = parseInt(this.matchArray[3],10);
+        this.X = parseInt(this.matchArray[2], 10);
+        this.Y = parseInt(this.matchArray[3], 10);
 
     }
 
@@ -253,21 +253,22 @@
                                 var street = new Streets(item);
                                 appManager.createRoad(street.name, street.X, street.Y, street.width, street.height, street.no_lane);
 
-                            }else if (item.toLowerCase().startsWith('cloud')){
+                            } else if (item.toLowerCase().startsWith('cloud')) {
                                 var cloud = new Cloud(item);
-                                appManager.createClound(cloud.X,cloud.Y);
+                                appManager.createClound(cloud.X, cloud.Y);
                             }
                         });
                         fluents.forEach(function (item, index) {
-                             if (item.toLowerCase().startsWith('location')) {
+                            if (item.toLowerCase().startsWith('location')) {
                                 // initialise the location of the car.
                                 var loc = new VehicleLoc(item, currentTime);
                                 appManager.createVehicle(loc.getObjectName(), loc.X, loc.Y, loc.getHeading());
-                            }else if (item.toLowerCase().startsWith('trafficlight')){
-                                 //    need to implement a function to create traffic light.
-                                 var light = new TrafficLight(item);
-                                 appManager.createTrafficLight(light.X,light.Y,light.color);
-                             }
+                            } else if (item.toLowerCase().startsWith('trafficlight')) {
+                                //  check if the traffic light has been initialised
+
+                                var light = new TrafficLight(item);
+                                appManager.createTrafficLight(light.X, light.Y, light.color);
+                            }
                         });
                         //Do something
                     } else if (currentTime > 1) {
@@ -278,9 +279,10 @@
                                 console.log(item);
                                 var loc = new VehicleLoc(item, currentTime);
                                 appManager.changeVehicleLocation(loc.getObjectName(), loc.X, loc.Y, loc.getHeading());
-                            }else if (item.toLowerCase().startsWith('trafficlight')){
+                            } else if (item.toLowerCase().startsWith('trafficlight')) {
+                                // console.log(item);
                                 var light = new TrafficLight(item);
-                                appManager.changeTrafficLight(light.X,light.Y,light.color);
+                                appManager.changeTrafficLight(light.X, light.Y, light.color);
 
                             }
                         });

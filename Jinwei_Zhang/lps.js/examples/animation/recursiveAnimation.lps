@@ -35,7 +35,7 @@ lpsDefineObject(myCar, image, [
 true -> drive(myCar, coordinate(0,0), coordinate(1,1))from T1 to T3.
 
 
-drive(Vehicle, coordinate(Xold,Yold),coordinate(Xnew,Ynew))from T1 to T3<-
+drive(Vehicle, coordinate(Xold,Yold),coordinate(Xnew,Ynew)) from T1 to T3<-
   testPrint('____________________________ss--updaing'+Vehicle+Xnew+Ynew),
 
   OldPlace = coordinate(Xold,Yold),

@@ -127,18 +127,18 @@ cloud(coordinate(750,90)).
 cloud(coordinate(800,120)).
 
 
-% cloud(coordinate(300,100)).
-% cloud(coordinate(330,90)).
-% cloud(coordinate(350,120)).
-% atTjunction(coordinate(A,B),junction(tJuntion1,coordinate(A1, A2),coordinate(B1, B2),coordinate(C1, C2),coordinate(D1, D2))) <-
-%   X1==475,Y1==200,X2 == 525, Y2 == 200, X3==.
-% atTjunction(tJuntion2,coordinate(475, 150),coordinate(525, 150),coordinate(475, 200),coordinate(525, 200)) <-
-%   Xu==475,Yu==200,Xd == 9, Yd == 9.
+trafficLight(coordinate(X, Y), Color, FacingDirection,Street) at T->
+  Color == green,
+  Reminder = mod(T,30),
+  Reminder == 0,
+  changeTrafficLight(coordinate(X, Y),red) at T.
 
-% ---------------------------------Reactive rules---------------------------------------------
-% true ->
-%   changeTrafficLight(coordinate(475, 270),red) from T1 to T5,
-%   changeTrafficLight(coordinate(475, 270),green) from T5 to T10.
+
+trafficLight(coordinate(X, Y), Color, FacingDirection,Street) at T->
+  Color == red,
+  Reminder = mod(T,30),
+  Reminder == 0,
+  changeTrafficLight(coordinate(X, Y),green) at T.
 
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
