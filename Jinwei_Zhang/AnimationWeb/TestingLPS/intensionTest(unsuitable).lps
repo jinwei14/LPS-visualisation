@@ -24,8 +24,8 @@ actions ([
 initially([
   moving(carA),
   moving(carB),
-  % location(carA, coordinate(500, 225), eastward),
-  % goal(carA,coordinate(980, 225)),
+  location(carA, coordinate(500, 225), eastward),
+  goal(carA,coordinate(980, 225)),
 
   % location(carA, coordinate(980, 225), eastward),
   % goal(carA,coordinate(500, 225)),

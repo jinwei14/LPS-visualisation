@@ -30,18 +30,22 @@ events ([
 actions ([
   step(Vehicle, NextPlace),
   turn(Vehicle, NewHeading),
-  arrive(Vehicle)
+  arrive(Vehicle),
+  changeTrafficLight(Place,Color)
 ]).
 
 initially([
   moving(carA),
   moving(carB),
+  moving(carC),
  %  normal start one on the mainstreet and other on the southStreet
  % carA wants to go straight from mainStreet, carB want to turn left from southStreet
   location(carA, coordinate(145, 475), eastward),
   location(carB, coordinate(475, 880), northward),
+  location(carC,coordinate(700,525),westward),
   goal(carA,coordinate(980, 475)),
   goal(carB,coordinate(120, 525)),
+  goal(carC,coordinate(120, 525)),
 
   % % %  carA start from Tjunction
   %  %  % normal start one on the mainstreet and other on the southStreet
@@ -80,7 +84,7 @@ initially([
   %   goal(carB,coordinate(145, 225)),
 
   % the position that the car might step on, a traffic light is defined here for further instructions.
-  trafficLight(coordinate(430, 475), green, westward, mainStreet),
+  trafficLight(coordinate(430, 475), red, westward, mainStreet),
   trafficLight(coordinate(575, 525), red, eastward, mainStreet),
   trafficLight(coordinate(475, 570), green, southward, southStreet),
   trafficLight(coordinate(525, 430), green, northward, northStreet)
@@ -121,6 +125,13 @@ cloud(coordinate(800,120)).
 %   Xu==475,Yu==200,Xd == 9, Yd == 9.
 
 % ---------------------------------Reactive rules---------------------------------------------
+trafficLight(coordinate(X, Y), Color, FacingDirection,Street) at T->
+  opposite(Color,Color2),
+  Reminder = mod(T,40),
+  Reminder == 0,
+  changeTrafficLight(coordinate(X, Y),Color2) at T.
+
+
 goal(Vehicle,coordinate(A, B)) from _ to T,
 location(Vehicle, coordinate(X, Y), Direction), A==X, B==Y,moving(Vehicle) at T ->
   % testPrint(Vehicle+ ' we have arrived'),
@@ -258,72 +269,19 @@ drive(Vehicle) from T to T1 <-
   % testPrint(Vehicle+ ' move eastward'),
   step(Vehicle, NextPlace) at T1.
 
-% if Vehicle is at same horizontal level as its goal and there is another car whose
-clearRoute(Vehicle) at T<-
-  location(Vehicle, coordinate(X, Y), _),
-  goal(Vehicle,coordinate(P, Q)),
-  location(Vehicle2, coordinate(A, B), _),
-  Vehicle != Vehicle2,
-  Y == Q,
-  B != Q.
 
-clearRoute(Vehicle) at T<-
-  location(Vehicle, coordinate(X, Y), _),
-  goal(Vehicle,coordinate(P, Q)),
-  location(Vehicle2, coordinate(A, B), _),
-  Vehicle != Vehicle2,
-  A < X,
-  A < P.
-
-clearRoute(Vehicle) at T<-
-  location(Vehicle, coordinate(X, Y), _),
-  goal(Vehicle,coordinate(P, Q)),
-  location(Vehicle2, coordinate(A, B), _),
-  Vehicle != Vehicle2,
-  A < X,
-  A >= P,
-  abs(B-Y) >= 50.
-
-clearRoute(Vehicle) at T<-
-  location(Vehicle, coordinate(X, Y), _),
-  goal(Vehicle,coordinate(P, Q)),
-  location(Vehicle2, coordinate(A, B), _),
-  Vehicle != Vehicle2,
-  A > X,
-  A > P.
 % ---------------------------------------------------------------------------------------------
 %step is false if the car is moving into a junction, not on main Road and there is a collision.
 % this part need further developemnt for other cases
-
-
-% if you dont have a clear route you can not step
+% you can not step forward if there is a trafficLight at your postion
+% and the traffic light is red.
 <- step(Vehicle, NextPlace),
-  collisionPossible(Vehicle, Vehicle2) at T,
-  Vehicle != Vehicle2,
-  not clearRoute(Vehicle) at T.
+  location(Vehicle, coordinate(X, Y), Direction1),
+  trafficLight(coordinate(A, B), red, Direction2, Street),
+  X==A,
+  Y==B.
 
 
-
-% both car have clear routes but car on main street can not step
-<- step(Vehicle, NextPlace),
-  not onMainRoad(Vehicle) at T,
-  collisionPossible(Vehicle, Vehicle2) at T,
-  Vehicle != Vehicle2,
-  clearRoute(Vehicle) at T,
-  clearRoute(Vehicle2) at T.
-
-% both car have clear routes and both on the same street and have the same goal.
-<- step(Vehicle, NextPlace),
-  onMainRoad(Vehicle) at T,
-  collisionPossible(Vehicle, Vehicle2) at T,
-  Vehicle != Vehicle2,
-  onMainRoad(Vehicle2) at T,
-  clearRoute(Vehicle) at T,
-  clearRoute(Vehicle2) at T,
-  goal(Vehicle,coordinate(X, Y)),
-  goal(Vehicle2,coordinate(A, B)),
-  A == X,
-  B == Y.
 
 % this is also not perfect need further development
 <- step(Vehicle, NextPlace),
@@ -387,7 +345,12 @@ onMainRoad(Vehicle) at T <-
   Y<=B+Height, Y>=B,
   Priority > 0.
 
-
+opposite(Dir1,Dir2)<-Dir1 == eastward, Dir2 = westward.
+opposite(Dir1,Dir2)<-Dir1 == westward, Dir2 = eastward.
+opposite(Dir1,Dir2)<-Dir1 == northward, Dir2 = southward.
+opposite(Dir1,Dir2)<-Dir1 == southward, Dir2 = northward.
+opposite(Color1,Color2)<-Color1 == red, Color2 = green.
+opposite(Color1,Color2)<-Color1 == green, Color2 = red.
 % ---------------------------------------------------------------------------------------------
 
 
@@ -398,6 +361,10 @@ updates(step(Vehicle, NextPlace), location(VehicleIns, OldPlace, Direction),  lo
 updates(turn(Vehicle, NewHeading) , location(VehicleIns, Place, OldHeading), location(VehicleIns, Place, NewHeading))<-
   Vehicle == VehicleIns.
   % ('updating turing ' + Vehicle + ' '+NewHeading).
+
+% updating the traffic light
+updates(changeTrafficLight(Place,Color) , trafficLight(PlaceIns, OldColor, _, _), trafficLight(PlaceIns, Color, _, _))<-
+  Place == PlaceIns.
 
 terminates(arrive(Vehicle), moving(Vehicle)).
 initiates(arrive(Vehicle), stopped(Vehicle)).

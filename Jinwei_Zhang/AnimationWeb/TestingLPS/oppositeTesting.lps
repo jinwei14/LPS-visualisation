@@ -1,0 +1,41 @@
+maxTime(10).
+cycleInterval(50).
+fluents([
+  trafficLight(coordinate(X, Y), Color, FacingDirection,Street)
+]).
+
+actions ([
+  changeTrafficLight(Place,Color)
+]).
+
+
+initially([
+
+  trafficLight(coordinate(430, 175), green, westward, mainStreet),
+  trafficLight(coordinate(475, 270), red, eastward, mainStreet),
+  trafficLight(coordinate(570, 225), green, southward, southStreet)
+
+]).
+
+
+% true ->
+%   turn(carA, eastward) from T1 to T2.
+
+trafficLight(coordinate(X, Y), Color, FacingDirection,Street) at T->
+  opposite(Color,Color2),
+  Reminder = mod(T,5),
+  Reminder == 0,
+  changeTrafficLight(coordinate(X, Y),Color2) at T.
+
+
+opposite(Dir1,Dir2)<-Dir1 == eastward, Dir2 = westward.
+opposite(Dir1,Dir2)<-Dir1 == westward, Dir2 = eastward.
+opposite(Dir1,Dir2)<-Dir1 == northward, Dir2 = southward.
+opposite(Dir1,Dir2)<-Dir1 == southward, Dir2 = northward.
+opposite(Color1,Color2)<-Color1 == red, Color2 = green.
+opposite(Color1,Color2)<-Color1 == green, Color2 = red.
+
+
+% updating the traffic light
+updates(changeTrafficLight(Place,Color) , trafficLight(PlaceIns, OldColor, _, _), trafficLight(PlaceIns, Color, _, _))<-
+  Place == PlaceIns.
