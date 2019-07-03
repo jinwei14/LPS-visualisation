@@ -128,17 +128,10 @@ cloud(coordinate(800,120)).
 
 
 trafficLight(coordinate(X, Y), Color, FacingDirection,Street) at T->
-  Color == green,
-  Reminder = mod(T,30),
+  opposite(Color,Color2),
+  Reminder = mod(T,40),
   Reminder == 0,
-  changeTrafficLight(coordinate(X, Y),red) at T.
-
-
-trafficLight(coordinate(X, Y), Color, FacingDirection,Street) at T->
-  Color == red,
-  Reminder = mod(T,30),
-  Reminder == 0,
-  changeTrafficLight(coordinate(X, Y),green) at T.
+  changeTrafficLight(coordinate(X, Y),Color2) at T.
 
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
@@ -383,10 +376,12 @@ onMainRoad(Vehicle) at T <-
   Priority > 0.
 
 
-opposite(Dir1,Dir2)<-Dir1 == eastward, Dir2 == westward.
-opposite(Dir1,Dir2)<-Dir1 == westward, Dir2 == eastward.
-opposite(Dir1,Dir2)<-Dir1 == northward, Dir2 == southward.
-opposite(Dir1,Dir2)<-Dir1 == southward, Dir2 == northward.
+opposite(Dir1,Dir2)<-Dir1 == eastward, Dir2 = westward.
+opposite(Dir1,Dir2)<-Dir1 == westward, Dir2 = eastward.
+opposite(Dir1,Dir2)<-Dir1 == northward, Dir2 = southward.
+opposite(Dir1,Dir2)<-Dir1 == southward, Dir2 = northward.
+opposite(Color1,Color2)<-Color1 == red, Color2 = green.
+opposite(Color1,Color2)<-Color1 == green, Color2 = red.
 % ---------------------------------------------------------------------------------------------
 
 
