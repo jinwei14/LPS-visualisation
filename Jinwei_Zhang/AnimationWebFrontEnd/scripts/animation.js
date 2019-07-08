@@ -13,7 +13,7 @@
     /*
     *
     * */
-    var app = new PIXI.Application({backgroundColor: 0x1099bb, width: 1100, height: 1000});;
+    var app = new PIXI.Application({backgroundColor: 0x1099bb, width: 1100, height: 1000});
 
     /*
     *
@@ -67,10 +67,12 @@
         const originText = new PIXI.Text('(0,0)', {fontFamily: 'Arial', fontSize: 15, fill: 0x333, align: 'center'});
         originText.x = 0;
         originText.y = 0;
+
         app.stage.addChild(richText);
         app.stage.addChild(graphics);
         app.stage.addChild(xText, yText, originText);
 
+        console.log(app);
 
     };
 
@@ -301,8 +303,6 @@
          });
 
      }
-
-
 
 
     window.appManager = appManager;

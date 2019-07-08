@@ -5,7 +5,7 @@
     console.log('index -> LPS(loadFile) -> ProgramFactory(fromFile) -> Parser(source, pathname) -> _lexer.get()');
     var program = '';
 
-    // Event handling on the broswer life clcle for parse the text file
+    // Event handling on the browser life cycle for parse the text file
     document.addEventListener("DOMContentLoaded", function () {
         function parserText(event) {
             //open up the content of the  visualiser
@@ -16,12 +16,10 @@
                 console.log(program);
                 //make display text box appear
                 var vis = document.getElementById("content");
-                if (vis.style.display === "none") {
-                    vis.style.display = "block";
-                }
+
                 //clear the content before running the
                 appManager.clearContent();
-                LPSRunner(program, null);
+                // LPSRunner(program, null);
 
 
             } else {
@@ -41,7 +39,7 @@
             var message = "<h6> Successfully cleared the lps program ! </h6>";
 
             document.getElementById("output").innerHTML = message;
-            var vis = document.getElementById("content");
+
             // if (vis.style.display === "block") {
             //     vis.style.display = "none";
             // }
@@ -58,6 +56,7 @@
 
     //loading test button listener
     document.addEventListener("DOMContentLoaded", function () {
+
         function loadTextFromFile(evt) {
             //Retrieve the first (and only!) File from the FileList object
             var f = evt.target.files[0];
@@ -71,10 +70,17 @@
                     // + "starts with: " + contents.substr(1, contents.indexOf("n")));
                     console.log(contents);
                     document.getElementById("exampleFormControlTextarea1").value = contents;
+
                 };
 
                 r.readAsText(f);
-
+                // console.log("createVisualizer in advanced ");
+                var vis = document.getElementById("content");
+                if (vis.style.display === "none") {
+                    vis.style.display = "block";
+                }
+                appManager.clearContent();
+                appManager.createVisualizer();
             } else {
                 alert("Failed to load file");
             }
@@ -235,7 +241,7 @@
             .then((engine) => {
                 let profiler = engine.getProfiler();
                 //start creating the pixiJS panel
-                appManager.createVisualizer();
+                // appManager.createVisualizer();
                 engine.on('postCycle', () => {
                     let currentTime = engine.getCurrentTime();
                     let fluents = engine.getActiveFluents();
