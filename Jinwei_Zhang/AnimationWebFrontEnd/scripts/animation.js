@@ -20,6 +20,7 @@
     * */
     var graphics = null;
 
+
     appManager.createVisualizer = function () {
         // the graphics object will be used throughout the class
         graphics = new PIXI.Graphics();
@@ -73,13 +74,13 @@
         app.stage.addChild(xText, yText, originText);
 
 
-        const textureButtonPlus = PIXI.Texture.from('img/plus-circle.png');
-        const textureButtonPlusOver = PIXI.Texture.from('img/plus-circle2.png');
-        const textureButtonPlusDown = PIXI.Texture.from('img/plus-circle3.png');
+        const textureButtonPlus = PIXI.Texture.from('imgs/plus-circle.png');
+        const textureButtonPlusOver = PIXI.Texture.from('imgs/plus-circle-2.png');
+        const textureButtonPlusDown = PIXI.Texture.from('imgs/plus-circle-3.png');
 
-        const textureButtonMinus = PIXI.Texture.from('img/minus-circle.png');
-        const textureButtonMinusOver = PIXI.Texture.from('img/minus-circle2.png');
-        const textureButtonMinusDown = PIXI.Texture.from('img/minus-circle3.png');
+        const textureButtonMinus = PIXI.Texture.from('imgs/minus-circle.png');
+        const textureButtonMinusOver = PIXI.Texture.from('imgs/minus-circle-2.png');
+        const textureButtonMinusDown = PIXI.Texture.from('imgs/minus-circle-3.png');
 
         //this part here is the button creator
         const buttonPlus = new PIXI.Sprite(textureButtonPlus);
@@ -87,8 +88,9 @@
         buttonPlus.buttonMode = true;
         buttonMinus.buttonMode = true;
 
-        buttonPlus.x = 0; buttonPlus.y = 10;
-        buttonMinus.x =10; buttonMinus.y = 10;
+        buttonMinus.x =1020; buttonMinus.y = 0;
+        buttonPlus.x = 1020; buttonPlus.y = 90;
+
 
         // make the button interactive...
         buttonPlus.interactive = true;
@@ -119,71 +121,69 @@
         // add it to the stage
         app.stage.addChild(buttonPlus,buttonMinus);
 
+        function onButtonPlusDown() {
+            this.isdown = true;
+            this.texture = textureButtonPlusDown;
+            this.alpha = 1;
+        }
 
-    };
+        function onButtonPlusUp() {
+            this.isdown = false;
+            if (this.isOver) {
+                this.texture = textureButtonPlusOver;
+            } else {
+                this.texture = textureButtonPlus;
+            }
+        }
 
-
-    function onButtonPlusDown() {
-        this.isdown = true;
-        this.texture = textureButtonPlusDown;
-        this.alpha = 1;
-    }
-
-    function onButtonPlusUp() {
-        this.isdown = false;
-        if (this.isOver) {
+        function onButtonPlusOver() {
+            this.isOver = true;
+            if (this.isdown) {
+                return;
+            }
             this.texture = textureButtonPlusOver;
-        } else {
+        }
+
+        function onButtonPlusOut() {
+            this.isOver = false;
+            if (this.isdown) {
+                return;
+            }
             this.texture = textureButtonPlus;
         }
-    }
 
-    function onButtonPlusOver() {
-        this.isOver = true;
-        if (this.isdown) {
-            return;
+        function onButtonMinusDown() {
+            this.isdown = true;
+            this.texture = textureButtonMinusDown;
+            this.alpha = 1;
         }
-        this.texture = textureButtonPlusOver;
-    }
 
-    function onButtonPlusOut() {
-        this.isOver = false;
-        if (this.isdown) {
-            return;
+        function onButtonMinusUp() {
+            this.isdown = false;
+            if (this.isOver) {
+                this.texture = textureButtonMinusOver;
+            } else {
+                this.texture = textureButtonMinus;
+            }
         }
-        this.texture = textureButtonPlus;
-    }
 
-    function onButtonMinusDown() {
-        this.isdown = true;
-        this.texture = textureButtonMinusDown;
-        this.alpha = 1;
-    }
-
-    function onButtonMinusUp() {
-        this.isdown = false;
-        if (this.isOver) {
+        function onButtonMinusOver() {
+            this.isOver = true;
+            if (this.isdown) {
+                return;
+            }
             this.texture = textureButtonMinusOver;
-        } else {
+        }
+
+        function onButtonMinusOut() {
+            this.isOver = false;
+            if (this.isdown) {
+                return;
+            }
             this.texture = textureButtonMinus;
         }
-    }
 
-    function onButtonMinusOver() {
-        this.isOver = true;
-        if (this.isdown) {
-            return;
-        }
-        this.texture = textureButtonMinusOver;
-    }
-
-    function onButtonMinusOut() {
-        this.isOver = false;
-        if (this.isdown) {
-            return;
-        }
-        this.texture = textureButtonMinus;
-    }
+    };
 
     /*
     * This field will create the Road
@@ -218,11 +218,25 @@
     appManager.createVehicle = function (vehicleName, x, y, direction) {
         console.log('creating vehicle has been called in animation.js ' + window.name);
         console.log(vehicleName, x, y, direction);
+
         // create a new Sprite from an image path
         var carInstance = PIXI.Sprite.from('imgs/carNorth.png');
         carInstance.anchor.set(0.5);
         carInstance.x = x;
         carInstance.y = y;
+
+        // enable the bunny to be interactive... this will allow it to respond to mouse and touch events
+        carInstance.interactive = true;
+        // this button mode will mean the hand cursor appears when you roll over the bunny with your mouse
+        carInstance.buttonMode = true;
+
+        // setup events for mouse + touch using
+        // the pointer events
+        carInstance
+            .on('pointerdown', onDragStart)
+            .on('pointerup', onDragEnd)
+            .on('pointerupoutside', onDragEnd)
+            .on('pointermove', onDragMove);
 
         //the length of the car is 40
         switch (direction) {
@@ -255,7 +269,7 @@
         // center the sprite's anchor point
 
 
-        let carText = new PIXI.Text(vehicleName, {fontFamily: 'Arial', fontSize: 12, fill: 0x007bff});
+        let carText = new PIXI.Text(vehicleName, {fontFamily: 'Arial', fontSize: 12, fill: 0xffffff});
         carText.x = x - 15;
         carText.y = y - 40;
 
@@ -265,13 +279,52 @@
         appManager.vehicle.push({
             name: vehicleName,
             textObj: carText,
-            xLoc: x,
-            yLoc: y,
+            // xLoc: x,
+            // yLoc: y,
             direction: direction,
             obj: carInstance
         });
         app.stage.addChild(carInstance);
         app.stage.addChild(carText);
+
+        function onDragStart(event) {
+            // store a reference to the data
+            // the reason for this is because of multitouch
+            // we want to track the movement of this particular touch
+            this.data = event.data;
+            this.alpha = 0.5;
+            this.dragging = true;
+        }
+
+        function onDragEnd() {
+            this.alpha = 1;
+            this.dragging = false;
+            // set the interaction data to null
+            this.data = null;
+            if (this.x > 1020 && this.y < 90){
+                console.log('delete');
+            //    this part should be user delete the car manually.
+            }
+        }
+
+        function onDragMove() {
+            if (this.dragging) {
+                console.log(this);
+                const newPosition = this.data.getLocalPosition(this.parent);
+                this.x = newPosition.x;
+                this.y = newPosition.y;
+                var findObj = this;
+                appManager.vehicle.forEach(function (item, index) {
+
+                    if (item.obj === findObj) {
+                        item.textObj.x = newPosition.x - 15;
+                        item.textObj.y = newPosition.y - 40;
+                    }
+                });
+
+
+            }
+        }
     };
 
     /*
@@ -413,35 +466,9 @@
 
      }
 
-    function onDragStart(event) {
-        // store a reference to the data
-        // the reason for this is because of multitouch
-        // we want to track the movement of this particular touch
-        this.data = event.data;
-        this.alpha = 0.5;
-        this.dragging = true;
-    }
 
-    function onDragEnd() {
-        this.alpha = 1;
-        this.dragging = false;
-        // set the interaction data to null
-        this.data = null;
-    }
 
-    function onDragMove() {
-        if (this.dragging) {
-            const newPosition = this.data.getLocalPosition(this.parent);
-            this.x = newPosition.x;
-            this.y = newPosition.y;
-        }
-    }
 
-    function onCreateButtonDown() {
-        this.isdown = true;
-        this.texture = textureButtonDown;
-        this.alpha = 1;
-    }
 
 
 
