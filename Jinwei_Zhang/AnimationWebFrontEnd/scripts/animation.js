@@ -72,9 +72,118 @@
         app.stage.addChild(graphics);
         app.stage.addChild(xText, yText, originText);
 
-        console.log(app);
+
+        const textureButtonPlus = PIXI.Texture.from('img/plus-circle.png');
+        const textureButtonPlusOver = PIXI.Texture.from('img/plus-circle2.png');
+        const textureButtonPlusDown = PIXI.Texture.from('img/plus-circle3.png');
+
+        const textureButtonMinus = PIXI.Texture.from('img/minus-circle.png');
+        const textureButtonMinusOver = PIXI.Texture.from('img/minus-circle2.png');
+        const textureButtonMinusDown = PIXI.Texture.from('img/minus-circle3.png');
+
+        //this part here is the button creator
+        const buttonPlus = new PIXI.Sprite(textureButtonPlus);
+        const buttonMinus = new PIXI.Sprite(textureButtonMinus);
+        buttonPlus.buttonMode = true;
+        buttonMinus.buttonMode = true;
+
+        buttonPlus.x = 0; buttonPlus.y = 10;
+        buttonMinus.x =10; buttonMinus.y = 10;
+
+        // make the button interactive...
+        buttonPlus.interactive = true;
+        buttonPlus.buttonMode = true;
+        buttonMinus.interactive = true;
+        buttonMinus.buttonMode = true;
+
+        buttonPlus
+        // Mouse & touch events are normalized into
+        // the pointer* events for handling different
+        // button events.
+            .on('pointerdown', onButtonPlusDown)
+            .on('pointerup', onButtonPlusUp)
+            .on('pointerupoutside', onButtonPlusUp)
+            .on('pointerover', onButtonPlusOver)
+            .on('pointerout', onButtonPlusOut);
+
+        buttonMinus
+        // Mouse & touch events are normalized into
+        // the pointer* events for handling different
+        // button events.
+            .on('pointerdown', onButtonMinusDown)
+            .on('pointerup', onButtonMinusUp)
+            .on('pointerupoutside', onButtonMinusUp)
+            .on('pointerover', onButtonMinusOver)
+            .on('pointerout', onButtonMinusOut);
+
+        // add it to the stage
+        app.stage.addChild(buttonPlus,buttonMinus);
+
 
     };
+
+
+    function onButtonPlusDown() {
+        this.isdown = true;
+        this.texture = textureButtonPlusDown;
+        this.alpha = 1;
+    }
+
+    function onButtonPlusUp() {
+        this.isdown = false;
+        if (this.isOver) {
+            this.texture = textureButtonPlusOver;
+        } else {
+            this.texture = textureButtonPlus;
+        }
+    }
+
+    function onButtonPlusOver() {
+        this.isOver = true;
+        if (this.isdown) {
+            return;
+        }
+        this.texture = textureButtonPlusOver;
+    }
+
+    function onButtonPlusOut() {
+        this.isOver = false;
+        if (this.isdown) {
+            return;
+        }
+        this.texture = textureButtonPlus;
+    }
+
+    function onButtonMinusDown() {
+        this.isdown = true;
+        this.texture = textureButtonMinusDown;
+        this.alpha = 1;
+    }
+
+    function onButtonMinusUp() {
+        this.isdown = false;
+        if (this.isOver) {
+            this.texture = textureButtonMinusOver;
+        } else {
+            this.texture = textureButtonMinus;
+        }
+    }
+
+    function onButtonMinusOver() {
+        this.isOver = true;
+        if (this.isdown) {
+            return;
+        }
+        this.texture = textureButtonMinusOver;
+    }
+
+    function onButtonMinusOut() {
+        this.isOver = false;
+        if (this.isdown) {
+            return;
+        }
+        this.texture = textureButtonMinus;
+    }
 
     /*
     * This field will create the Road
@@ -327,6 +436,14 @@
             this.y = newPosition.y;
         }
     }
+
+    function onCreateButtonDown() {
+        this.isdown = true;
+        this.texture = textureButtonDown;
+        this.alpha = 1;
+    }
+
+
 
 
     window.appManager = appManager;

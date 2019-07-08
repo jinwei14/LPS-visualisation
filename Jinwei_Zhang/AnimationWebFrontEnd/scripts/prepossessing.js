@@ -17,8 +17,7 @@
                 //make display text box appear
                 var vis = document.getElementById("content");
 
-                //clear the content before running the
-                appManager.clearContent();
+
                 // LPSRunner(program, null);
 
 
@@ -75,6 +74,8 @@
                     if (vis.style.display === "none") {
                         vis.style.display = "block";
                     }
+                    //clear the content before running the
+                    // appManager.clearContent();
                     appManager.clearContent();
                     appManager.createVisualizer();
                     LPSInitializer(contents,null);
