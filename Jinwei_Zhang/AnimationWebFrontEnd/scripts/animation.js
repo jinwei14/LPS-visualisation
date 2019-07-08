@@ -13,7 +13,7 @@
     /*
     *
     * */
-    var app = new PIXI.Application({backgroundColor: 0x1099bb, width: 1100, height: 1000});;
+    var app = new PIXI.Application({backgroundColor: 0x1099bb, width: 1100, height: 1000});
 
     /*
     *
@@ -67,12 +67,123 @@
         const originText = new PIXI.Text('(0,0)', {fontFamily: 'Arial', fontSize: 15, fill: 0x333, align: 'center'});
         originText.x = 0;
         originText.y = 0;
+
         app.stage.addChild(richText);
         app.stage.addChild(graphics);
         app.stage.addChild(xText, yText, originText);
 
 
+        const textureButtonPlus = PIXI.Texture.from('img/plus-circle.png');
+        const textureButtonPlusOver = PIXI.Texture.from('img/plus-circle2.png');
+        const textureButtonPlusDown = PIXI.Texture.from('img/plus-circle3.png');
+
+        const textureButtonMinus = PIXI.Texture.from('img/minus-circle.png');
+        const textureButtonMinusOver = PIXI.Texture.from('img/minus-circle2.png');
+        const textureButtonMinusDown = PIXI.Texture.from('img/minus-circle3.png');
+
+        //this part here is the button creator
+        const buttonPlus = new PIXI.Sprite(textureButtonPlus);
+        const buttonMinus = new PIXI.Sprite(textureButtonMinus);
+        buttonPlus.buttonMode = true;
+        buttonMinus.buttonMode = true;
+
+        buttonPlus.x = 0; buttonPlus.y = 10;
+        buttonMinus.x =10; buttonMinus.y = 10;
+
+        // make the button interactive...
+        buttonPlus.interactive = true;
+        buttonPlus.buttonMode = true;
+        buttonMinus.interactive = true;
+        buttonMinus.buttonMode = true;
+
+        buttonPlus
+        // Mouse & touch events are normalized into
+        // the pointer* events for handling different
+        // button events.
+            .on('pointerdown', onButtonPlusDown)
+            .on('pointerup', onButtonPlusUp)
+            .on('pointerupoutside', onButtonPlusUp)
+            .on('pointerover', onButtonPlusOver)
+            .on('pointerout', onButtonPlusOut);
+
+        buttonMinus
+        // Mouse & touch events are normalized into
+        // the pointer* events for handling different
+        // button events.
+            .on('pointerdown', onButtonMinusDown)
+            .on('pointerup', onButtonMinusUp)
+            .on('pointerupoutside', onButtonMinusUp)
+            .on('pointerover', onButtonMinusOver)
+            .on('pointerout', onButtonMinusOut);
+
+        // add it to the stage
+        app.stage.addChild(buttonPlus,buttonMinus);
+
+
     };
+
+
+    function onButtonPlusDown() {
+        this.isdown = true;
+        this.texture = textureButtonPlusDown;
+        this.alpha = 1;
+    }
+
+    function onButtonPlusUp() {
+        this.isdown = false;
+        if (this.isOver) {
+            this.texture = textureButtonPlusOver;
+        } else {
+            this.texture = textureButtonPlus;
+        }
+    }
+
+    function onButtonPlusOver() {
+        this.isOver = true;
+        if (this.isdown) {
+            return;
+        }
+        this.texture = textureButtonPlusOver;
+    }
+
+    function onButtonPlusOut() {
+        this.isOver = false;
+        if (this.isdown) {
+            return;
+        }
+        this.texture = textureButtonPlus;
+    }
+
+    function onButtonMinusDown() {
+        this.isdown = true;
+        this.texture = textureButtonMinusDown;
+        this.alpha = 1;
+    }
+
+    function onButtonMinusUp() {
+        this.isdown = false;
+        if (this.isOver) {
+            this.texture = textureButtonMinusOver;
+        } else {
+            this.texture = textureButtonMinus;
+        }
+    }
+
+    function onButtonMinusOver() {
+        this.isOver = true;
+        if (this.isdown) {
+            return;
+        }
+        this.texture = textureButtonMinusOver;
+    }
+
+    function onButtonMinusOut() {
+        this.isOver = false;
+        if (this.isdown) {
+            return;
+        }
+        this.texture = textureButtonMinus;
+    }
 
     /*
     * This field will create the Road
@@ -283,7 +394,7 @@
     /*
 * this method will create the cloud and animate the cloud in the canvas
 * */
-     appManager.createClound = function(x,y){
+     appManager.createCloud = function(x, y){
          //    define some cloud for the front end
          var cloudInstance = PIXI.Sprite.from('imgs/clouds.png');
          cloudInstance.anchor.set(0.5);
@@ -301,6 +412,36 @@
          });
 
      }
+
+    function onDragStart(event) {
+        // store a reference to the data
+        // the reason for this is because of multitouch
+        // we want to track the movement of this particular touch
+        this.data = event.data;
+        this.alpha = 0.5;
+        this.dragging = true;
+    }
+
+    function onDragEnd() {
+        this.alpha = 1;
+        this.dragging = false;
+        // set the interaction data to null
+        this.data = null;
+    }
+
+    function onDragMove() {
+        if (this.dragging) {
+            const newPosition = this.data.getLocalPosition(this.parent);
+            this.x = newPosition.x;
+            this.y = newPosition.y;
+        }
+    }
+
+    function onCreateButtonDown() {
+        this.isdown = true;
+        this.texture = textureButtonDown;
+        this.alpha = 1;
+    }
 
 
 

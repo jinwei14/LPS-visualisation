@@ -5,7 +5,7 @@
     console.log('index -> LPS(loadFile) -> ProgramFactory(fromFile) -> Parser(source, pathname) -> _lexer.get()');
     var program = '';
 
-    // Event handling on the broswer life clcle for parse the text file
+    // Event handling on the browser life cycle for parse the text file
     document.addEventListener("DOMContentLoaded", function () {
         function parserText(event) {
             //open up the content of the  visualiser
@@ -13,15 +13,12 @@
             if (program !== '' && program.trim().length !== 0) {
                 var message = "<h6> Successfully passing LPS program to the parser ! </h6>";
                 document.getElementById("output").innerHTML = message;
-                console.log(program);
+                // console.log(program);
                 //make display text box appear
                 var vis = document.getElementById("content");
-                if (vis.style.display === "none") {
-                    vis.style.display = "block";
-                }
-                //clear the content before running the
-                appManager.clearContent();
-                LPSRunner(program, null);
+
+
+                // LPSRunner(program, null);
 
 
             } else {
@@ -41,7 +38,7 @@
             var message = "<h6> Successfully cleared the lps program ! </h6>";
 
             document.getElementById("output").innerHTML = message;
-            var vis = document.getElementById("content");
+
             // if (vis.style.display === "block") {
             //     vis.style.display = "none";
             // }
@@ -58,6 +55,7 @@
 
     //loading test button listener
     document.addEventListener("DOMContentLoaded", function () {
+
         function loadTextFromFile(evt) {
             //Retrieve the first (and only!) File from the FileList object
             var f = evt.target.files[0];
@@ -71,9 +69,22 @@
                     // + "starts with: " + contents.substr(1, contents.indexOf("n")));
                     console.log(contents);
                     document.getElementById("exampleFormControlTextarea1").value = contents;
+
+                    var vis = document.getElementById("content");
+                    if (vis.style.display === "none") {
+                        vis.style.display = "block";
+                    }
+                    //clear the content before running the
+                    // appManager.clearContent();
+                    appManager.clearContent();
+                    appManager.createVisualizer();
+                    LPSInitializer(contents,null);
+
+
                 };
 
                 r.readAsText(f);
+
 
             } else {
                 alert("Failed to load file");
@@ -235,7 +246,7 @@
             .then((engine) => {
                 let profiler = engine.getProfiler();
                 //start creating the pixiJS panel
-                appManager.createVisualizer();
+                // appManager.createVisualizer();
                 engine.on('postCycle', () => {
                     let currentTime = engine.getCurrentTime();
                     let fluents = engine.getActiveFluents();
@@ -245,33 +256,35 @@
                     let facts = engine.getTimelessFacts();
 
                     let duration = profiler.get('lastCycleExecutionTime');
-                    if (currentTime === 1) {
-                        console.log(facts);
-                        facts.forEach(function (item, index) {
-                            if (item.toLowerCase().startsWith('street')) {
-                                //street(mainStreet, coordinate(100, 200), 900, 50, 1)).
-                                var street = new Streets(item);
-                                appManager.createRoad(street.name, street.X, street.Y, street.width, street.height, street.no_lane);
+                    // if (currentTime === 1) {
+                    //     console.log(facts);
+                    //     facts.forEach(function (item, index) {
+                    //         if (item.toLowerCase().startsWith('street')) {
+                    //             //street(mainStreet, coordinate(100, 200), 900, 50, 1)).
+                    //             var street = new Streets(item);
+                    //             appManager.createRoad(street.name, street.X, street.Y, street.width, street.height, street.no_lane);
+                    //
+                    //         } else if (item.toLowerCase().startsWith('cloud')) {
+                    //             var cloud = new Cloud(item);
+                    //             appManager.createCloud(cloud.X, cloud.Y);
+                    //         }
+                    //     });
+                    //     fluents.forEach(function (item, index) {
+                    //         if (item.toLowerCase().startsWith('location')) {
+                    //             // initialise the location of the car.
+                    //             var loc = new VehicleLoc(item, currentTime);
+                    //             appManager.createVehicle(loc.getObjectName(), loc.X, loc.Y, loc.getHeading());
+                    //         } else if (item.toLowerCase().startsWith('trafficlight')) {
+                    //             //  check if the traffic light has been initialised
+                    //
+                    //             var light = new TrafficLight(item);
+                    //             appManager.createTrafficLight(light.X, light.Y, light.color);
+                    //         }
+                    //     });
+                    //     //Do something
+                    // } else
 
-                            } else if (item.toLowerCase().startsWith('cloud')) {
-                                var cloud = new Cloud(item);
-                                appManager.createClound(cloud.X, cloud.Y);
-                            }
-                        });
-                        fluents.forEach(function (item, index) {
-                            if (item.toLowerCase().startsWith('location')) {
-                                // initialise the location of the car.
-                                var loc = new VehicleLoc(item, currentTime);
-                                appManager.createVehicle(loc.getObjectName(), loc.X, loc.Y, loc.getHeading());
-                            } else if (item.toLowerCase().startsWith('trafficlight')) {
-                                //  check if the traffic light has been initialised
-
-                                var light = new TrafficLight(item);
-                                appManager.createTrafficLight(light.X, light.Y, light.color);
-                            }
-                        });
-                        //Do something
-                    } else if (currentTime > 1) {
+                        if (currentTime > 1) {
                         console.log(currentTime);
 
                         fluents.forEach(function (item, index) {
@@ -311,6 +324,52 @@
 
                 engine.run();
                 console.log('engine finished running');
+            }).catch((err) => {
+
+            //clear the content if there is any error.
+            appManager.clearContent();
+            console.log('this is the error message: ' + err);
+            alert("Error in running the program: " + err);
+        });
+    }
+
+    function LPSInitializer(programFile, specFile) {
+
+
+        LPS.loadString(programFile)
+            .then((engine) => {
+
+                let currentTime = engine.getCurrentTime();
+                let fluents = engine.getActiveFluents();
+                //get all the fact other wise needs to define all the fact as fluents
+                let facts = engine.getTimelessFacts();
+
+                facts.forEach(function (item, index) {
+                    if (item.toLowerCase().startsWith('street')) {
+                        //street(mainStreet, coordinate(100, 200), 900, 50, 1)).
+                        var street = new Streets(item);
+                        appManager.createRoad(street.name, street.X, street.Y, street.width, street.height, street.no_lane);
+
+                    } else if (item.toLowerCase().startsWith('cloud')) {
+                        var cloud = new Cloud(item);
+                        appManager.createCloud(cloud.X, cloud.Y);
+                    }
+                });
+
+                fluents.forEach(function (item, index) {
+                    if (item.toLowerCase().startsWith('location')) {
+                        // initialise the location of the car.
+                        var loc = new VehicleLoc(item, currentTime);
+                        appManager.createVehicle(loc.getObjectName(), loc.X, loc.Y, loc.getHeading());
+                    } else if (item.toLowerCase().startsWith('trafficlight')) {
+                        //  check if the traffic light has been initialised
+
+                        var light = new TrafficLight(item);
+                        appManager.createTrafficLight(light.X, light.Y, light.color);
+                    }
+                });
+
+
             }).catch((err) => {
 
             //clear the content if there is any error.
