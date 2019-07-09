@@ -335,7 +335,6 @@
 
     function LPSInitializer(programFile, specFile) {
 
-
         LPS.loadString(programFile)
             .then((engine) => {
 
