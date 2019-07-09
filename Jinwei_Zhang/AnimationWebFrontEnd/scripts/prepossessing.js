@@ -17,8 +17,12 @@
                 //make display text box appear
                 var vis = document.getElementById("content");
 
-
-                // LPSRunner(program, null);
+                //modify the program based the user input change in appManager.
+                newProgram = ProgramModifier(program);
+                //display the new program in the text box.
+                document.getElementById("exampleFormControlTextarea1").value = newProgram;
+                //run the new program in the LPS runner.
+                LPSRunner(program, null);
 
 
             } else {
@@ -201,6 +205,11 @@
 
     }
 
+
+    function ProgramModifier(program){
+
+        return newProgram
+    }
     /*
     * This function will be called when the animate button is clicked.
     * */
@@ -332,6 +341,8 @@
                         appManager.createTrafficLight(light.X, light.Y, light.color);
                     }
                 });
+
+
 
 
             }).catch((err) => {

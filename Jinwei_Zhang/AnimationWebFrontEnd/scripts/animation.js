@@ -12,7 +12,8 @@
     };
 
     var dataManager = {
-        responseTime : 0
+        responseTime : 0,
+        carCounter:0
 
     };
 
@@ -148,9 +149,13 @@
         app.stage.addChild(UIManager.buttonPlus,UIManager.buttonMinus);
 
         function onButtonPlusDown() {
+
             this.isdown = true;
             this.texture = UIManager.textureButtonPlusDown;
             this.alpha = 1;
+            vehicleName = 'car'+ dataManager.carCounter.toString();
+            UIManager.richTextAction.text = 'creating :' + vehicleName;
+            appManager.createVehicle(vehicleName, 800, 800, 'northward');
         }
 
         function onButtonPlusUp() {
@@ -251,6 +256,7 @@
     * This field will create the vehicles with name, location and direction.
     * */
     appManager.createVehicle = function (vehicleName, x, y, direction) {
+        dataManager.carCounter += 1;
         console.log('creating vehicle has been called in animation.js ' + window.name);
         console.log(vehicleName, x, y, direction);
 
@@ -293,7 +299,8 @@
                 carInstance.rotation -= (Math.PI) / 2;
                 break;
             default:
-                carInstance = PIXI.Sprite.from('imgs/carNorth.png');
+                console.log('direction format wrong');
+                break;
         }
 
         // const graphics = new PIXI.Graphics();
@@ -357,16 +364,28 @@
             // set the interaction data to null
             this.data = null;
             if (this.x > 1020 && this.y < 90){
-                console.log('delete');
-                UIManager.richTextAction.text = "car deleted";
                 // this part should be user delete the car manually.
-                // vehicle should be deleted in the appManager and the text in the text box.
+                // vehicle should be deleted in the appManager and app.stage
+                appManager.removeVehicle(this);
             }
 
             //adjust the car location on to the street.
             postationArr = appManager.coordinateCorrection(this.x,this.y);
             this.x = postationArr[0];
             this.y = postationArr[1];
+            var findObj = this;
+
+            appManager.vehicle.forEach(function (item, index) {
+                if (item.obj === findObj) {
+                    item.textObj.x = postationArr[0] - 15;
+                    item.textObj.y = postationArr[1] - 40;
+                    item.carLocText.text = '(' + postationArr[0] .toString() + ',' + postationArr[1].toString()+')';
+                    item.carLocText.x = postationArr[0] - 25;
+                    item.carLocText.y = postationArr[1]  + 25;
+                }
+            });
+
+            console.log(appManager.vehicle);
         }
 
         /**
@@ -399,6 +418,7 @@
                         this.scale.x *= 1.07;
                         this.scale.y *= 1.07;
                     }
+
                     UIManager.buttonMinus.texture = UIManager.textureButtonMinusDown;
                 // If the car was moved out of the deletion area.
                 }else{
@@ -412,6 +432,23 @@
 
             }
         }
+    };
+
+    /*
+    *
+    * */
+    appManager.removeVehicle = function(carSpriteObj, carName=null){
+        for (var i = appManager.vehicle.length - 1; i >= 0; i--) {
+            if (appManager.vehicle[i].obj === carSpriteObj){
+                UIManager.richTextAction.text = appManager.vehicle[i].name + " deleted";
+                app.stage.removeChild(appManager.vehicle[i].obj);
+                app.stage.removeChild(appManager.vehicle[i].textObj);
+                app.stage.removeChild(appManager.vehicle[i].carLocText);
+                appManager.vehicle.splice(i,1);
+            }
+
+        }
+
     };
 
     /*
@@ -587,7 +624,7 @@
              }
          });
 
-         return [newX, newY]
+         return [ Math.round(newX),  Math.round(newY)]
      };
 
     window.appManager = appManager;
