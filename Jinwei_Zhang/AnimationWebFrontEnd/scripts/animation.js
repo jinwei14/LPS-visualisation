@@ -10,22 +10,41 @@
         street: [],
         lights: []
     };
+
+    var dataManager = {
+        responseTime : 0
+
+    };
+
+    var UIManager = {
+        graphics : null,
+        richTextTitle: null,
+        xAxisText:null,
+        yAxisText:null,
+        originPointText:null,
+        textureButtonPlus : null,
+        textureButtonPlusOver : null,
+        textureButtonPlusDown : null,
+        textureButtonMinus : null,
+        textureButtonMinusOver : null,
+        textureButtonMinusDown : null,
+
+        buttonPlus : null,
+        buttonMinus : null
+    };
     /*
     *
     * */
     var app = new PIXI.Application({backgroundColor: 0x1099bb, width: 1100, height: 1000});
 
-    /*
-    *
-    * */
-    var graphics = null;
+
 
 
     appManager.createVisualizer = function () {
         // the graphics object will be used throughout the class
-        graphics = new PIXI.Graphics();
+        UIManager.graphics = new PIXI.Graphics();
         document.getElementById("content").appendChild(app.view);
-        console.log('the createVisualizer  has been called');
+        console.log('The createVisualizer  has been called');
 
         //LPS sample animation text
         const style = new PIXI.TextStyle({
@@ -45,60 +64,62 @@
             wordWrapWidth: 440,
         });
 
-        const richText = new PIXI.Text('LPS Self-Driving car animation', style);
-        richText.x = 300;
-        richText.y = 0;
+        UIManager.richTextTitle = new PIXI.Text('LPS Self-Driving car animation', style);
+        UIManager.richTextTitle.x = 300;
+        UIManager.richTextTitle.y = 0;
 
         // draw a coordinate system X
-        graphics.lineStyle(5, 0x333, 1);
-        graphics.moveTo(0, 0);
-        graphics.lineTo(200, 0);
-        const xText = new PIXI.Text('X', {fontFamily: 'Arial', fontSize: 15, fill: 0x333, align: 'center'});
-        xText.x = 150;
-        xText.y = 0;
+        UIManager.graphics.lineStyle(5, 0x333, 1);
+        UIManager.graphics.moveTo(0, 0);
+        UIManager.graphics.lineTo(200, 0);
+
+        UIManager.xAxisText = new PIXI.Text('X', {fontFamily: 'Arial', fontSize: 15, fill: 0x333, align: 'center'});
+        UIManager.xAxisText.x = 150;
+        UIManager.xAxisText.y = 0;
         // draw a coordinate system Y
-        graphics.lineStyle(5, 0x333, 1);
-        graphics.moveTo(0, 0);
-        graphics.lineTo(0, 200);
+        UIManager.graphics.lineStyle(5, 0x333, 1);
+        UIManager.graphics.moveTo(0, 0);
+        UIManager.graphics.lineTo(0, 200);
 
-        const yText = new PIXI.Text('Y', {fontFamily: 'Arial', fontSize: 15, fill: 0x333, align: 'center'});
-        yText.x = 0;
-        yText.y = 150;
+        UIManager.yAxisText = new PIXI.Text('Y', {fontFamily: 'Arial', fontSize: 15, fill: 0x333, align: 'center'});
+        UIManager.yAxisText.x = 0;
+        UIManager.yAxisText.y = 150;
 
-        const originText = new PIXI.Text('(0,0)', {fontFamily: 'Arial', fontSize: 15, fill: 0x333, align: 'center'});
-        originText.x = 0;
-        originText.y = 0;
+        // draw a original point in the coordinate system
+        UIManager.originPointText = new PIXI.Text('(0,0)', {fontFamily: 'Arial', fontSize: 15, fill: 0x333, align: 'center'});
+        UIManager.originPointText.x = 0;
+        UIManager.originPointText.y = 0;
 
-        app.stage.addChild(richText);
-        app.stage.addChild(graphics);
-        app.stage.addChild(xText, yText, originText);
+        app.stage.addChild(UIManager.richTextTitle);
+        app.stage.addChild(UIManager.graphics);
+        app.stage.addChild(UIManager.xAxisText, UIManager.yAxisText, UIManager.originPointText);
 
 
-        const textureButtonPlus = PIXI.Texture.from('imgs/plus-circle.png');
-        const textureButtonPlusOver = PIXI.Texture.from('imgs/plus-circle-2.png');
-        const textureButtonPlusDown = PIXI.Texture.from('imgs/plus-circle-3.png');
+        UIManager.textureButtonPlus = PIXI.Texture.from('imgs/plus-circle.png');
+        UIManager.textureButtonPlusOver = PIXI.Texture.from('imgs/plus-circle-2.png');
+        UIManager.textureButtonPlusDown = PIXI.Texture.from('imgs/plus-circle-3.png');
 
-        const textureButtonMinus = PIXI.Texture.from('imgs/minus-circle.png');
-        const textureButtonMinusOver = PIXI.Texture.from('imgs/minus-circle-2.png');
-        const textureButtonMinusDown = PIXI.Texture.from('imgs/minus-circle-3.png');
+        UIManager.textureButtonMinus = PIXI.Texture.from('imgs/minus-circle.png');
+        UIManager.textureButtonMinusOver = PIXI.Texture.from('imgs/minus-circle-2.png');
+        UIManager.textureButtonMinusDown = PIXI.Texture.from('imgs/minus-circle-3.png');
 
         //this part here is the button creator
-        const buttonPlus = new PIXI.Sprite(textureButtonPlus);
-        const buttonMinus = new PIXI.Sprite(textureButtonMinus);
-        buttonPlus.buttonMode = true;
-        buttonMinus.buttonMode = true;
+        UIManager.buttonPlus = new PIXI.Sprite(UIManager.textureButtonPlus);
+        UIManager.buttonMinus = new PIXI.Sprite(UIManager.textureButtonMinus);
+        UIManager.buttonPlus.buttonMode = true;
+        UIManager.buttonMinus.buttonMode = true;
 
-        buttonMinus.x =1020; buttonMinus.y = 0;
-        buttonPlus.x = 1020; buttonPlus.y = 90;
+        UIManager.buttonMinus.x =1020; UIManager.buttonMinus.y = 0;
+        UIManager.buttonPlus.x = 1020; UIManager.buttonPlus.y = 90;
 
 
         // make the button interactive...
-        buttonPlus.interactive = true;
-        buttonPlus.buttonMode = true;
-        buttonMinus.interactive = true;
-        buttonMinus.buttonMode = true;
+        UIManager.buttonPlus.interactive = true;
+        UIManager.buttonPlus.buttonMode = true;
+        UIManager.buttonMinus.interactive = true;
+        UIManager.buttonMinus.buttonMode = true;
 
-        buttonPlus
+        UIManager.buttonPlus
         // Mouse & touch events are normalized into
         // the pointer* events for handling different
         // button events.
@@ -108,7 +129,7 @@
             .on('pointerover', onButtonPlusOver)
             .on('pointerout', onButtonPlusOut);
 
-        buttonMinus
+        UIManager.buttonMinus
         // Mouse & touch events are normalized into
         // the pointer* events for handling different
         // button events.
@@ -119,20 +140,20 @@
             .on('pointerout', onButtonMinusOut);
 
         // add it to the stage
-        app.stage.addChild(buttonPlus,buttonMinus);
+        app.stage.addChild(UIManager.buttonPlus,UIManager.buttonMinus);
 
         function onButtonPlusDown() {
             this.isdown = true;
-            this.texture = textureButtonPlusDown;
+            this.texture = UIManager.textureButtonPlusDown;
             this.alpha = 1;
         }
 
         function onButtonPlusUp() {
             this.isdown = false;
             if (this.isOver) {
-                this.texture = textureButtonPlusOver;
+                this.texture = UIManager.textureButtonPlusOver;
             } else {
-                this.texture = textureButtonPlus;
+                this.texture = UIManager.textureButtonPlus;
             }
         }
 
@@ -141,7 +162,7 @@
             if (this.isdown) {
                 return;
             }
-            this.texture = textureButtonPlusOver;
+            this.texture = UIManager.textureButtonPlusOver;
         }
 
         function onButtonPlusOut() {
@@ -149,21 +170,21 @@
             if (this.isdown) {
                 return;
             }
-            this.texture = textureButtonPlus;
+            this.texture = UIManager.textureButtonPlus;
         }
 
         function onButtonMinusDown() {
             this.isdown = true;
-            this.texture = textureButtonMinusDown;
+            this.texture = UIManager.textureButtonMinusDown;
             this.alpha = 1;
         }
 
         function onButtonMinusUp() {
             this.isdown = false;
             if (this.isOver) {
-                this.texture = textureButtonMinusOver;
+                this.texture = UIManager.textureButtonMinusOver;
             } else {
-                this.texture = textureButtonMinus;
+                this.texture = UIManager.textureButtonMinus;
             }
         }
 
@@ -172,7 +193,7 @@
             if (this.isdown) {
                 return;
             }
-            this.texture = textureButtonMinusOver;
+            this.texture = UIManager.textureButtonMinusOver;
         }
 
         function onButtonMinusOut() {
@@ -180,7 +201,7 @@
             if (this.isdown) {
                 return;
             }
-            this.texture = textureButtonMinus;
+            this.texture = UIManager.textureButtonMinus;
         }
 
     };
@@ -203,10 +224,10 @@
             streetText.rotation = Math.PI / 2;
         }
         //main street
-        graphics.lineStyle(2, 0xFFFFFF, 1);
-        graphics.beginFill(0x333);
-        graphics.drawRect(x, y, width, height);
-        graphics.endFill();
+        UIManager.graphics.lineStyle(2, 0xFFFFFF, 1);
+        UIManager.graphics.beginFill(0x333);
+        UIManager.graphics.drawRect(x, y, width, height);
+        UIManager.graphics.endFill();
 
         app.stage.addChild(streetText);
     };
@@ -288,6 +309,7 @@
         app.stage.addChild(carText);
 
         function onDragStart(event) {
+            dataManager.responseTime = Date.now();
             // store a reference to the data
             // the reason for this is because of multitouch
             // we want to track the movement of this particular touch
@@ -296,20 +318,40 @@
             this.dragging = true;
         }
 
+        /**
+         * In the drag end the information in the appManager and the original lps program should change.
+         *
+         * 1. deletion
+         * 2. modification
+         */
+
         function onDragEnd() {
+            // This does not allow multi touch since we are only record one time response time.
+            var timeSpan = Date.now() - dataManager.responseTime;
+            if (timeSpan < 100){
+            //    if user click on the object the orientation should change clockwise
+                this.rotation += (Math.PI) / 2;
+            }
             this.alpha = 1;
             this.dragging = false;
             // set the interaction data to null
             this.data = null;
             if (this.x > 1020 && this.y < 90){
                 console.log('delete');
-            //    this part should be user delete the car manually.
+                this.texture = textureButtonMinusDown;
+
+                // this part should be user delete the car manually.
+                // vehicle should be deleted in the appManager and the text in the text box.
             }
         }
 
+        /**
+         * while the user is dragging the car both the text and the car object should move together.
+         *
+         */
         function onDragMove() {
             if (this.dragging) {
-                console.log(this);
+                //console.log(this);
                 const newPosition = this.data.getLocalPosition(this.parent);
                 this.x = newPosition.x;
                 this.y = newPosition.y;
@@ -321,6 +363,18 @@
                         item.textObj.y = newPosition.y - 40;
                     }
                 });
+
+                if (this.x > 1020 && this.y < 90 ){
+                    if (this.scale.x <= 3 ) {
+                        this.scale.x *= 1.07;
+                        this.scale.y *= 1.07;
+                    }
+                }else{
+                    if(this.scale.x > 1){
+                        this.scale.x /= 1.07;
+                        this.scale.y /= 1.07;
+                    }
+                }
 
 
             }
@@ -465,11 +519,6 @@
          });
 
      }
-
-
-
-
-
 
 
 
