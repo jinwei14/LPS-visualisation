@@ -274,9 +274,10 @@
 
         //loop through the appManager check if there is added car
         appManager.vehicle.forEach(function (item,index) {
-            if(item.name === carName){
-                //found is true meaning there is the same car in the appManager only need to do modification to location
-                found = true
+            //if the program set do not contain some car in the manager set then we should insert the new car into the program
+            if(!carSetProgram.has(item.name)){
+                arr.splice(start+1,0,'moving('+item.name+'),');
+                arr.splice(start+2,0,'location('+item.name+', coordinate('+item.obj.x.toString()+','+item.obj.y.toString()+'),'+item.direction+'),');
             }
         });
 
