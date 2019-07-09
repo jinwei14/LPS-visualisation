@@ -19,6 +19,7 @@
     var UIManager = {
         graphics : null,
         richTextTitle: null,
+        richTextAction: null,
         xAxisText:null,
         yAxisText:null,
         originPointText:null,
@@ -68,6 +69,10 @@
         UIManager.richTextTitle.x = 300;
         UIManager.richTextTitle.y = 0;
 
+        UIManager.richTextAction = new PIXI.Text('Action: ', style);
+        UIManager.richTextAction.x = 700;
+        UIManager.richTextAction.y = 0;
+
         // draw a coordinate system X
         UIManager.graphics.lineStyle(5, 0x333, 1);
         UIManager.graphics.moveTo(0, 0);
@@ -90,7 +95,7 @@
         UIManager.originPointText.x = 0;
         UIManager.originPointText.y = 0;
 
-        app.stage.addChild(UIManager.richTextTitle);
+        app.stage.addChild(UIManager.richTextTitle,UIManager.richTextAction);
         app.stage.addChild(UIManager.graphics);
         app.stage.addChild(UIManager.xAxisText, UIManager.yAxisText, UIManager.originPointText);
 
@@ -316,6 +321,7 @@
             this.data = event.data;
             this.alpha = 0.5;
             this.dragging = true;
+
         }
 
         /**
@@ -338,6 +344,7 @@
             this.data = null;
             if (this.x > 1020 && this.y < 90){
                 console.log('delete');
+                UIManager.richTextAction.text = "car deleted";
 
 
                 // this part should be user delete the car manually.
@@ -364,13 +371,16 @@
                     }
                 });
 
+
+
+                // If the car was moved into the deletion area.
                 if (this.x > 1020 && this.y < 90 ){
                     if (this.scale.x <= 3 ) {
                         this.scale.x *= 1.07;
                         this.scale.y *= 1.07;
                     }
                     UIManager.buttonMinus.texture = UIManager.textureButtonMinusDown;
-
+                // If the car was moved out of the deletion area.
                 }else{
                     if(this.scale.x > 1){
                         this.scale.x /= 1.07;

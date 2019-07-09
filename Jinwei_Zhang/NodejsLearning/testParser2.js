@@ -71,18 +71,58 @@ function ResultDict(fullPhrase,timeStamp) {
 
 }
 
+
+function VehicleLoc(fullPhrase, timeStamp) {
+    //the full phrase of the user defined fluent such as loc(car, 1650, 340)).
+    this.fullPhrase = fullPhrase;
+
+    //the time stamp that this fluent changed
+    this.timeStamp = timeStamp;
+
+    //regulation match array
+    this.matchArray = this.fullPhrase.match(/(\w+)/g);
+
+    console.log(this.matchArray);
+
+    //the object that is changing such as Car , Truck etx
+    this.getObjectName = this.matchArray[1];
+
+    // should be the fluent that changed such as : loc, location.
+    this.getFluent = this.matchArray[0];
+
+    //the x and y position of the car
+
+    this.X = parseInt(this.matchArray[3], 10);
+    this.Y = parseInt(this.matchArray[4], 10);
+
+    //the heading is optional. If there is a heading then get the heading as the form of
+    this.getHeading = this.matchArray[5];
+
+
+
+}
+
 //location(yourCar, coordinate(9, 9), eastward)
 //loc(car, 1650, 340))
 //position(dummyCar, xy(66.90)).
 
 
-var obj2 = new ResultDict('location(yourCar, coordinate(9, 9), eastward)', 30);
-console.log('Fluent: ' + obj2.getFluent());
-console.log('heading: ' + obj2.getHeading());
-console.log('Object name: ' + obj2.getObjectName());
-console.log('Position: ' + obj2.getPosition());
+// var obj2 = new ResultDict('location(car0, coordinate(9, 9), eastward)', 30);
+// console.log('Fluent: ' + obj2.getFluent());
+// console.log('heading: ' + obj2.getHeading());
+// console.log('Object name: ' + obj2.getObjectName());
+// console.log('Position: ' + obj2.getPosition());
+// console.log('Timestamp: ' + obj2.timeStamp);
+// console.log('x: ' + obj2.X);
+// console.log('y: ' + obj2.Y);
+// console.log(parseInt(obj2.getPosition()[0], 10));
+// console.log(parseInt(obj2.getPosition()[1], 10));
+
+
+var obj2 = new VehicleLoc('location(car0, coordinate(9, 9), eastward)', 30);
+console.log('Fluent: ' + obj2.getFluent);
+console.log('heading: ' + obj2.getHeading);
+console.log('Object name: ' + obj2.getObjectName);
 console.log('Timestamp: ' + obj2.timeStamp);
 console.log('x: ' + obj2.X);
 console.log('y: ' + obj2.Y);
-console.log(parseInt(obj2.getPosition()[0], 10));
-console.log(parseInt(obj2.getPosition()[1], 10));
