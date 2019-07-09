@@ -149,12 +149,13 @@
         app.stage.addChild(UIManager.buttonPlus,UIManager.buttonMinus);
 
         function onButtonPlusDown() {
+
             this.isdown = true;
             this.texture = UIManager.textureButtonPlusDown;
             this.alpha = 1;
-            dataManager.carCounter += 1;
-            vehicleName ='car'+ (dataManager.carCounter-1).toString();
-            appManager.createVehicle(vehicleName, 100, 100, 'northwards');
+            vehicleName = 'car'+ dataManager.carCounter.toString();
+            UIManager.richTextAction.text = 'creating :' + vehicleName;
+            appManager.createVehicle(vehicleName, 800, 800, 'northward');
         }
 
         function onButtonPlusUp() {
@@ -298,7 +299,8 @@
                 carInstance.rotation -= (Math.PI) / 2;
                 break;
             default:
-                carInstance = PIXI.Sprite.from('imgs/carNorth.png');
+                console.log('direction format wrong');
+                break;
         }
 
         // const graphics = new PIXI.Graphics();
