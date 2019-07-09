@@ -108,9 +108,9 @@ street(mainStreet , coordinate(100, 450), 900, 50, 2,1).
 
 street(mainStreet , coordinate(100, 500), 900, 50, 2,1).
 
-street(southStreet , coordinate(450, 550), 50, 300, 2,0).
+street(southStreet , coordinate(450, 550), 50, 400, 2,0).
 
-street(southStreet , coordinate(500, 550), 50, 300, 2,0).
+street(southStreet , coordinate(500, 550), 50, 400, 2,0).
 
 cloud(coordinate(140,100)).
 cloud(coordinate(250,90)).

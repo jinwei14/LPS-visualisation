@@ -109,57 +109,22 @@
         //regulation match array
         this.matchArray = this.fullPhrase.match(/(\w+)/g);
 
-
         //the object that is changing such as Car , Truck etx
-        this.getObjectName = function () {
-            var coordinate = ['coordinate', 'loc', 'location', 'coor', 'pos', 'position', 'xy'];
-            var len = this.matchArray.length;
-            //if the word is not one of the words in the coordinate array and not a digit it will be the name
-            //of the object
-            for (var i = 1; i < len; i++) {
-                if (isNaN(this.matchArray[i]) && coordinate.includes(this.matchArray[i].toLowerCase()) === false) {
-                    return this.matchArray[i];
-                }
-            }
-        };
+        this.getObjectName = this.matchArray[1];
 
         // should be the fluent that changed such as : loc, location.
-        this.getFluent = function () {
-            var endPos = fullPhrase.indexOf('(');
-            return fullPhrase.slice(0, endPos);
-        };
+        this.getFluent = this.matchArray[0];
 
-        //position is a list of number which specify the number of position.
-        this.getPosition = function () {
-            var r = /\d+/g;
-            var s = fullPhrase;
-            var m;
-            var retList = [];
-            while ((m = r.exec(s)) != null) {
-                retList.push(parseInt(m[0], 10));
-            }
-            return retList;
-        };
+        //the x and y position of the car
 
-        this.X = parseInt(this.getPosition()[0], 10);
-        this.Y = parseInt(this.getPosition()[1], 10);
+        this.X = parseInt(this.matchArray[3], 10);
+        this.Y = parseInt(this.matchArray[4], 10);
 
         //the heading is optional. If there is a heading then get the heading as the form of
-        this.getHeading = function () {
-            var orientation =
-                [
-                    'north', 'south', 'west', 'east',
-                    'up', 'down', 'left', 'right',
-                    'northward', 'southward', 'westward', 'eastward'
-                ];
-            var len = this.matchArray.length;
-            for (var i = 0; i < len; i++) {
-                //check if any of the works in the matching array is in the orientation array
-                if (orientation.includes(this.matchArray[i].toLowerCase())) {
-                    return this.matchArray[i];
-                }
-            }
-        };
+        this.getHeading = this.matchArray[5];
+
+
+
     }
 
     /*
@@ -291,7 +256,7 @@
                             if (item.toLowerCase().startsWith('location')) {
                                 console.log(item);
                                 var loc = new VehicleLoc(item, currentTime);
-                                appManager.changeVehicleLocation(loc.getObjectName(), loc.X, loc.Y, loc.getHeading());
+                                appManager.changeVehicleLocation(loc.getObjectName, loc.X, loc.Y, loc.getHeading);
                             } else if (item.toLowerCase().startsWith('trafficlight')) {
                                 // console.log(item);
                                 var light = new TrafficLight(item);
@@ -359,7 +324,7 @@
                     if (item.toLowerCase().startsWith('location')) {
                         // initialise the location of the car.
                         var loc = new VehicleLoc(item, currentTime);
-                        appManager.createVehicle(loc.getObjectName(), loc.X, loc.Y, loc.getHeading());
+                        appManager.createVehicle(loc.getObjectName, loc.X, loc.Y, loc.getHeading);
                     } else if (item.toLowerCase().startsWith('trafficlight')) {
                         //  check if the traffic light has been initialised
 

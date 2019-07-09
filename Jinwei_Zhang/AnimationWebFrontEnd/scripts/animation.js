@@ -234,6 +234,15 @@
         UIManager.graphics.drawRect(x, y, width, height);
         UIManager.graphics.endFill();
 
+        appManager.street.push({
+            nameText:nameText,
+            x:x,
+            y:y,
+            width:width,
+            height:height,
+            laneNumber:laneNumber
+        });
+
         app.stage.addChild(streetText);
     };
 
@@ -299,19 +308,24 @@
         carText.x = x - 15;
         carText.y = y - 40;
 
+        let carLocText = new PIXI.Text('(' + x.toString() + ',' + y.toString()+')', {fontFamily: 'Arial', fontSize: 12, fill: 0xffffff});
+        carLocText.x = x - 25;
+        carLocText.y = y + 25;
+
 
         // carInstance.rotation = 45*(Math.PI/180);
 
         appManager.vehicle.push({
             name: vehicleName,
             textObj: carText,
+            carLocText : carLocText,
             // xLoc: x,
             // yLoc: y,
             direction: direction,
             obj: carInstance
         });
         app.stage.addChild(carInstance);
-        app.stage.addChild(carText);
+        app.stage.addChild(carText,carLocText);
 
         function onDragStart(event) {
             dataManager.responseTime = Date.now();
@@ -334,8 +348,8 @@
         function onDragEnd() {
             // This does not allow multi touch since we are only record one time response time.
             var timeSpan = Date.now() - dataManager.responseTime;
-            if (timeSpan < 100){
             //    if user click on the object the orientation should change clockwise
+            if (timeSpan < 100){
                 this.rotation += (Math.PI) / 2;
             }
             this.alpha = 1;
@@ -345,11 +359,14 @@
             if (this.x > 1020 && this.y < 90){
                 console.log('delete');
                 UIManager.richTextAction.text = "car deleted";
-
-
                 // this part should be user delete the car manually.
                 // vehicle should be deleted in the appManager and the text in the text box.
             }
+
+            //adjust the car location on to the street.
+            postationArr = appManager.coordinateCorrection(this.x,this.y);
+            this.x = postationArr[0];
+            this.y = postationArr[1];
         }
 
         /**
@@ -368,6 +385,9 @@
                     if (item.obj === findObj) {
                         item.textObj.x = newPosition.x - 15;
                         item.textObj.y = newPosition.y - 40;
+                        item.carLocText.text = '(' + Math.round(newPosition.x).toString() + ',' + Math.round(newPosition.y).toString()+')';
+                        item.carLocText.x = newPosition.x - 25;
+                        item.carLocText.y = newPosition.y + 25;
                     }
                 });
 
@@ -404,6 +424,10 @@
                 item.obj.y = y;
                 item.textObj.x = x - 15;
                 item.textObj.y = y - 40;
+                item.carLocText.text = '(' + x.toString() + ',' + y.toString()+')';
+                item.carLocText.x = x - 25;
+                item.carLocText.y = y + 25;
+
                 if (item.direction !== direction) {
 
                     if ((item.direction === 'southward' && direction === 'northward') ||
@@ -489,7 +513,7 @@
                 }
             }
         });
-    }
+    };
 
     /*
     * this method will clear out the street and vehicle information
@@ -498,6 +522,7 @@
     appManager.clearContent = function () {
         appManager.vehicle = [];
         appManager.street = [];
+        appManager.lights = [];
         for (var i = app.stage.children.length - 1; i >= 0; i--) {
             app.stage.removeChild(app.stage.children[i]);
         }
@@ -512,8 +537,8 @@
 
 
     /*
-* this method will create the cloud and animate the cloud in the canvas
-* */
+    * this method will create the cloud and animate the cloud in the canvas
+    * */
      appManager.createCloud = function(x, y){
          //    define some cloud for the front end
          var cloudInstance = PIXI.Sprite.from('imgs/clouds.png');
@@ -531,9 +556,39 @@
              }
          });
 
-     }
+     };
 
 
+     /*
+     * correct the coordinate on to the street.
+     * */
+     appManager.coordinateCorrection = function(x, y){
+         var newX = x;
+         var newY = y;
+         appManager.street.forEach(function (item, index) {
+             if(x>item.x && x<item.x + item.width && y> item.y && y<item.y + item.height){
+                 // UIManager.richTextAction.text = "Correction on: " + item.nameText;
+                 // console.log("Correction on: " + item.nameText);
+                 //west east facing street
+                 if (item.width > item.height){
+
+                     newY = Math.round(((item.y + item.y + item.height)/2));
+                     newX = Math.round(x);
+                     // console.log("on: " + newX.toString() + ' '+ newY.toString());
+                     return [newX, newY]
+                 }else{
+                 // north south facing street
+                     newX = Math.round(((item.x + item.x + item.width)/2));
+                     newY = Math.round(y);
+                     // console.log("on: " + newX.toString() + ' '+ newY.toString());
+                     return [newX, newY]
+                 }
+
+             }
+         });
+
+         return [newX, newY]
+     };
 
     window.appManager = appManager;
 
