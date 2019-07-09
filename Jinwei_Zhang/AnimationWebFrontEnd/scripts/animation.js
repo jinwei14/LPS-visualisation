@@ -338,7 +338,7 @@
             this.data = null;
             if (this.x > 1020 && this.y < 90){
                 console.log('delete');
-                this.texture = textureButtonMinusDown;
+
 
                 // this part should be user delete the car manually.
                 // vehicle should be deleted in the appManager and the text in the text box.
@@ -369,10 +369,13 @@
                         this.scale.x *= 1.07;
                         this.scale.y *= 1.07;
                     }
+                    UIManager.buttonMinus.texture = UIManager.textureButtonMinusDown;
+
                 }else{
                     if(this.scale.x > 1){
                         this.scale.x /= 1.07;
                         this.scale.y /= 1.07;
+                        UIManager.buttonMinus.texture = UIManager.textureButtonMinus;
                     }
                 }
 
