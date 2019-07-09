@@ -34,6 +34,7 @@
         buttonPlus : null,
         buttonMinus : null
     };
+
     /*
     *
     * */
@@ -376,7 +377,7 @@
             this.y = postationArr[1];
             var findObj = this;
 
-            //move the car text and the coordination accordingly.
+            // move the car text and the coordination accordingly.
             appManager.vehicle.forEach(function (item, index) {
                 if (item.obj === findObj) {
                     item.textObj.x = postationArr[0] - 15;
@@ -384,7 +385,7 @@
                     item.carLocText.text = '(' + postationArr[0] .toString() + ',' + postationArr[1].toString()+')';
                     item.carLocText.x = postationArr[0] - 25;
                     item.carLocText.y = postationArr[1]  + 25;
-                    //the length of the car is 40
+                    //if the time span is less than 100 meaning the direction has changed.
                     if (timeSpan < 100) {
                         switch (item.direction) {
                             case 'northward':
@@ -632,13 +633,13 @@
                  if (item.width > item.height){
 
                      newY = Math.round(((item.y + item.y + item.height)/2));
-                     newX = Math.round(x);
+                     newX = Math.round(Math.ceil(x/5)*5);
                      // console.log("on: " + newX.toString() + ' '+ newY.toString());
                      return [newX, newY]
                  }else{
                  // north south facing street
                      newX = Math.round(((item.x + item.x + item.width)/2));
-                     newY = Math.round(y);
+                     newY = Math.round(Math.ceil(y/5)*5);
                      // console.log("on: " + newX.toString() + ' '+ newY.toString());
                      return [newX, newY]
                  }
