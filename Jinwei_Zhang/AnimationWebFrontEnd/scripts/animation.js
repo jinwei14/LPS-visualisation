@@ -359,6 +359,7 @@
             if (timeSpan < 100){
                 this.rotation += (Math.PI) / 2;
             }
+
             this.alpha = 1;
             this.dragging = false;
             // set the interaction data to null
@@ -375,6 +376,7 @@
             this.y = postationArr[1];
             var findObj = this;
 
+            //move the car text and the coordination accordingly.
             appManager.vehicle.forEach(function (item, index) {
                 if (item.obj === findObj) {
                     item.textObj.x = postationArr[0] - 15;
@@ -382,6 +384,26 @@
                     item.carLocText.text = '(' + postationArr[0] .toString() + ',' + postationArr[1].toString()+')';
                     item.carLocText.x = postationArr[0] - 25;
                     item.carLocText.y = postationArr[1]  + 25;
+                    //the length of the car is 40
+                    if (timeSpan < 100) {
+                        switch (item.direction) {
+                            case 'northward':
+                                item.direction = 'eastward';
+                                break;
+                            case 'southward':
+                                item.direction = 'westward';
+                                break;
+                            case 'eastward':
+                                item.direction = 'southward';
+                                break;
+                            case 'westward':
+                                item.direction = 'northward';
+                                break;
+                            default:
+                                console.log('direction format wrong');
+                                break;
+                        }
+                    }
                 }
             });
 

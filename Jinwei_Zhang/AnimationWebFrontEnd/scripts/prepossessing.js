@@ -22,7 +22,7 @@
                 //display the new program in the text box.
                 document.getElementById("exampleFormControlTextarea1").value = newProgram;
                 //run the new program in the LPS runner.
-                LPSRunner(program, null);
+                LPSRunner(newProgram, null);
 
 
             } else {
@@ -82,7 +82,7 @@
                     // appManager.clearContent();
                     appManager.clearContent();
                     appManager.createVisualizer();
-                    LPSInitializer(contents,null);
+                    LPSInitializer(contents, null);
 
 
                 };
@@ -127,8 +127,13 @@
         //the heading is optional. If there is a heading then get the heading as the form of
         this.getHeading = this.matchArray[5];
 
-
-
+        this.writeOut = function () {
+            return this.getFluent + '('
+                + this.getObjectName
+                + ',' + this.matchArray[2]
+                + '('+ this.X.toString()+','+ this.Y.toString()+'),'
+                + this.getHeading + '),'
+        }
     }
 
     /*
@@ -188,8 +193,9 @@
 
     }
 
-
-    // this parser file is the parser for te animated cloud.
+    /*
+    * this parser file is the parser for te animated cloud.
+    * */
     function Cloud(fullPhrase) {
 
         //the full phrase of the user defined fluent such as loc(car, 1650, 340)).
@@ -205,11 +211,78 @@
 
     }
 
+    /*
+   * this parser file is the parser for te testing the program.
+   * */
+    function ProgramModifier(program) {
 
-    function ProgramModifier(program){
+        var arr = program.split("\n");
+        // keep a start index of initially block
+        var start = 0;
 
-        return newProgram
+        while (!arr[start].trim().startsWith('initially')) {
+            start += 1;
+        }
+
+        // keep a end index of initially block
+        var end = start;
+
+        while (!arr[end].trim().startsWith(']).')) {
+            end += 1;
+        }
+
+        console.log(start, end);
+        var found = false;
+        var carSetProgram = new Set();
+        var carSetManager = new Set(appManager.vehicle);
+        //loop through the initial block and change the car location and state.
+        for (i = end; i > start; i--) {
+            //if we find a line like moving(car2)
+            if (arr[i].trim().startsWith('moving')) {
+                console.log(arr[i]);
+                found = false;
+                var matchArray1 = arr[i].match(/(\w+)/g);
+                carName = matchArray1[1];
+
+                // if we do find a same car in the manager
+                if (carSetManager.has(carName)){
+                    carSetProgram.add(carName);
+
+                }else{
+                    arr.splice(i, 1);
+                }
+
+                // arr.splice(i, 1);
+            } else if (arr[i].trim().startsWith('location')) {
+                console.log(arr[i]);
+                found = false;
+                var loc = new VehicleLoc(arr[i].trim(), 0);
+
+                // if we do find a same car in the manager
+                    if(carSetManager.has(loc.getObjectName)){
+                        //found is true meaning there is the same car in the appManager only need to do modification to location
+                        loc.X = item.obj.x;
+                        loc.Y = item.obj.y;
+                        loc.getHeading = item.direction;
+                        arr[i] = loc.writeOut();
+                    }else{
+                        //   did not find car2 in the appManger (it has been deleted by the user) remove the moving line
+                        arr.splice(i, 1);
+                    }
+            }
+        }
+
+        //loop through the appManager check if there is added car
+        appManager.vehicle.forEach(function (item,index) {
+            if(item.name === carName){
+                //found is true meaning there is the same car in the appManager only need to do modification to location
+                found = true
+            }
+        });
+
+        return arr.join("\n");
     }
+
     /*
     * This function will be called when the animate button is clicked.
     * */
@@ -258,7 +331,7 @@
                     //     //Do something
                     // } else
 
-                        if (currentTime > 1) {
+                    if (currentTime > 1) {
                         console.log(currentTime);
 
                         fluents.forEach(function (item, index) {
@@ -341,8 +414,6 @@
                         appManager.createTrafficLight(light.X, light.Y, light.color);
                     }
                 });
-
-
 
 
             }).catch((err) => {

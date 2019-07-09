@@ -98,7 +98,13 @@ function VehicleLoc(fullPhrase, timeStamp) {
     //the heading is optional. If there is a heading then get the heading as the form of
     this.getHeading = this.matchArray[5];
 
-
+    this.writeOut = function () {
+        return this.getFluent + '('
+            + this.getObjectName
+            + ',' + this.matchArray[2]
+            + '('+ this.X.toString()+','+ this.Y.toString()+'),'
+            + this.getHeading + '),'
+    }
 
 }
 
@@ -120,9 +126,12 @@ function VehicleLoc(fullPhrase, timeStamp) {
 
 
 var obj2 = new VehicleLoc('location(car0, coordinate(9, 9), eastward)', 30);
+obj2.getHeading = 'northward';
 console.log('Fluent: ' + obj2.getFluent);
 console.log('heading: ' + obj2.getHeading);
 console.log('Object name: ' + obj2.getObjectName);
 console.log('Timestamp: ' + obj2.timeStamp);
 console.log('x: ' + obj2.X);
 console.log('y: ' + obj2.Y);
+
+console.log(obj2.writeOut());
