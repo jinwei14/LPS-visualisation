@@ -47,6 +47,19 @@ initially([
  %  goal(car1,coordinate(120, 525)),
  %  goal(car2,coordinate(120, 525)),
 
+ stopped(car0),
+ stopped(car1),
+ stopped(car2),
+%  normal start one on the mainstreet and other on the southStreet
+% carA wants to go straight from mainStreet, carB want to turn left from southStreet
+ location(car0, coordinate(145, 475), eastward),
+ location(car1, coordinate(475, 880), northward),
+ location(car2,coordinate(700,525),westward),
+ goal(car0,coordinate(980, 475)),
+ goal(car1,coordinate(120, 525)),
+ goal(car2,coordinate(120, 525)),
+
+
   % % %  carA start from Tjunction
   %  %  % normal start one on the mainstreet and other on the southStreet
   %  % carA wants to go straight from mainStreet, carB want to turn left from southStreet
@@ -83,13 +96,13 @@ initially([
   %   goal(carA,coordinate(980, 175)),
   %   goal(carB,coordinate(145, 225)),
 
-  % a stoped car near  another car
-   moving(car0),
-   stopped(car1),
-   location(car0, coordinate(145, 475), eastward),
-   location(car1, coordinate(200, 525), northward),
-   goal(car0,coordinate(980, 475)),
-   goal(car1,coordinate(200, 525)),
+  % % a stoped car near  another car
+  %  moving(car0),
+  %  stopped(car1),
+  %  location(car0, coordinate(145, 475), eastward),
+  %  location(car1, coordinate(200, 525), northward),
+  %  goal(car0,coordinate(980, 475)),
+  %  goal(car1,coordinate(200, 525)),
 
 
   % the position that the car might step on, a traffic light is defined here for further instructions.
@@ -294,6 +307,7 @@ drive(Vehicle) from T to T1 <-
 % this is also not perfect need further development
 <- step(Vehicle, NextPlace),
   collisionPossible(Vehicle, Vehicle2) at T,
+  onSameRoad(Vehicle,Vehicle2) at T,
   stopped(Vehicle2).
 
 % case where car should not step forward is that your goal is on your left but you are facing in a wrong direction
@@ -352,6 +366,16 @@ onMainRoad(Vehicle) at T <-
   X<=A+Width, X>=A,
   Y<=B+Height, Y>=B,
   Priority > 0.
+
+onSameRoad(Vehicle1,Vehicle2) at T <-
+  Vehicle1 != Vehicle2,
+  location(Vehicle1, coordinate(X1, Y1), Direction1) at T,
+  location(Vehicle2, coordinate(X2, Y2), Direction2) at T,
+  street(StreetName, coordinate(A, B), Width, Height, Number_of_lane, Priority),
+  X1<=A+Width, X1>=A,
+  Y1<=B+Height, Y1>=B,
+  X2<=A+Width, X2>=A,
+  Y2<=B+Height, Y2>=B.
 
 opposite(Dir1,Dir2)<-Dir1 == eastward, Dir2 = westward.
 opposite(Dir1,Dir2)<-Dir1 == westward, Dir2 = eastward.
