@@ -27,7 +27,7 @@ fluents([
 %   placeBlockingItem(Item,coordinate(X, Y))
 % ]).
 
-observe(placeBlockingItem(blockedItem,coordinate(100, 100)), 5,  6).
+ observe(placeBlockingItem(cross,coordinate(850, 475)), 10,  20).
 
 
 actions ([
@@ -35,7 +35,8 @@ actions ([
   turn(Vehicle, NewHeading),
   arrive(Vehicle),
   restart(Vehicle),
-  changeTrafficLight(Place,Color)
+  changeTrafficLight(Place,Color),
+  placeBlockingItem(Item,Place)
 ]).
 
 initially([
@@ -380,6 +381,7 @@ updates(restart(Vehicle) , location(VehicleIns, OldPlace, OldDirection),  locati
 
 initiates(placeBlockingItem(Item,Place), stopped(Item)).
 initiates(placeBlockingItem(Item,Place), location(Item, Place, _)).
+
 % % decision making will give a waiting state if car is not stopped
 % terminates(decision_making(Vehicle), moving(Vehicle))<- not stopped(Vehicle).
 % initiates(decision_making(Vehicle), waitting(Vehicle))<- not stopped(Vehicle).

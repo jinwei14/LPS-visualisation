@@ -8,7 +8,8 @@
     var appManager = {
         vehicle: [],
         street: [],
-        lights: []
+        lights: [],
+        block: []
     };
 
     var dataManager = {
@@ -620,7 +621,7 @@
 
 
      /*
-     * correct the coordinate on to the street.
+     * correct the coordinate on to the street. use might place the car onto other part rather than the road
      * */
      appManager.coordinateCorrection = function(x, y){
          var newX = x;
@@ -648,6 +649,49 @@
          });
 
          return [ Math.round(newX),  Math.round(newY)]
+     };
+
+     /*
+     * When there is a blocked item placed by user/program the front end will show up a cross
+     * */
+     appManager.createBlockItem =function(x, y, itemName){
+         console.log('creating createBlockItem has been called in animation.js ' + window.name);
+         console.log( x, y, itemName);
+         var blockItemInstance = null;
+
+        // leave the item for further development.
+        switch (itemName) {
+            case 'cross':
+                blockItemInstance = PIXI.Sprite.from('imgs/cross.png');
+                break;
+
+            case 'brokencar':
+                blockItemInstance = PIXI.Sprite.from('imgs/brokencar.png');
+                break;
+
+            case 'pedestrian':
+                blockItemInstance = PIXI.Sprite.from('imgs/pedestrian.png');
+                break
+
+            case 'hole':
+                blockItemInstance = PIXI.Sprite.from('imgs/hole.png');
+                break;
+
+            default:
+                blockItemInstance = PIXI.Sprite.from('imgs/cross.png');
+                break
+        }
+
+
+         blockItemInstance.anchor.set(0.5);
+         blockItemInstance.x = x;
+         blockItemInstance.y = y;
+
+         appManager.block.push({
+             name: itemName,
+             obj: blockItemInstance
+         });
+         app.stage.addChild(blockItemInstance);
      };
 
     window.appManager = appManager;
