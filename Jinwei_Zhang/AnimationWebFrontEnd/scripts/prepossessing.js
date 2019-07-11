@@ -281,12 +281,31 @@
 
         console.log(carSetProgram);
         console.log(carSetManager);
-        //loop through the appManager check if there is added car
+        //loop through the appManager check if there is added car then give a random goal just for fun right now
         appManager.vehicle.forEach(function (item,index) {
             //if the program set do not contain some car in the manager set then we should insert the new car into the program
             if(!carSetProgram.has(item.name)){
                 arr.splice(start+1,0,'moving('+item.name+'),');
                 arr.splice(start+2,0,'location('+item.name+', coordinate('+item.obj.x.toString()+','+item.obj.y.toString()+'),'+item.direction+'),');
+                switch (item.direction) {
+                    case 'northward':
+                        arr.splice(start+3,0,'goal('+item.name+', coordinate('+item.obj.x.toString()+','+(item.obj.y-100).toString()+')),');
+                        break;
+                    case 'southward':
+                        arr.splice(start+3,0,'goal('+item.name+', coordinate('+item.obj.x.toString()+','+(item.obj.y+100).toString()+')),');
+                        break;
+                    case 'westward':
+                        arr.splice(start+3,0,'goal('+item.name+', coordinate('+(item.obj.x-100).toString()+','+item.obj.y.toString()+')),');
+                        break;
+                    case 'eastward':
+                        arr.splice(start+3,0,'goal('+item.name+', coordinate('+(item.obj.x+100).toString()+','+item.obj.y.toString()+')),');
+                        break;
+                    default:
+                        console.log(err);
+                        alert('direction wrong');
+
+                }
+
             }
         });
 
