@@ -352,7 +352,7 @@
                         //     console.log(observations);
                         //      console.log(observations[0]);
                         //     let matchArray = observations[0].match(/(\w+)/g);
-                        //     if (matchArray[0].toLowerCase() === 'changetrafficlight'){
+                        //     if (matchArray[0].toLowerCase() === 'placeblockingitem'){
                         //         lightX = parseInt(matchArray[2],10);
                         //         lightY = parseInt(matchArray[3],10);
                         //         appManager.changeTrafficLight(lightX,lightY,matchArray[4]);

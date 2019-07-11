@@ -22,10 +22,19 @@ fluents([
 
 ]).
 
-% events will reserved for traffic lights
-events ([
+% % events will reserved for user placing blocked item.
+% events ([
+%   placeBlockingItem(Item,coordinate(X, Y))
+% ]).
 
-]).
+observe(placeBlockingItem(blockedItem,coordinate(100, 100)), 5,  6).
+
+% event(😀).
+% action(😆).
+% observe(😀, 1, 2).
+%
+% 😀 from T1 to T2 ->
+%   😆 from T2 to T3.
 
 actions ([
   step(Vehicle, NextPlace),
@@ -130,6 +139,9 @@ cloud(coordinate(800,120)).
 %   Xu==475,Yu==200,Xd == 9, Yd == 9.
 
 % ---------------------------------Reactive rules---------------------------------------------
+
+
+
 trafficLight(coordinate(X, Y), Color, FacingDirection,Street) at T->
   opposite(Color,Color2),
   Reminder = mod(T,40),
@@ -289,6 +301,8 @@ drive(Vehicle) from T to T1 <-
 
 
 
+
+
 % this is also not perfect need further development
 <- step(Vehicle, NextPlace),
   collisionPossible(Vehicle, Vehicle2) at T,
@@ -381,6 +395,9 @@ updates(restart(Vehicle) , location(VehicleIns, OldPlace, OldDirection),  locati
   VehicleIns == Vehicle,
   startLocation(Vehicle,NextPlace,NewDirection).
 
+
+initiates(placeBlockingItem(Item,Place), stopped(Item)).
+initiates(placeBlockingItem(Item,Place), location(Item, Place, _)).
 % % decision making will give a waiting state if car is not stopped
 % terminates(decision_making(Vehicle), moving(Vehicle))<- not stopped(Vehicle).
 % initiates(decision_making(Vehicle), waitting(Vehicle))<- not stopped(Vehicle).

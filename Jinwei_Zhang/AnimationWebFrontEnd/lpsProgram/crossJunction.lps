@@ -22,10 +22,10 @@ fluents([
 
 ]).
 
-% events will reserved for traffic lights
-events ([
-
-]).
+% % events will reserved for user placing blocked item.
+% events ([
+%   placingBlockedItem()
+% ]).
 
 actions ([
   step(Vehicle, NextPlace),
@@ -35,17 +35,17 @@ actions ([
 ]).
 
 initially([
-  moving(car0),
-  moving(car1),
-  moving(car2),
- %  normal start one on the mainstreet and other on the southStreet
- % carA wants to go straight from mainStreet, carB want to turn left from southStreet
-  location(car0, coordinate(145, 475), eastward),
-  location(car1, coordinate(475, 880), northward),
-  location(car2,coordinate(700,525),westward),
-  goal(car0,coordinate(980, 475)),
-  goal(car1,coordinate(120, 525)),
-  goal(car2,coordinate(120, 525)),
+ %  moving(car0),
+ %  moving(car1),
+ %  moving(car2),
+ % %  normal start one on the mainstreet and other on the southStreet
+ % % carA wants to go straight from mainStreet, carB want to turn left from southStreet
+ %  location(car0, coordinate(145, 475), eastward),
+ %  location(car1, coordinate(475, 880), northward),
+ %  location(car2,coordinate(700,525),westward),
+ %  goal(car0,coordinate(980, 475)),
+ %  goal(car1,coordinate(120, 525)),
+ %  goal(car2,coordinate(120, 525)),
 
   % % %  carA start from Tjunction
   %  %  % normal start one on the mainstreet and other on the southStreet
@@ -82,6 +82,15 @@ initially([
   %   location(carB, coordinate(980 ,225), westward),
   %   goal(carA,coordinate(980, 175)),
   %   goal(carB,coordinate(145, 225)),
+
+  % a stoped car near  another car
+   moving(car0),
+   stopped(car1),
+   location(car0, coordinate(145, 475), eastward),
+   location(car1, coordinate(200, 525), northward),
+   goal(car0,coordinate(980, 475)),
+   goal(car1,coordinate(200, 525)),
+
 
   % the position that the car might step on, a traffic light is defined here for further instructions.
   trafficLight(coordinate(430, 475), red, westward, mainStreet),
@@ -143,7 +152,7 @@ location(Vehicle, coordinate(X, Y), Direction),
   moving(Vehicle) at T ->
     % need to find the right direction here
     % driving forward
-    % testPrint(Vehicle+' '+X+' '+Y+' Direction '+Direction + '----------------Reactive rule----------------'),
+    testPrint(Vehicle+' '+X+' '+Y+' Direction '+Direction + '----------------Reactive rule----------------'),
     direction(Vehicle) at T.
 
 
