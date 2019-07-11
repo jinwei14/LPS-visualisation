@@ -27,7 +27,7 @@ fluents([
 %   placeBlockingItem(Item,coordinate(X, Y))
 % ]).
 
- observe(placeBlockingItem(cross,coordinate(850, 475)), 10,  20).
+% observe(placeBlockingItem(cross,coordinate(850, 475)), 10,  20).
 
 
 actions ([
