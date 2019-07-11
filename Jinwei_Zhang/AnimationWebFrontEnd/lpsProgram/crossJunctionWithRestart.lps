@@ -24,28 +24,38 @@ fluents([
 
 % % events will reserved for user placing blocked item.
 % events ([
-%   placingBlockedItem()
+%   placeBlockingItem(Item,coordinate(X, Y))
 % ]).
+
+observe(placeBlockingItem(blockedItem,coordinate(100, 100)), 5,  6).
+
+% event(😀).
+% action(😆).
+% observe(😀, 1, 2).
+%
+% 😀 from T1 to T2 ->
+%   😆 from T2 to T3.
 
 actions ([
   step(Vehicle, NextPlace),
   turn(Vehicle, NewHeading),
   arrive(Vehicle),
+  restart(Vehicle),
   changeTrafficLight(Place,Color)
 ]).
 
 initially([
- %  moving(car0),
- %  moving(car1),
- %  moving(car2),
- % %  normal start one on the mainstreet and other on the southStreet
- % % carA wants to go straight from mainStreet, carB want to turn left from southStreet
- %  location(car0, coordinate(145, 475), eastward),
- %  location(car1, coordinate(475, 880), northward),
- %  location(car2,coordinate(700,525),westward),
- %  goal(car0,coordinate(980, 475)),
- %  goal(car1,coordinate(120, 525)),
- %  goal(car2,coordinate(120, 525)),
+  moving(car0),
+  moving(car1),
+  moving(car2),
+ %  normal start one on the mainstreet and other on the southStreet
+ % carA wants to go straight from mainStreet, carB want to turn left from southStreet
+ location(car0, coordinate(145, 475), eastward),
+ location(car1, coordinate(475, 880), northward),
+ location(car2,coordinate(700,525),westward),
+ goal(car0,coordinate(980, 475)),
+ goal(car1,coordinate(120, 525)),
+ goal(car2,coordinate(120, 525)),
 
   % % %  carA start from Tjunction
   %  %  % normal start one on the mainstreet and other on the southStreet
@@ -83,15 +93,6 @@ initially([
   %   goal(carA,coordinate(980, 175)),
   %   goal(carB,coordinate(145, 225)),
 
-  % a stoped car near  another car
-   moving(car0),
-   stopped(car1),
-   location(car0, coordinate(145, 475), eastward),
-   location(car1, coordinate(200, 525), northward),
-   goal(car0,coordinate(980, 475)),
-   goal(car1,coordinate(200, 525)),
-
-
   % the position that the car might step on, a traffic light is defined here for further instructions.
   trafficLight(coordinate(430, 475), red, westward, mainStreet),
   trafficLight(coordinate(575, 525), red, eastward, mainStreet),
@@ -99,6 +100,10 @@ initially([
   trafficLight(coordinate(525, 430), green, northward, northStreet)
 
 ]).
+
+startLocation(car0, coordinate(145, 475), eastward),
+startLocation(car1, coordinate(475, 880), northward),
+startLocation(car2,coordinate(700,525),westward),
 
 % define the junction coordinate facts
 % junction(Name,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H))
@@ -134,6 +139,9 @@ cloud(coordinate(800,120)).
 %   Xu==475,Yu==200,Xd == 9, Yd == 9.
 
 % ---------------------------------Reactive rules---------------------------------------------
+
+
+
 trafficLight(coordinate(X, Y), Color, FacingDirection,Street) at T->
   opposite(Color,Color2),
   Reminder = mod(T,40),
@@ -146,13 +154,15 @@ location(Vehicle, coordinate(X, Y), Direction), A==X, B==Y,moving(Vehicle) at T 
   % testPrint(Vehicle+ ' we have arrived'),
   arrive(Vehicle) at T.
 
+stopped(Vehicle) at T ->
+  restart(Vehicle) at T.
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
 location(Vehicle, coordinate(X, Y), Direction),
   moving(Vehicle) at T ->
     % need to find the right direction here
     % driving forward
-    testPrint(Vehicle+' '+X+' '+Y+' Direction '+Direction + '----------------Reactive rule----------------'),
+    % testPrint(Vehicle+' '+X+' '+Y+' Direction '+Direction + '----------------Reactive rule----------------'),
     direction(Vehicle) at T.
 
 
@@ -291,6 +301,8 @@ drive(Vehicle) from T to T1 <-
 
 
 
+
+
 % this is also not perfect need further development
 <- step(Vehicle, NextPlace),
   collisionPossible(Vehicle, Vehicle2) at T,
@@ -377,6 +389,15 @@ updates(changeTrafficLight(Place,Color) , trafficLight(PlaceIns, OldColor, _, _)
 terminates(arrive(Vehicle), moving(Vehicle)).
 initiates(arrive(Vehicle), stopped(Vehicle)).
 
+terminates(restart(Vehicle),  stopped(Vehicle)).
+initiates(restart(Vehicle), moving(Vehicle)).
+updates(restart(Vehicle) , location(VehicleIns, OldPlace, OldDirection),  location(VehicleIns, NextPlace, NewDirection))<-
+  VehicleIns == Vehicle,
+  startLocation(Vehicle,NextPlace,NewDirection).
+
+
+initiates(placeBlockingItem(Item,Place), stopped(Item)).
+initiates(placeBlockingItem(Item,Place), location(Item, Place, _)).
 % % decision making will give a waiting state if car is not stopped
 % terminates(decision_making(Vehicle), moving(Vehicle))<- not stopped(Vehicle).
 % initiates(decision_making(Vehicle), waitting(Vehicle))<- not stopped(Vehicle).
