@@ -233,19 +233,26 @@
 
         console.log(start, end);
         var found = false;
+        //a set  of cars which is in user text input
         var carSetProgram = new Set();
-        var carSetManager = new Set(appManager.vehicle);
-        //loop through the initial block and change the car location and state.
+        //a set  of cars which is modified after canvas was showed.
+        var carSetManager = {};
+        appManager.vehicle.forEach(function (item) {
+            carSetManager[item.name] = item
+        });
+
+        //loop through the initial text block and change the car location and state. (deletion and modification)
         for (i = end; i > start; i--) {
             //if we find a line like moving(car2)
-            if (arr[i].trim().startsWith('moving')) {
+            if (arr[i].trim().startsWith('moving') || arr[i].trim().startsWith('stopped')) {
                 console.log(arr[i]);
                 found = false;
                 var matchArray1 = arr[i].match(/(\w+)/g);
                 carName = matchArray1[1];
 
                 // if we do find a same car in the manager
-                if (carSetManager.has(carName)){
+                console.log(carName);
+                if (carName in carSetManager){
                     carSetProgram.add(carName);
 
                 }else{
@@ -259,11 +266,11 @@
                 var loc = new VehicleLoc(arr[i].trim(), 0);
 
                 // if we do find a same car in the manager
-                    if(carSetManager.has(loc.getObjectName)){
+                    if( loc.getObjectName in carSetManager){
                         //found is true meaning there is the same car in the appManager only need to do modification to location
-                        loc.X = item.obj.x;
-                        loc.Y = item.obj.y;
-                        loc.getHeading = item.direction;
+                        loc.X = carSetManager[loc.getObjectName].obj.x;
+                        loc.Y = carSetManager[loc.getObjectName].obj.y;
+                        loc.getHeading = carSetManager[loc.getObjectName].direction;
                         arr[i] = loc.writeOut();
                     }else{
                         //   did not find car2 in the appManger (it has been deleted by the user) remove the moving line
@@ -272,6 +279,8 @@
             }
         }
 
+        console.log(carSetProgram);
+        console.log(carSetManager);
         //loop through the appManager check if there is added car
         appManager.vehicle.forEach(function (item,index) {
             //if the program set do not contain some car in the manager set then we should insert the new car into the program

@@ -306,6 +306,7 @@ drive(Vehicle) from T to T1 <-
 % this is also not perfect need further development
 <- step(Vehicle, NextPlace),
   collisionPossible(Vehicle, Vehicle2) at T,
+  onSameRoad(Vehicle,Vehicle2) at T,
   stopped(Vehicle2).
 
 % case where car should not step forward is that your goal is on your left but you are facing in a wrong direction
@@ -364,6 +365,16 @@ onMainRoad(Vehicle) at T <-
   X<=A+Width, X>=A,
   Y<=B+Height, Y>=B,
   Priority > 0.
+
+onSameRoad(Vehicle1,Vehicle2) at T <-
+  Vehicle1 != Vehicle2,
+  location(Vehicle1, coordinate(X1, Y1), Direction1) at T,
+  location(Vehicle2, coordinate(X2, Y2), Direction2) at T,
+  street(StreetName, coordinate(A, B), Width, Height, Number_of_lane, Priority),
+  X1<=A+Width, X1>=A,
+  Y1<=B+Height, Y1>=B,
+  X2<=A+Width, X2>=A,
+  Y2<=B+Height, Y2>=B.
 
 opposite(Dir1,Dir2)<-Dir1 == eastward, Dir2 = westward.
 opposite(Dir1,Dir2)<-Dir1 == westward, Dir2 = eastward.
