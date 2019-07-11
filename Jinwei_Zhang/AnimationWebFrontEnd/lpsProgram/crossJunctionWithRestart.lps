@@ -29,12 +29,6 @@ fluents([
 
 observe(placeBlockingItem(blockedItem,coordinate(100, 100)), 5,  6).
 
-% event(😀).
-% action(😆).
-% observe(😀, 1, 2).
-%
-% 😀 from T1 to T2 ->
-%   😆 from T2 to T3.
 
 actions ([
   step(Vehicle, NextPlace),
@@ -45,59 +39,35 @@ actions ([
 ]).
 
 initially([
-  moving(car0),
-  moving(car1),
-  moving(car2),
- %  normal start one on the mainstreet and other on the southStreet
- % carA wants to go straight from mainStreet, carB want to turn left from southStreet
- location(car0, coordinate(145, 475), eastward),
- location(car1, coordinate(475, 880), northward),
- location(car2,coordinate(700,525),westward),
- goal(car0,coordinate(980, 475)),
- goal(car1,coordinate(120, 525)),
- goal(car2,coordinate(120, 525)),
+   %  stopped(car0),
+   %  stopped(car1),
+   %  stopped(car2),
+   moving(car0),
+   moving(car1),
+   moving(car2),
+  %  normal start one on the mainstreet and other on the southStreet
+  % carA wants to go straight from mainStreet, carB want to turn left from southStreet
+   location(car0, coordinate(145, 475), eastward),
+   location(car1, coordinate(475, 880), northward),
+   location(car2,coordinate(700,525),westward),
+   goal(car0,coordinate(980, 475)),
+   goal(car1,coordinate(120, 525)),
+   goal(car2,coordinate(120, 525)),
 
-  % % %  carA start from Tjunction
-  %  %  % normal start one on the mainstreet and other on the southStreet
-  %  % carA wants to go straight from mainStreet, carB want to turn left from southStreet
-  % location(carA, coordinate(500, 175), eastward),
-  % location(carB, coordinate(500 ,300), northward),
-  % goal(carA,coordinate(980, 175)),
-  % goal(carB,coordinate(120, 225)),
-
-  % % %carA carB start driving to a same goal straightly
-  %   location(carA, coordinate(145, 175), eastward),
-  %   location(carB, coordinate(200, 175), eastward),
-  %   goal(carA,coordinate(980, 225)),
-  %   goal(carB,coordinate(980, 225)),
+   % % a stoped car near  another car
+   %  moving(car0),
+   %  stopped(car1),
+   %  location(car0, coordinate(145, 475), eastward),
+   %  location(car1, coordinate(200, 525), westward),
+   %  goal(car0,coordinate(980, 475)),
+   %  goal(car1,coordinate(200, 525)),
 
 
-  % % %carA carB start driving to a same goal both turnnig into southStreet
-  %   location(carA, coordinate(145, 175), eastward),
-  %   location(carB, coordinate(200, 175), eastward),
-  %   goal(carA,coordinate(500, 580)),
-  %   goal(carB,coordinate(500, 580)),
-
-
-% %carB turn left from southStreet, carA turn right from mainStreet
-%   location(carA, coordinate(145, 175), eastward),
-%   location(carB, coordinate(500, 580), northward),
-%   goal(carA,coordinate(500, 580)),
-%   goal(carB,coordinate(145, 225)),
-
-
-
-  % % carA carB drivr opposite to each other
-  %   location(carA, coordinate(450, 175), eastward),
-  %   location(carB, coordinate(980 ,225), westward),
-  %   goal(carA,coordinate(980, 175)),
-  %   goal(carB,coordinate(145, 225)),
-
-  % the position that the car might step on, a traffic light is defined here for further instructions.
-  trafficLight(coordinate(430, 475), red, westward, mainStreet),
-  trafficLight(coordinate(575, 525), red, eastward, mainStreet),
-  trafficLight(coordinate(475, 570), green, southward, southStreet),
-  trafficLight(coordinate(525, 430), green, northward, northStreet)
+   % the position that the car might step on, a traffic light is defined here for further instructions.
+   trafficLight(coordinate(430, 475), red, westward, mainStreet),
+   trafficLight(coordinate(575, 525), red, eastward, mainStreet),
+   trafficLight(coordinate(475, 570), green, southward, southStreet),
+   trafficLight(coordinate(525, 430), green, northward, northStreet)
 
 ]).
 
@@ -154,7 +124,8 @@ location(Vehicle, coordinate(X, Y), Direction), A==X, B==Y,moving(Vehicle) at T 
   % testPrint(Vehicle+ ' we have arrived'),
   arrive(Vehicle) at T.
 
-stopped(Vehicle) at T ->
+% if the car is stopped and it has a start location.
+stopped(Vehicle) at T ,startLocation(Vehicle, _, _)->
   restart(Vehicle) at T.
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
