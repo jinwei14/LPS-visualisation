@@ -22,10 +22,10 @@ fluents([
 
 ]).
 
-% events will reserved for traffic lights
-events ([
-
-]).
+% % events will reserved for user input item to block the car
+% events ([
+%
+% ]).
 
 actions ([
   step(Vehicle, NextPlace),
