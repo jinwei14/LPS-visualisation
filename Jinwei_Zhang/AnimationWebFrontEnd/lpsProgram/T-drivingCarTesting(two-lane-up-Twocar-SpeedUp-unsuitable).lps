@@ -1,0 +1,391 @@
+% LPS visualisation for self-driving car
+% Define street as: street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane) eg: street(piccadillyRoad, coordinate(9, 9), 80, 70, 2)
+% Define location of car as location(Name_of_car, coordinate(X, Y), Direction) eg: location(yourCar, coordinate(9, 9), eastward)
+% Define traffic light as trafficLight(coordinate(X, Y), Working_status, Color, FacingDirection) eg: trafficLight(coordinate(2, 2), on, Red, eastward)
+
+% we assume the destination is reachable
+% and car length is 40 x 40 based on the image
+% speed is 5 unit per cycle.
+maxTime(200).
+cycleInterval(10).
+
+loadModule('../scripts/module.js').
+
+fluents([
+  velocity(VehicleName, Speed),
+  stopped(VehicleName),
+  moving(VehicleName),
+  coordinate(X, Y),
+  location(VehicleName, coordinate(X, Y), Direction),
+  trafficLight(coordinate(X, Y), Working_status, Color, FacingDirection),
+  street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane, Priority),
+  goal(VehicleName,coordinate(X, Y))
+
+]).
+
+% events will reserved for traffic lights
+events ([
+
+]).
+
+actions ([
+  step(Vehicle, NextPlace),
+  turn(Vehicle, NewHeading),
+  arrive(Vehicle)
+]).
+
+initially([
+  moving(carA),
+  moving(carB),
+ %  normal start one on the mainstreet and other on the southStreet
+ % carA wants to go straight from mainStreet, carB want to turn left from southStreet
+  location(carA, coordinate(145, 175), eastward),
+  location(carB, coordinate(500, 580), northward),
+  goal(carA,coordinate(980, 175)),
+  goal(carB,coordinate(120, 225))
+
+  % % %  carA start from Tjunction
+  %  %  % normal start one on the mainstreet and other on the southStreet
+  %  % carA wants to go straight from mainStreet, carB want to turn left from southStreet
+  % location(carA, coordinate(500, 175), eastward),
+  % location(carB, coordinate(500 ,300), northward),
+  % goal(carA,coordinate(980, 175)),
+  % goal(carB,coordinate(120, 225))
+
+  % % %carA carB start driving to a same goal straightly
+  %   location(carA, coordinate(145, 175), eastward),
+  %   location(carB, coordinate(200, 175), eastward),
+  %   goal(carA,coordinate(980, 225)),
+  %   goal(carB,coordinate(980, 225))
+
+
+  % % %carA carB start driving to a same goal both turnnig into southStreet
+  %   location(carA, coordinate(145, 175), eastward),
+  %   location(carB, coordinate(200, 175), eastward),
+  %   goal(carA,coordinate(500, 580)),
+  %   goal(carB,coordinate(500, 580))
+
+
+% %carB turn left from southStreet, carA turn right from mainStreet
+%   location(carA, coordinate(145, 175), eastward),
+%   location(carB, coordinate(500, 580), northward),
+%   goal(carA,coordinate(500, 580)),
+%   goal(carB,coordinate(145, 225))
+
+  % % carA carB drive opposite to each other
+  %   location(carA, coordinate(450, 175), eastward),
+  %   location(carB, coordinate(980 ,225), westward),
+  %   goal(carA,coordinate(980, 175)),
+  %   goal(carB,coordinate(145, 225))
+
+  % % % This case still need some improvement
+  % % %carB turn right from southStreet, carA turn right from mainStreet
+  %   location(carA, coordinate(145, 175), eastward),
+  %   location(carB, coordinate(500, 580), northward),
+  %   goal(carA,coordinate(500, 580)),
+  %   goal(carB,coordinate(800, 175))
+
+
+
+]).
+
+% define the junction coordinate
+% junction(Name,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H))
+
+junction(tJuntion1,coordinate(475, 200),coordinate(525, 200),coordinate(475, 250),coordinate(525, 250)).
+
+junction(tJuntion2,coordinate(475, 150),coordinate(525, 150),coordinate(475, 200),coordinate(525, 200)).
+
+
+street(mainStreet , coordinate(100, 150), 900, 50, 2,1).
+
+street(mainStreet , coordinate(100, 200), 900, 50, 2,1).
+
+street(southStreet , coordinate(475, 250), 50, 500, 1,0).
+
+cloud(coordinate(140,100)).
+cloud(coordinate(250,90)).
+cloud(coordinate(300,120)).
+cloud(coordinate(640,100)).
+cloud(coordinate(750,90)).
+cloud(coordinate(800,120)).
+% atTjunction(coordinate(A,B),junction(tJuntion1,coordinate(A1, A2),coordinate(B1, B2),coordinate(C1, C2),coordinate(D1, D2))) <-
+%   X1==475,Y1==200,X2 == 525, Y2 == 200, X3==.
+% atTjunction(tJuntion2,coordinate(475, 150),coordinate(525, 150),coordinate(475, 200),coordinate(525, 200)) <-
+%   Xu==475,Yu==200,Xd == 9, Yd == 9.
+
+% ---------------------------------Reactive rules---------------------------------------------
+goal(Vehicle,coordinate(A, B)) from _ to T,
+location(Vehicle, coordinate(X, Y), Direction), A==X, B==Y,moving(Vehicle) at T ->
+  % testPrint(Vehicle+ ' we have arrived'),
+  arrive(Vehicle) at T.
+
+
+goal(Vehicle,coordinate(A, B)) from _ to T,
+location(Vehicle, coordinate(X, Y), Direction),
+  moving(Vehicle) at T ->
+    % need to find the right direction here
+    % driving forward
+    % testPrint(Vehicle+' '+X+' '+Y+' Direction '+Direction + '----------------Reactive rule----------------'),
+    direction(Vehicle) at T.
+
+
+goal(Vehicle,coordinate(A, B)) from T to T1,
+location(Vehicle, coordinate(X, Y), Direction),
+  moving(Vehicle) at T1 ->
+
+    % testPrint(Vehicle + " start driving"),
+    drive(Vehicle) from T1 to _.
+
+
+% ---------------------------------------------------------------------------------------------
+% the case where car is not at t junction.
+direction(Vehicle) at T<-
+  % testPrint('checking in Juntion or not ?'),
+  location(Vehicle, coordinate(X, Y), _) at T,
+  junction(tJuntion1,coordinate(A1, B1),coordinate(C1, D1),coordinate(E1, F1),coordinate(G1, H1)),
+  junction(tJuntion2,coordinate(A2, B2),coordinate(C2, D2),coordinate(E2, F2),coordinate(G2, H2)),
+  notAtTjunction(X,Y,A1,B1,C1,D1,E1,F1),
+  notAtTjunction(X,Y,A2,B2,C2,D2,E2,F2).
+
+
+
+notAtTjunction(X,Y,A,B,C,D,E,F)<-
+  Y != (B+F)/2.
+notAtTjunction(X,Y,A,B,C,D,E,F)<-
+  X != (A+C)/2.
+
+
+% you only turn when you are in the middle of the juction.
+direction(Vehicle) at T<-
+  % testPrint('checking in turnning westward or not ?'),
+  location(Vehicle, coordinate(X, Y), Direction),
+  goal(Vehicle,coordinate(K, P)),
+  % junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
+  % X == (A+C)/2,
+  % Y == (B+F)/2,
+  P == Y,
+  K < X,
+  % testPrint(Vehicle +' turing westward'),
+  turn(Vehicle,westward) at T.
+
+direction(Vehicle) at T<-
+  % testPrint('checking in turnning eastward or not ?'),
+  location(Vehicle, coordinate(X, Y), Direction),
+  goal(Vehicle,coordinate(K, P)),
+  % junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
+  % X == (A+C)/2,
+  % Y == (B+F)/2,
+  P == Y,
+  K > X,
+  % testPrint(Vehicle +' turing eastward'),
+  turn(Vehicle, eastward) at T.
+
+direction(Vehicle) at T<-
+  % testPrint('checking in turnning northward or not ?'),
+  location(Vehicle, coordinate(X, Y), Direction),
+  goal(Vehicle,coordinate(K, P)),
+  % junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
+  % X == (A+C)/2,
+  % Y == (B+F)/2,
+  K == X,
+  P < Y,
+  % testPrint(Vehicle +' turing northward'),
+  turn(Vehicle,northward) at T.
+
+direction(Vehicle) at T<-
+  location(Vehicle, coordinate(X, Y), Direction),
+  goal(Vehicle,coordinate(K, P)),
+  % junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
+  % X == (A+C)/2,
+  % Y == (B+F)/2,
+  K == X,
+  P > Y,
+  % testPrint('checking in turnning or not ?'),
+  % testPrint(Vehicle +' turing southward'),
+  turn(Vehicle,southward) at T.
+
+
+% ---------------------------------------------------------------------------------------------
+
+
+% drive macro event.
+drive(Vehicle) from T to T1 <-
+  location(Vehicle, coordinate(X, Y), Direction),
+  Direction == northward,
+  NewY = Y - 5,
+  NextPlace = coordinate(X, NewY),
+  % testPrint(Vehicle+ ' move northward'),
+  step(Vehicle, NextPlace) at T1.
+
+drive(Vehicle) from T to T1 <-
+  location(Vehicle, coordinate(X, Y), Direction),
+  Direction == southward,
+  NewY = Y + 5,
+  NextPlace = coordinate(X, NewY),
+  % testPrint(Vehicle+ ' move southward'),
+  step(Vehicle, NextPlace) at T1.
+
+drive(Vehicle) from T to T1 <-
+  location(Vehicle, coordinate(X, Y), Direction),
+  Direction == westward,
+  NewX = X-5,
+  NextPlace = coordinate(NewX, Y),
+  % testPrint(Vehicle+ ' move westward'),
+  step(Vehicle, NextPlace) at T1.
+
+drive(Vehicle) from T to T1 <-
+  location(Vehicle, coordinate(X, Y), Direction),
+  Direction == eastward,
+  NewX = X + 5,
+  NextPlace = coordinate(NewX, Y),
+  % testPrint(Vehicle+ ' move eastward'),
+  step(Vehicle, NextPlace) at T1.
+
+%----------------version 1--------------------------------
+% if Vehicle is at same horizontal level as its goal and there is another car whose
+clearRoute(Vehicle) at T<-
+  location(Vehicle, coordinate(X, Y), _),
+  goal(Vehicle,coordinate(P, Q)),
+  location(Vehicle2, coordinate(A, B), _),
+  Vehicle != Vehicle2,
+  Y == Q,
+  B != Q.
+
+clearRoute(Vehicle) at T<-
+  location(Vehicle, coordinate(X, Y), _),
+  goal(Vehicle,coordinate(P, Q)),
+  location(Vehicle2, coordinate(A, B), _),
+  Vehicle != Vehicle2,
+  A < X,
+  A < P.
+
+clearRoute(Vehicle) at T<-
+  location(Vehicle, coordinate(X, Y), _),
+  goal(Vehicle,coordinate(P, Q)),
+  location(Vehicle2, coordinate(A, B), _),
+  Vehicle != Vehicle2,
+  A < X,
+  A >= P,
+  abs(B-Y) >= 50.
+
+clearRoute(Vehicle) at T<-
+  location(Vehicle, coordinate(X, Y), _),
+  goal(Vehicle,coordinate(P, Q)),
+  location(Vehicle2, coordinate(A, B), _),
+  Vehicle != Vehicle2,
+  A > X,
+  A > P.
+
+% ---------------------------------------------------------------------------------------------
+
+
+% if you dont have a clear route you can not step
+<- step(Vehicle, NextPlace),
+  collisionPossible(Vehicle, Vehicle2) at T,
+  Vehicle != Vehicle2,
+  not clearRoute(Vehicle) at T.
+
+
+
+% both car have clear routes but car on main street can not step
+<- step(Vehicle, NextPlace),
+  not onMainRoad(Vehicle) at T,
+  collisionPossible(Vehicle, Vehicle2) at T,
+  Vehicle != Vehicle2,
+  clearRoute(Vehicle) at T,
+  clearRoute(Vehicle2) at T.
+
+% both car have clear routes and both on the same street and have the same goal.
+<- step(Vehicle, NextPlace),
+  onMainRoad(Vehicle) at T,
+  collisionPossible(Vehicle, Vehicle2) at T,
+  Vehicle != Vehicle2,
+  onMainRoad(Vehicle2) at T,
+  clearRoute(Vehicle) at T,
+  clearRoute(Vehicle2) at T,
+  goal(Vehicle,coordinate(X, Y)),
+  goal(Vehicle2,coordinate(A, B)),
+  A == X,
+  B == Y.
+
+% this is also not perfect need further development
+<- step(Vehicle, NextPlace),
+  collisionPossible(Vehicle, Vehicle2) at T,
+  stopped(Vehicle2).
+
+% case where car should not step forward is that your goal is on your left but you are facing in a wrong direction
+<- step(Vehicle, NextPlace),
+  location(Vehicle, coordinate(A, B), Direction),
+  % street(_, coordinate(A, B), Width, Height, _, _),
+  goal(Vehicle,coordinate(C, D)),
+  A == C,
+  D < B,
+  Direction != northward.
+
+% this bit need furter improvement.
+<- step(Vehicle, NextPlace),
+  location(Vehicle, coordinate(A, B), Direction),
+  % street(_, coordinate(A, B), Width, Height, _, _),
+  goal(Vehicle,coordinate(C, D)),
+  A == C,
+  D > B,
+  Direction != southward.
+
+<- step(Vehicle, NextPlace),
+  location(Vehicle, coordinate(A, B), Direction),
+  % street(_, coordinate(A, B), Width, Height, _, _),
+  goal(Vehicle,coordinate(C, D)),
+  D == B,
+  C < A,
+  Direction != westward.
+
+<- step(Vehicle, NextPlace),
+  location(Vehicle, coordinate(A, B), Direction),
+  % street(_, coordinate(A, B), Width, Height, _, _),
+  goal(Vehicle,coordinate(C, D)),
+  D == B,
+  C > A,
+  Direction != eastward.
+
+collisionPossible(Vehicle1, Vehicle2) at T <-
+
+  location(Vehicle1, coordinate(X, Y), Direction1) at T,
+  location(Vehicle2, coordinate(A, B), Direction2) at T,
+  Vehicle1 != Vehicle2,
+  % testPrint('collisionPossible' + Vehicle1 + ' '+Vehicle2),
+  % there is a collision possiblity if the two direction are not the same
+  % Direction1 != Direction2,
+  warningZone(coordinate(X, Y),coordinate(A, B)).
+
+% warnning zone is two times the length of the car plus 10
+warningZone(coordinate(X, Y),coordinate(A, B)) <-
+  Manhattan = abs(X-A) + abs(Y-B),
+  % 80 is two times the length of the car.s
+  Manhattan <= 90.
+
+onMainRoad(Vehicle) at T <-
+  location(Vehicle, coordinate(X, Y), Direction1) at T,
+  street(StreetName, coordinate(A, B), Width, Height, Number_of_lane, Priority),
+  X<=A+Width, X>=A,
+  Y<=B+Height, Y>=B,
+  Priority > 0.
+
+
+% ---------------------------------------------------------------------------------------------
+
+
+updates(step(Vehicle, NextPlace), location(VehicleIns, OldPlace, Direction),  location(VehicleIns, NextPlace, Direction))<-
+  VehicleIns == Vehicle.
+  % ('updating loc ' + Vehicle + ' '+ NextPlace).
+
+updates(turn(Vehicle, NewHeading) , location(VehicleIns, Place, OldHeading), location(VehicleIns, Place, NewHeading))<-
+  Vehicle == VehicleIns.
+  % ('updating turing ' + Vehicle + ' '+NewHeading).
+
+terminates(arrive(Vehicle), moving(Vehicle)).
+initiates(arrive(Vehicle), stopped(Vehicle)).
+
+% % decision making will give a waiting state if car is not stopped
+% terminates(decision_making(Vehicle), moving(Vehicle))<- not stopped(Vehicle).
+% initiates(decision_making(Vehicle), waitting(Vehicle))<- not stopped(Vehicle).
