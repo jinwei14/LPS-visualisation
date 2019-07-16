@@ -35,28 +35,28 @@ actions ([
 ]).
 
 initially([
- %  %  stopped(car0),
- %  %  stopped(car1),
- %  %  stopped(car2),
- %  moving(car0),
- %  moving(car1),
- %  moving(car2),
- % %  normal start one on the mainstreet and other on the southStreet
- % % carA wants to go straight from mainStreet, carB want to turn left from southStreet
- %  location(car0, coordinate(145, 475), eastward),
- %  location(car1, coordinate(475, 880), northward),
- %  location(car2,coordinate(700,525),westward),
- %  goal(car0,coordinate(980, 475)),
- %  goal(car1,coordinate(120, 525)),
- %  goal(car2,coordinate(120, 525)),
+  %  stopped(car0),
+  %  stopped(car1),
+  %  stopped(car2),
+  moving(car0),
+  moving(car1),
+  moving(car2),
+ %  normal start one on the mainstreet and other on the southStreet
+ % carA wants to go straight from mainStreet, carB want to turn left from southStreet
+  location(car0, coordinate(145, 475), eastward),
+  location(car1, coordinate(475, 880), northward),
+  location(car2,coordinate(700,525),westward),
+  goal(car0,coordinate(980, 475)),
+  goal(car1,coordinate(120, 525)),
+  goal(car2,coordinate(120, 525)),
 
-  % a stoped car near  another car
-   moving(car0),
-   stopped(car1),
-   location(car0, coordinate(145, 475), eastward),
-   location(car1, coordinate(200, 525), westward),
-   goal(car0,coordinate(980, 475)),
-   goal(car1,coordinate(200, 525)),
+  % % a stoped car near  another car
+  %  moving(car0),
+  %  stopped(car1),
+  %  location(car0, coordinate(145, 475), eastward),
+  %  location(car1, coordinate(200, 525), westward),
+  %  goal(car0,coordinate(980, 475)),
+  %  goal(car1,coordinate(200, 525)),
 
 
   % the position that the car might step on, a traffic light is defined here for further instructions.
