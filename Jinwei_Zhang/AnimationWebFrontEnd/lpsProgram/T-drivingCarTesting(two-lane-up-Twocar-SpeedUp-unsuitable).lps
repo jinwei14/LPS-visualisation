@@ -130,9 +130,9 @@ initially([
 % carA does not need to give way to the car running on the narrow
 % two-way lane, because the driving direction will be the same
 
-    location(carA, coordinate(400, 175), eastward),
+    location(carA, coordinate(300, 175), eastward),
     location(carB, coordinate(500, 325), southward),
-    location(carC, coordinate(600, 225), westward),
+    location(carC, coordinate(700, 225), westward),
     goal(carA,coordinate(500, 900)),
     goal(carB,coordinate(500, 900)),
     goal(carC,coordinate(500, 900))
@@ -149,7 +149,6 @@ initially([
 junction(tJuntion1,coordinate(475, 200),coordinate(525, 200),coordinate(475, 250),coordinate(525, 250)).
 
 junction(tJuntion2,coordinate(475, 150),coordinate(525, 150),coordinate(475, 200),coordinate(525, 200)).
-
 
 street(mainStreet , coordinate(100, 150), 900, 50, 2,1).
 
@@ -315,7 +314,8 @@ intention(VehicleName, Plan) <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == northward,
-  NewY = Y - 5,
+  velocity(Vehicle,Speed),
+  NewY = Y - Speed,
   NextPlace = coordinate(X, NewY),
   % testPrint(Vehicle+ ' move northward'),
   step(Vehicle, NextPlace) at T1.
@@ -323,7 +323,8 @@ drive(Vehicle) from T to T1 <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == southward,
-  NewY = Y + 5,
+  velocity(Vehicle,Speed),
+  NewY = Y + Speed,
   NextPlace = coordinate(X, NewY),
   % testPrint(Vehicle+ ' move southward'),
   step(Vehicle, NextPlace) at T1.
@@ -331,7 +332,8 @@ drive(Vehicle) from T to T1 <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == westward,
-  NewX = X-5,
+  velocity(Vehicle,Speed),
+  NewX = X-Speed,
   NextPlace = coordinate(NewX, Y),
   % testPrint(Vehicle+ ' move westward'),
   step(Vehicle, NextPlace) at T1.
@@ -339,7 +341,8 @@ drive(Vehicle) from T to T1 <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == eastward,
-  NewX = X + 5,
+  velocity(Vehicle,Speed),
+  NewX = X + Speed,
   NextPlace = coordinate(NewX, Y),
   % testPrint(Vehicle+ ' move eastward'),
   step(Vehicle, NextPlace) at T1.
