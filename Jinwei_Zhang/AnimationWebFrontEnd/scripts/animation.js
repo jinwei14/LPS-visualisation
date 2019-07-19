@@ -219,7 +219,7 @@
     };
 
     /*
-    * This field will create the Road
+    * This field will create the all the road depends on what the user is defined.
     * */
     appManager.createRoad = function (nameText, x, y, width, height, laneNumber) {
         console.log('creating Road has been called in animation.js ' + window.name);
