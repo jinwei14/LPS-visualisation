@@ -1,6 +1,6 @@
- <img src="./Jinwei_Zhang/logo/logo.png" height = "86" width="195"/>
+
  
-# LPS-visualisation 
+# LPS-visualisation   <img src="./Jinwei_Zhang/logo/logo.png" height = "86" width="195"/>
 
 
 This project will apply and extend a JavaScript implementation of a logic-based language LPS to a multi-agent simulation of self-driving cars. All cars will employ the same set of rules, for driving to a goal destination, for avoiding accidents and for complying with traffic regulations.  For example, if there is a collision warning, and one car is going to turn right, and the other car is driving straight, then the first car should stop and give way to the second car. However, they will have different initial locations and different goal destinations.
