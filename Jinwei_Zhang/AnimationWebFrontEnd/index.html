@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html class="h-100" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>LPS Animation</title>
@@ -11,13 +11,31 @@
     <script src="scripts/lps-1.0.16.bundle.js"></script>
     <script src="https://pixijs.download/v5.0.3/pixi.js"></script>
 
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="./css/sticky-footer-navbar.css" rel="stylesheet">
 
 </head>
-<body>
 
+<body class="d-flex flex-column h-100">
+<header>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">LPS Visualiser</a>
+    <a class="navbar-brand" href="index.html">LPS Visualiser</a>
     <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
             class="navbar-toggler"
             data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
@@ -31,31 +49,33 @@
             <!--            </li>-->
             <li class="nav-item">
                 <!--                <a class="nav-link disabled" href="#">Disabled</a>-->
-                <a class="nav-link " href="#">LPS</a>
+                <a class="nav-link " href="http://lps.doc.ic.ac.uk">LPS</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">Github</a>
+                <a class="nav-link" href="https://github.com/jinwei14/LPS-visualisation">Github</a>
             </li>
 
             <li class="nav-item">
                 <!--                <a class="nav-link disabled" href="#">Disabled</a>-->
-                <a class="nav-link " href="#">Sandbox</a>
+                <a class="nav-link " href="https://lps.js.org">Sandbox</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="./links/aboutus.html">About</a>
             </li>
 
         </ul>
 
     </div>
 </nav>
+</header>
 
+<!-- Begin page content -->
+<main class="flex-shrink-0" role="main">
 <div class="container-fluid">
     <div class="row">
         <div class="col-md">
-
             <p></p>
             <!--The file chosen form-->
             <form>
@@ -83,24 +103,21 @@
             <div id="content" style="display:none;text-align: center;"></div>
         </div>
     </div>
-    <script src="scripts/prepossessing.js"></script>
-    <script src="scripts/animation.js" type="text/javascript"></script>
-
-
-
-
 </div>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script crossorigin="anonymous"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</main>
+
+<footer class="footer mt-auto py-3">
+    <div class="container">
+        <img src="../logo/logo.png"  width="80" height="35" align="right" alt="img">
+        <span class="text-muted"> &copy; Author: Jinwei Zhang</span>
+
+    </div>
+</footer>
+
+<script src="scripts/prepossessing.js"></script>
+<script src="scripts/animation.js" type="text/javascript"></script>
+
+
 </body>
 </html>
