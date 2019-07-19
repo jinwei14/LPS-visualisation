@@ -37,13 +37,13 @@
     };
 
     /*
-    *
+    *The main application framework to host the whole canvas with height etc are defined here
     * */
     var app = new PIXI.Application({backgroundColor: 0x1099bb, width: 1100, height: 1000});
 
-
-
-
+    /*
+    * Initialise the canvas, all the buttons, title text, define the base graphic
+    * */
     appManager.createVisualizer = function () {
         // the graphics object will be used throughout the class
         UIManager.graphics = new PIXI.Graphics();
@@ -219,7 +219,7 @@
     };
 
     /*
-    * This field will create the Road
+    * This field will create the all the road depends on what the user is defined.
     * */
     appManager.createRoad = function (nameText, x, y, width, height, laneNumber) {
         console.log('creating Road has been called in animation.js ' + window.name);
@@ -693,6 +693,7 @@
          });
          app.stage.addChild(blockItemInstance);
      };
+
 
     window.appManager = appManager;
 
