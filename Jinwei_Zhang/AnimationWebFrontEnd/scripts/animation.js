@@ -12,12 +12,18 @@
         block: []
     };
 
+    /*
+    *
+    * */
     var dataManager = {
         responseTime : 0,
         carCounter:0
 
     };
 
+    /*
+    *
+    * */
     var UIManager = {
         graphics : null,
         richTextTitle: null,
