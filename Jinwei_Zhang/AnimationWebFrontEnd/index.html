@@ -6,8 +6,8 @@
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
     <script src="scripts/lps-1.0.16.bundle.js"></script>
     <script src="https://pixijs.download/v5.0.3/pixi.js"></script>
 
@@ -34,82 +34,82 @@
 
 <body class="d-flex flex-column h-100">
 <header>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="index.html">LPS Visualiser</a>
-    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-            class="navbar-toggler"
-            data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="index.html">LPS Visualiser</a>
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <!--            <li class="nav-item active">-->
-            <!--                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
-            <!--            </li>-->
-            <li class="nav-item">
-                <!--                <a class="nav-link disabled" href="#">Disabled</a>-->
-                <a class="nav-link " href="http://lps.doc.ic.ac.uk">LPS</a>
-            </li>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <!--            <li class="nav-item active">-->
+                <!--                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
+                <!--            </li>-->
+                <li class="nav-item">
+                    <!--                <a class="nav-link disabled" href="#">Disabled</a>-->
+                    <a class="nav-link " href="http://lps.doc.ic.ac.uk">LPS</a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="https://github.com/jinwei14/LPS-visualisation">Github</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/jinwei14/LPS-visualisation">Github</a>
+                </li>
 
-            <li class="nav-item">
-                <!--                <a class="nav-link disabled" href="#">Disabled</a>-->
-                <a class="nav-link " href="https://lps.js.org">Sandbox</a>
-            </li>
+                <li class="nav-item">
+                    <!--                <a class="nav-link disabled" href="#">Disabled</a>-->
+                    <a class="nav-link " href="https://lps.js.org">Sandbox</a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="./links/aboutus.html">About</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./links/aboutus.html">About</a>
+                </li>
 
-        </ul>
+            </ul>
 
-    </div>
-</nav>
+        </div>
+    </nav>
 </header>
 
 <!-- Begin page content -->
 <main class="flex-shrink-0" role="main">
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md">
-            <p></p>
-            <!--The file chosen form-->
-            <form>
-                <div class="form-group">
-                    <input accept=".lps" class="form-control-file" id="formControlFile1" type="file">
-                </div>
-            </form>
-            <!--the visualisation box-->
-            <form>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md">
+                <p></p>
+                <!--The file chosen form-->
+                <form>
+                    <div class="form-group">
+                        <input accept=".lps" class="form-control-file" id="formControlFile1" type="file">
+                    </div>
+                </form>
+                <!--the visualisation box-->
+                <form>
 
-                <div class="form-group">
-                    <!-- <label for="exampleFormControlTextarea1">LPS visualisation for self-driving car</label>-->
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-            </form>
+                    <div class="form-group">
+                        <!-- <label for="exampleFormControlTextarea1">LPS visualisation for self-driving car</label>-->
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                </form>
 
-            <div id="output"></div>
-            <button class="btn btn-primary btn-lg" id="AnimateButton" type="button">Animate</button>
-            <button class="btn btn-secondary btn-lg" id="ClearButton" type="button">Clear</button>
+                <div id="output"></div>
+                <button class="btn btn-primary btn-lg" id="AnimateButton" type="button">Animate</button>
+                <button class="btn btn-secondary btn-lg" id="ClearButton" type="button">Clear</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md">
+                <div id="content" style="display:none;text-align: center;"></div>
+            </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md">
-            <div id="content" style="display:none;text-align: center;"></div>
-        </div>
-    </div>
-</div>
 
 </main>
 
 <footer class="footer mt-auto py-3">
     <div class="container">
-        <img src="../logo/logo.png"  width="80" height="35" align="right" alt="img">
+        <img align="right" alt="img" height="35" src="../logo/logo.png" width="80">
         <span class="text-muted"> &copy; Author: Jinwei Zhang</span>
 
     </div>
