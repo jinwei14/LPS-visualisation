@@ -81,7 +81,9 @@
                     //clear the content before running the
                     // appManager.clearContent();
                     appManager.clearContent();
+                    tableManager.clearTable();
                     appManager.createVisualizer();
+
                     LPSInitializer(contents, null);
 
 
@@ -209,6 +211,26 @@
         this.X = parseInt(this.matchArray[2], 10);
         this.Y = parseInt(this.matchArray[3], 10);
 
+    }
+
+    /*
+    * This is the parser for the destination.
+    * */
+    function Destination(fullPhrase){
+        //the full phrase of the user defined fluent such as loc(car, 1650, 340)).
+        this.fullPhrase = fullPhrase;
+
+        //regulation match array
+        this.matchArray = this.fullPhrase.match(/(\w+)/g);
+
+        this.fluent = this.matchArray[0];
+
+        this.vehicle = this.matchArray[1];
+        //the location and the name of the street
+        this.X = parseInt(this.matchArray[3], 10);
+        this.Y = parseInt(this.matchArray[4], 10);
+
+        this.destination = '(' + this.matchArray[3] +','+ this.matchArray[4] + ')';
     }
 
     /*
@@ -438,6 +460,10 @@
 
                         var light = new TrafficLight(item);
                         appManager.createTrafficLight(light.X, light.Y, light.color);
+                    }else if (item.toLowerCase().startsWith('goal')){
+
+                        var goal = new Destination(item);
+                        tableManager.createTable(goal.vehicle, goal.destination);
                     }
                 });
 
