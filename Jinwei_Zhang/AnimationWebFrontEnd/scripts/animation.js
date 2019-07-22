@@ -224,6 +224,26 @@
 
     };
 
+
+    /*
+    * adding goal tag onto the map
+    * */
+    appManager.addGoal = function(vehicle, x, y){
+        console.log('addGoal has been called in animation.js ' + window.name);
+
+        UIManager.graphics.lineStyle(0); // draw a circle, set the lineStyle to zero so the circle doesn't have an outline
+        UIManager.graphics.beginFill(0xff0000, 1);
+        UIManager.graphics.drawCircle(x, y, 7);
+        UIManager.graphics.endFill();
+
+
+        let goalText = new PIXI.Text('(' + x.toString() + ',' + y.toString()+')', {fontFamily: 'Arial', fontSize: 12, fill: 0xffffff});
+        goalText.x = x;
+        goalText.y = y;
+        app.stage.addChild(goalText);
+
+    };
+
     /*
     * This field will create the all the road depends on what the user is defined.
     * */

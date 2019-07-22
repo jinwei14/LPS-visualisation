@@ -230,7 +230,7 @@
         this.X = parseInt(this.matchArray[3], 10);
         this.Y = parseInt(this.matchArray[4], 10);
 
-        this.destination = '(' + this.matchArray[3] +','+ this.matchArray[4] + ')';
+        this.destination = '(' + this.matchArray[3] +' , '+ this.matchArray[4] + ')';
     }
 
     /*
@@ -464,6 +464,7 @@
 
                         var goal = new Destination(item);
                         tableManager.createTable(goal.vehicle, goal.destination);
+                        appManager.addGoal(goal.vehicle,goal.X,goal.Y);
                     }
                 });
 
