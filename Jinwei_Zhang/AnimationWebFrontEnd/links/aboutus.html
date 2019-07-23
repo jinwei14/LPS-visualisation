@@ -100,17 +100,25 @@
         </p>
 
         <p class="lead">
-        ->  All the LPS program are stored in <a href="https://www.mongodb.com">MongoDB</a>  and <a href="https://mongoosejs.com">Mongoose.js</a> . (This part is still being developed.)
+        ->  All the LPS program are stored in <a href="https://www.mongodb.com">MongoDB</a>  and <a href="https://mongoosejs.com">Mongoose.js</a> . (This part is still under developed.)
         </p>
 
 
-        <h2 class="mt-5">How to use</h2>
+        <h2 class="mt-5">Instruction</h2>
         <p class="lead">-> Start visualising your autonomous vehicle program by entering the lps program or by clicking on the choose file button to load the <code>.lps</code> file</p>
         <p class="lead">-> Define the vehicle in your lps program or using  <code>+</code> or <code>-</code> button to add or delete a car. Mention that deletion during the program time will not modify the underlying LPS program</p>
         <p class="lead">-> Watch the behaviour of the vehicle by clicking the <code>Animate</code> button</p>
         <p class="lead">-> Clear the program in the text area via <code>Clear</code> button. Clear the program by refreshing the page.</p>
 
+        <h2 class="mt-5">LPS predicate</h2>
+        <p class="lead">Define street(fact) as: <code>street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane)</code></p>
+        <p class="lead">Define location of vehicle(fluent) as: <code>location(Name_of_car, coordinate(X, Y), Direction)</code></p>
+        <p class="lead">Define traffic light(fluent) as: <code>trafficLight(coordinate(X, Y), Working_status, Color, FacingDirection)</code></p>
+        <p class="lead">Define the goal of the Vehicle(fluent) as: <code>goal(VehicleName,coordinate(X, Y))</code></p>
+        <p class="lead"> Each vehicle can have multiple state(fluent) eg <code>stopped(VehicleName)</code> or <code>moving(VehicleName)</code></p>
+        <p class="lead">Define the junction(fact) as: eg <code>junction(JunctionName,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)).</code> where (A, B), (C, D), (E, F), (G, H) are 4 different corners</p>
 
+        <p> Sample LPS programs are provided in  <a href="../index.html">home page</a></p>
 
         <h2 class="mt-5">Logic in traffic scenario</h2>
         <p class="lead">
@@ -118,10 +126,12 @@
         </p>
 
 
-        <p class="lead">Pin a footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A
-            fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>main &gt; .container</code>.
-        </p>
-        <p>Back to <a href="/docs/4.3/examples/sticky-footer/">the default sticky footer</a> minus the navbar.</p>
+        <h2 class="mt-5">Developer setup</h2>
+        <p> For developer setup please refer to the  <a href="https://github.com/jinwei14/LPS-visualisation">github repo</a></p>
+
+
+
+        <p>Back to <a href="../index.html">home page</a> to start visualise your LPS program.</p>
     </div>
 </main>
 
