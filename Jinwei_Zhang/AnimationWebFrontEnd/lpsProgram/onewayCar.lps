@@ -5,6 +5,8 @@ cycleInterval(50).
 loadModule('../scripts/module.js').
 
 fluents([
+   stopped(VehicleName),
+   moving(VehicleName),
    coordinate(X, Y),
    location(VehicleName, coordinate(X, Y), Direction),
    trafficLight(coordinate(X, Y), Working_status, Color, FacingDirection),
@@ -19,10 +21,12 @@ events ([
 
 actions ([
   step(Vehicle, NextPlace),
-  turn(Vehicle, NewHeading)
+  turn(Vehicle, NewHeading),
+  arrive(Vehicle)
 ]).
 
 initially([
+  moving(carA),
   location(carA, coordinate(150, 225), eastward),
   goal(carA,coordinate(900, 225))
 ]).
@@ -37,6 +41,11 @@ cloud(coordinate(300,120)).
 cloud(coordinate(640,100)).
 cloud(coordinate(750,90)).
 cloud(coordinate(800,120)).
+
+goal(Vehicle,coordinate(A, B)) from _ to T,
+location(Vehicle, coordinate(X, Y), Direction), A==X, B==Y,moving(Vehicle) at T ->
+  % testPrint(Vehicle+ ' we have arrived'),
+  arrive(Vehicle) at T.
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
 location(Vehicle, coordinate(X, Y), Direction), A!=X at T ->
@@ -86,5 +95,6 @@ updates(step(Vehicle, NextPlace), location(Vehicle, OldPlace, Direction),  locat
 
 updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading)).
 
-
+terminates(arrive(Vehicle), moving(Vehicle)).
+initiates(arrive(Vehicle), stopped(Vehicle)).
 % you  can not move (x++) if you are not facing eastward
