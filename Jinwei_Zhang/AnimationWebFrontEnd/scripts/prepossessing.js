@@ -450,6 +450,9 @@
         });
     }
 
+    /*
+    *
+    * */
     function LPSInitializer(programFile, specFile) {
 
         LPS.loadString(programFile)
