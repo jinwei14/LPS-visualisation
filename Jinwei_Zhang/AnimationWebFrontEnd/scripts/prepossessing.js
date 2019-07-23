@@ -57,7 +57,11 @@
 
     });
 
-    //loading test button listener
+
+
+    /*
+    * loading test button listener
+    * */
     document.addEventListener("DOMContentLoaded", function () {
 
         function loadTextFromFile(evt) {
@@ -99,6 +103,24 @@
 
         document.querySelector('#formControlFile1').addEventListener("change", loadTextFromFile);
     });
+
+
+    // /*
+    // * Detect if the program is changed by user.
+    // * */
+    // document.addEventListener("DOMContentLoaded", function (){
+    //     function programChanged(event) {
+    //         console.log("program has been modified");
+    //         appManager.clearContent();
+    //         tableManager.clearTable();
+    //         appManager.createVisualizer();
+    //
+    //         LPSInitializer(contents, null);
+    //
+    //     }
+    //
+    //     document.querySelector('#exampleFormControlTextarea1').addEventListener("keyup", programChanged);
+    // });
 
     /*
     this is the data structure for parse the vehicle location from
