@@ -138,7 +138,7 @@
         <h2 class="mt-5">Logic in traffic scenario</h2>
         <ul class="list-group">
             <li class="list-group-item list-group-item-action ">
-                <img alt="one way drive" height="100" src="../imgs/webImg/oneway.png" width="300" align="centre">
+                <img alt="one way drive" height="100" src="../imgs/webImg/oneway.png" width="300">
                 <pre><code>
                     !goalHasBeenReached(Vehicle)
                     ^ moving(Vehicle) ->
@@ -150,64 +150,89 @@
                 </code></pre>
             </li>
             <li class="list-group-item list-group-item-action ">
-                <img alt="one way drive" height="300" src="../imgs/webImg/T20.png" width="300">
+                <img alt="two car in T junction" height="300" src="../imgs/webImg/T20.png" width="300"> &nbsp;&nbsp;&nbsp;<img alt="one way drive" height="300" src="../imgs/webImg/T21.png" width="300">
                 <pre><code>
-                    !goalHasBeenReached(Vehicle)
+                    atTjunction(Vehicle)
                     ^ moving(Vehicle) ->
-                    drive(Vehicle).
+                    turn(Direction).
                 </code><code>
-                    goalHasBeenReached(Vehicle)
-                    ^ moving(Vehicle) ->
-                    arrive(Vehicle).
-                </code></pre>
+                    collisionPossible(Vehicle, Vehicle2)
+                    ^ !routeBlocked ->
+                    stepAhead(Vehicle).
+                </code><code>
+                    collisionPossible(Vehicle, Vehicle2)
+                    ^ routeBlocked ->
+                    wait(Vehicle).
+                </code>
+                </pre>
             </li>
             <li class="list-group-item list-group-item-action ">
-                <img alt="one way drive" height="300" src="../imgs/webImg/T21.png" width="300">
+                <img alt="cars in un-controlled T junction" height="300" src="../imgs/webImg/T30.png" width="300"> <br>
+                ->A car driving straight has a higher pirority than a car turning right or left at an un-controlled T-junction.<br>
+                ->If a car is driving into a narrow road it should wait until other car drive out of the narrow. <br>
+                ->One car is turning left and another car is turnning right to the same road at the same time, left turn has higher priority
                 <pre><code>
-                    !goalHasBeenReached(Vehicle)
-                    ^ moving(Vehicle) ->
-                    drive(Vehicle).
+                    rightTurn_Intension(carA)
+                    ^rightTurn_Intension(carB)
+                    ^goStraight_Intension(carC)->
+                    waitForCarB(carA),
+                    waitForCarA(carB),
+                    stepAhead(carC).
                 </code><code>
-                    goalHasBeenReached(Vehicle)
-                    ^ moving(Vehicle) ->
-                    arrive(Vehicle).
-                </code></pre>
+                    rightTurn_Intension(carA)
+                    ^leftTurn_Intension(carB)
+                    ^goStraight_Intension(carC)->
+                    waitForCarB(carA),
+                    waitForCarA(carB),
+                    stepAhead(carC).
+                </code><code>
+                    rightTurn_Intension(carA)
+                    ^rightTurn_Intension(carB)
+                    ^leftTurn_Intension(carC)->
+                    waitForCarB&C(carA),
+                    stepAhead(carB),
+                    waitForCarB(carC).
+                </code><code>
+                    rightTurn_Intension(carA)
+                    ^leftTurn_Intension(carB)
+                    ^leftTurn_Intension(carC)->
+                    waitForCarB&C(carA),
+                    stepAhead(carB),
+                    waitForCarB(carC).
+                </code>
+                </pre>
             </li>
             <li class="list-group-item list-group-item-action ">
-                <img alt="one way drive" height="300" src="../imgs/webImg/T30.png" width="300">
+                <img alt="cars in un-controlled T junction" height="300" src="../imgs/webImg/T31.png" width="300">
                 <pre><code>
-                    !goalHasBeenReached(Vehicle)
-                    ^ moving(Vehicle) ->
-                    drive(Vehicle).
+                    rightTurn_Intension(carA)
+                    ^goStraight_Intension(carB)
+                    ^goStraight_Intension(carC)->
+                    waitForCarC(carA),
+                    stepAhead(carB),
+                    stepAhead(carC).
                 </code><code>
-                    goalHasBeenReached(Vehicle)
-                    ^ moving(Vehicle) ->
-                    arrive(Vehicle).
-                </code></pre>
-            </li>
-            <li class="list-group-item list-group-item-action ">
-                <img alt="3 cars in un controlled T junction" height="300" src="../imgs/webImg/T31.png" width="300">
-                <pre><code>
-                    !goalHasBeenReached(Vehicle)
-                    ^ moving(Vehicle) ->
-                    drive(Vehicle).
-                </code><code>
-                    goalHasBeenReached(Vehicle)
-                    ^ moving(Vehicle) ->
-                    arrive(Vehicle).
+                    rightTurn_Intension(carA)
+                    ^goStraight_Intension(carB)
+                    ^leftTurn_Intension(carC)->
+                    waitForCarC(carA),
+                    stepAhead(carB),
+                    stepAhead(carC).
                 </code></pre>
             </li>
 
             <li class="list-group-item list-group-item-action ">
                 <img alt="cross junction drive with light" height="300" src="../imgs/webImg/crossJunc.png" width="300">
                 <pre><code>
-                    !goalHasBeenReached(Vehicle)
-                    ^ moving(Vehicle) ->
+                    greenTraffic(trafficLight)
+                    ^ moving(Vehicle)
+                    ^ location(Vehicle) == location(trafficLight)->
                     drive(Vehicle).
                 </code><code>
-                    goalHasBeenReached(Vehicle)
-                    ^ moving(Vehicle) ->
-                    arrive(Vehicle).
+                    redTraffic(trafficLight)
+                    ^ moving(Vehicle)
+                    ^ location(Vehicle) == location(trafficLight)->
+                    waiting(Vehicle).
                 </code></pre>
             </li>
         </ul>
