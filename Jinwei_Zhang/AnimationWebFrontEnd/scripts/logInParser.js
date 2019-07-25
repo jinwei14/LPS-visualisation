@@ -11,27 +11,15 @@
             console.log(event.type);
             console.log(username,password);
 
-            // for (i = 0; i<1000;i++ ){
-            //     console.log(event.type);
-            //     console.log(username,password);
-            //
-            //     console.log(event.type);
-            //     console.log(username,password);
-            //     console.log(event.type);
-            //     console.log(username,password);
-            //     console.log(event.type);
-            //     console.log(username,password);
-            //     console.log(event.type);
-            //     console.log(username,password);
-            //     console.log(event.type);
-            //     console.log(username,password);
-            //     console.log(event.type);
-            //     console.log(username,password);
-            //     console.log(event.type);
-            //     console.log(username,password);
-            //     console.log(event.type);
-            //     console.log(username,password);
-            // }
+
+            if (username === 'jinwei@gmail.com' && password === '123'){
+
+// Simulate an HTTP redirect:
+                window.location.replace("../index.html");
+            }else{
+                window.alert("password incorrect");
+            }
+
         }
 
 
