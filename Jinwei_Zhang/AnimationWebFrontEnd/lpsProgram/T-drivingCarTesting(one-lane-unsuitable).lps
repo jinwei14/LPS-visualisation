@@ -43,7 +43,7 @@ initially([
   % location(carB, coordinate(500, 580), northward),
   % goal(carA,coordinate(980, 225)),
   % goal(carB,coordinate(120, 225))
-
+  
   % %  carA start from Tjunction
   % location(carA, coordinate(500, 225), eastward),
   % location(carB, coordinate(500 ,270), northward),
