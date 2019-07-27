@@ -1,0 +1,19 @@
+{
+  "name": "express_learn",
+  "version": "1.0.0",
+  "description": "## Used for both server render apps as well as API/Microservices",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index"
+  },
+  "author": "jinwei.zhang",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
