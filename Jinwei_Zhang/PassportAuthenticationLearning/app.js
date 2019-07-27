@@ -8,6 +8,7 @@ const PORT = process.env.Port || 8081;
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
+app.use(express.static(__dirname + '/public'));
 // // Routes
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/user'));
