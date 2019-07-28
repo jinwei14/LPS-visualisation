@@ -82,13 +82,14 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                     </div>
-                    <input class="form-control" name="" placeholder="Full name" type="text">
+                    <input class="form-control" name="" placeholder="Full name" id="cc-name" required type="text">
+
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                     </div>
-                    <input class="form-control" name="" placeholder="Email address" type="email">
+                    <input class="form-control" name="" placeholder="Email address" required type="email">
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
@@ -100,14 +101,14 @@
                         <option value="2">+198</option>
                         <option value="3">+701</option>
                     </select>
-                    <input class="form-control" name="" placeholder="Phone number" type="text">
+                    <input class="form-control" name="" placeholder="Phone number" required type="number">
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-building"></i> </span>
                     </div>
                     <select class="form-control">
-                        <option selected=""> Select job field</option>
+                        <option selected=""> Select job field (Optional)</option>
                         <option>Education</option>
                         <option>IT</option>
                         <option>Designer</option>
@@ -118,18 +119,18 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input class="form-control" placeholder="Create password" type="password">
+                    <input class="form-control" placeholder="Create password" required type="password">
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input class="form-control" placeholder="Repeat password" type="password">
+                    <input class="form-control" placeholder="Repeat password" required type="password">
                 </div> <!-- form-group// -->
                 <div class="form-group">
                     <button class="btn btn-primary btn-block" type="submit"> Create Account</button>
                 </div> <!-- form-group// -->
-                <p class="text-center">Have an account? <a href="">Log In</a></p>
+                <p class="text-center">Have an account? <a href="login.html">Log In</a></p>
             </form>
         </article>
     </div> <!-- card.// -->
@@ -145,6 +146,5 @@
 <script crossorigin="anonymous"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
 </body>
 </html>
