@@ -1,4 +1,4 @@
-<img align="right" src="./Jinwei_Zhang/logo/logo.png" height = "86" width="195"/>
+<img align="right" src="./Jinwei_Zhang/AnimationWebFrontEnd/logo/logo.png" height = "86" width="195"/>
 
 # LPS-visualisation 
 
@@ -99,4 +99,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 
-<img align="right" src="./Jinwei_Zhang/logo/logo.png" height = "86" width="195"/>
+<img align="right" src="./Jinwei_Zhang/AnimationWebFrontEnd/logo/logo.png" height = "86" width="195"/>
