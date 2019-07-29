@@ -51,6 +51,14 @@
         function alertFunc() {
             alert("Not implemented yet");
         }
+        
+        function check() {
+            if (document.getElementById('password').value === document.getElementById('confirm_password').value) {
+                document.getElementById('submit').disabled = false;
+            } else {
+                document.getElementById('submit').disabled = true;
+            }
+        }
     </script>
 
 </head>
@@ -119,16 +127,16 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input class="form-control" placeholder="Create password" required type="password">
+                    <input class="form-control" placeholder="Create password" required type="password" id = "password" onkeyup='check();'>
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input class="form-control" placeholder="Repeat password" required type="password">
+                    <input class="form-control" placeholder="Repeat password" required type="password" id = "confirm_password" onkeyup='check();'>
                 </div> <!-- form-group// -->
                 <div class="form-group">
-                    <button class="btn btn-primary btn-block" type="submit"> Create Account</button>
+                    <button class="btn btn-primary btn-block" id ="submit" type="submit"> Create Account</button>
                 </div> <!-- form-group// -->
                 <p class="text-center">Have an account? <a href="login.html">Log In</a></p>
             </form>
