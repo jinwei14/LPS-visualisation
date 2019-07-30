@@ -544,10 +544,10 @@
                     // if we find a opposite position car we will change the color of the text
                     if (appManager.oppositeDir(item,itemNext)) {
                         found = true;
-                        item.textObj.style.fill = 0x00FF00;
-                        item.carLocText.style.fill = 0x00FF00;
-                        itemNext.textObj.style.fill = 0x00FF00;
-                        itemNext.carLocText.style.fill = 0x00FF00;
+                        item.textObj.style.fill = 0xff0000;
+                        item.carLocText.style.fill = 0xff0000;
+                        itemNext.textObj.style.fill = 0xff0000;
+                        itemNext.carLocText.style.fill = 0xff0000;
                         console.log(item.name,itemNext.name);
                         console.log(item.obj.name,itemNext.name);
                         console.log("testing changing color"+"-----------------");
@@ -745,7 +745,7 @@
      };
 
     /*
-    * Opposite direction
+    * This part is checking all the adding cars that is there is any car that is opposite to each other (same horizontal or vertical level)
     * */
     appManager.oppositeDir = function(item1,item2){
         switch (item1.direction) {
