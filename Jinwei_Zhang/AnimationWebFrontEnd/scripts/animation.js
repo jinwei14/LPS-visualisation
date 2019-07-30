@@ -537,6 +537,30 @@
 
                     item.direction = direction;
                 }
+
+                // check if there is any car passing through each other.
+                var found = false;
+                appManager.vehicle.forEach(function (itemNext, index) {
+                    // if we find a opposite position car we will change the color of the text
+                    if (appManager.oppositeDir(item,itemNext)) {
+                        found = true;
+                        item.textObj.style.fill = 0x00FF00;
+                        item.carLocText.style.fill = 0x00FF00;
+                        itemNext.textObj.style.fill = 0x00FF00;
+                        itemNext.carLocText.style.fill = 0x00FF00;
+                        console.log(item.name,itemNext.name);
+                        console.log(item.obj.name,itemNext.name);
+                        console.log("testing changing color"+"-----------------");
+                    }
+                });
+
+                if(found === false){
+                    //change back the color to white. this is really pointless.
+                    // item.textObj.style.fill  =  0xffffff;
+                    item.textObj.style.fill = 0xffffff;
+                    item.carLocText.style.fill = 0xffffff;
+                }
+
             }
         });
 
@@ -719,6 +743,25 @@
          });
          app.stage.addChild(blockItemInstance);
      };
+
+    /*
+    * Opposite direction
+    * */
+    appManager.oppositeDir = function(item1,item2){
+        switch (item1.direction) {
+            case 'northward':
+                return (item2.direction === 'southward' && item1.obj.x === item2.obj.x && Math.abs(item1.obj.y - item2.obj.y)<120);
+            case 'southward':
+                return (item2.direction === 'northward' && item1.obj.x === item2.obj.x &&  Math.abs(item2.obj.y - item1.obj.y )< 120);
+            case 'eastward':
+                return (item2.direction === 'westward' && item1.obj.y === item2.obj.y && Math.abs(item2.obj.x - item1.obj.x) < 120);
+            case 'westward':
+                return (item2.direction === 'eastward' && item1.obj.y === item2.obj.y && Math.abs(item1.obj.x - item2.obj.x) < 120 );
+            default:
+                console.log('direction wrong');
+                return false;
+        }
+    };
 
 
     window.appManager = appManager;
