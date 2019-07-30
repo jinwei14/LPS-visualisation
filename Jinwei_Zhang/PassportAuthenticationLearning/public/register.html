@@ -8,7 +8,7 @@
     <meta content="Jekyll v3.8.5" name="generator">
     <title>Register</title>
     <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" id="bootstrap-css" rel="stylesheet">
+    <link href="./css/bootstrap.min.css" id="bootstrap-css" rel="stylesheet">
     <style>
         .divider-text {
             position: relative;
@@ -51,7 +51,7 @@
         function alertFunc() {
             alert("Not implemented yet");
         }
-        
+
         function check() {
             if (document.getElementById('password').value === document.getElementById('confirm_password').value) {
                 document.getElementById('submit').disabled = false;
@@ -85,7 +85,7 @@
             </p>
 
 
-            <form>
+            <form action="/register" method = "POST">
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
@@ -138,7 +138,7 @@
                 <div class="form-group">
                     <button class="btn btn-primary btn-block" id ="submit" type="submit"> Create Account</button>
                 </div> <!-- form-group// -->
-                <p class="text-center">Have an account? <a href="login.html">Log In</a></p>
+                <p class="text-center">Have an account? <a href="index.html">Log In</a></p>
             </form>
         </article>
     </div> <!-- card.// -->
