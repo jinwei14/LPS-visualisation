@@ -21,6 +21,7 @@
                 newProgram = ProgramModifier(program);
                 //display the new program in the text box.
                 document.getElementById("exampleFormControlTextarea1").value = newProgram;
+
                 //run the new program in the LPS runner.
                 LPSRunner(newProgram, null);
 
