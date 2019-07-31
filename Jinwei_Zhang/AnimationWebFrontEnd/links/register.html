@@ -90,14 +90,14 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                     </div>
-                    <input class="form-control" name="" placeholder="Full name" id="cc-name" required type="text">
+                    <input class="form-control" name="name" placeholder="Full name" id="name" required type="text">
 
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                     </div>
-                    <input class="form-control" name="" placeholder="Email address" required type="email">
+                    <input class="form-control" name="email" placeholder="Email address" id="email" required type="email">
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
@@ -109,13 +109,13 @@
                         <option value="2">+198</option>
                         <option value="3">+701</option>
                     </select>
-                    <input class="form-control" name="" placeholder="Phone number" required type="number">
+                    <input class="form-control" name="phone" placeholder="Phone number" id="phone" required type="number">
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-building"></i> </span>
                     </div>
-                    <select class="form-control">
+                    <select class="form-control" id="job" name = "job">
                         <option selected=""> Select job field (Optional)</option>
                         <option>Education</option>
                         <option>IT</option>
@@ -127,13 +127,13 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input class="form-control" placeholder="Create password" required type="password" id = "password" onkeyup='check();'>
+                    <input class="form-control" placeholder="Create password" required type="password" name="password" id = "password" onkeyup='check();'>
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input class="form-control" placeholder="Repeat password" required type="password" id = "confirm_password" onkeyup='check();'>
+                    <input class="form-control" placeholder="Repeat password" required type="password" name="confirm_password" id = "confirm_password" onkeyup='check();'>
                 </div> <!-- form-group// -->
                 <div class="form-group">
                     <button class="btn btn-primary btn-block" id ="submit" type="submit"> Create Account</button>

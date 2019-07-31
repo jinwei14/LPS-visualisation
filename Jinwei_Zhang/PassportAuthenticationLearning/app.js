@@ -4,7 +4,9 @@ const path = require('path');
 const PORT = process.env.Port || 8081;
 const logger = require('./middleware/logger');
 const mongoose = require('mongoose');
-
+var bodyParser = require('body-parser');
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //DB config
 const db = require('./config/keys').MongoURI;
