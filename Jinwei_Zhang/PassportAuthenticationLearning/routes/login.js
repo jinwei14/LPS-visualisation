@@ -37,7 +37,7 @@ loginRouter.route('/')
     });
 
 
-loginRouter.route('/main.html')
+loginRouter.route('/main')
     .all((req, res, next) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/plain');
