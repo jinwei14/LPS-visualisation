@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html class="h-100" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LPS Animation</title>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="scripts/lps-1.0.16.bundle.js"></script>
+    <script src="https://pixijs.download/v5.0.3/pixi.js"></script>
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="./css/sticky-footer-navbar.css" rel="stylesheet">
+
+</head>
+
+<body class="d-flex flex-column h-100">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="index.html">LPS Visualiser</a>
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <!--            <li class="nav-item active">-->
+                <!--                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
+                <!--            </li>-->
+                <li class="nav-item">
+                    <!--                <a class="nav-link disabled" href="#">Disabled</a>-->
+                    <a class="nav-link " href="http://lps.doc.ic.ac.uk">LPS</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/jinwei14/LPS-visualisation"><del>Github</del></a>
+                </li>
+
+                <li class="nav-item">
+                    <!--                <a class="nav-link disabled" href="#">Disabled</a>-->
+                    <a class="nav-link " href="https://lps.js.org">Sandbox</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="./links/aboutus.html">About</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+</header>
+
+<!-- Begin page content -->
+<main class="flex-shrink-0" role="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md">
+                <p></p>
+                <!--The file chosen form-->
+                <form>
+                    <div class="form-group">
+                        <input accept=".lps" class="form-control-file" id="formControlFile1" type="file">
+                    </div>
+                </form>
+                <!--the visualisation box-->
+                <form>
+                    <div class="form-group">
+                        <!-- <label for="exampleFormControlTextarea1">LPS visualisation for self-driving car</label>-->
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                </form>
+
+                <div id="output"></div>
+                <button class="btn btn-primary btn-lg" id="AnimateButton" type="button">Animate</button>
+                <button class="btn btn-secondary btn-lg" id="ClearButton" type="button">Clear</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md">
+                <div id="content" style="display:none;"></div>
+            </div>
+
+            <div class="col-md">
+                <div id='destination' style="background: white;">
+                    <table class="table table-striped" id="DESTable">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Vehicle</th>
+                            <th scope="col">Destination</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--                        <tr>-->
+                        <!--                            <th scope="row">0</th>-->
+                        <!--                            <td><span contenteditable id="V0">#####</span></td>-->
+                        <!--                            <td><span contenteditable id="D0">#####</span></td>-->
+                        <!--                        </tr>-->
+                        <!--                        <tr>-->
+                        <!--                            <th scope="row">1</th>-->
+                        <!--                            <td><span contenteditable id="V1">#####</span></td>-->
+                        <!--                            <td><span contenteditable id="D1">#####</span></td>-->
+                        <!--                        </tr>-->
+                        </tbody>
+                    </table>
+
+                    <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading">Welcome to LPS visualiser</h4>
+                        <p>> Start visualising your autonomous vehicle program by entering the lps program or by loading the <code>.lps</code> file</p>
+                        <p>> Define the vehicle in your lps program or via  <code>+</code> or <code>-</code> button</p>
+                        <p>> Watch the behaviour of the vehicle by clicking the <code>Animate</code> button</p>
+                        <p>> Clear the program via <code>Clear</code> button</p>
+                        <hr>
+                        <p class="mb-0">This project is under MIT license, For further instruction and traffic regulations, please refer to the <a href="./links/aboutus.html">About</a>  page</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer class="footer mt-auto py-2">
+    <div class="container">
+        <img align="right" alt="img" height="35" src="logo/logo.png" width="80">
+        <span class="text-muted"> &copy; Author: Jinwei Zhang</span>
+
+    </div>
+</footer>
+
+<script src="scripts/prepossessing.js"></script>
+<script src="scripts/animation.js" type="text/javascript"></script>
+<script src="scripts/table.js" type="text/javascript"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>
