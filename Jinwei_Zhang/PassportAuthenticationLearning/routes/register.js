@@ -13,12 +13,15 @@ userRouter.route('/')
         res.setHeader('Content-Type', 'text/plain');
         next();
     })
+
+    // get the message (conflict with the express.static)
     .get((req, res, next) => {
         res.end('Will send all the user to you!');
     })
 
     // This adding (posting to the database)
     .post((req, res, next) => {
+        // This require the html tag to be name =="??"
         const { name, email, phone, job, password, confirm_password } = req.body;
         User.findOne({email:email})
             .then(user => {
@@ -33,6 +36,7 @@ userRouter.route('/')
                         job: job,
                         password:password
                     });
+                    //save the data into database
                     newUser
                         .save()
                         .then(user => {
@@ -46,10 +50,14 @@ userRouter.route('/')
         console.log('The input is: ', req.body);
 
     })
+
+    //modifing the data (not suportted)
     .put((req, res, next) => {
         res.statusCode = 403;
         res.end('PUT operation not supported on /user');
     })
+
+    //delete data in the data base.
     .delete((req, res, next) => {
         res.end('Deleting all user');
     });

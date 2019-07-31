@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+//mongoose schema to parse the data into database.
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,

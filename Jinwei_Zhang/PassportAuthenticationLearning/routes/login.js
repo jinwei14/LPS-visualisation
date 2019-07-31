@@ -3,7 +3,8 @@
 const express = require('express');
 const loginRouter = express.Router();
 const path = require('path');
-
+const passport = require('passport');
+const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 // // // Login Page
 // router.get('/', (req, res) => res.sendFile(path.join(__dirname, '../public', 'login.html')));
 //
@@ -21,7 +22,10 @@ loginRouter.route('/')
         res.end('Will send all the dishes to you!');
     })
     .post((req, res, next) => {
-        res.end('Will log in with the user name and pawword');
+        passport.authenticate('local', {
+            successRedirect: '/main',
+            failureRedirect: '/',
+        })(req, res, next);
     })
     .put((req, res, next) => {
         res.statusCode = 403;
@@ -30,6 +34,17 @@ loginRouter.route('/')
     .delete((req, res, next) => {
         res.statusCode = 403;
         res.end('Deleting operation not supported on /');
+    });
+
+
+loginRouter.route('/main.html')
+    .all((req, res, next) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/plain');
+        next();
+    })
+    .get(ensureAuthenticated,(req, res, next) => {
+        res.redirect('/main.html');
     });
 
 
