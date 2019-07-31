@@ -3,7 +3,9 @@
 const express = require('express');
 const userRouter = express.Router();
 const path = require('path');
+const bcrypt = require('bcryptjs'); // I dong want to use it anymore.
 
+const User = require('../models/user');
 // Register Page
 userRouter.route('/')
     .all((req, res, next) => {
@@ -14,8 +16,35 @@ userRouter.route('/')
     .get((req, res, next) => {
         res.end('Will send all the user to you!');
     })
+
+    // This adding (posting to the database)
     .post((req, res, next) => {
-        res.end('Will add the user: with details: ');
+        const { name, email, phone, job, password, confirm_password } = req.body;
+        User.findOne({email:email})
+            .then(user => {
+                if (user){
+                    console.log('user already exist!!!!!!!!!!!!!');
+                    res.send(500,'user already exist');
+                }else{
+                    const newUser = new User({
+                        name:name,
+                        email:email,
+                        phone: phone,
+                        job: job,
+                        password:password
+                    });
+                    newUser
+                        .save()
+                        .then(user => {
+                            res.redirect('/');
+                        })
+                        .catch(err => console.log(err));
+
+                    console.log('The new user is added',newUser);
+                }
+            });
+        console.log('The input is: ', req.body);
+
     })
     .put((req, res, next) => {
         res.statusCode = 403;

@@ -21,14 +21,15 @@ loginRouter.route('/')
         res.end('Will send all the dishes to you!');
     })
     .post((req, res, next) => {
-        res.end('Will add the dish: with details: ');
+        res.end('Will log in with the user name and pawword');
     })
     .put((req, res, next) => {
         res.statusCode = 403;
-        res.end('PUT operation not supported on /dishes');
+        res.end('PUT operation not supported on /');
     })
     .delete((req, res, next) => {
-        res.end('Deleting all dishes');
+        res.statusCode = 403;
+        res.end('Deleting operation not supported on /');
     });
 
 
