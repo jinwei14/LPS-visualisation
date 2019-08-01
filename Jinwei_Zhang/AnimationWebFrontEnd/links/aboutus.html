@@ -138,33 +138,29 @@
         <h2 class="mt-5">Logic in traffic scenario</h2>
         <ul class="list-group">
             <li class="list-group-item list-group-item-action ">
-                <img alt="one way drive" height="100" src="../imgs/webImg/oneway.png" width="300">
-                <pre><code>
-                    !goalHasBeenReached(Vehicle)
-                    ^ moving(Vehicle) ->
-                    drive(Vehicle).
-                </code><code>
-                    goalHasBeenReached(Vehicle)
-                    ^ moving(Vehicle) ->
-                    arrive(Vehicle).
-                </code></pre>
+
+                <img alt="one way drive" align = "left" height="100" src="../imgs/webImg/oneway.png" width="300">
+                If the goal of Vehicle has not been reached and Vehicle is moving
+                    then Vehicle will drive forward. <br>
+
+                    If the goal of Vehicle has been reached and Vehicle is moving
+                    then Vehicle will perform arriving action
+
+
             </li>
             <li class="list-group-item list-group-item-action ">
-                <img alt="two car in T junction" height="300" src="../imgs/webImg/T20.png" width="300"> &nbsp;&nbsp;&nbsp;<img alt="one way drive" height="300" src="../imgs/webImg/T21.png" width="300">
-                <pre><code>
-                    atTjunction(Vehicle)
-                    ^ moving(Vehicle) ->
-                    turn(Direction).
-                </code><code>
-                    collisionPossible(Vehicle, Vehicle2)
-                    ^ !routeBlocked ->
-                    stepAhead(Vehicle).
-                </code><code>
-                    collisionPossible(Vehicle, Vehicle2)
-                    ^ routeBlocked ->
-                    wait(Vehicle).
-                </code>
-                </pre>
+                <img alt="two car in T junction" align = "left" height="300" src="../imgs/webImg/T20.png" width="300">
+                &nbsp;&nbsp;&nbsp;&nbsp;<img alt="one way drive" align = "left" height="300" src="../imgs/webImg/T21.png" width="300">
+
+                    if Vehicle is at T-junction and Vehicle is moving
+                    then it will remain the same direction or turn to a new direction.<br><br>
+
+                    if Vehicle and Vehicle2 are possible to have collision and Vehicle's route is not blocked
+                    then Vehicle should drive forward.<br><br>
+
+                    if Vehicle and Vehicle2 are possible to have collision and Vehicle's route is blocked
+                    then Vehicle should wait for Vehicle2.<br><br>
+
             </li>
             <li class="list-group-item list-group-item-action ">
                 <img alt="cars in un-controlled T junction" height="300" src="../imgs/webImg/T30.png" width="300"> <br>
