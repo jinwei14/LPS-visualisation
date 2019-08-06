@@ -140,63 +140,72 @@
             <li class="list-group-item list-group-item-action ">
 
                 <img alt="one way drive" align = "left" height="100" src="../imgs/webImg/oneway.png" width="300">
-                If the goal of Vehicle has not been reached and Vehicle is moving
-                    then Vehicle will drive forward. <br>
+                <p>  &nbsp;Assumption: carA need to reach it'g goal which is at (900,225) </p>
 
-                    If the goal of Vehicle has been reached and Vehicle is moving
-                    then Vehicle will perform arriving action
+                <p>  &nbsp;If the goal of Vehicle has not been reached and Vehicle is moving
+                    then Vehicle will drive forward. </p>
+
+                <p>  &nbsp;If the goal of Vehicle has been reached and Vehicle is moving
+                    then Vehicle will perform arriving action</p>
 
 
             </li>
             <li class="list-group-item list-group-item-action ">
                 <img alt="two car in T junction" align = "left" height="300" src="../imgs/webImg/T20.png" width="300">
-                &nbsp;&nbsp;&nbsp;&nbsp;<img alt="one way drive" align = "left" height="300" src="../imgs/webImg/T21.png" width="300">
+                <p>  &nbsp; Assumption: carA intend to turn right or go straight. carB intend to turn right or left  </p>
 
-                    if Vehicle is at T-junction and Vehicle is moving
-                    then it will remain the same direction or turn to a new direction.<br><br>
+                <p>  &nbsp; if Vehicle is at T-junction and Vehicle is moving
+                    then it will remain the same direction or turn to a new direction.</p>
 
-                    if Vehicle and Vehicle2 are possible to have collision and Vehicle's route is not blocked
-                    then Vehicle should drive forward.<br><br>
+                <p> &nbsp; if Vehicle and Vehicle2 are possible to have collision and Vehicle's route is not blocked
+                    then Vehicle should drive forward.</p>
 
-                    if Vehicle and Vehicle2 are possible to have collision and Vehicle's route is blocked
-                    then Vehicle should wait for Vehicle2.<br><br>
+                <p> &nbsp;  if Vehicle and Vehicle2 are possible to have collision and Vehicle's route is blocked
+                    then Vehicle should wait for Vehicle2. </p>
 
             </li>
             <li class="list-group-item list-group-item-action ">
-                <img alt="cars in un-controlled T junction" height="300" src="../imgs/webImg/T30.png" width="300"> <br>
-                ->A car driving straight has a higher pirority than a car turning right or left at an un-controlled T-junction.<br>
-                ->If a car is driving into a narrow road it should wait until other car drive out of the narrow. <br>
-                ->One car is turning left and another car is turnning right to the same road at the same time, left turn has higher priority
-                <pre><code>
-                    rightTurn_Intension(carA)
-                    ^rightTurn_Intension(carB)
-                    ^goStraight_Intension(carC)->
-                    waitForCarB(carA),
-                    waitForCarA(carB),
-                    stepAhead(carC).
-                </code><code>
-                    rightTurn_Intension(carA)
-                    ^leftTurn_Intension(carB)
-                    ^goStraight_Intension(carC)->
-                    waitForCarB(carA),
-                    waitForCarA(carB),
-                    stepAhead(carC).
-                </code><code>
+                <img alt="one way drive" align = "left" height="300" src="../imgs/webImg/T21.png" width="300">
+
+                <p>  &nbsp; Assumption: carA intend to turn right or go straight. carB intend to turn right or left  </p>
+
+                <p>  &nbsp; Same logic as before, however, the warning distance will be increased because carA on the up lane might turn right
+                which may possible collide with carB</p>
+
+            </li>
+            <li class="list-group-item list-group-item-action ">
+                <img alt="cars in un-controlled T junction" align = "left" height="300" src="../imgs/webImg/T30.png" width="300">
+
+                <p>  &nbsp; Assumption: carA intend to turn right or go straight. carB intend to turn left or right, carC intend to turn left or go straight  </p>
+                <p>  &nbsp; Based on the assumption, few rules are made: </p>
+                <p>  &nbsp;->A car driving straight has a higher pirority than a car turning right or left at an un-controlled T-junction.</p>
+                <p>  &nbsp;->If a car is driving into a narrow road it should wait until other car drive out of the narrow. </p>
+                <p>  &nbsp;->One car is turning left and another car is turnning right to the same road at the same time, left turn has higher priority</p>
+                <p> &nbsp;
+                 if carA has right turn intention and carB has rightTurn intention and carC has intention of going straight then
+                    carA wait for CarB,
+                    carB wait for CarA,
+                    carC step ahead.
+                </p> <p> &nbsp;
+                    if carA has intention of turning right and CarB has intention of turning left and carC has intention of going straight then
+                    carA should wait for carB, carB should wait for carA, carC should step ahead.
+                </p> <p> &nbsp;
+                if carA has intention of turning right and carB has intention of turning right and carC has intention of turning left then
+                carA should wait for carB and carC. carB should step ahead, carC should wait for carB.
                     rightTurn_Intension(carA)
                     ^rightTurn_Intension(carB)
                     ^leftTurn_Intension(carC)->
                     waitForCarB&C(carA),
                     stepAhead(carB),
                     waitForCarB(carC).
-                </code><code>
+                </p> <p> &nbsp;
                     rightTurn_Intension(carA)
                     ^leftTurn_Intension(carB)
                     ^leftTurn_Intension(carC)->
                     waitForCarB&C(carA),
                     stepAhead(carB),
                     waitForCarB(carC).
-                </code>
-                </pre>
+                </p>
             </li>
             <li class="list-group-item list-group-item-action ">
                 <img alt="cars in un-controlled T junction" height="300" src="../imgs/webImg/T31.png" width="300">
