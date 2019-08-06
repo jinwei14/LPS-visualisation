@@ -192,53 +192,34 @@
                 </p> <p> &nbsp;
                 if carA has intention of turning right and carB has intention of turning right and carC has intention of turning left then
                 carA should wait for carB and carC. carB should step ahead, carC should wait for carB.
-                    rightTurn_Intension(carA)
-                    ^rightTurn_Intension(carB)
-                    ^leftTurn_Intension(carC)->
-                    waitForCarB&C(carA),
-                    stepAhead(carB),
-                    waitForCarB(carC).
                 </p> <p> &nbsp;
-                    rightTurn_Intension(carA)
-                    ^leftTurn_Intension(carB)
-                    ^leftTurn_Intension(carC)->
-                    waitForCarB&C(carA),
-                    stepAhead(carB),
-                    waitForCarB(carC).
+                if carA has intention of turning right and carB has intention of turning left and carC has intention of turning left then
+                carA should wait for carB and carC. carB should step ahead, carC should wait for carB.
                 </p>
             </li>
             <li class="list-group-item list-group-item-action ">
-                <img alt="cars in un-controlled T junction" height="300" src="../imgs/webImg/T31.png" width="300">
-                <pre><code>
-                    rightTurn_Intension(carA)
-                    ^goStraight_Intension(carB)
-                    ^goStraight_Intension(carC)->
-                    waitForCarC(carA),
-                    stepAhead(carB),
-                    stepAhead(carC).
-                </code><code>
-                    rightTurn_Intension(carA)
-                    ^goStraight_Intension(carB)
-                    ^leftTurn_Intension(carC)->
-                    waitForCarC(carA),
-                    stepAhead(carB),
-                    stepAhead(carC).
-                </code></pre>
+                <img alt="cars in un-controlled T junction" align = "left" height="300" src="../imgs/webImg/T31.png" width="300">
+                <p>  &nbsp; Assumption: carA intend to turn right or go straight. carB intend to go straight down the raod, carC intend to turn left or go straight  </p>
+                <p>  &nbsp;
+                    if carA has intention of turning right and carB has intention of going straight and carC has intention of going straight then
+                carA should wait for carC. carB should step ahead, carC should also step ahead.
+
+                </p> <p> &nbsp;
+                if carA has intention of turning right and carB has intention of going straight and carC has intention of turning left then
+                carA should wait for carC. carB should step ahead, carC should also step ahead (left turn).
+            </p>
             </li>
 
             <li class="list-group-item list-group-item-action ">
-                <img alt="cross junction drive with light" height="300" src="../imgs/webImg/crossJunc.png" width="300">
-                <pre><code>
-                    greenTraffic(trafficLight)
-                    ^ moving(Vehicle)
-                    ^ location(Vehicle) == location(trafficLight)->
-                    drive(Vehicle).
-                </code><code>
-                    redTraffic(trafficLight)
-                    ^ moving(Vehicle)
-                    ^ location(Vehicle) == location(trafficLight)->
-                    waiting(Vehicle).
-                </code></pre>
+                <img alt="cross junction drive with light" align = "left" height="300" src="../imgs/webImg/crossJunc.png" width="300">
+                <p>  &nbsp; Assumption: cars should move or stop based on the traffic light that in front of itself. </p>
+                <p>  &nbsp;
+                    if the trafficLight turns green at current position and the vehicle is moving then
+                    Vehicle keep moving.
+                </p> <p> &nbsp;
+                if the trafficLight turns red at current position and the vehicle is moving then
+                Vehicle will stop moving.
+                </p>
             </li>
         </ul>
 
