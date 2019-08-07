@@ -479,8 +479,6 @@ blockedRoute(Vehicle,Vehicle2) at T<-
   Y2 > Y1,
   Y2 < B1.
 
-
-
 % ---------------------------------------------------------------------------------------------
 % % both car have clear routes but car on the narrow road can not step
 % % (car on main street has higher priority)

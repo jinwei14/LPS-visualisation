@@ -6,18 +6,12 @@
 % we assume the destination is reachable
 % and car length is 40 x 40 based on the image
 % speed is 5 unit per cycle.
-
-% this part of the code is the demo for cars has different speed this do not
-% comply with the UI yet including user adding cars delete cars and change cars.
-
-
-maxTime(500).
+maxTime(200).
 cycleInterval(1).
 
 loadModule('../scripts/module.js').
 
 fluents([
-  velocity(VehicleName, Speed),
   stopped(VehicleName),
   moving(VehicleName),
   coordinate(X, Y),
@@ -36,29 +30,127 @@ fluents([
 actions ([
   step(Vehicle, NextPlace),
   turn(Vehicle, NewHeading),
-  arrive(Vehicle),
-  changeSpeed(Vehicle,NewSpeed)
+  arrive(Vehicle)
 ]).
 
 initially([
   moving(car0),
   moving(car1),
-  velocity(car0,1),
-  velocity(car1,5),
-  location(car0, coordinate(400, 175), eastward),
-  location(car1, coordinate(200, 175), eastward),
-  goal(car0,coordinate(970, 175)),
-  goal(car1,coordinate(970, 175))
+  moving(car2),
+  moving(car3),
+  moving(car4),
+% %-----------------------three car scenario (Paper: Ontology-Based Driving Decision Making)----------------------
+
+% % CASE 1
+% % CarA turn right to the narrow road,
+% % carB turn right to the main street
+% % carC go straight.
+%
+%  % carA should give way to both cars because carC
+%  % is driving straight and the CarB is driving out from narrow road to
+%  % the wider road (turn). According to the Right-of- Way rules, a car driving straight
+%  % has a higher priority than a car turning right or left at an uncontrolled intersection.
+%  % If a car is going to drive into a narrow two-way road, it should
+%  % wait for the other car which is going to drive out from the narrow two-way road.
+%
+%   location(carA, coordinate(400, 175), eastward),
+%   location(carB, coordinate(500, 325), northward),
+%   location(carC, coordinate(600, 225), westward),
+%   goal(carA,coordinate(500, 580)),
+%   goal(carB,coordinate(800, 175)),
+%   goal(carC,coordinate(145, 225))
+
+
+% CASE 2
+% CarA turn right to the narrow road,
+% carB turn left to the main street
+% carC go straight.
+    location(car0, coordinate(400, 175), eastward),
+    location(car1, coordinate(500, 725), northward),
+    location(car2, coordinate(500, 250), southward),
+    location(car3, coordinate(500, 400), southward),
+
+    goal(car0,coordinate(800, 175)),
+    goal(car1,coordinate(145, 225)),
+    goal(car2,coordinate(500, 700)),
+    goal(car3,coordinate(500, 700))
+
+
+% % CASE 3
+% % CarA turn right to the narrow road,
+% % carB turn right to the main street
+% % carC turn left to the narrow road.
+%
+% % if two cars are going to enter the same lane, the car turning left has a
+% % higher priority than the car turning right.
+%
+%   location(carA, coordinate(400, 175), eastward),
+%   location(carB, coordinate(500, 325), northward),
+%   location(carC, coordinate(600, 225), westward),
+%   goal(carA,coordinate(500, 580)),
+%   goal(carB,coordinate(800, 175)),
+%   goal(carC,coordinate(500, 580))
+
+
+%
+% % CASE 4
+% % CarA turn right to the narrow road,
+% % carB turn left to the main street
+% % carC turn left to the narrow road.
+%   location(carA, coordinate(400, 175), eastward),
+%   location(carB, coordinate(500, 325), northward),
+%   location(carC, coordinate(600, 225), westward),
+%   goal(carA,coordinate(500, 580)),
+%   goal(carB,coordinate(145, 225)),
+%   goal(carC,coordinate(500, 580))
+
+
+% % CASE 5
+% % CarA turn right to the narrow road,
+% % carB go straight southward to the narrow road
+% % carC go straight.
+%     location(carA, coordinate(400, 175), eastward),
+%     location(carB, coordinate(500, 325), southward),
+%     location(carC, coordinate(600, 225), westward),
+%     goal(carA,coordinate(500, 600)),
+%     goal(carB,coordinate(500, 600)),
+%     goal(carC,coordinate(145, 225))
+
+
+% % CASE 6
+% % CarA turn right to the narrow road,
+% % carB go straight southward to the narrow road
+% % carC turn left to the narrow road
+%
+% % carA does not need to give way to the car running on the narrow
+% % two-way lane, because the driving direction will be the same
+%
+%     location(carA, coordinate(400, 175), eastward),
+%     location(carB, coordinate(500, 325), southward),
+%     location(carC, coordinate(600, 225), westward),
+%     goal(carA,coordinate(500, 600)),
+%     goal(carB,coordinate(500, 600)),
+%     goal(carC,coordinate(500, 600))
+%
+
+
+
+
 ]).
 
 % define the junction coordinate
 % junction(Name,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H))
+
+junction(tJuntion1,coordinate(475, 200),coordinate(525, 200),coordinate(475, 250),coordinate(525, 250)).
+
+junction(tJuntion2,coordinate(475, 150),coordinate(525, 150),coordinate(475, 200),coordinate(525, 200)).
 
 
 street(mainStreet , coordinate(100, 150), 900, 50, 2,1).
 
 street(mainStreet , coordinate(100, 200), 900, 50, 2,1).
 
+street(southStreet , coordinate(475, 250), 50, 500, 1,0).
 
 
 
@@ -80,13 +172,13 @@ location(Vehicle, coordinate(X, Y), Direction), A==X, B==Y,moving(Vehicle) at T 
   arrive(Vehicle) at T.
 
 
-% goal(Vehicle,coordinate(A, B)) from _ to T,
-% location(Vehicle, coordinate(X, Y), Direction),
-%   moving(Vehicle) at T ->
-%     % need to find the right direction here
-%     % driving forward
-%     % testPrint(Vehicle+' '+X+' '+Y+' Direction '+Direction + '----------------Reactive rule----------------'),
-%     direction(Vehicle) at T.
+goal(Vehicle,coordinate(A, B)) from _ to T,
+location(Vehicle, coordinate(X, Y), Direction),
+  moving(Vehicle) at T ->
+    % need to find the right direction here
+    % driving forward
+    % testPrint(Vehicle+' '+X+' '+Y+' Direction '+Direction + '----------------Reactive rule----------------'),
+    direction(Vehicle) at T.
 
 
 goal(Vehicle,coordinate(A, B)) from T to T1,
@@ -218,8 +310,7 @@ intention(VehicleName, Plan) <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == northward,
-  velocity(Vehicle,Speed),
-  NewY = Y - Speed,
+  NewY = Y - 5,
   NextPlace = coordinate(X, NewY),
   % testPrint(Vehicle+ ' move northward'),
   step(Vehicle, NextPlace) at T1.
@@ -227,8 +318,7 @@ drive(Vehicle) from T to T1 <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == southward,
-  velocity(Vehicle,Speed),
-  NewY = Y + Speed,
+  NewY = Y + 5,
   NextPlace = coordinate(X, NewY),
   % testPrint(Vehicle+ ' move southward'),
   step(Vehicle, NextPlace) at T1.
@@ -236,8 +326,7 @@ drive(Vehicle) from T to T1 <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == westward,
-  velocity(Vehicle,Speed),
-  NewX = X-Speed,
+  NewX = X-5,
   NextPlace = coordinate(NewX, Y),
   % testPrint(Vehicle+ ' move westward'),
   step(Vehicle, NextPlace) at T1.
@@ -245,8 +334,7 @@ drive(Vehicle) from T to T1 <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == eastward,
-  velocity(Vehicle,Speed),
-  NewX = X + Speed,
+  NewX = X + 5,
   NextPlace = coordinate(NewX, Y),
   % testPrint(Vehicle+ ' move eastward'),
   step(Vehicle, NextPlace) at T1.
@@ -396,39 +484,7 @@ blockedRoute(Vehicle,Vehicle2) at T<-
   Y2 > Y1,
   Y2 < B1.
 
-
 % ---------------------------------------------------------------------------------------------
-% if you dont have a clear route you can not step
-collisionPossible(Vehicle, Vehicle2) from T1 to T3,
-  Vehicle != Vehicle2,
-  velocity(Vehicle, S1),
-  velocity(Vehicle2, S2),
-  S1 > S2,
-  blockedRoute(Vehicle,Vehicle2) at T1 ->
-    overtaking(Vehicle,Vehicle2,T1,T3).
-
-overtaking(Vehicle,Vehicle2,T1,T3) <-
-  location(Vehicle, coordinate(X2, Y2), _) at T1,
-  NewY = Y2+50,
-  NewLocation = coordinate(X2, NewY),
-  step(Vehicle, NewLocation,T2, T3).
-
-not collisionPossible(Vehicle, Vehicle2) from T1 to T3,
-  velocity(Vehicle, S1),
-  velocity(Vehicle2, S2),
-  location(Vehicle, coordinate(X1, Y1), _),
-  location(Vehicle2, coordinate(X2, Y2), _),
-  X1 > X2,
-  Y1 > Y2,
-  S1 > S2 ->
-    navigateBack(Vehicle,T1,T3).
-
-navigateBack(Vehicle,T1,T3)<-
-  location(Vehicle, coordinate(X2, Y2), _) at T1,
-  NewY = Y2-50,
-  NewLocation = coordinate(X2, NewY),
-  step(Vehicle, NewLocation,T3, _).
-
 % % both car have clear routes but car on the narrow road can not step
 % % (car on main street has higher priority)
 % <- step(Vehicle, NextPlace),
@@ -438,18 +494,18 @@ navigateBack(Vehicle,T1,T3)<-
 %   onMainRoad(Vehicle2) at T,
 %   not blockedRoute(Vehicle,Vehicle2) at T,
 %   not blockedRoute(Vehicle2,Vehicle) at T.
-%
-% % both car have clear routes and both on the same street lane and have the same goal.
-% <- step(Vehicle, NextPlace),
-%   onMainRoad(Vehicle) at T,
-%   collisionPossible(Vehicle, Vehicle2) at T,
-%   Vehicle != Vehicle2,
-%   onMainRoad(Vehicle2) at T,
-%   not blockedRoute(Vehicle,Vehicle2) at T,
-%   not blockedRoute(Vehicle2,Vehicle) at T,
-%   intention(Vehicle,Plan),
-%   intention(Vehicle2,Plan2),
-%   Plan2 == straight.
+
+% both car have clear routes and both on the same street lane and have the same goal.
+<- step(Vehicle, NextPlace),
+  onMainRoad(Vehicle) at T,
+  collisionPossible(Vehicle, Vehicle2) at T,
+  Vehicle != Vehicle2,
+  onMainRoad(Vehicle2) at T,
+  not blockedRoute(Vehicle,Vehicle2) at T,
+  not blockedRoute(Vehicle2,Vehicle) at T,
+  intention(Vehicle,Plan),
+  intention(Vehicle2,Plan2),
+  Plan2 == straight.
 
 % this is also not perfect need further development
 <- step(Vehicle, NextPlace),
@@ -515,6 +571,12 @@ onMainRoad(Vehicle) at T <-
   Priority > 0.
 
 
+opposite(Dir1,Dir2)<-Dir1 == eastward, Dir2 = westward.
+opposite(Dir1,Dir2)<-Dir1 == westward, Dir2 = eastward.
+opposite(Dir1,Dir2)<-Dir1 == northward, Dir2 = southward.
+opposite(Dir1,Dir2)<-Dir1 == southward, Dir2 = northward.
+opposite(Color1,Color2)<-Color1 == red, Color2 = green.
+opposite(Color1,Color2)<-Color1 == green, Color2 = red.
 % ---------------------------------------------------------------------------------------------
 
 
@@ -528,7 +590,11 @@ updates(turn(Vehicle, NewHeading) , location(VehicleIns, Place, OldHeading), loc
 
 terminates(arrive(Vehicle), moving(Vehicle)).
 initiates(arrive(Vehicle), stopped(Vehicle)).
-
+%
+% terminates(passingThrough(VehicleName1,VehicleName2), clear(VehicleName1)).
+% terminates(passingThrough(VehicleName1,VehicleName2), clear(VehicleName2)).
+% initiates(passingThrough(VehicleName1,VehicleName2), passing(VehicleName1)).
+% initiates(passingThrough(VehicleName1,VehicleName2), passing(VehicleName2)).
 % % decision making will give a waiting state if car is not stopped
 % terminates(decision_making(Vehicle), moving(Vehicle))<- not stopped(Vehicle).
 % initiates(decision_making(Vehicle), waitting(Vehicle))<- not stopped(Vehicle).
