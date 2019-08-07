@@ -74,7 +74,7 @@ initially([
 
 startLocation(car0, coordinate(145, 475), eastward),
 startLocation(car1, coordinate(475, 880), northward),
-startLocation(car2,coordinate(700,525),westward),
+startLocation(car2, coordinate(700, 525), westward),
 
 % define the junction coordinate facts
 % junction(Name,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H))

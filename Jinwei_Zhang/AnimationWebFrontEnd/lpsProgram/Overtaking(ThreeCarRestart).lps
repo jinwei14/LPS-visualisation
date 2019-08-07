@@ -9,13 +9,10 @@
 
 % this part of the code is the demo for cars has different speed this do not
 % comply with the UI yet including user adding cars delete cars and change cars.
-
-
 maxTime(500).
 cycleInterval(1).
 
 loadModule('../scripts/module.js').
-
 fluents([
   velocity(VehicleName, Speed),
   stopped(VehicleName),
@@ -27,40 +24,40 @@ fluents([
   goal(VehicleName,coordinate(X, Y))
 
 ]).
-
 % % events will reserved for user input item to block the car
 % events ([
 %
 % ]).
-
 actions ([
   step(Vehicle, NextPlace),
   turn(Vehicle, NewHeading),
   arrive(Vehicle),
+  restart(Vehicle),
   changeSpeed(Vehicle,NewSpeed)
 ]).
 
 initially([
   moving(car0),
   moving(car1),
+  moving(car2),
   velocity(car0,1),
   velocity(car1,5),
+  velocity(car2,2),
   location(car0, coordinate(400, 175), eastward),
   location(car1, coordinate(200, 175), eastward),
+  location(car2, coordinate(940, 225), westward),
   goal(car0,coordinate(970, 175)),
-  goal(car1,coordinate(970, 175))
+  goal(car1,coordinate(970, 175)),
+  goal(car2,coordinate(140, 225))
 ]).
-
 % define the junction coordinate
 % junction(Name,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H))
-
+startLocation(car0, coordinate(400, 175), eastward),
+startLocation(car1, coordinate(200, 175), eastward),
+startLocation(car2, coordinate(940, 225), westward),
 
 street(mainStreet , coordinate(100, 150), 900, 50, 2,1).
-
 street(mainStreet , coordinate(100, 200), 900, 50, 2,1).
-
-
-
 
 cloud(coordinate(140,100)).
 cloud(coordinate(250,90)).
@@ -76,9 +73,8 @@ cloud(coordinate(800,120)).
 % ---------------------------------Reactive rules---------------------------------------------
 goal(Vehicle,coordinate(A, B)) from _ to T,
 location(Vehicle, coordinate(X, Y), Direction), A==X, B==Y,moving(Vehicle) at T ->
-  % testPrint(Vehicle+ ' we have arrived'),
+    % testPrint(Vehicle+ ' we have arrived'),
   arrive(Vehicle) at T.
-
 
 % goal(Vehicle,coordinate(A, B)) from _ to T,
 % location(Vehicle, coordinate(X, Y), Direction),
@@ -88,6 +84,9 @@ location(Vehicle, coordinate(X, Y), Direction), A==X, B==Y,moving(Vehicle) at T 
 %     % testPrint(Vehicle+' '+X+' '+Y+' Direction '+Direction + '----------------Reactive rule----------------'),
 %     direction(Vehicle) at T.
 
+% if the car is stopped and it has a start location.
+stopped(Vehicle) at T ,startLocation(Vehicle, _, _)->
+  restart(Vehicle) at T.
 
 goal(Vehicle,coordinate(A, B)) from T to T1,
 location(Vehicle, coordinate(X, Y), Direction),
@@ -251,8 +250,8 @@ drive(Vehicle) from T to T1 <-
   % testPrint(Vehicle+ ' move eastward'),
   step(Vehicle, NextPlace) at T1.
 
-% %----------------version 1--------------------------------
-% % if Vehicle is at same horizontal level as its goal and there is another car whose
+% % %----------------version 1--------------------------------
+% % % if Vehicle is at same horizontal level as its goal and there is another car whose
 % clearRoute(Vehicle) at T<-
 %   location(Vehicle, coordinate(X, Y), _),
 %   goal(Vehicle,coordinate(P, Q)),
@@ -285,11 +284,11 @@ drive(Vehicle) from T to T1 <-
 %   Vehicle != Vehicle2,
 %   A > X,
 %   A > P.
-
-% ---------------------------------------------------------------------------------------------
-
-
-% %----------------version 2--------------------------------
+%
+% % ---------------------------------------------------------------------------------------------
+%
+%
+% % %----------------version 2--------------------------------
 % % There are 6 cases in total that your route will be blocked
 % if Vehicle is at same horizontal level as its goal and there is another car in between
 blockedRoute(Vehicle,Vehicle2) at T<-
@@ -405,19 +404,49 @@ collisionPossible(Vehicle, Vehicle2) from T1 to T3,
   velocity(Vehicle2, S2),
   S1 > S2,
   blockedRoute(Vehicle,Vehicle2) at T1 ->
-    overtaking(Vehicle,Vehicle2,T1,T3).
+  overtaking(Vehicle,Vehicle2,T1,T3).
 
 overtaking(Vehicle,Vehicle2,T1,T3) <-
   location(Vehicle, coordinate(X2, Y2), _) at T1,
   NewY = Y2+50,
   NewLocation = coordinate(X2, NewY),
+  aheadClear(Vehicle,Vehicle2,Vehicle3),
+  not goalTooNear(Vehicle),
   step(Vehicle, NewLocation,T2, T3).
+
+aheadClear(Vehicle,Vehicle2,Vehicle3)<-
+  location(Vehicle, coordinate(X1, Y1), _),
+  NewY = Y1 + 50,
+  NewX = X1 + 300,
+  location(Vehicle3, coordinate(X3, Y3), _),
+  Vehicle3 != Vehicle,
+  Vehicle3 != Vehicle2,
+  Y3 == NewY,
+  X3 >= NewX.
+
+
+aheadClear(Vehicle,Vehicle2,Vehicle3)<-
+  location(Vehicle, coordinate(X1, Y1), _),
+  NewY = Y1 + 50,
+  NewX = X1-100,
+  location(Vehicle3, coordinate(X3, Y3), _),
+  Vehicle3 != Vehicle,
+  Vehicle3 != Vehicle2,
+  Y3 == NewY,
+  X3 < NewX.
+
+goalTooNear(Vehicle)<-
+  goal(Vehicle,coordinate(A1, B1)),
+  location(Vehicle, coordinate(X1, Y1), _),
+  Diff = abs(A1-X1),
+  Diff < 300.
 
 not collisionPossible(Vehicle, Vehicle2) from T1 to T3,
   velocity(Vehicle, S1),
   velocity(Vehicle2, S2),
-  location(Vehicle, coordinate(X1, Y1), _),
-  location(Vehicle2, coordinate(X2, Y2), _),
+  location(Vehicle, coordinate(X1, Y1), Dir1),
+  location(Vehicle2, coordinate(X2, Y2), Dir2),
+  Dir1 ==Dir2,
   X1 > X2,
   Y1 > Y2,
   S1 > S2 ->
@@ -429,6 +458,21 @@ navigateBack(Vehicle,T1,T3)<-
   NewLocation = coordinate(X2, NewY),
   step(Vehicle, NewLocation,T3, _).
 
+  % if you dont have a clear route you can not step
+<- step(Vehicle, NextPlace),
+  collisionPossible(Vehicle, Vehicle2) at T,
+  Vehicle != Vehicle2,
+  blockedRoute(Vehicle,Vehicle2) at T,
+  not aheadClear(Vehicle,Vehicle2,Vehicle3).
+
+<- step(Vehicle, NextPlace),
+  collisionPossible(Vehicle, Vehicle2) at T,
+  Vehicle != Vehicle2,
+  blockedRoute(Vehicle,Vehicle2) at T,
+  aheadClear(Vehicle,Vehicle2,Vehicle3),
+  goalTooNear(Vehicle).
+
+%
 % % both car have clear routes but car on the narrow road can not step
 % % (car on main street has higher priority)
 % <- step(Vehicle, NextPlace),
@@ -515,6 +559,13 @@ onMainRoad(Vehicle) at T <-
   Priority > 0.
 
 
+
+opposite(Dir1,Dir2)<- Dir1 == eastward, Dir2 = westward.
+opposite(Dir1,Dir2)<-Dir1 == westward, Dir2 = eastward.
+opposite(Dir1,Dir2)<-Dir1 == northward, Dir2 = southward.
+opposite(Dir1,Dir2)<-Dir1 == southward, Dir2 = northward.
+opposite(Color1,Color2)<-Color1 == red, Color2 = green.
+opposite(Color1,Color2)<-Color1 == green, Color2 = red.
 % ---------------------------------------------------------------------------------------------
 
 
@@ -528,6 +579,12 @@ updates(turn(Vehicle, NewHeading) , location(VehicleIns, Place, OldHeading), loc
 
 terminates(arrive(Vehicle), moving(Vehicle)).
 initiates(arrive(Vehicle), stopped(Vehicle)).
+
+terminates(restart(Vehicle),  stopped(Vehicle)).
+initiates(restart(Vehicle), moving(Vehicle)).
+updates(restart(Vehicle) , location(VehicleIns, OldPlace, OldDirection),  location(VehicleIns, NextPlace, NewDirection))<-
+  VehicleIns == Vehicle,
+  startLocation(Vehicle,NextPlace,NewDirection).
 
 % % decision making will give a waiting state if car is not stopped
 % terminates(decision_making(Vehicle), moving(Vehicle))<- not stopped(Vehicle).
