@@ -75,7 +75,6 @@ initially([
     goal(car2,coordinate(500, 700)),
     goal(car3,coordinate(500, 700))
 
-
 % % CASE 3
 % % CarA turn right to the narrow road,
 % % carB turn right to the main street
