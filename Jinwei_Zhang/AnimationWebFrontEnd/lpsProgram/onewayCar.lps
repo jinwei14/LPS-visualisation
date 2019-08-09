@@ -26,9 +26,9 @@ actions ([
 ]).
 
 initially([
-  moving(carA),
-  location(carA, coordinate(150, 225), eastward),
-  goal(carA,coordinate(900, 225))
+  moving(car0),
+  location(car0, coordinate(150, 225), eastward),
+  goal(car0,coordinate(900, 225))
 ]).
 
 
