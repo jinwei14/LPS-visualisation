@@ -452,7 +452,7 @@
     }
 
     /*
-    *
+    * init the street cloud and the vehicles
     * */
     function LPSInitializer(programFile, specFile) {
 
@@ -483,7 +483,6 @@
                         appManager.createVehicle(loc.getObjectName, loc.X, loc.Y, loc.getHeading);
                     } else if (item.toLowerCase().startsWith('trafficlight')) {
                         //  check if the traffic light has been initialised
-
                         var light = new TrafficLight(item);
                         appManager.createTrafficLight(light.X, light.Y, light.color);
                     }else if (item.toLowerCase().startsWith('goal')){

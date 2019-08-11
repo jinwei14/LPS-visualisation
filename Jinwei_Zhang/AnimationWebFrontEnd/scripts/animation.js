@@ -569,7 +569,6 @@
     /*
     * this field will create the traffic light based on the location
     * */
-
     appManager.createTrafficLight = function(x, y, initialColor){
         console.log('creating createTrafficLight has been called in animation.js ' + window.name);
         console.log( x, y, initialColor);
