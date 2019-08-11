@@ -45,7 +45,7 @@
     /*
     *The main application framework to host the whole canvas with height etc are defined here
     * */
-    var app = new PIXI.Application({backgroundColor: 0x1099bb, width: 1500, height: 1500});
+    var app = new PIXI.Application({backgroundColor: 0x1099bb, width: 1300, height: 1000});
 
     /*
     * Initialise the canvas, all the buttons, title text, define the base graphic
@@ -123,8 +123,8 @@
         UIManager.buttonPlus.buttonMode = true;
         UIManager.buttonMinus.buttonMode = true;
 
-        UIManager.buttonMinus.x =1020; UIManager.buttonMinus.y = 0;
-        UIManager.buttonPlus.x = 1020; UIManager.buttonPlus.y = 90;
+        UIManager.buttonMinus.x =1220; UIManager.buttonMinus.y = 0;
+        UIManager.buttonPlus.x = 1220; UIManager.buttonPlus.y = 90;
 
 
         // make the button interactive...
@@ -463,7 +463,7 @@
 
 
                 // If the car was moved into the deletion area.
-                if (this.x > 1020 && this.y < 90 ){
+                if (this.x > 1220 && this.y < 90 ){
                     if (this.scale.x <= 3 ) {
                         this.scale.x *= 1.07;
                         this.scale.y *= 1.07;
