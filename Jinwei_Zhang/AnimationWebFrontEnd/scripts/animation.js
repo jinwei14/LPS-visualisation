@@ -642,7 +642,6 @@
 
         // app.stage.children = [];
         // app = null;
-        // graphics = null;
     };
 
 
