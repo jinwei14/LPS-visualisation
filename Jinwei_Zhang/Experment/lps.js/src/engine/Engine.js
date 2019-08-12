@@ -101,7 +101,7 @@ function Engine(programArg) {
 
       // only perform pre-checks
       if (!checkConstraintSatisfaction.call(this, cloneProgram)
-          || !checkConstraintSatisfaction.call(this, postCloneProgram)) {
+        || !checkConstraintSatisfaction.call(this, postCloneProgram)) {
         // reject incoming observation
         activeObservations.remove(action);
 
@@ -315,7 +315,7 @@ function Engine(programArg) {
       );
     }
     if (newMaxTime <= 0
-        || !Number.isInteger(newMaxTime)) {
+      || !Number.isInteger(newMaxTime)) {
       throw stringLiterals.error('engine.nonPositiveIntegerMaxTime', newMaxTime);
     }
 
@@ -352,7 +352,7 @@ function Engine(programArg) {
       );
     }
     if (newCycleInterval <= 0
-        || !Number.isInteger(newCycleInterval)) {
+      || !Number.isInteger(newCycleInterval)) {
       throw stringLiterals.error('engine.nonPositiveIntegerCycleInterval', newCycleInterval);
     }
     _cycleInterval = newCycleInterval;
@@ -610,7 +610,7 @@ function Engine(programArg) {
     let startTime = startTimeArg;
     let endTime = endTimeArg;
     if (startTime === undefined
-        || startTime < _currentTime) {
+      || startTime < _currentTime) {
       throw stringLiterals.error(
         'engine.invalidStartTimeObservationScheduling',
         [observation, startTime, _currentTime]
