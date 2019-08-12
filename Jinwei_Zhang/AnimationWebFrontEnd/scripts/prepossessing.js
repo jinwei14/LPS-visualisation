@@ -4,8 +4,10 @@
 (function (window) {
     console.log('index -> LPS(loadFile) -> ProgramFactory(fromFile) -> Parser(source, pathname) -> _lexer.get()');
     var program = '';
-
-    // Event handling on the browser life cycle for parse the text file
+    var clearButtonPressed = false;
+    /*
+    * Event handling on the browser life cycle for parse the text file
+    **/
     document.addEventListener("DOMContentLoaded", function () {
         function parserText(event) {
             //open up the content of the  visualiser
@@ -21,7 +23,8 @@
                 newProgram = ProgramModifier(program);
                 //display the new program in the text box.
                 document.getElementById("exampleFormControlTextarea1").value = newProgram;
-
+                //reset the button status to be false.
+                clearButtonPressed = false;
                 //run the new program in the LPS runner.
                 LPSRunner(newProgram, null);
 
@@ -30,9 +33,39 @@
                 alert('Empty program detected via ' + event + ', Please input a program ');
             }
         }
+        // change the button text after click
+        // instead of using another selector API.
+        document.querySelector("#AnimateButton").addEventListener("click", parserText);
 
+
+    });
+
+    /*
+    * Event handling on stopping the LPS program.
+    **/
+    document.addEventListener("DOMContentLoaded", function () {
+        //clear the content of the input box and disable the visualiser
+        function stopRunning(event) {
+            if (clearButtonPressed === false){clearButtonPressed = true;}
+
+
+            var message = "<h6> Successfully stopped lps program ! </h6>";
+
+            document.getElementById("output").innerHTML = message;
+
+        }
+
+        document.querySelector("#StopButton").addEventListener("click", stopRunning);
+        // document.querySelector("#formControlFile1").addEventListener("click", clearText);
+    });
+
+    /*
+    * Event handling on clearText and stop the running LPS program
+    **/
+    document.addEventListener("DOMContentLoaded", function () {
         //clear the content of the input box and disable the visualiser
         function clearText(event) {
+            if (clearButtonPressed === false){clearButtonPressed = true;}
 
             document.getElementById("exampleFormControlTextarea1").value = "";
             console.log(document.getElementById("formControlFile1").value);
@@ -48,17 +81,13 @@
             //     vis.style.display = "none";
             // }
             // appManager.clearContent();
+            appManager.clearContent();
+            tableManager.clearTable();
         }
 
-        // change the button text after click
-        // instead of using another selector API.
-        document.querySelector("#AnimateButton").addEventListener("click", parserText);
         document.querySelector("#ClearButton").addEventListener("click", clearText);
         // document.querySelector("#formControlFile1").addEventListener("click", clearText);
-
     });
-
-
 
     /*
     * loading test button listener
@@ -362,7 +391,6 @@
     * */
     function LPSRunner(programFile, specFile) {
 
-
         LPS.loadString(programFile)
             .then((engine) => {
                 let profiler = engine.getProfiler();
@@ -429,6 +457,14 @@
                             }
                         }
 
+
+                    }
+
+                    // judge when should the program be stopped. then reset the  clearButtonPressed to be false again.
+                    if(clearButtonPressed === true){
+                        console.log('current time: '+ engine.getCurrentTime() + ' LPS program has been stopped');
+                        engine.halt();
+                        clearButtonPressed = false;
 
                     }
                 });
