@@ -45,7 +45,7 @@ initially([
  %  normal start one on the mainstreet and other on the southStreet
  % carA wants to go straight from mainStreet, carB want to turn left from southStreet
   location(car0, coordinate(145, 475), eastward),
-  location(car1, coordinate(475, 880), northward),
+  location(car1, coordinate(495, 855), northward),
   location(car2,coordinate(700,525),westward),
   goal(car0,coordinate(980, 475)),
   goal(car1,coordinate(120, 525)),
@@ -77,7 +77,7 @@ street(southStreet , coordinate(470, 580), 50, 300, 2,0).
 
 street(southStreet , coordinate(520, 580), 50, 300, 2,0).
 
-roundabout(r1, coordinate(520, 500),20,70,120),
+roundabout(r1, coordinate(520, 500),40,90,140).
 
 
 cloud(coordinate(140,100)).
