@@ -285,6 +285,28 @@
         this.destination = '(' + this.matchArray[3] +' , '+ this.matchArray[4] + ')';
     }
 
+    // this parser file is the parser for the rotated road.
+    function RotateRoad(fullPhrase) {
+
+        //the full phrase of the user defined fluent such as loc(car, 1650, 340)).
+        this.fullPhrase = fullPhrase;
+
+        //regulation match array
+        this.matchArray = this.fullPhrase.match(/(\w+)/g);
+
+        this.fluent = this.matchArray[0];
+        this.name = this.matchArray[1];
+        //the location and the name of the street
+        this.X1 = parseInt(this.matchArray[3],10);
+        this.Y1 = parseInt(this.matchArray[4],10);
+        this.X2 = parseInt(this.matchArray[6],10);
+        this.Y2 = parseInt(this.matchArray[7],10);
+        this.X3 = parseInt(this.matchArray[9],10);
+        this.Y3 = parseInt(this.matchArray[10],10);
+        this.X4 = parseInt(this.matchArray[12],10);
+        this.Y4 = parseInt(this.matchArray[13],10);
+
+    }
     /*
    * this parser file is the parser for te testing the program.
    * */
@@ -509,6 +531,13 @@
                     } else if (item.toLowerCase().startsWith('cloud')) {
                         var cloud = new Cloud(item);
                         appManager.createCloud(cloud.X, cloud.Y);
+                    } else if (item.toLowerCase().startsWith('rotatestreet')) {
+                        console.log("preprocesiing RR");
+                        var rotateStreet = new RotateRoad(item);
+                        appManager.createRotateRoad(rotateStreet.X1, rotateStreet.Y1,
+                            rotateStreet.X2,rotateStreet.Y2,
+                            rotateStreet.X3,rotateStreet.Y3,
+                            rotateStreet.X4,rotateStreet.Y4);
                     }
                 });
 

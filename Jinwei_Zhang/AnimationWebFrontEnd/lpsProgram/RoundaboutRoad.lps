@@ -1,100 +1,89 @@
+% LPS visualisation for self-driving car
+% Define street as: street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane) eg: street(piccadillyRoad, coordinate(9, 9), 80, 70, 2)
+% Define location of car as location(Name_of_car, coordinate(X, Y), Direction) eg: location(yourCar, coordinate(9, 9), eastward)
+% Define traffic light as trafficLight(coordinate(X, Y), Working_status, Color, FacingDirection) eg: trafficLight(coordinate(2, 2), on, Red, eastward)
+
 % we assume the destination is reachable
-maxTime(100).
+% and car length is 40 x 40 based on the image
+% speed is 5 unit per cycle.
+maxTime(200).
 cycleInterval(50).
 
 loadModule('../scripts/module.js').
 
 fluents([
-   stopped(VehicleName),
-   moving(VehicleName),
-   coordinate(X, Y),
-   location(VehicleName, coordinate(X, Y), Direction),
-   trafficLight(coordinate(X, Y), Working_status, Color, FacingDirection),
-   street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane),
-   goal(VehicleName,coordinate(X, Y))
-]).
-
-% events will reserved for traffic lights
-events ([
+  stopped(VehicleName),
+  moving(VehicleName),
+  coordinate(X, Y),
+  location(VehicleName, coordinate(X, Y), Direction),
+  trafficLight(coordinate(X, Y), Color, FacingDirection,Street),
+  street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane, Priority),
+  roundabout(StreetName, coordinate(X, Y),Radius1,Radius2,Radius3),
+  goal(VehicleName,coordinate(X, Y))
 
 ]).
+
+% % events will reserved for user placing blocked item.
+% events ([
+%   placingBlockedItem()
+% ]).
 
 actions ([
   step(Vehicle, NextPlace),
   turn(Vehicle, NewHeading),
-  arrive(Vehicle)
+  arrive(Vehicle),
+  changeTrafficLight(Place,Color)
 ]).
 
 initially([
+  %  stopped(car0),
+  %  stopped(car1),
+  %  stopped(car2),
   moving(car0),
-  location(car0, coordinate(150, 225), eastward),
-  goal(car0,coordinate(900, 225))
+  moving(car1),
+  moving(car2),
+ %  normal start one on the mainstreet and other on the southStreet
+ % carA wants to go straight from mainStreet, carB want to turn left from southStreet
+  location(car0, coordinate(145, 475), eastward),
+  location(car1, coordinate(475, 880), northward),
+  location(car2,coordinate(700,525),westward),
+  goal(car0,coordinate(980, 475)),
+  goal(car1,coordinate(120, 525)),
+  goal(car2,coordinate(120, 525))
+
+  % % a stoped car near  another car
+  %  moving(car0),
+  %  stopped(car1),
+  %  location(car0, coordinate(145, 475), eastward),
+  %  location(car1, coordinate(200, 525), westward),
+  %  goal(car0,coordinate(980, 475)),
+  %  goal(car1,coordinate(200, 525)),
 ]).
 
+% define the street coordinate facts.
+street(northStreet , coordinate(470, 120), 50, 300, 2,0).
 
+street(northStreet , coordinate(520, 120), 50, 300, 2,0).
 
-street(mainStreet , coordinate(100, 200), 900, 50, 1).
+street(mainStreet , coordinate(100, 450), 300, 50, 2,1).
+
+street(mainStreet , coordinate(100, 500), 300, 50, 2,1).
+
+street(mainStreet , coordinate(640, 450), 500, 50, 2,1).
+
+street(mainStreet , coordinate(640, 500), 500, 50, 2,1).
+
+street(southStreet , coordinate(470, 580), 50, 300, 2,0).
+
+street(southStreet , coordinate(520, 580), 50, 300, 2,0).
+
+roundabout(r1, coordinate(520, 500),20,70,120),
+
 
 cloud(coordinate(140,100)).
 cloud(coordinate(250,90)).
 cloud(coordinate(300,120)).
+
 cloud(coordinate(640,100)).
 cloud(coordinate(750,90)).
 cloud(coordinate(800,120)).
-
-goal(Vehicle,coordinate(A, B)) from _ to T,
-location(Vehicle, coordinate(X, Y), Direction), A==X, B==Y,moving(Vehicle) at T ->
-  % testPrint(Vehicle+ ' we have arrived'),
-  arrive(Vehicle) at T.
-
-goal(Vehicle,coordinate(A, B)) from _ to T,
-location(Vehicle, coordinate(X, Y), Direction), A!=X at T ->
-  % need to find the right direction here
-  % driving forward
-    drive(Vehicle) from T to _.
-
-goal(Vehicle,coordinate(A, B)) from _ to T,
-location(Vehicle, coordinate(X, Y), Direction), B!=Y at T ->
-  % need to find the right direction here
-  % driving forward
-    drive(Vehicle) from T to _.
-
-drive(Vehicle) from T to T1 <-
-  location(Vehicle, coordinate(X, Y), Direction),
-  Direction == northward,
-  NewY = Y - 10,
-  NextPlace = coordinate(X, NewY),
-  step(Vehicle, NextPlace) from T1 to T2.
-
-drive(Vehicle) from T to T1 <-
-  location(Vehicle, coordinate(X, Y), Direction),
-  Direction == southward,
-  NewY = Y + 10,
-  NextPlace = coordinate(X, NewY),
-  step(Vehicle, NextPlace) from T1 to T2.
-
-drive(Vehicle) from T to T1 <-
-  location(Vehicle, coordinate(X, Y), Direction),
-  Direction == westward,
-  NewX = X-10,
-  NextPlace = coordinate(NewX, Y),
-  step(Vehicle, NextPlace) from T1 to T2.
-
-drive(Vehicle) from T to T1 <-
-  location(Vehicle, coordinate(X, Y), Direction),
-  Direction == eastward,
-  NewX = X + 10,
-  NextPlace = coordinate(NewX, Y),
-  step(Vehicle, NextPlace) from T1 to T2.
-
-% on(coordinate(X,Y),Street) <-
-
-
-
-updates(step(Vehicle, NextPlace), location(Vehicle, OldPlace, Direction),  location(Vehicle, NextPlace, Direction)).
-
-updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading)).
-
-terminates(arrive(Vehicle), moving(Vehicle)).
-initiates(arrive(Vehicle), stopped(Vehicle)).
-% you  can not move (x++) if you are not facing eastward
