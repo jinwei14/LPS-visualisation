@@ -281,6 +281,43 @@
 
 
     /*
+  * This field will create the rotated road depends on the user defined
+  * */
+    appManager.createRotateRoad = function(x1,y1,x2,y2,x3,y3,x4,y4){
+        // draw polygon
+        console.log("add rotateed rd has been called");
+        const path = [x1,y1,x2,y2,x3,y3,x4,y4];
+
+        UIManager.graphics.lineStyle(2, 0xFFFFFF, 1);
+        UIManager.graphics.beginFill(0x333);
+        UIManager.graphics.drawPolygon(path);
+        UIManager.graphics.endFill();
+    };
+    /*
+    * This field will create the roundabout
+    * */
+    appManager.createRoundabout = function(x1,y1,radius1,radiu2,radiu3){
+
+        // Circle + line style 1 outer roundabout
+        UIManager.graphics.lineStyle(2, 0xFFFFFF, 1);
+        UIManager.graphics.beginFill(0x333, 1);
+        UIManager.graphics.drawCircle(x1, y1, radius1);
+        UIManager.graphics.endFill();
+
+        // Circle + line style 1 middle roundabout
+        UIManager.graphics.lineStyle(2, 0xFFFFFF, 1);
+        UIManager.graphics.beginFill(0x333, 1);
+        UIManager.graphics.drawCircle(x1, y1, radiu2);
+        UIManager.graphics.endFill();
+
+        // inner cycle
+        UIManager.graphics.lineStyle(2, 0xFFFFFF, 1);
+        UIManager.graphics.beginFill(0xFFFFFF, 1);
+        UIManager.graphics.drawCircle(x1, y1, radiu3);
+        UIManager.graphics.endFill();
+    };
+
+    /*
     * This field will create the vehicles with name, location and direction.
     * */
     appManager.createVehicle = function (vehicleName, x, y, direction) {
