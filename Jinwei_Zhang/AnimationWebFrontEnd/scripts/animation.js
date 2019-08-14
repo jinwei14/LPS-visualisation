@@ -301,7 +301,7 @@
         // Circle + line style 1 outer roundabout
         UIManager.graphics.lineStyle(2, 0xFFFFFF, 1);
         UIManager.graphics.beginFill(0x333, 1);
-        UIManager.graphics.drawCircle(x1, y1, radius1);
+        UIManager.graphics.drawCircle(x1, y1, radiu3);
         UIManager.graphics.endFill();
 
         // Circle + line style 1 middle roundabout
@@ -311,9 +311,9 @@
         UIManager.graphics.endFill();
 
         // inner cycle
-        UIManager.graphics.lineStyle(2, 0xFFFFFF, 1);
-        UIManager.graphics.beginFill(0xFFFFFF, 1);
-        UIManager.graphics.drawCircle(x1, y1, radiu3);
+        UIManager.graphics.lineStyle(2, 0x1099bb, 1);
+        UIManager.graphics.beginFill(0x1099bb, 1);
+        UIManager.graphics.drawCircle(x1, y1, radius1);
         UIManager.graphics.endFill();
     };
 

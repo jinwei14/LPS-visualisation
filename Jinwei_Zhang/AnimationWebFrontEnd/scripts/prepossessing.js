@@ -307,6 +307,28 @@
         this.Y4 = parseInt(this.matchArray[13],10);
 
     }
+    /**
+     * this parser file is the parser for the roundabout
+     * */
+    function Roundabout(fullPhrase) {
+
+        //the full phrase of the user defined fluent such as loc(car, 1650, 340)).
+        this.fullPhrase = fullPhrase;
+
+        //regulation match array
+        this.matchArray = this.fullPhrase.match(/(\w+)/g);
+
+        this.fluent = this.matchArray[0];
+        this.name = this.matchArray[1];
+        //the location and the name of the street
+        this.X = parseInt(this.matchArray[3],10);
+        this.Y = parseInt(this.matchArray[4],10);
+        this.radius1 = parseInt(this.matchArray[5],10);
+        this.radius2 = parseInt(this.matchArray[6],10);
+        this.radius3 = parseInt(this.matchArray[7],10);
+
+    }
+
     /*
    * this parser file is the parser for te testing the program.
    * */
@@ -532,12 +554,14 @@
                         var cloud = new Cloud(item);
                         appManager.createCloud(cloud.X, cloud.Y);
                     } else if (item.toLowerCase().startsWith('rotatestreet')) {
-                        console.log("preprocesiing RR");
                         var rotateStreet = new RotateRoad(item);
                         appManager.createRotateRoad(rotateStreet.X1, rotateStreet.Y1,
                             rotateStreet.X2,rotateStreet.Y2,
                             rotateStreet.X3,rotateStreet.Y3,
                             rotateStreet.X4,rotateStreet.Y4);
+                    }else if (item.toLowerCase().startsWith('roundabout')) {
+                        var roundabout = new Roundabout(item);
+                        appManager.createRoundabout(roundabout.X,roundabout.Y,roundabout.radius1,roundabout.radius2,roundabout.radius3);
                     }
                 });
 
