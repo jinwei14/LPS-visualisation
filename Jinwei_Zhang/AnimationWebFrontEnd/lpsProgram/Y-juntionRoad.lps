@@ -11,6 +11,7 @@ fluents([
    location(VehicleName, coordinate(X, Y), Direction),
    trafficLight(coordinate(X, Y), Working_status, Color, FacingDirection),
    street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane),
+   rotateStreet(StreetName, coordinate(X, Y), Width, Height, Rotation),
    goal(VehicleName,coordinate(X, Y))
 ]).
 
@@ -34,6 +35,8 @@ initially([
 
 
 street(mainStreet , coordinate(100, 200), 900, 50, 1).
+street(mainStreet , coordinate(150, 200), 900, 50, 1).
+
 
 cloud(coordinate(140,100)).
 cloud(coordinate(250,90)).
