@@ -373,7 +373,7 @@ drive(Vehicle) from T to T1 <-
 
 
 % %----------------version 2--------------------------------
-% % There are 6 cases in total that your route will be blocked
+% % There are 8 cases in total that your route will be blocked
 % if Vehicle is at same horizontal level as its goal and there is another car in between
 blockedRoute(Vehicle,Vehicle2) at T<-
   location(Vehicle, coordinate(X1, Y1), Direction),
