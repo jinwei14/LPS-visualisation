@@ -13,7 +13,7 @@
     };
 
     /*
-    *
+    * data manager consist of the global information of the number of car and the response using to detect user click event
     * */
     var dataManager = {
         responseTime : 0,
@@ -22,7 +22,7 @@
     };
 
     /*
-    *
+    *UI manager manage the UI field including the graphics, button and textures.
     * */
     var UIManager = {
         graphics : null,
@@ -522,7 +522,7 @@
     };
 
     /*
-    *
+    * Will remove the vehicle if user drop the vehicel in the deletion area
     * */
     appManager.removeVehicle = function(carSpriteObj, carName=null){
         for (var i = appManager.vehicle.length - 1; i >= 0; i--) {
