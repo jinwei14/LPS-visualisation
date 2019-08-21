@@ -6,8 +6,8 @@
 % we assume the destination is reachable
 % and car length is 40 x 40 based on the image
 % speed is 5 unit per cycle.
-maxTime(200).
-cycleInterval(50).
+maxTime(20).
+cycleInterval(10).
 
 loadModule('../scripts/module.js').
 
@@ -15,7 +15,8 @@ fluents([
   stopped(VehicleName),
   moving(VehicleName),
   coordinate(X, Y),
-  location(VehicleName, coordinate(X, Y), Direction),
+  dir(A,B),
+  location(VehicleName, Coordinate, Dir),
   trafficLight(coordinate(X, Y), Color, FacingDirection,Street),
   street(StreetName, coordinate(X, Y), Width, Height, Number_of_lane, Priority),
   roundabout(StreetName, coordinate(X, Y),Radius1,Radius2,Radius3),
@@ -40,16 +41,13 @@ initially([
   %  stopped(car1),
   %  stopped(car2),
   moving(car0),
-  moving(car1),
-  moving(car2),
+
  %  normal start one on the mainstreet and other on the southStreet
  % carA wants to go straight from mainStreet, carB want to turn left from southStreet
-  location(car0, coordinate(145, 475), eastward),
-  location(car1, coordinate(495, 855), northward),
-  location(car2,coordinate(700,525),westward),
-  goal(car0,coordinate(980, 475)),
-  goal(car1,coordinate(120, 525)),
-  goal(car2,coordinate(120, 525))
+  location(car0, coordinate(406, 475), dir(1,0)),
+
+  goal(car0,coordinate(495, 610))
+
 
   % % a stoped car near  another car
   %  moving(car0),
@@ -87,3 +85,81 @@ cloud(coordinate(300,120)).
 cloud(coordinate(640,100)).
 cloud(coordinate(750,90)).
 cloud(coordinate(800,120)).
+
+
+
+
+goal(Vehicle,coordinate(A, B)) from _ to T,
+location(Vehicle, coordinate(X, Y), _), A==X, B==Y,moving(Vehicle) at T ->
+  % testPrint(Vehicle+ ' we have arrived'),
+  arrive(Vehicle) at T.
+
+
+goal(Vehicle,coordinate(A, B)) from _ to T,
+location(Vehicle, coordinate(X, Y), Direction),
+  moving(Vehicle) at T ->
+    % need to find the right direction here
+    % driving forward
+    % testPrint(Vehicle+' '+X+' '+Y+' Direction '+Direction + '----------------Reactive rule----------------'),
+    direction(Vehicle) at T.
+
+
+goal(Vehicle,coordinate(A, B)) from T to T1,
+location(Vehicle, coordinate(X, Y), Direction),
+  moving(Vehicle) at T1 ->
+
+    % testPrint(Vehicle + " start driving"),
+    drive(Vehicle) from T1 to _.
+
+
+% ---------------------------------------------------------------------------------------------
+% the case where car is not at t junction.
+direction(Vehicle) at T<-
+  testPrint('checking in roundabout or not ?'),
+  location(Vehicle, coordinate(X, Y), _) at T,
+  roundabout(Name, coordinate(C1, C2),R1,R2,R3).
+  notAtRoundabout(X,Y,C1,C2,R3).
+
+
+
+notAtRoundabout(X,Y,C1,C2,R3)<-
+  testPrint('checking in roundabout inside ?'),
+  PowX = (X-C1)**2,
+  PowY = (Y-C2)**2,
+  Dis = sqrt(PowX+PowY),
+  Dis > R3.
+
+
+% you only turn when you are in the middle of the juction.
+direction(Vehicle) at T<-
+  % testPrint('checking in turnning westward or not ?'),
+  location(Vehicle, coordinate(X, Y), Direction),
+  goal(Vehicle,coordinate(K, P)),
+  Direction = dir(A,B),
+  0.5 = A*X + B*Y,
+  1 = X**2 + Y**2,
+  testPrint(Vehicle +' turing '+X+" "+Y ),
+  turn(Vehicle,dir(X,Y)) at T.
+
+
+% ---------------------------------------------------------------------------------------------
+
+
+% drive macro event.
+drive(Vehicle) from T to T1 <-
+  location(Vehicle, coordinate(X, Y), dir(A,B)),
+  NewX = X + A,
+  NewY = Y + B,
+  testPrint(NewX+" "+NewY).
+  % NextPlace = coordinate(NewX, NewY),
+  % % testPrint(Vehicle+ ' move northward'),
+  % step(Vehicle, NextPlace) at T1.
+
+
+updates(step(Vehicle, NextPlace), location(Vehicle, OldPlace, Direction),  location(Vehicle, NextPlace, Direction)).
+
+updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading)).
+
+terminates(arrive(Vehicle), moving(Vehicle)).
+initiates(arrive(Vehicle), stopped(Vehicle)).
+% you  can not move (x++) if you are not facing eastward
