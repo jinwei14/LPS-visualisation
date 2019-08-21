@@ -330,7 +330,8 @@
     }
 
     /*
-   * this parser file is the parser for te testing the program.
+   * this parser file is the parser for te testing the program. The program need to be modified before use hit
+   * the running button.
    * */
     function ProgramModifier(program) {
 
