@@ -23,6 +23,7 @@
                 newProgram = ProgramModifier(program);
                 //display the new program in the text box.
                 document.getElementById("exampleFormControlTextarea1").value = newProgram;
+
                 //reset the button status to be false.
                 clearButtonPressed = false;
                 //run the new program in the LPS runner.
@@ -179,14 +180,23 @@
         this.Y = parseInt(this.matchArray[4], 10);
 
         //the heading is optional. If there is a heading then get the heading as the form of
-        this.getHeading = this.matchArray[5];
+        var regex = new RegExp('\\b' + 'dir' + '\\b');
+        dirIndex = fullPhrase.search(regex);
+
+        dir = fullPhrase.slice(dirIndex,fullPhrase.length-2);
+        console.log(dir);
+        dirX = dir.slice(dir.indexOf('(')+1,dir.indexOf(','));
+        dirY = dir.slice(dir.indexOf(',')+1,dir.indexOf(')'));
+
+        console.log(dirX,dirY);
+        this.getHeading = [parseInt(dirX),parseInt(dirY)];
 
         this.writeOut = function () {
             return this.getFluent + '('
                 + this.getObjectName
                 + ',' + this.matchArray[2]
                 + '('+ this.X.toString()+','+ this.Y.toString()+'),'
-                + this.getHeading + '),'
+                + 'dir('+this.getHeading[0].toString()+','+ this.getHeading[1].toString()+ ')),'
         }
     }
 
@@ -480,7 +490,7 @@
 
                     if (currentTime > 1) {
                         console.log(currentTime);
-
+                        console.log(fluents);
                         fluents.forEach(function (item, index) {
                             if (item.toLowerCase().startsWith('location')) {
                                 console.log(item);
