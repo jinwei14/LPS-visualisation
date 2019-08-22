@@ -6,8 +6,8 @@
 % we assume the destination is reachable
 % and car length is 40 x 40 based on the image
 % speed is 5 unit per cycle.
-maxTime(5).
-cycleInterval(10).
+maxTime(10).
+cycleInterval(20).
 
 loadModule('../scripts/module.js').
 
@@ -137,7 +137,7 @@ notAtRoundabout(X,Y,C1,C2,R3)<-
 
 % you only turn when you are in the middle of the juction.
 direction(Vehicle) at T<-
-  testPrint('moving! around!!'),
+  % testPrint('moving! around!!'),
   location(Vehicle, _, dir(A,B)),
   goal(Vehicle,coordinate(K, P)),
   % COS60 = 0.5,

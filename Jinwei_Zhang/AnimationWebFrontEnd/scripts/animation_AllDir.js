@@ -344,29 +344,38 @@
             .on('pointerupoutside', onDragEnd)
             .on('pointermove', onDragMove);
 
+        northVector = [0,-1];
+        cosTheta = northVector[0]*direction[0]+ northVector[1]*direction[1];
+        console.log("costheta: "+ direction[0],direction[1]);
+        console.log("arc cos theta: "+ Math.acos(cosTheta));
         //the length of the car is 40
-        switch (direction) {
-            case 'northward':
-                // code block
-                // carInstance = PIXI.Sprite.from('imgs/carNorth.png');
-                break;
-            case 'southward':
-                // code block
-                // carInstance = PIXI.Sprite.from('imgs/carSouth.png');
-                carInstance.rotation += Math.PI;
-                break;
-            case 'eastward':
-                // carInstance = PIXI.Sprite.from('imgs/carEast.png');
-                carInstance.rotation += (Math.PI) / 2;
-                break;
-            case 'westward':
-                // carInstance = PIXI.Sprite.from('imgs/carWest.png');
-                carInstance.rotation -= (Math.PI) / 2;
-                break;
-            default:
-                console.log('direction format wrong');
-                break;
+        if (direction[0] >= 0) {
+            carInstance.rotation += Math.acos(cosTheta);
+        }else{
+            carInstance.rotation -= Math.acos(cosTheta);
         }
+        // switch (direction) {
+        //     case 'northward':
+        //         // code block
+        //         // carInstance = PIXI.Sprite.from('imgs/carNorth.png');
+        //         break;
+        //     case 'southward':
+        //         // code block
+        //         // carInstance = PIXI.Sprite.from('imgs/carSouth.png');
+        //         carInstance.rotation += Math.PI;
+        //         break;
+        //     case 'eastward':
+        //         // carInstance = PIXI.Sprite.from('imgs/carEast.png');
+        //         carInstance.rotation += (Math.PI) / 2;
+        //         break;
+        //     case 'westward':
+        //         // carInstance = PIXI.Sprite.from('imgs/carWest.png');
+        //         carInstance.rotation -= (Math.PI) / 2;
+        //         break;
+        //     default:
+        //         console.log('direction format wrong');
+        //         break;
+        // }
 
         // const graphics = new PIXI.Graphics();
         // graphics.lineStyle(2, 0x000000, 1);
@@ -451,23 +460,28 @@
                     item.carLocText.y = postationArr[1]  + 25;
                     //if the time span is less than 100 meaning the direction has changed.
                     if (timeSpan < 100) {
-                        switch (item.direction) {
-                            case 'northward':
-                                item.direction = 'eastward';
-                                break;
-                            case 'southward':
-                                item.direction = 'westward';
-                                break;
-                            case 'eastward':
-                                item.direction = 'southward';
-                                break;
-                            case 'westward':
-                                item.direction = 'northward';
-                                break;
-                            default:
-                                console.log('direction format wrong');
-                                break;
-                        }
+                        xBefore = item.direction[0];
+                        yBefore = item.direction[1];
+                        xAfter = xBefore*Math.cos(Math.PI/2) - yBefore*Math.sin(Math.PI/2);
+                        yAfter = yBefore*Math.cos(Math.PI/2) + xBefore*Math.sin(Math.PI/2);
+                        item.direction = [xAfter,yAfter];
+                        // switch (item.direction) {
+                        //     case 'northward':
+                        //         item.direction = 'eastward';
+                        //         break;
+                        //     case 'southward':
+                        //         item.direction = 'westward';
+                        //         break;
+                        //     case 'eastward':
+                        //         item.direction = 'southward';
+                        //         break;
+                        //     case 'westward':
+                        //         item.direction = 'northward';
+                        //         break;
+                        //     default:
+                        //         console.log('direction format wrong');
+                        //         break;
+                        // }
                     }
                 }
             });
@@ -552,25 +566,29 @@
                 item.carLocText.x = x - 25;
                 item.carLocText.y = y + 25;
 
-                if (item.direction !== direction) {
-
-                    if ((item.direction === 'southward' && direction === 'northward') ||
-                        (item.direction === 'eastward' && direction === 'westward') ||
-                        (item.direction === 'northward' && direction === 'southward') ||
-                        (item.direction === 'westward' && direction === 'eastward')) {
-                        item.obj.rotation += Math.PI;
-                    } else if ((item.direction === 'southward' && direction === 'eastward') ||
-                        (item.direction === 'eastward' && direction === 'northward') ||
-                        (item.direction === 'northward' && direction === 'westward') ||
-                        (item.direction === 'westward' && direction === 'southward')) {
-                        item.obj.rotation -= Math.PI / 2;
-
-                    } else if ((item.direction === 'southward' && direction === 'westward') ||
-                        (item.direction === 'westward' && direction === 'northward') ||
-                        (item.direction === 'northward' && direction === 'eastward') ||
-                        (item.direction === 'eastward' && direction === 'southward')) {
-                        item.obj.rotation += Math.PI / 2;
-                    }
+                if (item.direction[0] !== direction[0] || item.direction[1] !== direction[1]) {
+                    xBefore = item.direction[0];
+                    yBefore = item.direction[1];
+                    xAfter = direction[0];
+                    yAfter = direction[1];
+                    item.rotation += Math.acos(xBefore*xAfter + yBefore*yAfter);
+                    // if ((item.direction === 'southward' && direction === 'northward') ||
+                    //     (item.direction === 'eastward' && direction === 'westward') ||
+                    //     (item.direction === 'northward' && direction === 'southward') ||
+                    //     (item.direction === 'westward' && direction === 'eastward')) {
+                    //     item.obj.rotation += Math.PI;
+                    // } else if ((item.direction === 'southward' && direction === 'eastward') ||
+                    //     (item.direction === 'eastward' && direction === 'northward') ||
+                    //     (item.direction === 'northward' && direction === 'westward') ||
+                    //     (item.direction === 'westward' && direction === 'southward')) {
+                    //     item.obj.rotation -= Math.PI / 2;
+                    //
+                    // } else if ((item.direction === 'southward' && direction === 'westward') ||
+                    //     (item.direction === 'westward' && direction === 'northward') ||
+                    //     (item.direction === 'northward' && direction === 'eastward') ||
+                    //     (item.direction === 'eastward' && direction === 'southward')) {
+                    //     item.obj.rotation += Math.PI / 2;
+                    // }
 
                     item.direction = direction;
                 }
@@ -783,19 +801,25 @@
     * This part is checking all the adding cars that is there is any car that is opposite to each other (same horizontal or vertical level)
     * */
     appManager.oppositeDir = function(item1,item2){
-        switch (item1.direction) {
-            case 'northward':
-                return (item2.direction === 'southward' && item1.obj.x === item2.obj.x && Math.abs(item1.obj.y - item2.obj.y)<120);
-            case 'southward':
-                return (item2.direction === 'northward' && item1.obj.x === item2.obj.x &&  Math.abs(item2.obj.y - item1.obj.y )< 120);
-            case 'eastward':
-                return (item2.direction === 'westward' && item1.obj.y === item2.obj.y && Math.abs(item2.obj.x - item1.obj.x) < 120);
-            case 'westward':
-                return (item2.direction === 'eastward' && item1.obj.y === item2.obj.y && Math.abs(item1.obj.x - item2.obj.x) < 120 );
-            default:
-                console.log('direction wrong');
-                return false;
-        }
+        dir1 = [item1.direction[0],item1.direction[1]];
+        dir2 = [item2.direction[0],item2.direction[1]];
+        angle = Math.acos(dir1[0]*dir2[0] + dir1[1]*dir2[1]);
+        return angle === Math.PI / 2 || angle === -Math.PI / 2;
+
+
+        // switch (item1.direction) {
+        //     case 'northward':
+        //         return (item2.direction === 'southward' && item1.obj.x === item2.obj.x && Math.abs(item1.obj.y - item2.obj.y)<120);
+        //     case 'southward':
+        //         return (item2.direction === 'northward' && item1.obj.x === item2.obj.x &&  Math.abs(item2.obj.y - item1.obj.y )< 120);
+        //     case 'eastward':
+        //         return (item2.direction === 'westward' && item1.obj.y === item2.obj.y && Math.abs(item2.obj.x - item1.obj.x) < 120);
+        //     case 'westward':
+        //         return (item2.direction === 'eastward' && item1.obj.y === item2.obj.y && Math.abs(item1.obj.x - item2.obj.x) < 120 );
+        //     default:
+        //         console.log('direction wrong');
+        //         return false;
+        // }
     };
 
 
