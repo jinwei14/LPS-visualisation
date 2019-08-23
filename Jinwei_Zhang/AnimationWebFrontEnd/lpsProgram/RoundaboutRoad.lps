@@ -6,8 +6,8 @@
 % we assume the destination is reachable
 % and car length is 40 x 40 based on the image
 % speed is 5 unit per cycle.
-maxTime(10).
-cycleInterval(20).
+maxTime(100).
+cycleInterval(50).
 
 loadModule('../scripts/module.js').
 
@@ -44,7 +44,7 @@ initially([
 
  %  normal start one on the mainstreet and other on the southStreet
  % carA wants to go straight from mainStreet, carB want to turn left from southStreet
-  location(car0, coordinate(406, 475), dir(0,-1)),
+  location(car0, coordinate(410, 513), dir(0,-1)),
 
   goal(car0,coordinate(495, 610))
 
@@ -74,8 +74,9 @@ street(mainStreet , coordinate(640, 500), 500, 50, 2,1).
 street(southStreet , coordinate(470, 580), 50, 300, 2,0).
 
 street(southStreet , coordinate(520, 580), 50, 300, 2,0).
-
+%
 roundabout(r1, coordinate(520, 500),40,90,140).
+% roundabout(r1, coordinate(520, 500),40,300,700).
 
 roundJunction(rJuntion1,coordinate(500, 500)).
 roundJunction(rJuntion2,coordinate(500, 500)).
@@ -95,7 +96,7 @@ cloud(coordinate(800,120)).
 
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
-location(Vehicle, coordinate(X, Y), _), A==X, B==Y,moving(Vehicle) at T ->
+location(Vehicle, coordinate(X, Y), _), abs(A-X)<10, abs(B-Y)<10,moving(Vehicle) at T ->
   % testPrint(Vehicle+ ' we have arrived'),
   arrive(Vehicle) at T.
 
@@ -132,7 +133,10 @@ notAtRoundabout(X,Y,C1,C2,R3)<-
   PowY = (Y-C2)**2,
   Dis = sqrt(PowX+PowY),
   % testPrint('checking Dis: '+ Dis+" "+R3),
-  Dis @> R3.
+  Dis > R3.
+
+  % this is the weridest bug I have ever found in LPS interpreter. came from not
+  % where @< does't work some times.
 
 
 % you only turn when you are in the middle of the juction.
@@ -143,11 +147,11 @@ direction(Vehicle) at T<-
   % COS60 = 0.5,
   % COS60 = A*X + B*Y.
   % 1 = X**2 + Y**2,
-  Theta = pi/3,
-  X = A*cos(Theta)-B*sin(Theta),
-  Y = B*cos(Theta)+A*sin(Theta),
-  % testPrint(Vehicle +' turing '+X+" "+Y ).
-  turn(Vehicle,dir(X,Y)) at T.
+  Theta = pi/36,
+  X = A*cos(Theta) - B*sin(Theta),
+  Y = B*cos(Theta) + A*sin(Theta),
+  % testPrint(Vehicle +' turing '+X+" "+Y ),
+    turn(Vehicle,dir(X,Y)) at T.
 
 
 % ---------------------------------------------------------------------------------------------
@@ -156,15 +160,17 @@ direction(Vehicle) at T<-
 % drive macro event.
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), dir(A,B)),
-  NewX = X + 5*A,
-  NewY = Y + 5*B,
-  testPrint("New loca: ("+ NewX+" "+NewY+") Dir: ("+A+","+B+")").
+  AA = 10 * A,
+  NewX = X + AA,
+  BB = 10 * B,
+  NewY = Y + BB,
+  % testPrint("old loca: ("+ X+" "+Y+") New loca: ("+ NewX+" "+NewY+") Dir: ("+A+","+B+")"),
   NextPlace = coordinate(NewX, NewY),
   % testPrint(Vehicle+ ' move northward'),
   step(Vehicle, NextPlace) at T1.
 
 
-updates(step(Vehicle, NextPlace), location(Vehicle, OldPlace, Direction),  location(Vehicle, NextPlace, Direction)).
+updates(step(Vehicle, NextPlace), location(Vehicle, OldPlace,Direction),  location(Vehicle, NextPlace, Direction)).
 
 updates(turn(Vehicle, NewHeading) , location(Vehicle, Place, OldHeading), location(Vehicle, Place, NewHeading)).
 

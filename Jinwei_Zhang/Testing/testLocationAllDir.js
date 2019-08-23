@@ -14,22 +14,31 @@ function VehicleLoc(fullPhrase, timeStamp) {
     // should be the fluent that changed such as : loc, location.
     this.getFluent = this.matchArray[0];
 
-    //the x and y position of the car
-
-    this.X = parseInt(this.matchArray[3], 10);
-    this.Y = parseInt(this.matchArray[4], 10);
 
     //the heading is optional. If there is a heading then get the heading as the form of
     var regex = new RegExp('\\b' + 'dir' + '\\b');
     dirIndex = fullPhrase.search(regex);
 
-    dir = fullPhrase.slice(dirIndex,fullPhrase.length-2);
-    console.log(dir);
+    dir = fullPhrase.slice(dirIndex,fullPhrase.length-1);
+    // console.log(dir);
     dirX = dir.slice(dir.indexOf('(')+1,dir.indexOf(','));
     dirY = dir.slice(dir.indexOf(',')+1,dir.indexOf(')'));
+    // console.log(dirX,dirY);
+    this.getHeading = [parseFloat(dirX),parseFloat(dirY)];
 
-    console.log(dirX,dirY);
-    this.getHeading = [parseInt(dirX),parseInt(dirY)];
+
+
+    //the x and y position of the car
+    var regex1 = new RegExp('\\b' + 'coordinate' + '\\b');
+    locationIndex = fullPhrase.search(regex1);
+
+    locationStr = fullPhrase.slice(locationIndex,dirIndex);
+    // console.log(location);
+    XStr = locationStr.slice(locationStr.indexOf('(')+1,locationStr.indexOf(','));
+    YStr = locationStr.slice(locationStr.indexOf(',')+1,locationStr.indexOf(')'));
+    this.X = parseFloat(XStr);
+    this.Y = parseFloat(YStr);
+    // console.log(this.X, this.Y);
 
     this.writeOut = function () {
         return this.getFluent + '('
@@ -40,19 +49,23 @@ function VehicleLoc(fullPhrase, timeStamp) {
     }
 }
 
-var obj2 = new VehicleLoc('location(car0, coordinate(9, 9), dir(11,-9)).', 30);
-// obj2.getHeading = 'northward';
-console.log("full  array" + obj2.matchArray);
-console.log('Fluent: ' + obj2.getFluent);
-console.log('heading: ' + obj2.getHeading);
-console.log('heading X: ' + obj2.getHeading[0]);
-console.log('heading Y: ' + obj2.getHeading[1]);
-console.log('Object name: ' + obj2.getObjectName);
-console.log('Timestamp: ' + obj2.timeStamp);
-console.log('x: ' + obj2.X);
-console.log('y: ' + obj2.Y);
+// var obj2 = new VehicleLoc('location(car0, coordinate(9, 9), dir(0,-1))', 30);
 
-console.log(obj2.writeOut());
+var obj1 = new VehicleLoc('location(car0, coordinate(423.32050807568874, 475),dir(-0.8660254037844384, 0.5000000000000004))', 30);
+
+var obj3 = new VehicleLoc('location(car0, coordinate(492.6025403784439, 525), dir(3.885780586188048e-16, 1))', 30);
+// obj2.getHeading = 'northward';
+console.log('full array:   ' + obj3.matchArray);
+console.log('Fluent:       ' + obj3.getFluent);
+console.log('heading:      ' + obj3.getHeading);
+console.log('heading X:    ' + obj3.getHeading[0]);
+console.log('heading Y:    ' + obj3.getHeading[1]);
+console.log('Object name:  ' + obj3.getObjectName);
+console.log('Timestamp:    ' + obj3.timeStamp);
+console.log('x:            ' + obj3.X);
+console.log('y:            ' + obj3.Y);
+
+console.log(obj3.writeOut());
 
 var cars = [
     "Saab",

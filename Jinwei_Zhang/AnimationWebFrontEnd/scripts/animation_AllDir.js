@@ -571,7 +571,8 @@
                     yBefore = item.direction[1];
                     xAfter = direction[0];
                     yAfter = direction[1];
-                    item.rotation += Math.acos(xBefore*xAfter + yBefore*yAfter);
+                    item.obj.rotation += Math.acos(xBefore*xAfter + yBefore*yAfter);
+                    console.log("roation times: "+ Math.acos(xBefore*xAfter + yBefore*yAfter));
                     // if ((item.direction === 'southward' && direction === 'northward') ||
                     //     (item.direction === 'eastward' && direction === 'westward') ||
                     //     (item.direction === 'northward' && direction === 'southward') ||
@@ -593,28 +594,28 @@
                     item.direction = direction;
                 }
 
-                // check if there is any car passing through each other.
-                var found = false;
-                appManager.vehicle.forEach(function (itemNext, index) {
-                    // if we find a opposite position car we will change the color of the text
-                    if (appManager.oppositeDir(item,itemNext)) {
-                        found = true;
-                        item.textObj.style.fill = 0xff0000;
-                        item.carLocText.style.fill = 0xff0000;
-                        itemNext.textObj.style.fill = 0xff0000;
-                        itemNext.carLocText.style.fill = 0xff0000;
-                        console.log(item.name,itemNext.name);
-                        console.log(item.obj.name,itemNext.name);
-                        console.log("testing changing color"+"-----------------");
-                    }
-                });
-
-                if(found === false){
-                    //change back the color to white. this is really pointless.
-                    // item.textObj.style.fill  =  0xffffff;
-                    item.textObj.style.fill = 0xffffff;
-                    item.carLocText.style.fill = 0xffffff;
-                }
+                // // check if there is any car passing through each other.
+                // var found = false;
+                // appManager.vehicle.forEach(function (itemNext, index) {
+                //     // if we find a opposite position car we will change the color of the text
+                //     if (appManager.oppositeDir(item,itemNext)) {
+                //         found = true;
+                //         item.textObj.style.fill = 0xff0000;
+                //         item.carLocText.style.fill = 0xff0000;
+                //         itemNext.textObj.style.fill = 0xff0000;
+                //         itemNext.carLocText.style.fill = 0xff0000;
+                //         console.log(item.name,itemNext.name);
+                //         console.log(item.obj.name,itemNext.name);
+                //         console.log("testing changing color"+"-----------------");
+                //     }
+                // });
+                //
+                // if(found === false){
+                //     //change back the color to white. this is really pointless.
+                //     // item.textObj.style.fill  =  0xffffff;
+                //     item.textObj.style.fill = 0xffffff;
+                //     item.carLocText.style.fill = 0xffffff;
+                // }
 
             }
         });

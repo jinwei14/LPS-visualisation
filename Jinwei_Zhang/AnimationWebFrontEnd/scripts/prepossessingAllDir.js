@@ -19,15 +19,21 @@
                 //make display text box appear
                 var vis = document.getElementById("content");
 
-                //modify the program based the user input change in appManager.
-                newProgram = ProgramModifier(program);
-                //display the new program in the text box.
-                document.getElementById("exampleFormControlTextarea1").value = newProgram;
+                // //modify the program based the user input change in appManager.
+                // newProgram = ProgramModifier(program);
+                // //display the new program in the text box.
+                // document.getElementById("exampleFormControlTextarea1").value = newProgram;
+                //
+                // //reset the button status to be false.
+                // clearButtonPressed = false;
+                // //run the new program in the LPS runner.
+                // LPSRunner(newProgram, null);
+
 
                 //reset the button status to be false.
                 clearButtonPressed = false;
                 //run the new program in the LPS runner.
-                LPSRunner(newProgram, null);
+                LPSRunner(program, null);
 
 
             } else {
@@ -174,22 +180,31 @@
         // should be the fluent that changed such as : loc, location.
         this.getFluent = this.matchArray[0];
 
-        //the x and y position of the car
-
-        this.X = parseInt(this.matchArray[3], 10);
-        this.Y = parseInt(this.matchArray[4], 10);
 
         //the heading is optional. If there is a heading then get the heading as the form of
         var regex = new RegExp('\\b' + 'dir' + '\\b');
         dirIndex = fullPhrase.search(regex);
 
-        dir = fullPhrase.slice(dirIndex,fullPhrase.length-2);
-        console.log(dir);
+        dir = fullPhrase.slice(dirIndex,fullPhrase.length-1);
+        // console.log(dir);
         dirX = dir.slice(dir.indexOf('(')+1,dir.indexOf(','));
         dirY = dir.slice(dir.indexOf(',')+1,dir.indexOf(')'));
+        // console.log(dirX,dirY);
+        this.getHeading = [parseFloat(dirX),parseFloat(dirY)];
 
-        console.log(dirX,dirY);
-        this.getHeading = [parseInt(dirX),parseInt(dirY)];
+
+
+        //the x and y position of the car
+        var regex1 = new RegExp('\\b' + 'coordinate' + '\\b');
+        locationIndex = fullPhrase.search(regex1);
+
+        locationStr = fullPhrase.slice(locationIndex,dirIndex);
+        // console.log(location);
+        XStr = locationStr.slice(locationStr.indexOf('(')+1,locationStr.indexOf(','));
+        YStr = locationStr.slice(locationStr.indexOf(',')+1,locationStr.indexOf(')'));
+        this.X = parseFloat(XStr);
+        this.Y = parseFloat(YStr);
+        // console.log(this.X, this.Y);
 
         this.writeOut = function () {
             return this.getFluent + '('
@@ -495,6 +510,7 @@
                             if (item.toLowerCase().startsWith('location')) {
                                 console.log(item);
                                 var loc = new VehicleLoc(item, currentTime);
+                                console.log(loc.getObjectName, loc.X, loc.Y, loc.getHeading);
                                 appManager.changeVehicleLocation(loc.getObjectName, loc.X, loc.Y, loc.getHeading);
                             } else if (item.toLowerCase().startsWith('trafficlight')) {
                                 // console.log(item);
