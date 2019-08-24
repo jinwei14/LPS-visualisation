@@ -12,6 +12,7 @@ cycleInterval(50).
 loadModule('../scripts/module.js').
 
 fluents([
+  velocity(VehicleName, Speed),
   stopped(VehicleName),
   moving(VehicleName),
   coordinate(X, Y),

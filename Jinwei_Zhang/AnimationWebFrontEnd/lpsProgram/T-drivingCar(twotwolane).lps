@@ -47,52 +47,52 @@ actions ([
 ]).
 
 initially([
-  moving(carA),
-  moving(carB),
+  moving(car0),
+  moving(car1),
  % %  normal start one on the mainstreet and other on the southStreet
- % % carA wants to go straight from mainStreet, carB want to turn left from southStreet
- %  location(carA, coordinate(145, 175), eastward),
- %  location(carB, coordinate(475, 580), northward),
+ % % car0 wants to go straight from mainStreet, car1 want to turn left from southStreet
+ %  location(car0, coordinate(145, 175), eastward),
+ %  location(car1, coordinate(475, 580), northward),
  %  % % this if for test the function of traffic light
- %  % % %location(carB, coordinate(475, 280), northward),
- %  goal(carA,coordinate(980, 175)),
- %  goal(carB,coordinate(120, 225)),
+ %  % % %location(car1, coordinate(475, 280), northward),
+ %  goal(car0,coordinate(980, 175)),
+ %  goal(car1,coordinate(120, 225)),
 
-  % %  carA start from Tjunction
+  % %  car0 start from Tjunction
    %  % normal start one on the mainstreet and other on the southStreet
-   % carA wants to go straight from mainStreet, carB want to turn left from southStreet
-  location(carA, coordinate(145, 175), eastward),
-  location(carB, coordinate(475, 580), northward),
-  goal(carA,coordinate(525, 700)),
-  goal(carB,coordinate(145, 225)),
+   % car0 wants to go straight from mainStreet, car1 want to turn left from southStreet
+  location(car0, coordinate(145, 175), eastward),
+  location(car1, coordinate(475, 580), northward),
+  goal(car0,coordinate(525, 650)),
+  goal(car1,coordinate(145, 225)),
 
-  % % %carA carB start driving to a same goal straightly
-  %   location(carA, coordinate(145, 175), eastward),
-  %   location(carB, coordinate(200, 175), eastward),
-  %   goal(carA,coordinate(980, 225)),
-  %   goal(carB,coordinate(980, 225)),
-
-
-  % % %carA carB start driving to a same goal both turnnig into southStreet
-  %   location(carA, coordinate(145, 175), eastward),
-  %   location(carB, coordinate(200, 175), eastward),
-  %   goal(carA,coordinate(500, 580)),
-  %   goal(carB,coordinate(500, 580)),
+  % % %car0 carB start driving to a same goal straightly
+  %   location(car0, coordinate(145, 175), eastward),
+  %   location(car1, coordinate(200, 175), eastward),
+  %   goal(car0,coordinate(980, 225)),
+  %   goal(car1,coordinate(980, 225)),
 
 
-% %carB turn left from southStreet, carA turn right from mainStreet
-%   location(carA, coordinate(145, 175), eastward),
-%   location(carB, coordinate(500, 580), northward),
-%   goal(carA,coordinate(500, 580)),
-%   goal(carB,coordinate(145, 225)),
+  % % %car0 carB start driving to a same goal both turnnig into southStreet
+  %   location(car0, coordinate(145, 175), eastward),
+  %   location(car1, coordinate(200, 175), eastward),
+  %   goal(car0,coordinate(500, 580)),
+  %   goal(car1,coordinate(500, 580)),
+
+
+% %car1 turn left from southStreet, car0 turn right from mainStreet
+%   location(car0, coordinate(145, 175), eastward),
+%   location(car1, coordinate(500, 580), northward),
+%   goal(car0,coordinate(500, 580)),
+%   goal(car1,coordinate(145, 225)),
 
 
 
-  % % carA carB drivr opposite to each other
-  %   location(carA, coordinate(450, 175), eastward),
-  %   location(carB, coordinate(980 ,225), westward),
-  %   goal(carA,coordinate(980, 175)),
-  %   goal(carB,coordinate(145, 225)),
+  % % car0 car1 drivr opposite to each other
+  %   location(car0, coordinate(450, 175), eastward),
+  %   location(car1, coordinate(980 ,225), westward),
+  %   goal(car0,coordinate(980, 175)),
+  %   goal(car1,coordinate(145, 225)),
 
   % the position that the car might step on, a traffic light is defined here for further instructions.
   trafficLight(coordinate(430, 175), green, westward, mainStreet),
