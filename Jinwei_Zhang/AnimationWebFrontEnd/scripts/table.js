@@ -53,7 +53,7 @@
         // var rows = tbody.rows;
         for (var i = tbody.rows.length-1; i>=0; i--){
             strHTML = tbody.rows[i].cells[1].innerHTML;
-            console.log("content"+ tbody.rows[i].cells[1].innerHTML);
+            // console.log("content"+ tbody.rows[i].cells[1].innerHTML);
             existeIndex = strHTML.indexOf(vehicle);
             if (existeIndex!==-1){
                 tbody.deleteRow(i);
