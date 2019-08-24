@@ -6,6 +6,7 @@ loadModule('../scripts/module.js').
 
 fluents([
    stopped(VehicleName),
+   velocity(VehicleName, Speed),
    moving(VehicleName),
    coordinate(X, Y),
    location(VehicleName, coordinate(X, Y), Direction),
@@ -26,9 +27,10 @@ actions ([
 ]).
 
 initially([
+  moving(car0),
   location(car0, coordinate(150, 225), eastward),
   goal(car0,coordinate(900, 225)),
-  moving(car0)
+  velocity(car0, 10)
 ]).
 
 
@@ -62,28 +64,32 @@ location(Vehicle, coordinate(X, Y), Direction), B!=Y at T ->
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == northward,
-  NewY = Y - 10,
+  velocity(Vehicle, Num),
+  NewY = Y - Num,
   NextPlace = coordinate(X, NewY),
   step(Vehicle, NextPlace) from T1 to T2.
 
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == southward,
-  NewY = Y + 10,
+  velocity(Vehicle, Num),
+  NewY = Y + Num,
   NextPlace = coordinate(X, NewY),
   step(Vehicle, NextPlace) from T1 to T2.
 
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == westward,
-  NewX = X-10,
+  velocity(Vehicle, Num),
+  NewX = X-Num,
   NextPlace = coordinate(NewX, Y),
   step(Vehicle, NextPlace) from T1 to T2.
 
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == eastward,
-  NewX = X + 10,
+  velocity(Vehicle, Num),
+  NewX = X + Num,
   NextPlace = coordinate(NewX, Y),
   step(Vehicle, NextPlace) from T1 to T2.
 

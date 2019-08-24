@@ -53,7 +53,10 @@ initially([
   goal(car1,coordinate(120, 525)),
   goal(car2,coordinate(120, 525)),
   goal(car3,coordinate(250, 875)),
-
+  velocity(car0, 5),
+  velocity(car1, 5),
+  velocity(car2, 5),
+  velocity(car3, 5),
   % % a stoped car near  another car
   %  moving(car0),
   %  stopped(car1),
@@ -234,7 +237,8 @@ direction(Vehicle) at T<-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == northward,
-  NewY = Y - 5,
+  velocity(Vehicle, Speed),
+  NewY = Y - Speed,
   NextPlace = coordinate(X, NewY),
   % testPrint(Vehicle+ ' move northward'),
   step(Vehicle, NextPlace) at T1.
@@ -242,7 +246,8 @@ drive(Vehicle) from T to T1 <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == southward,
-  NewY = Y + 5,
+  velocity(Vehicle, Speed),
+  NewY = Y + Speed,
   NextPlace = coordinate(X, NewY),
   % testPrint(Vehicle+ ' move southward'),
   step(Vehicle, NextPlace) at T1.
@@ -250,7 +255,8 @@ drive(Vehicle) from T to T1 <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == westward,
-  NewX = X-5,
+  velocity(Vehicle, Speed),
+  NewX = X-Speed,
   NextPlace = coordinate(NewX, Y),
   % testPrint(Vehicle+ ' move westward'),
   step(Vehicle, NextPlace) at T1.
@@ -258,7 +264,8 @@ drive(Vehicle) from T to T1 <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == eastward,
-  NewX = X + 5,
+  velocity(Vehicle, Speed),
+  NewX = X + Speed,
   NextPlace = coordinate(NewX, Y),
   % testPrint(Vehicle+ ' move eastward'),
   step(Vehicle, NextPlace) at T1.

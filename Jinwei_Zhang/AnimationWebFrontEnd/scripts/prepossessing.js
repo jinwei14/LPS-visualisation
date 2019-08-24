@@ -387,13 +387,11 @@
                 if (carName in carSetManager){
                     carSetProgram.add(carName);
 
+                } else{
+                    arr.splice(i, 1);
                 }
 
-                // else{
-                //     arr.splice(i, 1);
-                // }
 
-                // arr.splice(i, 1);
             } else if (arr[i].trim().startsWith('location')) {
                 console.log(arr[i]);
                 found = false;
@@ -471,13 +469,8 @@
             if(!carSetProgram.has(item.name)){
                 arr.splice(start+1,0,'moving('+item.name+'),');
                 arr.splice(start+2,0,'location('+item.name+', coordinate('+item.obj.x.toString()+','+item.obj.y.toString()+'),'+item.direction+'),');
-                if (index<appManager.vehicle.length-1){
-                    arr.splice(start+3,0,'goal('+item.name+', coordinate('+(goalSetManager[item.name].x).toString()+','+goalSetManager[item.name].y.toString()+')),');
-                }else{
-                    arr.splice(start+3,0,'goal('+item.name+', coordinate('+(goalSetManager[item.name].x).toString()+','+goalSetManager[item.name].y.toString()+')),');
-                }
-
-
+                arr.splice(start+3,0,'goal('+item.name+', coordinate('+(goalSetManager[item.name].x).toString()+','+goalSetManager[item.name].y.toString()+')),');
+                arr.splice(start+4,0,'velocity('+item.name+', 5),');
 
             }
         });
