@@ -44,8 +44,8 @@
 
 
     /*
-* clearTable function will clear out the tbody in table.
-* */
+    * clearTable function will clear out the tbody in table.
+    * */
     tableManager.deleteTableContent = function (vehicle) {
         var tbody = document.getElementById("DESTable").getElementsByTagName("tbody")[0];
         // console.log(tbody);
@@ -62,50 +62,51 @@
 
     };
 
+
     // /*
-    // * Detect the content changing.
+    // * modifying the table content of the goal
     // * */
-    // document.addEventListener("DOMContentLoaded", function () {
-    //
-    //     function Destination(evt) {
-    //         //Retrieve the first (and only!) File from the FileList object
-    //         var f = evt.target.files[0];
-    //
-    //         if (f) {
-    //             var r = new FileReader();
-    //             r.onload = function (e) {
-    //                 var contents = e.target.result;
-    //                 // alert( "name: " + f.name
-    //                 // +" size: " + f.size
-    //                 // + "starts with: " + contents.substr(1, contents.indexOf("n")));
-    //                 console.log(contents);
-    //                 document.getElementById("exampleFormControlTextarea1").value = contents;
-    //
-    //                 var vis = document.getElementById("content");
-    //                 if (vis.style.display === "none") {
-    //                     vis.style.display = "block";
-    //                 }
-    //                 //clear the content before running the
-    //                 // appManager.clearContent();
-    //                 appManager.clearContent();
-    //                 tableManager.clearTable();
-    //                 appManager.createVisualizer();
-    //
-    //                 LPSInitializer(contents, null);
-    //
-    //
-    //             };
-    //
-    //             r.readAsText(f);
-    //
-    //
-    //         } else {
-    //             alert("Failed to load file");
+    // tableManager.modifyTableContent = function(vehicle,x,y){
+    //     var tbody = document.getElementById("DESTable").getElementsByTagName("tbody")[0];
+    //     // console.log(tbody);
+    //     // console.log('removeing' + vehicle);
+    //     // var rows = tbody.rows;
+    //     for (var i = tbody.rows.length-1; i>=0; i--){
+    //         strHTML = tbody.rows[i].cells[1].innerHTML;
+    //         // console.log("content"+ tbody.rows[i].cells[1].innerHTML);
+    //         existeIndex = strHTML.indexOf(vehicle);
+    //         if (existeIndex!==-1){
+    //             appManager.
     //         }
     //     }
-    //
-    //     document.querySelector('#formControlFile1').addEventListener("change", loadTextFromFile);
-    // });
+    // };
+
+    /*
+    * Detect the content changing.
+    * */
+    document.addEventListener("DOMContentLoaded", function () {
+
+        function destinationChange(evt) {
+            console.log("destinationChange is called",evt.toString());
+            var tbody = document.getElementById("DESTable").getElementsByTagName("tbody")[0];
+            // console.log(tbody);
+            // console.log('removeing' + vehicle);
+            // var rows = tbody.rows;
+            for (var i = tbody.rows.length-1; i>=0; i--){
+                goalHTML = tbody.rows[i].cells[2].innerHTML;
+                carHTML = tbody.rows[i].cells[1].innerHTML;
+
+                carName = carHTML.match(/(\w+)/g)[1];
+                goalX = goalHTML.match(/(\w+)/g)[2];
+                goalY = goalHTML.match(/(\w+)/g)[3];
+                // console.log("content"+ tbody.rows[i].cells[1].innerHTML);
+                // console.log(carName,goalX,goalY);
+                appManager.changeGoal(carName,parseInt(goalX),parseInt(goalY));
+            }
+        }
+
+        document.querySelector('#changeTableContent').addEventListener("click", destinationChange);
+    });
 
     window.tableManager = tableManager;
 
