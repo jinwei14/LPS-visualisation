@@ -13,6 +13,7 @@ loadModule('../scripts/module.js').
 
 fluents([
   stopped(VehicleName),
+  velocity(VehicleName, Speed),
   moving(VehicleName),
   coordinate(X, Y),
   location(VehicleName, coordinate(X, Y), Direction),
@@ -132,8 +133,12 @@ moving(car0),
 moving(car1),
 moving(car2),
 moving(car3),
-moving(car4)
-
+moving(car4),
+  velocity(car0, 5),
+  velocity(car1, 5),
+  velocity(car2, 5),
+  velocity(car3, 5),
+  velocity(car4, 5)
 
 ]).
 
@@ -309,7 +314,8 @@ intention(VehicleName, Plan) <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == northward,
-  NewY = Y - 5,
+  velocity(Vehicle, Speed),
+  NewY = Y - Speed,
   NextPlace = coordinate(X, NewY),
   % testPrint(Vehicle+ ' move northward'),
   step(Vehicle, NextPlace) at T1.
@@ -317,7 +323,8 @@ drive(Vehicle) from T to T1 <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == southward,
-  NewY = Y + 5,
+  velocity(Vehicle, Speed),
+  NewY = Y + Speed,
   NextPlace = coordinate(X, NewY),
   % testPrint(Vehicle+ ' move southward'),
   step(Vehicle, NextPlace) at T1.
@@ -325,7 +332,8 @@ drive(Vehicle) from T to T1 <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == westward,
-  NewX = X-5,
+  velocity(Vehicle, Speed),
+  NewX = X-Speed,
   NextPlace = coordinate(NewX, Y),
   % testPrint(Vehicle+ ' move westward'),
   step(Vehicle, NextPlace) at T1.
@@ -333,7 +341,8 @@ drive(Vehicle) from T to T1 <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == eastward,
-  NewX = X + 5,
+  velocity(Vehicle, Speed),
+  NewX = X + Speed,
   NextPlace = coordinate(NewX, Y),
   % testPrint(Vehicle+ ' move eastward'),
   step(Vehicle, NextPlace) at T1.

@@ -12,6 +12,7 @@ cycleInterval(10).
 loadModule('../scripts/module.js').
 
 fluents([
+  velocity(VehicleName, Speed),
   stopped(VehicleName),
   moving(VehicleName),
   coordinate(X, Y),
@@ -34,7 +35,8 @@ actions ([
 ]).
 
 initially([
-
+  moving(car0),
+  moving(car1),
  %  normal start one on the mainstreet and other on the southStreet
  % car0 wants to go straight from mainStreet, car1 want to turn left from southStreet
   location(car0, coordinate(145, 175), eastward),
@@ -83,8 +85,9 @@ initially([
   %   goal(car0,coordinate(500, 580)),
   %   goal(car1,coordinate(800, 175))
 
-  moving(car0),
-  moving(car1)
+
+  velocity(car0, 5),
+  velocity(car1, 5)
 
 ]).
 
@@ -212,7 +215,8 @@ direction(Vehicle) at T<-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == northward,
-  NewY = Y - 5,
+  velocity(Vehicle, Speed),
+  NewY = Y - Speed,
   NextPlace = coordinate(X, NewY),
   % testPrint(Vehicle+ ' move northward'),
   step(Vehicle, NextPlace) at T1.
@@ -220,7 +224,8 @@ drive(Vehicle) from T to T1 <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == southward,
-  NewY = Y + 5,
+  velocity(Vehicle, Speed),
+  NewY = Y + Speed,
   NextPlace = coordinate(X, NewY),
   % testPrint(Vehicle+ ' move southward'),
   step(Vehicle, NextPlace) at T1.
@@ -228,7 +233,8 @@ drive(Vehicle) from T to T1 <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == westward,
-  NewX = X-5,
+  velocity(Vehicle, Speed),
+  NewX = X-Speed,
   NextPlace = coordinate(NewX, Y),
   % testPrint(Vehicle+ ' move westward'),
   step(Vehicle, NextPlace) at T1.
@@ -236,7 +242,8 @@ drive(Vehicle) from T to T1 <-
 drive(Vehicle) from T to T1 <-
   location(Vehicle, coordinate(X, Y), Direction),
   Direction == eastward,
-  NewX = X + 5,
+  velocity(Vehicle, Speed),
+  NewX = X + Speed,
   NextPlace = coordinate(NewX, Y),
   % testPrint(Vehicle+ ' move eastward'),
   step(Vehicle, NextPlace) at T1.

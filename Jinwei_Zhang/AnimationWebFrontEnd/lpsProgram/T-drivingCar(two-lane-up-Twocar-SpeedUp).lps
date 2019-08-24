@@ -43,7 +43,7 @@ actions ([
 initially([
   moving(car0),
   moving(car1),
-  moving(car2)，
+  moving(car2),
 
 % %-----------------------three car scenario (Paper: Ontology-Based Driving Decision Making)----------------------
 

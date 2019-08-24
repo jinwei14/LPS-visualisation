@@ -41,15 +41,16 @@ actions ([
 ]).
 
 initially([
+  moving(car0),
+  moving(car1),
 
-  velocity(car0,1),
-  velocity(car1,5),
   location(car0, coordinate(400, 175), eastward),
   location(car1, coordinate(200, 175), eastward),
   goal(car0,coordinate(970, 175)),
   goal(car1,coordinate(970, 175)),
-  moving(car0),
-  moving(car1)
+
+  velocity(car0,1),
+  velocity(car1,5)
 ]).
 
 % define the junction coordinate
