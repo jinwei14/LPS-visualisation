@@ -26,6 +26,8 @@
     * */
     var UIManager = {
         graphics : null,
+        goalGraphicsList : [],
+        goalText:null,
         richTextTitle: null,
         richTextAction: null,
         xAxisText:null,
@@ -53,6 +55,7 @@
     appManager.createVisualizer = function () {
         // the graphics object will be used throughout the class
         UIManager.graphics = new PIXI.Graphics();
+
         document.getElementById("content").appendChild(app.view);
         console.log('The createVisualizer  has been called');
 
@@ -166,7 +169,10 @@
             appManager.createVehicle(vehicleName, 800, 800, 'northward');
 
             //add the vehicle to the table by setting the goal automatcally to 100 pixi ahead
-            tableManager.addTableContent(vehicleName,800,900);
+            tableManager.addTableContent(vehicleName,800,800);
+
+            //add the location text and red dot
+            appManager.addGoal(vehicleName,800,800);
         }
 
         function onButtonPlusUp() {
@@ -234,17 +240,63 @@
     appManager.addGoal = function(vehicle, x, y){
         console.log('addGoal has been called in animation.js ' + window.name);
 
-        UIManager.graphics.lineStyle(0); // draw a circle, set the lineStyle to zero so the circle doesn't have an outline
-        UIManager.graphics.beginFill(0xff0000, 1);
-        UIManager.graphics.drawCircle(x, y, 7);
-        UIManager.graphics.endFill();
+        const temGraphic =  new PIXI.Graphics();
+
+        temGraphic.lineStyle(0); // draw a circle, set the lineStyle to zero so the circle doesn't have an outline
+        temGraphic.beginFill(0xff0000, 1);
+        temGraphic.drawCircle(x, y, 7);
+        temGraphic.endFill();
 
 
         let goalText = new PIXI.Text('(' + x.toString() + ',' + y.toString()+')', {fontFamily: 'Arial', fontSize: 12, fill: 0xffffff});
         goalText.x = x;
         goalText.y = y;
-        app.stage.addChild(goalText);
 
+        UIManager.goalGraphicsList.push(
+            {
+                name:vehicle,
+                x:x,
+                y:y,
+                goalTextObj:goalText,
+                graphicObj:temGraphic
+            }
+        );
+
+
+
+        app.stage.addChild(goalText);
+        app.stage.addChild(temGraphic);
+
+    };
+
+    /*
+    * delete goal tag onto the map
+    * */
+    appManager.deleteGoal = function(vehicle){
+        console.log('deleteGoal has been called in animation.js ' + window.name);
+        for (var i = UIManager.goalGraphicsList.length - 1; i >= 0; i--) {
+            if (UIManager.goalGraphicsList[i].name === vehicle){
+
+                //remove the corresponding test object.
+                app.stage.removeChild(UIManager.goalGraphicsList[i].goalTextObj);
+                //remove the corresponding red dot graphic
+                app.stage.removeChild(UIManager.goalGraphicsList[i].graphicObj);
+                UIManager.goalGraphicsList.splice(i,1);
+
+            }
+
+        }
+
+
+    };
+
+    /*
+    * change goal tag onto the map
+    * */
+    appManager.changeGoal = function(vehicle, x, y){
+        console.log('change goal has been called in animation.js ' + window.name);
+        appManager.deleteGoal(vehicle);
+        appManager.addGoal(vehicle,x,y);
     };
 
     /*
@@ -533,6 +585,8 @@
             if (appManager.vehicle[i].obj === carSpriteObj){
                 // remove the according vehicle in the table.
                 tableManager.deleteTableContent(appManager.vehicle[i].name);
+                //move the goal text and red dot
+                appManager.deleteGoal(appManager.vehicle[i].name);
 
                 UIManager.richTextAction.text = appManager.vehicle[i].name + " deleted";
                 app.stage.removeChild(appManager.vehicle[i].obj);
