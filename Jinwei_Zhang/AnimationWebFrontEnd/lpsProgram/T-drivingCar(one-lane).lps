@@ -35,8 +35,7 @@ actions ([
 ]).
 
 initially([
-  moving(car0),
-  moving(car1),
+
   % % normal start one on the mainstreet and other on the southStreet
   %   % car0 wants to go straight from mainStreet, car1 want to turn left from southStreet
   % location(car0, coordinate(145, 225), eastward),
@@ -67,7 +66,7 @@ initially([
 location(car0, coordinate(145, 225), eastward),
 location(car1, coordinate(500, 580), northward),
   goal(car0,coordinate(980, 225)),
-  goal(car1,coordinate(980, 225))
+  goal(car1,coordinate(980, 225)),
 
   % % car0 car1 drivr opposite to each other
   %   location(car0, coordinate(450, 225), eastward),
@@ -83,6 +82,8 @@ location(car1, coordinate(500, 580), northward),
   %   goal(car0,coordinate(500, 580)),
   %   goal(car1,coordinate(500, 580))
 
+  moving(car0),
+  moving(car1)
 
 ]).
 

@@ -41,9 +41,7 @@ actions ([
 ]).
 
 initially([
-  moving(car0),
-  moving(car1),
-  moving(car2),
+
   velocity(car0,5),
   velocity(car1,1),
   velocity(car2,5),
@@ -135,10 +133,12 @@ initially([
     location(car2, coordinate(700, 225), westward),
     goal(car0,coordinate(500, 900)),
     goal(car1,coordinate(500, 900)),
-    goal(car2,coordinate(500, 900))
+    goal(car2,coordinate(500, 900)),
 %
 
-
+moving(car0),
+moving(car1),
+moving(car2)
 
 
 ]).

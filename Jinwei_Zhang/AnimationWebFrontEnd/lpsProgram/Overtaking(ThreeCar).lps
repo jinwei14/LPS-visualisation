@@ -36,9 +36,7 @@ actions ([
 ]).
 
 initially([
-  moving(car0),
-  moving(car1),
-  moving(car2),
+
   velocity(car0,1),
   velocity(car1,5),
   velocity(car2,2),
@@ -47,7 +45,10 @@ initially([
   location(car2, coordinate(940, 225), westward),
   goal(car0,coordinate(970, 175)),
   goal(car1,coordinate(970, 175)),
-  goal(car2,coordinate(140, 225))
+  goal(car2,coordinate(140, 225)),
+  moving(car0),
+  moving(car1),
+  moving(car2)
 ]).
 % define the junction coordinate
 % junction(Name,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H))

@@ -27,9 +27,10 @@ actions ([
 ]).
 
 initially([
-  moving(car0),
+
   location(car0, coordinate(150, 225), eastward),
-  goal(car0,coordinate(900, 225))
+  goal(car0,coordinate(900, 225)),
+    moving(car0)
 ]).
 
 rotateStreet(yStreet, coordinate(660, 225), coordinate(710, 275),coordinate(555, 558),coordinate(498, 527)).

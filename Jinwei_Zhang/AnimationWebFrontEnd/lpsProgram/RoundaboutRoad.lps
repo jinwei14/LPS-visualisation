@@ -40,13 +40,14 @@ initially([
   %  stopped(car0),
   %  stopped(car1),
   %  stopped(car2),
-  moving(car0),
+
 
  %  normal start one on the mainstreet and other on the southStreet
  % carA wants to go straight from mainStreet, carB want to turn left from southStreet
   location(car0, coordinate(410, 513), dir(0,-1)),
 
-  goal(car0,coordinate(495, 610))
+  goal(car0,coordinate(495, 610)),
+  moving(car0)
 
 
   % % a stoped car near  another car
