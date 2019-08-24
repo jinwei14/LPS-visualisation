@@ -283,6 +283,15 @@
         this.Y = parseInt(this.matchArray[4], 10);
 
         this.destination = '(' + this.matchArray[3] +' , '+ this.matchArray[4] + ')';
+
+        this.writeOutWith_Comma =  function (){
+            return 'goal(' + this.vehicle  + ',coordinate(' +this.X.toString()+','+ this.Y.toString()+')),';
+        };
+
+        this.writeOutWith_NoComma =  function (){
+           return 'goal(' + this.vehicle + ',coordinate(' +this.X.toString()+','+ this.Y.toString()+'))';
+        };
+
     }
 
     // this parser file is the parser for the rotated road.
@@ -349,14 +358,19 @@
             end += 1;
         }
 
-        console.log(start, end);
+        console.log("the start the end index:",start, end,);
         var found = false;
         //a set  of cars which is in user text input
         var carSetProgram = new Set();
         //a set  of cars which is modified after canvas was showed.
         var carSetManager = {};
         appManager.vehicle.forEach(function (item) {
-            carSetManager[item.name] = item
+            carSetManager[item.name] = item;
+        });
+
+        var goalSetManager = {};
+        UIManager.goalGraphicsList.forEach(function(item){
+            goalSetManager[item.name] = item;
         });
 
         //loop through the initial text block and change the car location and state. (deletion and modification)
@@ -373,9 +387,11 @@
                 if (carName in carSetManager){
                     carSetProgram.add(carName);
 
-                }else{
-                    arr.splice(i, 1);
                 }
+
+                // else{
+                //     arr.splice(i, 1);
+                // }
 
                 // arr.splice(i, 1);
             } else if (arr[i].trim().startsWith('location')) {
@@ -385,44 +401,83 @@
 
                 // if we do find a same car in the manager
                     if( loc.getObjectName in carSetManager){
-                        //found is true meaning there is the same car in the appManager only need to do modification to location
+                        //found is true meaning there is the same car in the appManager need to do modification to location
                         loc.X = carSetManager[loc.getObjectName].obj.x;
                         loc.Y = carSetManager[loc.getObjectName].obj.y;
                         loc.getHeading = carSetManager[loc.getObjectName].direction;
                         arr[i] = loc.writeOut();
+
                     }else{
-                        //   did not find car2 in the appManger (it has been deleted by the user) remove the moving line
+                        // did not find car2 in the appManger (it has been deleted by the user) remove the moving line
                         arr.splice(i, 1);
                     }
+
+            }else if (arr[i].trim().startsWith('goal')) {
+                //remove all goal and add them to it again.
+                console.log(arr[i]);
+                var goal = new Destination(arr[i].trim(), 0);
+                // if we do find a same car in the goal manager then it might have been modified.
+                if (goal.vehicle in goalSetManager){
+                    goal.X = goalSetManager[goal.vehicle].x;
+                    goal.Y = goalSetManager[goal.vehicle].y;
+                    // if (i===end-1){
+                    //     arr[i] = goal.writeOutWith_NoComma();
+                    // }else{
+                        arr[i] = goal.writeOutWith_Comma();
+                    // }
+                }else{
+                    // did not find car2 in the goalManager (it has been deleted by the user) remove the goal line.
+                    arr.splice(i,1);
+                }
+
             }
         }
 
         console.log(carSetProgram);
         console.log(carSetManager);
-        //loop through the appManager check if there is added car then give a random goal just for fun right now
+        // //loop through the appManager check if there is added car then give a random goal just for fun right now
+        // appManager.vehicle.forEach(function (item,index) {
+        //     //if the program set do not contain some car in the manager set then we should insert the new car into the program
+        //     if(!carSetProgram.has(item.name)){
+        //         arr.splice(start+1,0,'moving('+item.name+'),');
+        //         arr.splice(start+2,0,'location('+item.name+', coordinate('+item.obj.x.toString()+','+item.obj.y.toString()+'),'+item.direction+'),');
+        //         switch (item.direction) {
+        //             case 'northward':
+        //                 arr.splice(start+3,0,'goal('+item.name+', coordinate('+item.obj.x.toString()+','+(item.obj.y-100).toString()+')),');
+        //                 break;
+        //             case 'southward':
+        //                 arr.splice(start+3,0,'goal('+item.name+', coordinate('+item.obj.x.toString()+','+(item.obj.y+100).toString()+')),');
+        //                 break;
+        //             case 'westward':
+        //                 arr.splice(start+3,0,'goal('+item.name+', coordinate('+(item.obj.x-100).toString()+','+item.obj.y.toString()+')),');
+        //                 break;
+        //             case 'eastward':
+        //                 arr.splice(start+3,0,'goal('+item.name+', coordinate('+(item.obj.x+100).toString()+','+item.obj.y.toString()+')),');
+        //                 break;
+        //             default:
+        //                 console.log(err);
+        //                 alert('direction wrong');
+        //
+        //         }
+        //
+        //     }
+        // });
+
+
+        //loop through the appManager check if there is added car then give a goal/inital state/speed
+        // according to the table content.
         appManager.vehicle.forEach(function (item,index) {
             //if the program set do not contain some car in the manager set then we should insert the new car into the program
             if(!carSetProgram.has(item.name)){
                 arr.splice(start+1,0,'moving('+item.name+'),');
                 arr.splice(start+2,0,'location('+item.name+', coordinate('+item.obj.x.toString()+','+item.obj.y.toString()+'),'+item.direction+'),');
-                switch (item.direction) {
-                    case 'northward':
-                        arr.splice(start+3,0,'goal('+item.name+', coordinate('+item.obj.x.toString()+','+(item.obj.y-100).toString()+')),');
-                        break;
-                    case 'southward':
-                        arr.splice(start+3,0,'goal('+item.name+', coordinate('+item.obj.x.toString()+','+(item.obj.y+100).toString()+')),');
-                        break;
-                    case 'westward':
-                        arr.splice(start+3,0,'goal('+item.name+', coordinate('+(item.obj.x-100).toString()+','+item.obj.y.toString()+')),');
-                        break;
-                    case 'eastward':
-                        arr.splice(start+3,0,'goal('+item.name+', coordinate('+(item.obj.x+100).toString()+','+item.obj.y.toString()+')),');
-                        break;
-                    default:
-                        console.log(err);
-                        alert('direction wrong');
-
+                if (index<appManager.vehicle.length-1){
+                    arr.splice(start+3,0,'goal('+item.name+', coordinate('+(goalSetManager[item.name].x).toString()+','+goalSetManager[item.name].y.toString()+')),');
+                }else{
+                    arr.splice(start+3,0,'goal('+item.name+', coordinate('+(goalSetManager[item.name].x).toString()+','+goalSetManager[item.name].y.toString()+')),');
                 }
+
+
 
             }
         });

@@ -34,9 +34,7 @@ actions ([
 ]).
 
 initially([
-  moving(car0),
-  moving(car1),
-  moving(car2),
+
 % %-----------------------three car scenario (Paper: Ontology-Based Driving Decision Making)----------------------
 
 % % CASE 1
@@ -68,7 +66,10 @@ initially([
     location(car2, coordinate(500, 300), southward),
     goal(car0,coordinate(800, 175)),
     goal(car1,coordinate(145, 225)),
-    goal(car2,coordinate(500, 600))
+    goal(car2,coordinate(500, 600)),
+    moving(car0),
+    moving(car1),
+    moving(car2)
 
 
 % % CASE 3

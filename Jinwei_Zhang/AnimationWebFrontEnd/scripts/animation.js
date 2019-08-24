@@ -585,13 +585,14 @@
             if (appManager.vehicle[i].obj === carSpriteObj){
                 // remove the according vehicle in the table.
                 tableManager.deleteTableContent(appManager.vehicle[i].name);
-                //move the goal text and red dot
+                //remove the goal text and red dot
                 appManager.deleteGoal(appManager.vehicle[i].name);
 
                 UIManager.richTextAction.text = appManager.vehicle[i].name + " deleted";
                 app.stage.removeChild(appManager.vehicle[i].obj);
                 app.stage.removeChild(appManager.vehicle[i].textObj);
                 app.stage.removeChild(appManager.vehicle[i].carLocText);
+                //remove the vehicle from the vehicle array.
                 appManager.vehicle.splice(i,1);
 
 
@@ -863,5 +864,6 @@
 
 
     window.appManager = appManager;
+    window.UIManager = UIManager;
 
 })(window);
