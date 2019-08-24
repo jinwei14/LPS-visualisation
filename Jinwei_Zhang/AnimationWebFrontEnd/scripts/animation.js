@@ -157,13 +157,16 @@
         app.stage.addChild(UIManager.buttonPlus,UIManager.buttonMinus);
 
         function onButtonPlusDown() {
-
+            //create a vehicle on the canvas.
             this.isdown = true;
             this.texture = UIManager.textureButtonPlusDown;
             this.alpha = 1;
             vehicleName = 'car'+ dataManager.carCounter.toString();
             UIManager.richTextAction.text = 'creating :' + vehicleName;
             appManager.createVehicle(vehicleName, 800, 800, 'northward');
+
+            //add the vehicle to the table by setting the goal automatcally to 100 pixi ahead
+            tableManager.addTableContent(vehicleName,800,900);
         }
 
         function onButtonPlusUp() {
@@ -433,6 +436,7 @@
                 // this part should be user delete the car manually.
                 // vehicle should be deleted in the appManager and app.stage
                 appManager.removeVehicle(this);
+
             }
 
             //adjust the car location on to the street.
@@ -440,7 +444,7 @@
             this.x = postationArr[0];
             this.y = postationArr[1];
             var findObj = this;
-
+            var itemIn = null;
             // move the car text and the coordination accordingly.
             appManager.vehicle.forEach(function (item, index) {
                 if (item.obj === findObj) {
@@ -527,11 +531,16 @@
     appManager.removeVehicle = function(carSpriteObj, carName=null){
         for (var i = appManager.vehicle.length - 1; i >= 0; i--) {
             if (appManager.vehicle[i].obj === carSpriteObj){
+                // remove the according vehicle in the table.
+                tableManager.deleteTableContent(appManager.vehicle[i].name);
+
                 UIManager.richTextAction.text = appManager.vehicle[i].name + " deleted";
                 app.stage.removeChild(appManager.vehicle[i].obj);
                 app.stage.removeChild(appManager.vehicle[i].textObj);
                 app.stage.removeChild(appManager.vehicle[i].carLocText);
                 appManager.vehicle.splice(i,1);
+
+
             }
 
         }
