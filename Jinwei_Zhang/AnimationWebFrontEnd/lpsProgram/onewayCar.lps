@@ -1,6 +1,6 @@
 % we assume the destination is reachable
-maxTime(100).
-cycleInterval(50).
+maxTime(200).
+cycleInterval(30).
 
 loadModule('../scripts/module.js').
 
@@ -30,7 +30,7 @@ initially([
   moving(car0),
   location(car0, coordinate(150, 225), eastward),
   goal(car0,coordinate(900, 225)),
-  velocity(car0, 10)
+  velocity(car0, 5)
 ]).
 
 
