@@ -63,24 +63,6 @@
     };
 
 
-    // /*
-    // * modifying the table content of the goal
-    // * */
-    // tableManager.modifyTableContent = function(vehicle,x,y){
-    //     var tbody = document.getElementById("DESTable").getElementsByTagName("tbody")[0];
-    //     // console.log(tbody);
-    //     // console.log('removeing' + vehicle);
-    //     // var rows = tbody.rows;
-    //     for (var i = tbody.rows.length-1; i>=0; i--){
-    //         strHTML = tbody.rows[i].cells[1].innerHTML;
-    //         // console.log("content"+ tbody.rows[i].cells[1].innerHTML);
-    //         existeIndex = strHTML.indexOf(vehicle);
-    //         if (existeIndex!==-1){
-    //             appManager.
-    //         }
-    //     }
-    // };
-
     /*
     * Detect the content changing.
     * */

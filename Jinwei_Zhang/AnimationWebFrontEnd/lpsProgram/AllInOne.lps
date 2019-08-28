@@ -137,7 +137,7 @@ location(Vehicle, coordinate(X, Y), Direction),
     % need to find the right direction here
     % driving forward
     % testPrint(Vehicle+' '+X+' '+Y+' Direction '+Direction + '----------------Reactive rule----------------'),
-    direction(Vehicle) at T.
+    change_direction(Vehicle) at T.
 
 
 goal(Vehicle,coordinate(A, B)) from T to T1,
@@ -150,7 +150,7 @@ location(Vehicle, coordinate(X, Y), Direction),
 
 % ---------------------------------------------------------------------------------------------
 % the case where car is not at t junction.
-direction(Vehicle) at T<-
+change_direction(Vehicle) at T<-
   % testPrint('checking in Juntion or not ?'),
   location(Vehicle, coordinate(X, Y), _) at T,
   junction(tJuntion1,coordinate(A1, B1),coordinate(C1, D1),coordinate(E1, F1),coordinate(G1, H1)),
@@ -175,7 +175,7 @@ notAtTjunction(X,Y,A,B,C,D,E,F)<-
 
 
 % you only turn when you are in the middle of the juction.
-direction(Vehicle) at T<-
+change_direction(Vehicle) at T<-
   % testPrint('checking in turnning westward or not ?'),
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
@@ -187,7 +187,7 @@ direction(Vehicle) at T<-
   % testPrint(Vehicle +' turing westward'),
   turn(Vehicle,westward) at T.
 
-direction(Vehicle) at T<-
+change_direction(Vehicle) at T<-
   % testPrint('checking in turnning eastward or not ?'),
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
@@ -199,7 +199,7 @@ direction(Vehicle) at T<-
   % testPrint(Vehicle +' turing eastward'),
   turn(Vehicle, eastward) at T.
 
-direction(Vehicle) at T<-
+change_direction(Vehicle) at T<-
   % testPrint('checking in turnning northward or not ?'),
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
@@ -211,7 +211,7 @@ direction(Vehicle) at T<-
   % testPrint(Vehicle +' turing northward'),
   turn(Vehicle,northward) at T.
 
-direction(Vehicle) at T<-
+change_direction(Vehicle) at T<-
   location(Vehicle, coordinate(X, Y), Direction),
   goal(Vehicle,coordinate(K, P)),
   % junction(tJuntion,coordinate(A, B),coordinate(C, D),coordinate(E, F),coordinate(G, H)),
