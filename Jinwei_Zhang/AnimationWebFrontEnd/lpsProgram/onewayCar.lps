@@ -49,14 +49,9 @@ location(Vehicle, coordinate(X, Y), Direction), A==X, B==Y,moving(Vehicle) at T 
   % testPrint(Vehicle+ ' we have arrived'),
   arrive(Vehicle) at T.
 
-goal(Vehicle,coordinate(A, B)) from _ to T,
-location(Vehicle, coordinate(X, Y), Direction), A!=X at T ->
-  % need to find the right direction here
-  % driving forward
-    drive(Vehicle) from T to _.
 
 goal(Vehicle,coordinate(A, B)) from _ to T,
-location(Vehicle, coordinate(X, Y), Direction), B!=Y at T ->
+location(Vehicle, coordinate(X, Y), Direction), moving(Vehicle) at T ->
   % need to find the right direction here
   % driving forward
     drive(Vehicle) from T to _.
