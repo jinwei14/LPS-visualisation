@@ -76,3 +76,61 @@ arr1 = [1,0];
 arr2 = [1,0];
 console.log([1,0] === [1,0]);
 console.log(arr1[0] === arr2[0]);
+
+
+var assert = require('assert');
+describe('All Direction Testing', function() {
+    it('full array:', function() {
+        assert.deepEqual(obj3.matchArray,  [
+            'location',
+            'car0',
+            'coordinate',
+            '492',
+            '6025403784439',
+            '525',
+            'dir',
+            '3',
+            '885780586188048e',
+            '16',
+            '1'
+        ] );
+    });
+
+    it('Fluent', function() {
+        assert.equal(obj3.getFluent, 'location');
+    });
+
+
+    it('heading:', function() {
+        assert.deepEqual(obj3.getHeading, [
+            3.885780586188048e-16,
+            1
+        ] );
+    });
+
+    it('heading X', function() {
+        assert.deepEqual(obj3.getHeading[0], 3.885780586188048e-16 );
+    });
+
+    it('heading Y:', function() {
+        assert.deepEqual(obj3.getHeading[1], 1 );
+    });
+
+    it('Object name:', function() {
+        assert.equal(obj3.getObjectName, 'car0' );
+    });
+
+    it('Timestamp:', function() {
+        assert.equal(obj3.timeStamp, 30 );
+    });
+
+    it('X:', function() {
+        assert.equal(obj3.X, 492.6025403784439 );
+    });
+
+    it('Y:', function() {
+        assert.equal(obj3.Y, 525 );
+    });
+
+});
+

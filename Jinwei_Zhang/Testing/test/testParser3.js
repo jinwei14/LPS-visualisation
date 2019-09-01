@@ -31,7 +31,7 @@ function Streets(fullPhrase) {
     //the number of lanes on the street
     this.no_lane = parseInt(this.matchArray[7],10);
 
-     // The priority of the road
+    // The priority of the road
     this.priority = parseInt(this.matchArray[8],10);
 }
 
@@ -51,3 +51,38 @@ console.log('height: ' + obj2.height);
 console.log('no_lane: ' + obj2.no_lane);
 
 console.log('priority: ' + obj2.priority);
+
+
+var assert = require('assert');
+describe('street data structure3 Testing', function() {
+    it('full test cases:', function() {
+        assert.deepEqual(obj2.matchArray, [
+            'street',
+            'piccadillyRoad',
+            'coordinate',
+            '9',
+            '9',
+            '80',
+            '70',
+            '2',
+            '2'
+        ]);
+    });
+    it('street test:', function() {
+        assert.equal(obj2.fullPhrase, 'street(piccadillyRoad, coordinate(9, 9), 80, 70, 2, 2).');
+    });
+
+    it('fluent test:', function() {
+        assert.equal(obj2.fluent, 'street');
+    });
+
+    it('X Y test:', function() {
+        assert.equal(obj2.X, 9);
+        assert.equal(obj2.Y, 9);
+    });
+
+    it('Height Width test:', function() {
+        assert.equal(obj2.width, 80);
+        assert.equal(obj2.height, 70);
+    });
+});

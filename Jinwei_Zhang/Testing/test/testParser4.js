@@ -33,3 +33,29 @@ console.log('direct: ' + obj2.direct);
 
 
 console.log("car1","car2");
+
+
+var assert = require('assert');
+describe('TrafficLight data structure Testing', function() {
+    it('full test cases:', function() {
+        assert.deepEqual(obj2.fullPhrase, 'trafficLight(coordinate(2, 2), red, eastward).');
+    });
+
+
+    it('fluent test:', function() {
+        assert.equal(obj2.fluent, 'trafficLight');
+    });
+
+    it('X Y test:', function() {
+        assert.equal(obj2.X, 2);
+        assert.equal(obj2.Y, 2);
+    });
+
+    it('color test:', function() {
+        assert.equal(obj2.color, 'red');
+    });
+
+    it('Direction test:', function() {
+        assert.equal(obj2.direct, 'eastward');
+    });
+});
