@@ -4,7 +4,7 @@
   "description": "Node Course",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node index"
   },
   "author": "Jinwei",
@@ -14,6 +14,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "mocha": "^6.2.0",
     "nodemon": "^1.18.11"
   }
 }

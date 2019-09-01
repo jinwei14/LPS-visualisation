@@ -23,3 +23,20 @@ console.log('x: ' + obj2.X);
 console.log('y: ' + obj2.Y);
 
 
+var assert = require('assert');
+describe('Cloud data structure Testing', function() {
+    it('full test cases:', function() {
+        assert.equal(obj2.fullPhrase, 'cloud(coordinate(2, 2)).');
+    });
+
+
+    it('fluent test:', function() {
+        assert.equal(obj2.fluent, 'cloud');
+    });
+
+    it('X Y test:', function() {
+        assert.equal(obj2.X, 2);
+        assert.equal(obj2.Y, 2);
+    });
+
+});

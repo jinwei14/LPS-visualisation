@@ -135,3 +135,16 @@ console.log('x: ' + obj2.X);
 console.log('y: ' + obj2.Y);
 
 console.log(obj2.writeOut());
+
+
+var assert = require('assert');
+describe('location data structure2 Testing', function() {
+    it('full test cases:', function() {
+        assert.equal(obj2.getFluent, 'location');
+        assert.equal(obj2.getHeading, 'northward');
+        assert.equal(obj2.getObjectName, 'car0');
+        assert.equal(obj2.timeStamp, 30);
+        assert.equal(obj2.X, 9);
+        assert.equal(obj2.Y, 9);
+    });
+});

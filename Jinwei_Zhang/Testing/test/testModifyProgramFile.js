@@ -1,4 +1,5 @@
 // this parser file is the parser for te testing the program.
+resAll = [];
 function ProgramModifier(program){
 
     var arr = program.split("\n");
@@ -12,22 +13,24 @@ function ProgramModifier(program){
     while(!arr[end].trim().startsWith(']).')){end +=1;}
 
     console.log(start,end);
+
     for(i=end; i>start; i--){
         if (arr[i].trim().startsWith('moving')){
-            console.log(arr[i]);
+            // console.log(arr[i]);
             var matchArray = arr[i].match(/(\w+)/g);
             console.log(matchArray);
+            resAll.push(matchArray);
             arr.splice(i, 1);
         }
 
         if (arr[i].trim().startsWith('location')){
-            console.log(arr[i]);
+            // console.log(arr[i]);
             var matchArray = arr[i].match(/(\w+)/g);
             console.log(matchArray);
+            resAll.push(matchArray);
             arr.splice(i, 1);
         }
     }
-
     return arr.join("\n");
 }
 
@@ -408,4 +411,16 @@ program = "% LPS visualisation for self-driving car\n" +
 
 var obj = ProgramModifier(program);
 
-// console.log(obj);
+var assert = require('assert');
+describe('All Direction Testing', function() {
+    it('full array:', function() {
+        assert.deepEqual(resAll[0],  [ 'location', 'car2', 'coordinate', '700', '525', 'westward' ]);
+        assert.deepEqual(resAll[1],  [ 'location', 'car1', 'coordinate', '475', '880', 'northward' ]);
+        assert.deepEqual(resAll[2],  [ 'location', 'car0', 'coordinate', '145', '475', 'eastward' ]);
+        assert.deepEqual(resAll[3],  [ 'moving', 'car2' ]);
+        assert.deepEqual(resAll[4],  [ 'moving', 'car1' ]);
+        assert.deepEqual(resAll[5],  [ 'moving', 'car0' ]);
+    });
+
+
+});

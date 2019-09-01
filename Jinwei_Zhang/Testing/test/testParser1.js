@@ -45,9 +45,18 @@ function ResultDict(fullPhrase, timeStamp) {
 
 var obj2 = new ResultDict('loc(car, 1650, 340)).',30);
 console.log('Fluent: '+obj2.getFluent());
-console.log('heading: '+ obj2.getHeading());
 console.log('Object:' + obj2.getObject());
 console.log('Position: '+ obj2.getPosition());
 console.log('Timestamp: '+ obj2.timeStamp);
 
 console.log(parseInt(obj2.getPosition()[0], 10));
+
+var assert = require('assert');
+describe('location data structure Testing', function() {
+    it('full test cases:', function() {
+        assert.equal(obj2.getFluent(), 'loc');
+        assert.equal(obj2.getObject(), 'car');
+        assert.deepEqual(obj2.getPosition(), [1650,340]);
+        assert.equal(obj2.timeStamp, 30);
+    });
+});
