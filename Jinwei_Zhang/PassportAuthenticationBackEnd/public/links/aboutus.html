@@ -1,0 +1,255 @@
+<!doctype html>
+<html class="h-100" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="" name="description">
+    <meta content="Mark Otto, Jacob Thornton, and Bootstrap contributors" name="author">
+    <meta content="Jekyll v3.8.5" name="generator">
+    <title>LPS visualiser</title>
+
+    <!--    <link href="https://getbootstrap.com/docs/4.3/examples/sticky-footer-navbar/" rel="canonical">-->
+    <!-- Bootstrap core CSS -->
+    <link crossorigin="anonymous" href="../css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="../css/sticky-footer-navbar.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
+        <a class="navbar-brand" href="../index.html">LPS Visualiser</a>
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <!--            <li class="nav-item active">-->
+                <!--                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
+                <!--            </li>-->
+                <li class="nav-item">
+                    <!--                <a class="nav-link disabled" href="#">Disabled</a>-->
+                    <a class="nav-link " href="http://lps.doc.ic.ac.uk">LPS</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/jinwei14/LPS-visualisation">
+                        <del>Github</del>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <!--                <a class="nav-link disabled" href="#">Disabled</a>-->
+                    <a class="nav-link " href="https://lps.js.org">Sandbox</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+</header>
+
+<!-- Begin page content -->
+<main class="flex-shrink-0" role="main">
+    <div class="container">
+        <h1 class="mt-5">LPS visualiser introduction</h1>
+
+        <p class="lead">
+            The main objective of this project is to apply and extend a JavaScript implementation of a logic-based
+            language LPS to a multi-agent simulation of self-driving cars.The same set of rules will be applied to
+            all cars to achieve a certain goal such as reaching out to a goal destination, avoiding accidents.
+            Additionally, cars should be complying with traffic regulations.
+        </p>
+
+        <p class="lead">
+            -> This application contains a LPS javascript interpreter in <code>lps-1.0.16.bundle.js</code>
+            ,the loaded LPS program or the input LPS program will be interpreted via <code>lps-1.0.16.bundle.js</code>
+        </p>
+
+        <p class="lead">
+            -> This application is using <a href="https://github.com/jekyll/jekyll">Jekyll</a>, <a
+                href="https://getbootstrap.com">bootstrap</a>
+            for the front-end layout, and <a href="https://www.pixijs.com"> pixi.js </a> for the vehicle visualisation.
+        </p>
+
+        <p class="lead">
+            -> This application has restful API using express in Node.js. The server is hosting on amazon AWS EC2
+            webservice.
+        </p>
+
+        <p class="lead">
+            -> All the LPS program are stored in <a href="https://www.mongodb.com">MongoDB</a> and <a
+                href="https://mongoosejs.com">Mongoose.js</a> . (This part is still under developed.)
+        </p>
+
+
+        <h2 class="mt-5">Instruction</h2>
+        <p class="lead">-> Start visualising your autonomous vehicle program by entering the lps program or by clicking
+            on the choose file button to load the <code>.lps</code> file</p>
+        <p class="lead">-> Define the vehicle in your lps program or using <code>+</code> or <code>-</code> button to
+            add or delete a car. Mention that deletion during the program time will not modify the underlying LPS
+            program</p>
+        <p class="lead">-> Watch the behaviour of the vehicle by clicking the <code>Animate</code> button</p>
+        <p class="lead">-> Clear the program in the text area via <code>Clear</code> button. Clear the program by
+            refreshing the page.</p>
+
+        <h2 class="mt-5">LPS predicate</h2>
+        <p class="lead">Define street(fact) as: <code>street(StreetName, coordinate(X, Y), Width, Height,
+            Number_of_lane)</code></p>
+        <p class="lead">Define location of vehicle(fluent) as: <code>location(Name_of_car, coordinate(X, Y),
+            Direction)</code></p>
+        <p class="lead">Define traffic light(fluent) as: <code>trafficLight(coordinate(X, Y), Working_status, Color,
+            FacingDirection)</code></p>
+        <p class="lead">Define the goal of the Vehicle(fluent) as: <code>goal(VehicleName,coordinate(X, Y))</code></p>
+        <p class="lead"> Each vehicle can have multiple state(fluent) eg <code>stopped(VehicleName)</code> or <code>moving(VehicleName)</code>
+        </p>
+        <p class="lead">Define the junction(fact) as: eg <code>junction(JunctionName,coordinate(A, B),coordinate(C,
+            D),coordinate(E, F),coordinate(G, H)).</code> where (A, B), (C, D), (E, F), (G, H) are 4 different corners
+        </p>
+
+        <p> Sample LPS programs are provided in <a href="../index.html">home page</a></p>
+
+        <h2 class="mt-5">Logic in traffic scenario</h2>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-action ">
+
+                <img alt="one way drive" align = "left" height="100" src="../imgs/webImg/oneway.png" width="300">
+                <p>  &nbsp;Assumption: carA need to reach it'g goal which is at (900,225) </p>
+
+                <p>  &nbsp;If the goal of Vehicle has not been reached and Vehicle is moving
+                    then Vehicle will drive forward. </p>
+
+                <p>  &nbsp;If the goal of Vehicle has been reached and Vehicle is moving
+                    then Vehicle will perform arriving action</p>
+
+
+            </li>
+            <li class="list-group-item list-group-item-action ">
+                <img alt="two car in T junction" align = "left" height="300" src="../imgs/webImg/T20.png" width="300">
+                <p>  &nbsp; Assumption: carA intend to turn right or go straight. carB intend to turn right or left  </p>
+
+                <p>  &nbsp; if Vehicle is at T-junction and Vehicle is moving
+                    then it will remain the same direction or turn to a new direction.</p>
+
+                <p> &nbsp; if Vehicle and Vehicle2 are possible to have collision and Vehicle's route is not blocked
+                    then Vehicle should drive forward.</p>
+
+                <p> &nbsp;  if Vehicle and Vehicle2 are possible to have collision and Vehicle's route is blocked
+                    then Vehicle should wait for Vehicle2. </p>
+
+            </li>
+            <li class="list-group-item list-group-item-action ">
+                <img alt="one way drive" align = "left" height="300" src="../imgs/webImg/T21.png" width="300">
+
+                <p>  &nbsp; Assumption: carA intend to turn right or go straight. carB intend to turn right or left  </p>
+
+                <p>  &nbsp; Same logic as before, however, the warning distance will be increased because carA on the up lane might turn right
+                which may possible collide with carB</p>
+
+            </li>
+            <li class="list-group-item list-group-item-action ">
+                <img alt="cars in un-controlled T junction" align = "left" height="300" src="../imgs/webImg/T30.png" width="300">
+
+                <p>  &nbsp; Assumption: carA intend to turn right or go straight. carB intend to turn left or right, carC intend to turn left or go straight  </p>
+                <p>  &nbsp; Based on the assumption, few rules are made: </p>
+                <p>  &nbsp;->A car driving straight has a higher pirority than a car turning right or left at an un-controlled T-junction.</p>
+                <p>  &nbsp;->If a car is driving into a narrow road it should wait until other car drive out of the narrow. </p>
+                <p>  &nbsp;->One car is turning left and another car is turnning right to the same road at the same time, left turn has higher priority</p>
+                <p> &nbsp;
+                 if carA has right turn intention and carB has rightTurn intention and carC has intention of going straight then
+                    carA wait for CarB,
+                    carB wait for CarA,
+                    carC step ahead.
+                </p> <p> &nbsp;
+                    if carA has intention of turning right and CarB has intention of turning left and carC has intention of going straight then
+                    carA should wait for carB, carB should wait for carA, carC should step ahead.
+                </p> <p> &nbsp;
+                if carA has intention of turning right and carB has intention of turning right and carC has intention of turning left then
+                carA should wait for carB and carC. carB should step ahead, carC should wait for carB.
+                </p> <p> &nbsp;
+                if carA has intention of turning right and carB has intention of turning left and carC has intention of turning left then
+                carA should wait for carB and carC. carB should step ahead, carC should wait for carB.
+                </p>
+            </li>
+            <li class="list-group-item list-group-item-action ">
+                <img alt="cars in un-controlled T junction" align = "left" height="300" src="../imgs/webImg/T31.png" width="300">
+                <p>  &nbsp; Assumption: carA intend to turn right or go straight. carB intend to go straight down the raod, carC intend to turn left or go straight  </p>
+                <p>  &nbsp;
+                    if carA has intention of turning right and carB has intention of going straight and carC has intention of going straight then
+                carA should wait for carC. carB should step ahead, carC should also step ahead.
+
+                </p> <p> &nbsp;
+                if carA has intention of turning right and carB has intention of going straight and carC has intention of turning left then
+                carA should wait for carC. carB should step ahead, carC should also step ahead (left turn).
+            </p>
+            </li>
+
+            <li class="list-group-item list-group-item-action ">
+                <img alt="cross junction drive with light" align = "left" height="300" src="../imgs/webImg/crossJunc.png" width="300">
+                <p>  &nbsp; Assumption: cars should move or stop based on the traffic light that in front of itself. </p>
+                <p>  &nbsp;
+                    if the trafficLight turns green at current position and the vehicle is moving then
+                    Vehicle keep moving.
+                </p> <p> &nbsp;
+                if the trafficLight turns red at current position and the vehicle is moving then
+                Vehicle will stop moving.
+                </p>
+            </li>
+        </ul>
+
+
+        <h2 class="mt-5">Developer setup</h2>
+        <p> For developer setup please refer to the <a href="https://github.com/jinwei14/LPS-visualisation">github
+            repo</a></p>
+
+
+        <p>Back to <a href="../index.html">home page</a> to start visualise your LPS program.</p>
+    </div>
+</main>
+
+<footer class="footer mt-auto py-2">
+    <div class="container">
+        <img align="right" alt="img" height="35" src="../logo/logo.png" width="80">
+        <span class="text-muted"> &copy; Author: Jinwei Zhang</span>
+
+    </div>
+</footer>
+
+
+<script crossorigin="anonymous"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -34,6 +34,7 @@
 </head>
 
 <body class="d-flex flex-column h-100">
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="index.html">LPS Visualiser</a>
@@ -94,6 +95,7 @@
 
                 <div id="output"></div>
                 <button class="btn btn-primary btn-lg" id="AnimateButton" type="button">Animate</button>
+                <button class="btn btn-danger btn-lg" id="StopButton" type="button">Stop</button>
                 <button class="btn btn-secondary btn-lg" id="ClearButton" type="button">Clear</button>
             </div>
         </div>
@@ -113,7 +115,7 @@
                             <th scope="col">Destination</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody >
                         <!--                        <tr>-->
                         <!--                            <th scope="row">0</th>-->
                         <!--                            <td><span contenteditable id="V0">#####</span></td>-->
@@ -126,6 +128,7 @@
                         <!--                        </tr>-->
                         </tbody>
                     </table>
+                    <button  type="button" class="btn btn-outline-primary btn-sm" id = "changeTableContent" >Confirm</button>
 
                     <div class="alert alert-success" role="alert">
                         <h4 class="alert-heading">Welcome to LPS visualiser</h4>
@@ -133,6 +136,7 @@
                         <p>> Define the vehicle in your lps program or via  <code>+</code> or <code>-</code> button</p>
                         <p>> Watch the behaviour of the vehicle by clicking the <code>Animate</code> button</p>
                         <p>> Clear the program via <code>Clear</code> button</p>
+                        <p>> Stop the running program via <code>Stop</code> button</p>
                         <hr>
                         <p class="mb-0">This project is under MIT license, For further instruction and traffic regulations, please refer to the <a href="./links/aboutus.html">About</a>  page</p>
                     </div>
