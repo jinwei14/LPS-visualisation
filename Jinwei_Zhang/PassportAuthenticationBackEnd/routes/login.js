@@ -14,12 +14,15 @@ const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 // Register Page
 loginRouter.route('/')
     .all((req, res, next) => {
+        //time of requesting
+
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/plain');
+
         next();
     })
     .get((req, res, next) => {
-        res.end('Will send all the dishes to you!');
+        res.end('Will send all the pages to you!');
     })
     .post((req, res, next) => {
         passport.authenticate('local', {
@@ -39,9 +42,11 @@ loginRouter.route('/')
 
 loginRouter.route('/main')
     .all((req, res, next) => {
+        console.time('log in request API Time');
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/plain');
         next();
+        console.timeEnd('log in request API Time');
     })
     .get(ensureAuthenticated,(req, res, next) => {
         res.redirect('/main.html');

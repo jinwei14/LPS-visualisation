@@ -21,6 +21,7 @@ userRouter.route('/')
 
     // This adding (posting to the database)
     .post((req, res, next) => {
+        console.time('Register request API Time');
         // This require the html tag to be name =="??"
         const { name, email, phone, job, password, confirm_password } = req.body;
         User.findOne({email:email})
@@ -48,7 +49,7 @@ userRouter.route('/')
                 }
             });
         console.log('The input is: ', req.body);
-
+        console.timeEnd('Register request API Time');
     })
 
     //modifing the data (not suportted)
