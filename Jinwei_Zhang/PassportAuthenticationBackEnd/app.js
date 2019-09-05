@@ -9,12 +9,16 @@ const passport = require('passport');
 //passport config
 require('./config/passport')(passport);
 
+
+
 // parse application/x-www-form-urlencoded for parsing the request body.
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 
 //DB config
 const db = require('./config/keys').MongoURI;
