@@ -1,0 +1,54 @@
+loadModule('../../modules/module.js').
+true -> testPrint('start of the program').
+
+maxTime(12).
+
+loadModule(p2p).
+
+p2pJoin(lending, 4100).
+
+event(wantToBuy(I)).
+
+fluent(money(A)).
+action(buy(I)).
+action(receiveLoan(A)).
+
+initially(money(1)).
+observe(wantToBuy(cereal), 3, 4).
+
+itemPrice(cereal, 4).
+itemPrice(potatos, 1).
+itemPrice(milk, 1).
+
+wantToBuy(I, T1, T2) ->
+  testPrint('alice want to buy '+ I),
+  itemPrice(I, Price),
+  money(Amount, T2),
+  loanIfNotEnough(Price, Amount, T2),
+  buy(I) from T3 to T4.
+
+loanIfNotEnough(Price, Amount, _T1) <-
+  testPrint('alice has enough money '+ Amount+ ' price is : '+ Price),
+  Price <= Amount.
+
+loanIfNotEnough(Price, Amount, T1) <-
+
+  Price > Amount,
+  testPrint('alice has no enough money '+ Amount+ ' price is : '+ Price),
+  p2pPeer(lending, P),
+  Loan = Price - Amount,
+  testPrint('alice has no enough money '+ Amount+ ' price is : '+ Price),
+  testPrint('alice is leanding money '+ Loan+ ' p is : '+ P),
+  p2pSend(lending, P, borrow(Loan)) from T1.
+
+p2pReceive(lending, P, lend(A), T1, T2) ->
+  testPrint('alice has received'+ A + ' P is : '+ P),
+  receiveLoan(A, T2, T3).
+
+updates(receiveLoan(Loan), money(A), money(A + Loan)).
+updates(buy(I), money(A), money(A - P)) <- itemPrice(I, P).
+
+<- money(Amt),
+  buy(I),
+  itemPrice(I, Price),
+  Amt < Price.
