@@ -1,3 +1,0 @@
-action(test(ID)).
-
-processId(ProgID) -> test(ProgID, T1, T2).
