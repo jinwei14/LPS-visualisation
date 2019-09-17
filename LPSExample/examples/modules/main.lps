@@ -1,4 +1,0 @@
-maxTime(3).
-loadModule('./module.js').
-
-true -> testPrint('Hello World').
